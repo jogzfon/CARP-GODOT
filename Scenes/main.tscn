@@ -1,0 +1,262 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8fqwku1kjuqn"]
+
+[ext_resource type="PackedScene" uid="uid://dw860tmmffkxq" path="res://Scenes/system_menu.tscn" id="1_or0nw"]
+[ext_resource type="Script" path="res://Scripts/Animations.cs" id="1_rmn0d"]
+[ext_resource type="Texture2D" uid="uid://5vy1ar8mknsj" path="res://Sprites/darkbg.png" id="1_rocr5"]
+[ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="3_taic5"]
+[ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="5_47uae"]
+[ext_resource type="Script" path="res://Scripts/AnimationHandler.cs" id="6_cpnfn"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, 0)
+scale = Vector2(1.82535, 1.65096)
+texture = ExtResource("1_rocr5")
+centered = false
+
+[node name="SystemMenu" parent="." instance=ExtResource("1_or0nw")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_rmn0d")
+moveSpeed = 100.0
+
+[node name="CpuOut" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(594.8, 373)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="CpuIn" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(595.6, 449)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="aIn" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(701.8, 373)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="aOut" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(805.6, 372.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="dIn" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(806.4, 448.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="dOut" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(702.6, 449)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="vDc" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(906.8, 373)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="hDc" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(906.8, 675)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="dcIn" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1063.8, 675)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="Min" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1542.6, 373)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="Mout1" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1543.6, 448.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="Mout2" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1543.6, 504.2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="vDc2" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1343.8, 504.2)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="hDc2" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1343.8, 633)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="dcIn2" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1276.8, 633)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="ioInV" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1487.6, 448.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="ioInH" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1487.6, 598.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="IO" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1543.6, 598.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="outIO" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1543.8, 681.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="dcIn3" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1276.8, 681.8)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="dcOut1" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1063.8, 757)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="dcOut2" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(1063.8, 823)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="read" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(595.6, 757)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="write" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(595.6, 823)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="clkOut" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(338.8, 823)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="clkV" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(285.8, 823)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="clkH" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(285.8, 1005)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="clkEnd" type="Sprite2D" parent="Node"]
+visible = false
+position = Vector2(436.8, 1005)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_taic5")
+
+[node name="Line" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line2" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line3" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line4" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line5" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line6" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line7" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line8" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line9" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line10" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="Line11" type="Line2D" parent="Node"]
+width = 5.0
+
+[node name="CPU" type="Sprite2D" parent="Node"]
+position = Vector2(467, 598)
+scale = Vector2(3, 7)
+texture = ExtResource("5_47uae")
+
+[node name="A" type="Sprite2D" parent="Node"]
+z_index = 1
+position = Vector2(753.5, 374)
+scale = Vector2(1.17978, -0.303797)
+texture = ExtResource("5_47uae")
+
+[node name="D" type="Sprite2D" parent="Node"]
+z_index = 1
+position = Vector2(753.5, 449)
+scale = Vector2(1.17978, -0.303797)
+texture = ExtResource("5_47uae")
+
+[node name="Memory" type="Sprite2D" parent="Node"]
+position = Vector2(1622.25, 435.5)
+scale = Vector2(1.74719, -2.46835)
+texture = ExtResource("5_47uae")
+
+[node name="IO2" type="Sprite2D" parent="Node"]
+position = Vector2(1620.75, 662)
+scale = Vector2(1.71348, -2.46835)
+texture = ExtResource("5_47uae")
+
+[node name="Decoder" type="Sprite2D" parent="Node"]
+position = Vector2(1172, 708.25)
+scale = Vector2(2.35955, -3.63924)
+texture = ExtResource("5_47uae")
+
+[node name="AnimationHandler" type="Node" parent="." node_paths=PackedStringArray("AnimationsScript")]
+script = ExtResource("6_cpnfn")
+AnimationsScript = NodePath("../Node")

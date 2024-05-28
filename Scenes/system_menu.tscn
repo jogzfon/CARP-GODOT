@@ -1,0 +1,228 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw860tmmffkxq"]
+
+[ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="1_g1du5"]
+[ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_hfd48"]
+[ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="2_dln5b"]
+[ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="2_u6x3k"]
+[ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="3_7qyq1"]
+
+[node name="SystemMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 69.0
+offset_top = 39.0
+offset_right = 1869.0
+offset_bottom = 216.0
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_g1du5")
+texture_pressed = ExtResource("2_dln5b")
+texture_hover = ExtResource("3_7qyq1")
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "AR: "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "PC: "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "DR: "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "TR: "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "IR:  "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "R:   "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/HBoxContainer6"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "AC: "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/HBoxContainer7"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 30
+text = "Z:   "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000 0000 0000 0000"
+expand_to_text_length = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 1378.0
+offset_top = 863.0
+offset_right = 1878.0
+offset_bottom = 1040.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_u6x3k")
+theme_override_font_sizes/font_size = 25
+text = "Start Location:"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 20
+text = "START"
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 20
+text = "STOP"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 20
+text = "RESET REGISTERS"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 20
+text = "STEP THROUGH CYCLE"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_hfd48")
+theme_override_font_sizes/font_size = 20
+text = "STEP THROUGH INSTRUCTION"
