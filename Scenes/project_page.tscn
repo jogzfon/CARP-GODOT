@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c18fyoobswur4"]
 
-[ext_resource type="Script" path="res://Scenes/project_page.cs" id="1_lst7x"]
+[ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="2_2pl7i"]
 
@@ -56,10 +56,10 @@ theme_override_fonts/font = ExtResource("1_tcw3m")
 theme_override_font_sizes/font_size = 30
 text = "Trace Results"
 
-[node name="AIButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="AIBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-toggle_mode = true
-texture_normal = ExtResource("2_2pl7i")
+icon = ExtResource("2_2pl7i")
+icon_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2

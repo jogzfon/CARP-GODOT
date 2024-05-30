@@ -16,7 +16,7 @@ public partial class ai_system : Control
 
         var sendRequest = GetNode<Button>("SendRequest");
         sendRequest.Connect("pressed", new Callable(this, nameof(Generate_Code)));
-        var back = GetNode<Button>("SendRequest");
+        var back = GetNode<TextureButton>("Back");
         sendRequest.Connect("pressed", new Callable(this, nameof(BackToMain)));
     }
 

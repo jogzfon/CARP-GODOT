@@ -91,6 +91,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Back" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 49.0
 offset_right = 133.0

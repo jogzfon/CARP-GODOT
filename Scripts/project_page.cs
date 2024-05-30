@@ -9,8 +9,8 @@ public partial class project_page : Control
         var toSystem = GetNode<Button>("VBoxContainer2/ViewSystem");
         toSystem.Connect("pressed", new Callable(this, nameof(GoToSystem)));
 
-        var toAI = GetNode<Button>("VBoxContainer/HBoxContainer/AIButton");
-        toAI.Connect("pressed", new Callable(this, nameof(GoToSystem)));
+        var toAI = GetNode<Button>("VBoxContainer/HBoxContainer/AIBtn");
+        toAI.Connect("pressed", new Callable(this, nameof(GoToAI)));
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
