@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="CARP"
-run/main_scene="res://Scenes/StartUpPage.tscn"
+run/main_scene="res://Scenes/main_page.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 run/size/viewport_height=1080
+
+[autoload]
+
+ProjectPage="*res://Scripts/project_page.cs"
 
 [display]
 

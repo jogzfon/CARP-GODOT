@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://whq7hnglcf2a"]
+[gd_scene load_steps=4 format=3 uid="uid://whq7hnglcf2a"]
 
-[ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="1_jrn3n"]
 [ext_resource type="Script" path="res://Scripts/StartUpPage.cs" id="1_xp5mf"]
+[ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vforg"]
+[ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_qe5aq"]
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -48,25 +49,27 @@ alignment = 1
 
 [node name="username" type="LineEdit" parent="Login"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Username"
 
 [node name="password" type="LineEdit" parent="Login"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Password"
+caret_blink = true
+secret = true
 
 [node name="login" type="Button" parent="Login"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("4_qe5aq")
 theme_override_font_sizes/font_size = 45
 text = "Login"
 
 [node name="register" type="Button" parent="Login"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("4_qe5aq")
 theme_override_font_sizes/font_size = 45
 text = "Register"
 
@@ -95,7 +98,7 @@ size_flags_vertical = 8
 [node name="firstname" type="LineEdit" parent="CreateAccount/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Firstname"
 expand_to_text_length = true
@@ -104,7 +107,7 @@ caret_blink = true
 [node name="lastname" type="LineEdit" parent="CreateAccount/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Lastname"
 expand_to_text_length = true
@@ -112,20 +115,26 @@ caret_blink = true
 
 [node name="cusername" type="LineEdit" parent="CreateAccount"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Username"
 caret_blink = true
 
 [node name="cpassword" type="LineEdit" parent="CreateAccount"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Password"
 secret = true
 
 [node name="create" type="Button" parent="CreateAccount"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_jrn3n")
+theme_override_fonts/font = ExtResource("4_qe5aq")
 theme_override_font_sizes/font_size = 45
 text = "Create Account"
+
+[node name="cancel" type="Button" parent="CreateAccount"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_qe5aq")
+theme_override_font_sizes/font_size = 45
+text = "Cancel"

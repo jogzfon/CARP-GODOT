@@ -1,14 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=10 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="2_2pl7i"]
+[ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="2_rnxid"]
+[ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_jdv15"]
+[ext_resource type="PackedScene" uid="uid://b8fqwku1kjuqn" path="res://Scenes/main.tscn" id="5_squa4"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="6_is7gs"]
+[ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
+[ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
 
 [node name="ProjectPage" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lst7x")
@@ -35,26 +43,33 @@ offset_bottom = 1025.0
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="MemoryAndIO" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_tcw3m")
+theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Memory and IO"
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="BreakPoints" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_tcw3m")
+theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Breakpoints"
 
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="TraceResults" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_tcw3m")
+theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Trace Results"
+
+[node name="ViewSystem" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 30
+text = "View System"
 
 [node name="AIBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -66,17 +81,185 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_tcw3m")
-theme_override_font_sizes/font_size = 40
-text = "MEMORY AND IO"
-
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="MemoryAndIO" type="Panel" parent="VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+theme_override_font_sizes/font_size = 40
+text = "MEMORY AND IO"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MemoryText" type="TextEdit" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("8_6x74r")
+theme_override_font_sizes/font_size = 25
+editable = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
+layout_mode = 2
+
+[node name="View" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "VIEW"
+
+[node name="Clear" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "CLEAR"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+text = "Convert To"
+
+[node name="Hex" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "HEX"
+
+[node name="Binary" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "BINARY"
+
+[node name="Breakpoints" type="Panel" parent="VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Breakpoints"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+theme_override_font_sizes/font_size = 40
+text = "BREAKPOINTS"
+
+[node name="AddressList" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "ADDRESS LINE: "
+
+[node name="AddressInput" type="LineEdit" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("8_6x74r")
+placeholder_text = "Input address line here..."
+
+[node name="Add" type="Button" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "ADD"
+
+[node name="Delete" type="Button" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "DELETE"
+
+[node name="TraceResult" type="Panel" parent="VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TraceResult"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+theme_override_font_sizes/font_size = 40
+text = "TRACE RESULT"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TraceText" type="TextEdit" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("8_6x74r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ViewResults" type="Button" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "VIEW"
+
+[node name="ClearResults" type="Button" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "CLEAR"
+
+[node name="SystemViewContainer" type="SubViewportContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/PanelContainer/SystemViewContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Main" parent="VBoxContainer/PanelContainer/SystemViewContainer/SubViewport" node_paths=PackedStringArray("cpuStatus", "rtlStatement", "dataMovement", "currentMemoryLocation") instance=ExtResource("5_squa4")]
+position = Vector2(0, -3)
+cpuStatus = NodePath("../../../../../LeftContainer/HBoxContainer2/Status")
+rtlStatement = NodePath("../../../../../LeftContainer/HBoxContainer3/RTLStatement")
+dataMovement = NodePath("../../../../../LeftContainer/DataMovement")
+currentMemoryLocation = NodePath("../../../../../LeftContainer/MemoryLocation")
+
+[node name="LeftContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -85,48 +268,106 @@ offset_top = 40.0
 offset_right = 560.0
 offset_bottom = -40.0
 grow_vertical = 2
+scale = Vector2(0.99339, 0.993209)
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="LeftContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_tcw3m")
+
+[node name="Label" type="Label" parent="LeftContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Current Cpu Status:"
 
-[node name="Label2" type="Label" parent="VBoxContainer2"]
+[node name="Status" type="Label" parent="LeftContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_tcw3m")
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_52ft5")
+theme_override_font_sizes/font_size = 30
+text = "Idle"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="LeftContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Current RTL Statement:"
 
-[node name="Label4" type="Label" parent="VBoxContainer2"]
+[node name="RTLStatement" type="Label" parent="LeftContainer/HBoxContainer3"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_tcw3m")
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_52ft5")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer2"]
+[node name="DataMovement" type="Label" parent="LeftContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_tcw3m")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_52ft5")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="LeftContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Current Memory Location:"
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer2"]
+[node name="MemoryLocation" type="LineEdit" parent="LeftContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("7_52ft5")
+theme_override_font_sizes/font_size = 30
+text = "0"
 placeholder_text = "Enter Memory Location"
+alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="LeftContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="InstructionCode" type="TextEdit" parent="LeftContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 size_flags_stretch_ratio = 0.8
+theme_override_fonts/font = ExtResource("8_6x74r")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Input code here..."
 
-[node name="Button" type="Button" parent="VBoxContainer2"]
+[node name="UnitType" type="Label" parent="LeftContainer"]
+visible = false
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tcw3m")
+theme_override_font_sizes/font_size = 25
+text = "Control Unit Type"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MicroProgrammed" type="CheckButton" parent="LeftContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_jdv15")
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+text = "Microprogrammed"
+
+[node name="Hardwired" type="CheckButton" parent="LeftContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_jdv15")
+theme_override_font_sizes/font_size = 20
+text = "Hardwired"
+
+[node name="Assemble" type="Button" parent="LeftContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
 text = "ASSEMBLE"
-
-[node name="ViewSystem" type="Button" parent="VBoxContainer2"]
-layout_mode = 2
-text = "VIEW SYSTEM"
-
-[node name="Button3" type="Button" parent="VBoxContainer2"]
-layout_mode = 2
-text = "ASK AI"

@@ -2,13 +2,12 @@ using Godot;
 using System;
 using System.Text;
 
-public partial class Memory
+public static class Memory
 {
+    public static Animations animation;
     public const int MEMORY_SIZE = 65536;
-    public short[] contents = new short[MEMORY_SIZE];
-    private CPU CPUBox;
-
-    public short Read(int address)
+    public static short[] contents = new short[MEMORY_SIZE];
+    public static short Read(int address)
     {
         if ((address < 0) || (address >= MEMORY_SIZE))
         {
@@ -21,7 +20,7 @@ public partial class Memory
 
     }
 
-    public bool Write(int address, short data)
+    public static bool Write(int address, short data)
     {
         if (address < 0 || address >= MEMORY_SIZE || data < 0 || data > 0xFF)
         {
@@ -29,11 +28,11 @@ public partial class Memory
         }
 
         contents[address] = data;
-        if (CPUBox != null)
+        if (animation != null)
         {
             // Access the property or call the method on CPU.theBox
-            CPUBox.IOint = contents[MEMORY_SIZE];
-            CPUBox.IO = AssemblyInstructions.ToNumberString(CPUBox.IOint, 2, 8);
+            animation.IOint = contents[MEMORY_SIZE];
+            animation.IO = AssemblyInstructions.ToNumberString(animation.IOint, 2, 8);
         }
         else
         {
@@ -44,7 +43,7 @@ public partial class Memory
         return true;
     }
 
-    public void Clear()
+    public static void Clear()
     {
         for (int index = 0; index < MEMORY_SIZE; index++)
         {
@@ -92,19 +91,19 @@ public partial class Memory
         }
     }
 
-    public string[] ReadBinaryNybbleStringArray(int address)
+    public static string[] ReadBinaryNybbleStringArray(int address)
     {
         return ToBinaryNybbleStringArray(Read(address));
     }
 
-    public bool WriteBinaryNybbleStringArray(int address, string[] dataStringArray)
+    public static bool WriteBinaryNybbleStringArray(int address, string[] dataStringArray)
     {
         short data = FromBinaryNybbleStringArray(dataStringArray);
 
         return Write(address, data);
     }
 
-    public void UpdateMemoryTextBox(Label textBox, bool isHex)
+    public static void UpdateMemoryTextBox(TextEdit textBox, bool isHex)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -130,7 +129,7 @@ public partial class Memory
 
         textBox.Text = sb.ToString();
     }
-    public short[] GetInstructions()
+    public static short[] GetInstructions()
     {
         //return contents.Select(s => (int)s).ToArray();
         return contents;

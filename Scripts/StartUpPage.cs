@@ -14,39 +14,45 @@ public partial class StartUpPage : Control
 	};
 
 	IFirebaseClient client;
-
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	VBoxContainer createAccount;
+    VBoxContainer loginAccount;
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 		client = new FireSharp.FirebaseClient(config);
 		
-		var create = GetNode<VBoxContainer>("CreateAccount");
-		create.Visible = false;
-		var login = GetNode<VBoxContainer>("Login");
-		login.Visible = true;
+		createAccount = GetNode<VBoxContainer>("CreateAccount");
+        createAccount.Visible = false;
+        loginAccount = GetNode<VBoxContainer>("Login");
+        loginAccount.Visible = true;
 		var registerButton = GetNode<Button>("Login/register");
-		registerButton.Connect("pressed", new Callable(this, nameof(_on_register_pressed)));
+		registerButton.Connect("pressed", new Callable(this, nameof(RegisterPressed)));
 		
 		var loginButton = GetNode<Button>("Login/login");
-		loginButton.Connect("pressed", new Callable(this, nameof(_on_login_pressed)));
+		loginButton.Connect("pressed", new Callable(this, nameof(LogInPressed)));
 		
 		var createButton = GetNode<Button>("CreateAccount/create");
-		createButton.Connect("pressed", new Callable(this, nameof(_on_create_pressed)));
-	}
+		createButton.Connect("pressed", new Callable(this, nameof(CreatePressed)));
+        var cancelButton = GetNode<Button>("CreateAccount/cancel");
+        cancelButton.Connect("pressed", new Callable(this, nameof(CancelPressed)));
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (Input.IsKeyPressed(Key.Enter))
+		{
+            LogInPressed();
+        }
 	}
 	
-	private void _on_register_pressed()
+	private void RegisterPressed()
 	{
-		var login = GetNode<VBoxContainer>("Login");
-		login.Visible = false;
-		var create = GetNode<VBoxContainer>("CreateAccount");
-		create.Visible = true;
+        loginAccount.Visible = false;
+
+        createAccount.Visible = true;
 	}
-	private async void _on_login_pressed()
+	private async void LogInPressed()
 	{
 		String username = GetNode<LineEdit>("Login/username").Text;
 		String password = GetNode<LineEdit>("Login/password").Text;
@@ -58,7 +64,7 @@ public partial class StartUpPage : Control
 		{
 			if (password.Equals(userObj.Password))
 			{
-				Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/project_page.tscn").Instantiate();
+				Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/main_page.tscn").Instantiate();
 				GetTree().Root.AddChild(simultaneousScene);
 				Hide();
 			}
@@ -72,7 +78,7 @@ public partial class StartUpPage : Control
 			GD.Print("User Does Not Exist!!!");
 		}
 	}
-	private async void _on_create_pressed()
+	private async void CreatePressed()
 	{
 		var data = new UserData
 		{
@@ -100,5 +106,12 @@ public partial class StartUpPage : Control
 			GD.Print("User Inserted " + result.Username);
 		}
 	}
+	private void CancelPressed()
+	{
+        loginAccount.Visible = true;
+
+        createAccount.Visible = false;
+
+    }
 }
 

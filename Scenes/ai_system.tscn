@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/ai_system.cs" id="1_hxjp6"]
-[ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="2_4t4tx"]
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="2_6b6m3"]
+[ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vad0u"]
 [ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="4_3r6y2"]
 [ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="5_1qe46"]
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="6_d1lji"]
@@ -34,14 +34,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -800.0
-offset_top = 260.0
+offset_top = 257.0
 offset_right = 485.0
-offset_bottom = 474.0
+offset_bottom = 471.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/background_color = Color(0.32549, 0.32549, 0.32549, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_4t4tx")
+theme_override_fonts/font = ExtResource("3_vad0u")
 theme_override_font_sizes/font_size = 25
 placeholder_text = "Input Command here..."
 wrap_mode = 1
@@ -70,6 +70,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_vad0u")
 theme_override_font_sizes/font_size = 25
 text = "Hi Carp here! How may I serve you?"
 

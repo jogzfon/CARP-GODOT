@@ -1,14 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=17 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
-[ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_u8uti"]
+[ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
+[ext_resource type="Texture2D" uid="uid://c4woa0garcmfn" path="res://Sprites/Rectangle 92.png" id="2_dsjfr"]
+[ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="3_3awsc"]
+[ext_resource type="Texture2D" uid="uid://6uq758q03qox" path="res://Sprites/pp.png" id="4_2bfqo"]
+[ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="4_6c80f"]
+[ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
+[ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
+[ext_resource type="Texture2D" uid="uid://1d5ieyywjcp7" path="res://Sprites/Settings.png" id="7_3qjo1"]
+[ext_resource type="Texture2D" uid="uid://7lrh782hri2" path="res://Sprites/User.png" id="8_u8is3"]
+[ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
+[ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
+[ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="14_r5kqw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
-font = ExtResource("1_u8uti")
-font_size = 20
+font = ExtResource("13_0fq7n")
+font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_qv4bw"]
-font = ExtResource("1_u8uti")
+font = ExtResource("13_0fq7n")
 font_size = 35
 shadow_color = Color(0.298039, 0.305882, 0.572549, 1)
 shadow_offset = Vector2(-3, 1)
@@ -20,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_tloas")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -31,6 +44,20 @@ grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 370.0
+offset_top = 859.0
+offset_right = -16.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.350686)
+color = Color(0.291716, 0.299233, 0.321761, 1)
+
 [node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 2
 offset_top = 100.0
@@ -38,52 +65,68 @@ offset_right = 350.0
 offset_bottom = 1080.0
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 15.0
+offset_top = 102.0
+offset_right = 335.0
+offset_bottom = 142.0
+texture = ExtResource("2_dsjfr")
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -11.0
+offset_right = 160.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PROJECTS"
+label_settings = SubResource("LabelSettings_qri6r")
+
+[node name="ProjectList" type="VBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 15.0
 offset_top = 146.0
 offset_right = 335.0
 offset_bottom = 646.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="ProjectList"]
 layout_mode = 2
-text = "RECENTS"
-label_settings = SubResource("LabelSettings_qri6r")
+theme_override_fonts/font = ExtResource("4_6c80f")
+theme_override_font_sizes/font_size = 20
+text = "Recents"
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Project 1"
-
-[node name="Button2" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Project 2"
-
-[node name="Button3" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Project 3"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="DocumentationsList" type="VBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 15.0
-offset_top = 700.0
+offset_top = 475.0
 offset_right = 335.0
-offset_bottom = 1000.0
+offset_bottom = 875.0
 
-[node name="Label" type="Label" parent="VBoxContainer2"]
+[node name="Label" type="Label" parent="DocumentationsList"]
 layout_mode = 2
 text = "DOCUMENTATION"
 label_settings = SubResource("LabelSettings_qri6r")
 
-[node name="Button" type="Button" parent="VBoxContainer2"]
+[node name="Button" type="Button" parent="DocumentationsList"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
 text = "Project 1"
 
-[node name="Button2" type="Button" parent="VBoxContainer2"]
+[node name="Button2" type="Button" parent="DocumentationsList"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
 text = "Project 2"
 
-[node name="Button3" type="Button" parent="VBoxContainer2"]
+[node name="Button3" type="Button" parent="DocumentationsList"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
 text = "Project 3"
 
 [node name="ColorRect3" type="ColorRect" parent="."]
@@ -106,3 +149,259 @@ stretch_mode = 3
 layout_mode = 2
 text = "WELCOME TO CARP"
 label_settings = SubResource("LabelSettings_qv4bw")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 1804.0
+offset_top = 10.0
+offset_right = 1884.0
+offset_bottom = 90.0
+texture = ExtResource("4_2bfqo")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NewProject" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = -2.0
+offset_right = -21.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_rgqy0")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = 196.0
+offset_right = -21.0
+offset_bottom = 231.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_6c80f")
+theme_override_font_sizes/font_size = 30
+text = "New Project"
+horizontal_alignment = 1
+
+[node name="OpenProject" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 199.0
+offset_top = -2.0
+offset_right = 379.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_2n6so")
+stretch_mode = 0
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 199.0
+offset_top = 196.0
+offset_right = 379.0
+offset_bottom = 231.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_6c80f")
+theme_override_font_sizes/font_size = 30
+text = "Open"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.0
+offset_top = -266.0
+offset_right = 559.0
+offset_bottom = -127.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "RELATIVELY SIMPLE COMPUTER 
+SYSTEM SIMULATOR"
+
+[node name="SubTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -121.0
+offset_right = 567.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+theme_override_font_sizes/font_size = 25
+text = "Create a new instruction set or start from scratch.
+Open existing project from file."
+
+[node name="SubTitle" type="Label" parent="SubTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -446.0
+offset_top = -240.0
+offset_right = -346.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+theme_override_font_sizes/font_size = 30
+text = ">M4J"
+
+[node name="Sign-In" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = -126.0
+offset_right = 334.0
+offset_bottom = -79.0
+grow_vertical = 0
+texture_normal = ExtResource("3_3awsc")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Sign-In"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sign-in"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Sign-In"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 56.0
+offset_bottom = 47.0
+texture = ExtResource("8_u8is3")
+
+[node name="Settings" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -67.0
+offset_right = 67.0
+offset_bottom = -22.0
+grow_vertical = 0
+texture_normal = ExtResource("7_3qjo1")
+stretch_mode = 0
+
+[node name="ProjectNamePanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -340.0
+offset_right = 540.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ProjectNamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.290196, 0.298039, 0.321569, 1)
+
+[node name="ProjectName" type="LineEdit" parent="ProjectNamePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -40.5
+offset_right = 250.0
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+placeholder_text = "Enter name..."
+alignment = 1
+right_icon = ExtResource("1_iv1we")
+
+[node name="Label" type="Label" parent="ProjectNamePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -99.0
+offset_right = 152.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 30
+text = "Enter Project Name"
+
+[node name="SubmitName" type="Button" parent="ProjectNamePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 87.0
+offset_right = 100.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_r5kqw")
+theme_override_font_sizes/font_size = 25
+text = "SUBMIT"
+icon_alignment = 1
+expand_icon = true

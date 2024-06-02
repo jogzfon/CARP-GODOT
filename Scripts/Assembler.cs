@@ -26,7 +26,7 @@ public partial class Assembler
     public const string DB = "DB";
     public const string DW = "DW";
 
-    public AssemblyResults Assemble(string source, int location, CPU CPUBox, Memory memory)
+    public AssemblyResults Assemble(string source, int location)
     {
         AssemblySourceProgram code = new AssemblySourceProgram(source);
         int memoryCounter = location;
@@ -219,7 +219,7 @@ public partial class Assembler
                         short byteShort = AssemblyInstructions.ToByteShort(
                             tokens[1 + offset]);
 
-                        memory.Write(memoryCounter, byteShort);
+                        Memory.Write(memoryCounter, byteShort);
 
                         //                  String[] binaryNybble = toBinaryNybble( byteShort );
                         //                  memory[ memoryCounter ] = binaryNybble;
@@ -231,8 +231,8 @@ public partial class Assembler
                         short[] wordCode = AssemblyInstructions.ToWordCode(
                             AssemblyInstructions.ToWordInteger(tokens[1 + offset]));
 
-                        memory.Write(memoryCounter, wordCode[0]);
-                        memory.Write(memoryCounter + 1, wordCode[1]);
+                        Memory.Write(memoryCounter, wordCode[0]);
+                        Memory.Write(memoryCounter + 1, wordCode[1]);
 
                         //                  String[] binaryNybble = toBinaryNybble( wordCode[ 0 ] );
                         //                  memory[ memoryCounter ] = binaryNybble;
@@ -251,7 +251,7 @@ public partial class Assembler
                         //                  String[] binaryNybble = toBinaryNybble(
                         //                     AssemblyInstruction.toMnemonicCode( tokens[ 0 ] ) );
 
-                        memory.Write(memoryCounter, AssemblyInstructions.
+                        Memory.Write(memoryCounter, AssemblyInstructions.
                             ToMnemonicCode(tokens[0 + offset]));
 
                         //                  memory[ memoryCounter ] = binaryNybble;
@@ -275,14 +275,14 @@ public partial class Assembler
                             //                     String[] binaryNybbleAddress = toBinaryNybble(
                             //                        addressCode[ 0 ] );
 
-                            memory.Write(memoryCounter + 1, addressCode[0]);
+                            Memory.Write(memoryCounter + 1, addressCode[0]);
 
                             //                     memory[ memoryCounter + 1 ] = binaryNybbleAddress;
 
                             //                     binaryNybbleAddress = toBinaryNybble( addressCode[
                             //                        1 ] );
 
-                            memory.Write(memoryCounter + 2, addressCode[1]);
+                            Memory.Write(memoryCounter + 2, addressCode[1]);
 
                             //                     memory[ memoryCounter + 2 ] = binaryNybbleAddress;
 

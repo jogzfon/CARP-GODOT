@@ -1,10 +1,30 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
-[GlobalClass]
 public partial class Animations : Node
 {
+    [Export] public Control systemMenu;
+
+    private Label cpuStatus;
+    private Label rtlStatement;
+    private Label dataMovement;
+    private LineEdit currentMemoryLocation;
+
+    private List<int> breakpoints;
+
+    private bool animationRunning = false;
+
+    #region Animation Settings
+    [Export] private float moveSpeed = 50f;
+
+    Vector2 destination;
+    bool redBallExist = false;
+    string moveDirection = "right";
+    #endregion
+
     #region CARPVar
     Sprite2D cpuOut;
 	Sprite2D cpuIn;
@@ -48,14 +68,88 @@ public partial class Animations : Node
     Line2D line10;
     #endregion
 
-    [Export] private float moveSpeed = 50f;
+    #region Labels
+    [Export] Label en1;
+    [Export] Label en2;
+    [Export] Label readL;
+    [Export] Label writeL;
+    [Export] Label clock;
+    [Export] Label clk;
+    [Export] Label ar;
+    [Export] Label pc;
+    [Export] Label dr;
+    [Export] Label tr;
+    [Export] Label ir;
+    [Export] Label r;
+    [Export] Label ac;
+    [Export] Label z;
+    [Export] Label a;
+    [Export] Label d;
+    [Export] Label cu;
+    [Export] Label alu;
+    [Export] Label ioB;
+    #endregion
 
-    Vector2 destination;
-    bool redBallExist = false;
-    string moveDirection = "right";
+    #region LineEdits
+    LineEdit AR_txt;
+    LineEdit PC_txt;
+    LineEdit DR_txt;
+    LineEdit TR_txt;
+    LineEdit IR_txt;
+    LineEdit R_txt;
+    LineEdit AC_txt;
+    LineEdit Z_txt;
+    #endregion
+
+    #region VisualizationOpcodes
+    public const short opcodeNOP = 0x00;
+    public const short opcodeLDAC = 0x01;
+    public const short opcodeSTAC = 0x02;
+    public const short opcodeMVAC = 0x03;
+    public const short opcodeMOVR = 0x04;
+    public const short opcodeJUMP = 0x05;
+    public const short opcodeJMPZ = 0x06;
+    public const short opcodeJPNZ = 0x07;
+    public const short opcodeADD = 0x08;
+    public const short opcodeSUB = 0x09;
+    public const short opcodeINAC = 0x0a;
+    public const short opcodeCLAC = 0x0b;
+    public const short opcodeAND = 0x0c;
+    public const short opcodeOR = 0x0d;
+    public const short opcodeXOR = 0x0e;
+    public const short opcodeNOT = 0x0f;
+    public const short opcodeEND = 0xff;
+
+    short[] memorycode;
+  
+    short instructadv1;
+    short instructadv2;
+
+    public long IOint = 0;
+    public string IO = "00000000";
+    private int ar_bit = 0x00000000;
+    private int pc_bit = 0x00000000;
+    private int dr_bit = 0x00000000;
+    private int tr_bit = 0x00000000;
+    private int ir_bit = 0x00000000;
+    private int r_bit = 0x00000000;
+    private int ac_bit = 0x00000000;
+    private int z_bit = 0;
+    #endregion
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        #region Animation Requirements
+        var node = GetNode<Control>("/root/ProjectPage");
+        project_page proj = node as project_page;
+
+        this.breakpoints = proj.breakpoints;
+
+        memorycode = Memory.contents;
+        TraceResults.RemoveAllStatements();
+        #endregion
+
         #region CARPNodes
         cpuIn = GetNode<Sprite2D>("CpuIn");
         cpuOut = GetNode<Sprite2D>("CpuOut");
@@ -99,46 +193,351 @@ public partial class Animations : Node
         line10 = GetNode<Line2D>("Line11");
         #endregion
 
+        #region LineEdits Registers
+        AR_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer/HBoxContainer/AR");
+        PC_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer/HBoxContainer2/PC");
+        DR_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer/HBoxContainer3/DR");
+        TR_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer/HBoxContainer4/TR");
+        IR_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer4/IR");
+        R_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer5/R");
+        AC_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer6/AC");
+        Z_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer7/Z");
+        #endregion
+
         DrawSystemLines();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        if (Input.IsKeyPressed(Key.Z))
+        ioB.Text = IO;
+    }
+    #region Animation Controls
+    public async void StartAnimation(int memoryStartLocation)
+    {
+        if (!animationRunning)
         {
-            FETCH1();
-        }
-        if (Input.IsKeyPressed(Key.X))
-        {
-            FETCH2();
-        }
-        if (Input.IsKeyPressed(Key.C))
-        {
-            FETCH3();
+            animationRunning = true;
+            for (int i = memoryStartLocation; i < memorycode.Length; i++)
+            {
+                if(animationRunning == false)
+                {
+                    cpuStatus.Text = "Stopped";
+                    return;
+                }
+                ar_bit = pc_bit;
+                await FETCH1();
+                pc_bit = pc_bit + 1;
+                dr_bit = memorycode[i];
+                await FETCH2();
+                ar = pc;
+                ir = dr;
+                await FETCH3();
+                switch (memorycode[i])
+                {
+                    case opcodeNOP:
+                        await NOP();
+                        break;
+                    case opcodeLDAC:
+                        Debug.Print("LDAC encountered");
+                        await LDAC1();
+                        await LDAC2();
+                        await LDAC3();
+                        await LDAC4();
+                        await LDAC5();
+                        break;
+                    case opcodeSTAC:
+                        Debug.Print("STAC encountered");
+                        await STAC1();
+                        await STAC2();
+                        await STAC3();
+                        await STAC4();
+                        break;
+                    case opcodeMVAC:
+                        Debug.Print("MVAC encountered");
+                        await MVAC();
+                        break;
+                    case opcodeMOVR:
+                        Debug.Print("MOVR encountered");
+                        await MOVR();
+                        break;
+                    case opcodeJUMP:
+                        Debug.Print("JUMP encountered");
+                        await JUMP();
+                        break;
+                    case opcodeJMPZ:
+                        Debug.Print("JMPZ encountered");
+                        await JMPZ();
+                        break;
+                    case opcodeJPNZ:
+                        Debug.Print("JPNZ encountered");
+                        await JPNZ();
+                        break;
+                    case opcodeADD:
+                        Debug.Print("ADD encountered");
+                        await ADD();
+                        break;
+                    case opcodeSUB:
+                        Debug.Print("SUB encountered");
+                        await SUB();
+                        break;
+                    case opcodeINAC:
+                        Debug.Print("INAC encountered");
+                        await INAC();
+                        break;
+                    case opcodeCLAC:
+                        Debug.Print("CLAC encountered");
+                        await CLAC();
+                        break;
+                    case opcodeAND:
+                        Debug.Print("AND encountered");
+                        await AND();
+                        break;
+                    case opcodeOR:
+                        Debug.Print("OR encountered");
+                        await OR();
+                        break;
+                    case opcodeXOR:
+                        Debug.Print("XOR encountered");
+                        await XOR();
+                        break;
+                    case opcodeNOT:
+                        Debug.Print("NOT encountered");
+                        await NOT();
+                        break;
+                    case opcodeEND:
+                        Debug.Print("END encountered");
+                        return;
+                    default:
+                        // Handle unknown instructions or implement additional instructions
+                        Debug.Print("Instruction Does not Exist");
+                        break;
+                }
+            }
+            animationRunning = false;
         }
     }
 
-    public async void FETCH1()
+    public void StopAnimation()
     {
+        
+    }
+    public void StepThroughCycle()
+    {
+
+    }
+    public void StepThroughInstruction()
+    {
+        animationRunning = false;
+    }
+    public void ResetRegisters()
+    {
+        AR_txt.Text = "0000 0000 0000 0000";
+        PC_txt.Text = "0000 0000 0000 0000";
+        DR_txt.Text = "0000 0000";
+        TR_txt.Text = "0000 0000";
+        IR_txt.Text = "0000 0000";
+        R_txt.Text = "0000 0000";
+        AC_txt.Text = "0000 0000";
+        Z_txt.Text = "0";
+
+        IOint = 0;
+        IO = "00000000";
+        ar_bit = 0x00000000;
+        pc_bit = 0x00000000;
+        dr_bit = 0x00000000;
+        tr_bit = 0x00000000;
+        ir_bit = 0x00000000;
+        r_bit = 0x00000000;
+        ac_bit = 0x00000000;
+        z_bit = 0;
+    }
+    #endregion
+
+    #region Animations
+    #region FETCH
+    public async Task FETCH1()
+    {
+        AR(1);
+        PC(1);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
+
+        ARLineColor(1);
+        PCLineColor(1);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        cpuStatus.Text = "Running";
+        rtlStatement.Text = "Fetch 1";
+        dataMovement.Text = "AR <- PC";
+
         await Task.WhenAll(CPUToA());
         await Task.WhenAll(AToVDc());
         await Task.WhenAll(VDcToM(),vDcTohDc());
         await Task.WhenAll(hDcToDc());
+
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+        TR_txt.Text = SpaceInserter(tr_bit, "tr");
+        IR_txt.Text = SpaceInserter(ir_bit, "ir");
+        R_txt.Text = SpaceInserter(r_bit, "r");
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
-    public async void FETCH2()
+    public async Task FETCH2()
     {
+        AR(0);
+        PC(1);
+        DR(1);
+        Read(1);
+
+        ARLineColor(0);
+        PCLineColor(1);
+        DRLineColor(1);
+
         await Task.WhenAll(MToioInV());
         await Task.WhenAll(ioInVToD());
         await Task.WhenAll(DToCPU());
     }
-    public async void FETCH3()
+    public async Task FETCH3()
     {
+        PC(1);
+        DR(1);
+        IR(1);
+        AR(1);
+        Read(0);
+
+        ARLineColor(1);
+        PCLineColor(1);
+        DRLineColor(1);
+        IRLineColor(1);
+
+
         await Task.WhenAll(CPUToA());
         await Task.WhenAll(AToVDc());
         await Task.WhenAll(VDcToM(), vDcTohDc());
         await Task.WhenAll(hDcToDc());
     }
+    #endregion
+    #region DataMovement
+    #region LDAC
+    public async Task LDAC1()
+    {
+
+    }
+    public async Task LDAC2()
+    {
+
+    }
+    public async Task LDAC3()
+    {
+
+    }
+    public async Task LDAC4()
+    {
+
+    }
+    public async Task LDAC5()
+    {
+
+    }
+    #endregion
+
+    #region STAC
+    public async Task STAC1()
+    {
+
+    }
+    public async Task STAC2()
+    {
+
+    }
+    public async Task STAC3()
+    {
+
+    }
+    public async Task STAC4()
+    {
+
+    }
+    #endregion
+    public async Task NOP()
+    {
+
+        await Task.Delay(4000);
+    }
+    public async Task MVAC()
+    {
+        
+    }
+    public async Task MOVR()
+    {
+
+    }
+    public async Task JUMP()
+    {
+
+    }
+    public async Task JMPZ()
+    {
+
+    }
+    public async Task JPNZ()
+    {
+
+    }
+    #endregion
+    #region Arithmetic
+    public async Task ADD()
+    {
+
+    }
+    public async Task SUB()
+    {
+
+    }
+    public async Task INAC()
+    {
+
+    }
+    public async Task CLAC()
+    {
+
+    }
+    #endregion
+    #region Logical
+    public async Task AND()
+    {
+
+    }
+    public async Task OR()
+    {
+
+    }
+    public async Task XOR()
+    {
+
+    }
+    public async Task NOT()
+    {
+
+    }
+    #endregion
+    #endregion
 
     #region Draw System Lines
     public void DrawSystemLines()
@@ -219,11 +618,12 @@ public partial class Animations : Node
         line10.AddPoint(dOut.Position);
     }
     #endregion
+
     #region Data Animation Movements
     public async Task CPUToA()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = cpuOut.Position;
         redBall.Name = "RedBall";
 
@@ -234,7 +634,7 @@ public partial class Animations : Node
     public async Task AToVDc()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = aOut.Position;
         redBall.Name = "RedBall";
 
@@ -245,7 +645,7 @@ public partial class Animations : Node
     public async Task VDcToM()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = vDc.Position;
         redBall.Name = "RedBall";
 
@@ -256,7 +656,7 @@ public partial class Animations : Node
     public async Task DToCPU()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = dOut.Position;
         redBall.Name = "RedBall";
 
@@ -267,7 +667,7 @@ public partial class Animations : Node
     public async Task ioInVToD()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = ioInV.Position;
         redBall.Name = "RedBall";
 
@@ -278,7 +678,7 @@ public partial class Animations : Node
     public async Task MToioInV()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = mOut1.Position;
         redBall.Name = "RedBall";
 
@@ -289,7 +689,7 @@ public partial class Animations : Node
     public async Task vDcTohDc()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = vDc.Position;
         redBall.Name = "RedBall";
 
@@ -300,7 +700,7 @@ public partial class Animations : Node
     public async Task hDcToDc()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
-        GetTree().Root.AddChild(redBall);
+        GetParent().FindChild("Databalls").AddChild(redBall);
         redBall.Position = hDc.Position;
         redBall.Name = "RedBall";
 
@@ -315,7 +715,7 @@ public partial class Animations : Node
         {
             if(destination == mIn.Position || destination == dIn.Position)
             {
-                character.Position = character.Position.MoveToward(destination, (float)((moveSpeed*2.1) * GetProcessDeltaTime()));
+                character.Position = character.Position.MoveToward(destination, (float)((moveSpeed*2.7) * GetProcessDeltaTime()));
                 await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
             }
             else
@@ -327,6 +727,7 @@ public partial class Animations : Node
         character.QueueFree();
     }
     #endregion
+
     #region Color Me Lines
     public void MemoryColor()
     {
@@ -371,6 +772,317 @@ public partial class Animations : Node
         {
             line8.DefaultColor = Colors.White;
         }
+    }
+    #endregion
+
+    #region Color Me Registers
+    // 0 for white 1 for red
+    Color red = Colors.Red;
+    Color white = Colors.White;
+    public void AR(int num)
+    {
+        if(num == 0)
+        {
+            ar.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            ar.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void PC(int num)
+    {
+        if (num == 0)
+        {
+            pc.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            pc.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void DR(int num)
+    {
+        if (num == 0)
+        {
+            dr.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            dr.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void TR(int num)
+    {
+        if (num == 0)
+        {
+            tr.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            tr.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void IR(int num)
+    {
+        if (num == 0)
+        {
+            ir.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            ir.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void R(int num)
+    {
+        if (num == 0)
+        {
+            r.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            r.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void AC(int num)
+    {
+        if (num == 0)
+        {
+            ac.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            ac.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void Z(int num)
+    {
+        if (num == 0)
+        {
+            z.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            z.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void CU(int num)
+    {
+        if (num == 0)
+        {
+            cu.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            cu.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void ALU(int num)
+    {
+        if (num == 0)
+        {
+            alu.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            alu.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void Clock(int num)
+    {
+        if (num == 0)
+        {
+            clock.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            clock.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void Read(int num)
+    {
+        if (num == 0)
+        {
+            readL.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            readL.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void Write(int num)
+    {
+        if (num == 0)
+        {
+            writeL.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            writeL.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void CLK(int num)
+    {
+        if (num == 0)
+        {
+            clk.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            clk.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void EN1(int num)
+    {
+        if (num == 0)
+        {
+            en1.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            en1.AddThemeColorOverride("font_color", red);
+        }
+    }
+    public void EN2(int num)
+    {
+        if (num == 0)
+        {
+            en2.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            en2.AddThemeColorOverride("font_color", red);
+        }
+    }
+    #endregion
+
+    #region Color Me LineEdits
+    private void ARLineColor(int num)
+    {
+        if (num == 0)
+        {
+            AR_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            AR_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    private void PCLineColor(int num)
+    {
+        if (num == 0)
+        {
+            PC_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            PC_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    private void DRLineColor(int num)
+    {
+        if (num == 0)
+        {
+            DR_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            DR_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    private void TRLineColor(int num)
+    {
+        if (num == 0)
+        {
+            TR_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            TR_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    private void IRLineColor(int num)
+    {
+        if (num == 0)
+        {
+            IR_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            R_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    private void RLineColor(int num)
+    {
+        if (num == 0)
+        {
+            R_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            R_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    private void ACLineColor(int num)
+    {
+        if (num == 0)
+        {
+            AC_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            AC_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    private void ZLineColor(int num)
+    {
+        if (num == 0)
+        {
+            Z_txt.AddThemeColorOverride("font_color", white);
+        }
+        else
+        {
+            Z_txt.AddThemeColorOverride("font_color", red);
+        }
+    }
+    #endregion
+
+    #region Miscellaneous
+    public string SpaceInserter(int reg, string regname)
+    {
+        string binaryString;
+        if (regname == "ar" || regname == "pc")
+        {
+            // Convert the integer to a binary string with spaces every 4 digits
+            binaryString = Convert.ToString(reg, 2).PadLeft(16, '0');
+        }
+        else if (regname == "z")
+        {
+            // Convert the integer to a binary string with spaces every 4 digits
+            binaryString = Convert.ToString(reg);
+        }
+        else
+        {
+            // Convert the integer to a binary string with spaces every 4 digits
+            binaryString = Convert.ToString(reg, 2).PadLeft(8, '0');
+        }
+
+        // Insert spaces after every 4 digits
+        int groupSize = 4;
+        for (int i = groupSize; i < binaryString.Length; i += (groupSize + 1))
+        {
+            binaryString = binaryString.Insert(i, " ");
+        }
+        return binaryString;
+    }
+
+    public void SetRequirements(Label cpuStatus, Label rtlStatement, Label dataMovement, LineEdit currentMemoryLocation)
+    {
+        this.cpuStatus = cpuStatus;
+        this.rtlStatement = rtlStatement;
+        this.dataMovement = dataMovement;
+        this.currentMemoryLocation = currentMemoryLocation;
     }
     #endregion
 }
