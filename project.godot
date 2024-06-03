@@ -19,6 +19,7 @@ run/size/viewport_height=1080
 [autoload]
 
 ProjectPage="*res://Scripts/project_page.cs"
+MainPage="*res://Scenes/main_page.tscn"
 
 [display]
 

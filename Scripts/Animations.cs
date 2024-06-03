@@ -15,7 +15,11 @@ public partial class Animations : Node
 
     private List<int> breakpoints;
 
+    int i = 0;
     private bool animationRunning = false;
+    private bool stepThroughCycle = false;
+    private bool stepThroughInstruction = false;
+    private bool stopAnimation = false;
 
     #region Animation Settings
     [Export] private float moveSpeed = 50f;
@@ -99,6 +103,8 @@ public partial class Animations : Node
     LineEdit R_txt;
     LineEdit AC_txt;
     LineEdit Z_txt;
+
+    bool isHex = false;
     #endregion
 
     #region VisualizationOpcodes
@@ -202,6 +208,11 @@ public partial class Animations : Node
         R_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer5/R");
         AC_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer6/AC");
         Z_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer7/Z");
+
+        var isHex = systemMenu.GetNode<Button>("HBoxContainer/VBoxContainer3/Hex");
+        isHex.Connect("pressed", new Callable(this, nameof(ToHex)));
+        var isBinary = systemMenu.GetNode<Button>("HBoxContainer/VBoxContainer3/Binary");
+        isBinary.Connect("pressed", new Callable(this, nameof(ToBinary)));
         #endregion
 
         DrawSystemLines();
@@ -211,47 +222,157 @@ public partial class Animations : Node
 	public override void _Process(double delta)
 	{
         ioB.Text = IO;
+        currentMemoryLocation.Text = i.ToString();
     }
     #region Animation Controls
     public async void StartAnimation(int memoryStartLocation)
     {
-        if (!animationRunning)
+        if (stepThroughCycle || stepThroughInstruction)
+        {
+            stepThroughInstruction = false;
+            stepThroughCycle = false;
+        }
+        else if (!animationRunning)
         {
             animationRunning = true;
-            for (int i = memoryStartLocation; i < memorycode.Length; i++)
+            ar_bit = BinaryStringToInt(AR_txt.Text);
+            pc_bit = BinaryStringToInt(PC_txt.Text);
+            dr_bit = BinaryStringToInt(DR_txt.Text);
+            tr_bit = BinaryStringToInt(TR_txt.Text);
+            ir_bit = BinaryStringToInt(IR_txt.Text);
+            r_bit = BinaryStringToInt(R_txt.Text);
+            ac_bit = BinaryStringToInt(AC_txt.Text);
+            z_bit = BinaryStringToInt(Z_txt.Text);
+
+
+            for (i = memoryStartLocation; i < memorycode.Length; i++)
             {
-                if(animationRunning == false)
+                await FETCH1();
+                await ClockPulse();
+                if (stopAnimation == true)
                 {
+                    stopAnimation = false;
+                    animationRunning = false;
                     cpuStatus.Text = "Stopped";
                     return;
                 }
-                ar_bit = pc_bit;
-                await FETCH1();
-                pc_bit = pc_bit + 1;
-                dr_bit = memorycode[i];
+                await StepCycle();
                 await FETCH2();
-                ar = pc;
-                ir = dr;
+                await ClockPulse();
+                if (stopAnimation == true)
+                {
+                    stopAnimation = false;
+                    animationRunning = false;
+                    cpuStatus.Text = "Stopped";
+                    return;
+                }
+                await StepCycle();
                 await FETCH3();
+                await ClockPulse();
+                if (stopAnimation == true)
+                {
+                    stopAnimation = false;
+                    animationRunning = false;
+                    cpuStatus.Text = "Stopped";
+                    return;
+                }
+                await StepCycle();
                 switch (memorycode[i])
                 {
                     case opcodeNOP:
+                        Debug.Print("NOP encountered");
                         await NOP();
+                        await StepCycle();
                         break;
                     case opcodeLDAC:
                         Debug.Print("LDAC encountered");
+                        i++;
                         await LDAC1();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
                         await LDAC2();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
                         await LDAC3();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
                         await LDAC4();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
                         await LDAC5();
                         break;
                     case opcodeSTAC:
                         Debug.Print("STAC encountered");
+                        i++;
                         await STAC1();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
                         await STAC2();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
                         await STAC3();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
                         await STAC4();
+                        await ClockPulse();
+                        if (stopAnimation == true)
+                        {
+                            stopAnimation = false;
+                            animationRunning = false;
+                            cpuStatus.Text = "Stopped";
+                            return;
+                        }
+                        await StepCycle();
+                        await STAC5();
                         break;
                     case opcodeMVAC:
                         Debug.Print("MVAC encountered");
@@ -263,14 +384,17 @@ public partial class Animations : Node
                         break;
                     case opcodeJUMP:
                         Debug.Print("JUMP encountered");
+                        i++;
                         await JUMP();
                         break;
                     case opcodeJMPZ:
                         Debug.Print("JMPZ encountered");
+                        i++;
                         await JMPZ();
                         break;
                     case opcodeJPNZ:
                         Debug.Print("JPNZ encountered");
+                        i++;
                         await JPNZ();
                         break;
                     case opcodeADD:
@@ -307,12 +431,23 @@ public partial class Animations : Node
                         break;
                     case opcodeEND:
                         Debug.Print("END encountered");
+                        await END();
                         return;
                     default:
                         // Handle unknown instructions or implement additional instructions
                         Debug.Print("Instruction Does not Exist");
                         break;
                 }
+                await ClockPulse();
+                if (stopAnimation == true)
+                {
+                    stopAnimation = false;
+                    animationRunning = false;
+                    cpuStatus.Text = "Stopped";
+                    return;
+                }
+                await StepCycle();
+                await StepInstruction();
             }
             animationRunning = false;
         }
@@ -320,15 +455,15 @@ public partial class Animations : Node
 
     public void StopAnimation()
     {
-        
+        stopAnimation = true;  
     }
     public void StepThroughCycle()
     {
-
+        stepThroughCycle = true;
     }
     public void StepThroughInstruction()
     {
-        animationRunning = false;
+        stepThroughInstruction = true;
     }
     public void ResetRegisters()
     {
@@ -358,6 +493,13 @@ public partial class Animations : Node
     #region FETCH
     public async Task FETCH1()
     {
+        Write(0);
+        Read(0);
+        EN1(0);
+        WriteColor(0);
+        ReadColor(0);
+        MemoryColor(0);
+
         AR(1);
         PC(1);
         DR(0);
@@ -366,8 +508,6 @@ public partial class Animations : Node
         R(0);
         AC(0);
         Z(0);
-        Read(0);
-        Write(0);
 
         ARLineColor(1);
         PCLineColor(1);
@@ -378,6 +518,7 @@ public partial class Animations : Node
         ACLineColor(0);
         ZLineColor(0);
 
+        ar_bit = pc_bit;
         cpuStatus.Text = "Running";
         rtlStatement.Text = "Fetch 1";
         dataMovement.Text = "AR <- PC";
@@ -396,6 +537,11 @@ public partial class Animations : Node
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
 
+        Read(1);
+        EN1(1);
+        ReadColor(1);
+        MemoryColor(1);
+
         TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task FETCH2()
@@ -403,15 +549,29 @@ public partial class Animations : Node
         AR(0);
         PC(1);
         DR(1);
-        Read(1);
 
         ARLineColor(0);
         PCLineColor(1);
         DRLineColor(1);
 
+        pc_bit = pc_bit + 1;
+        dr_bit = memorycode[i];
+        rtlStatement.Text = "Fetch 2";
+        dataMovement.Text = "DR <- M, PC <- PC+1";
+
         await Task.WhenAll(MToioInV());
         await Task.WhenAll(ioInVToD());
         await Task.WhenAll(DToCPU());
+
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+
+        Read(0);
+        EN1(0);
+        ReadColor(0);
+        MemoryColor(0);
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task FETCH3()
     {
@@ -419,122 +579,917 @@ public partial class Animations : Node
         DR(1);
         IR(1);
         AR(1);
-        Read(0);
 
         ARLineColor(1);
         PCLineColor(1);
         DRLineColor(1);
         IRLineColor(1);
 
+        ar_bit = pc_bit;
+        ir_bit = dr_bit;
+        rtlStatement.Text = "Fetch 3";
+        dataMovement.Text = "IR <- DR, AR <- PC";
 
         await Task.WhenAll(CPUToA());
         await Task.WhenAll(AToVDc());
         await Task.WhenAll(VDcToM(), vDcTohDc());
         await Task.WhenAll(hDcToDc());
+
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+        IR_txt.Text = SpaceInserter(ir_bit, "ir");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     #endregion
     #region DataMovement
     #region LDAC
     public async Task LDAC1()
     {
+        Read(1);
+        EN1(1);
+        ReadColor(1);
+        MemoryColor(1);
 
+        AR(1);
+        PC(1);
+        DR(1);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
+
+        ARLineColor(1);
+        PCLineColor(1);
+        DRLineColor(1);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        dr_bit = memorycode[i];
+        ar_bit = ar_bit + 1;
+        pc_bit = pc_bit + 1;
+
+        rtlStatement.Text = "LDAC 1";
+        dataMovement.Text = "DR <- M, PC <- PC + 1, AR <- AR + 1";
+
+        await Task.WhenAll(CPUToA(), MToioInV());
+        await Task.WhenAll(AToVDc(), ioInVToD());
+        await Task.WhenAll(VDcToM(), vDcTohDc());
+        await Task.WhenAll(hDcToDc(), DToCPU());
+
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task LDAC2()
     {
+        AR(0);
+        PC(1);
+        DR(1);
+        TR(1);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(1);
+        DRLineColor(1);
+        TRLineColor(1);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        tr_bit = dr_bit;
+        dr_bit = memorycode[i];
+        pc_bit = pc_bit + 1;
+
+        rtlStatement.Text = "LDAC 2";
+        dataMovement.Text = "TR <- DR, DR <- M, PC = PC + 1";
+
+        await Task.WhenAll(MToioInV());
+        await Task.WhenAll(ioInVToD());
+        await Task.WhenAll(DToCPU());
+
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+        TR_txt.Text = SpaceInserter(tr_bit, "tr");
+
+        Read(0);
+        EN1(0);
+        ReadColor(0);
+        MemoryColor(0);
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task LDAC3()
     {
+        AR(1);
+        PC(0);
+        DR(1);
+        TR(1);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
 
+        ARLineColor(1);
+        PCLineColor(0);
+        DRLineColor(1);
+        TRLineColor(1);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        ar_bit = dr_bit | tr_bit;
+
+        rtlStatement.Text = "LDAC 3";
+        dataMovement.Text = "AR <- DR | TR";
+
+        await Task.WhenAll(CPUToA());
+        await Task.WhenAll(AToVDc());
+        await Task.WhenAll(VDcToM(), vDcTohDc());
+        await Task.WhenAll(hDcToDc());
+
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+
+        Read(1);
+        EN1(1);
+        ReadColor(1);
+        MemoryColor(1);
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task LDAC4()
     {
+        AR(0);
+        PC(0);
+        DR(1);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(1);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        dr_bit = memorycode[i];
+
+        rtlStatement.Text = "LDAC 4";
+        dataMovement.Text = "DR <- M";
+
+        await Task.WhenAll(MToioInV());
+        await Task.WhenAll(ioInVToD());
+        await Task.WhenAll(DToCPU());
+
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+
+        Read(0);
+        EN1(0);
+        ReadColor(0);
+        MemoryColor(0);
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task LDAC5()
     {
+        AR(0);
+        PC(0);
+        DR(1);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(1);
+        Z(0);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(1);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(1);
+        ZLineColor(0);
+
+        ac_bit = dr_bit;
+
+        rtlStatement.Text = "LDAC 5";
+        dataMovement.Text = "AC <- DR";
+        
+        await Task.Delay(1000);
+        
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     #endregion
 
     #region STAC
     public async Task STAC1()
     {
+        Read(1);
+        EN1(1);
+        ReadColor(1);
+        MemoryColor(1);
 
+        AR(1);
+        PC(1);
+        DR(1);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
+
+        ARLineColor(1);
+        PCLineColor(1);
+        DRLineColor(1);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        dr_bit = memorycode[i];
+        ar_bit = ar_bit + 1;
+        pc_bit = pc_bit + 1;
+
+        rtlStatement.Text = "STAC 1";
+        dataMovement.Text = "DR <- M, PC <- PC + 1, AR <- AR + 1";
+
+        await Task.WhenAll(CPUToA(), MToioInV());
+        await Task.WhenAll(AToVDc(), ioInVToD());
+        await Task.WhenAll(VDcToM(), vDcTohDc());
+        await Task.WhenAll(hDcToDc(), DToCPU());
+
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task STAC2()
     {
+        AR(0);
+        PC(1);
+        DR(1);
+        TR(1);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(1);
+        DRLineColor(1);
+        TRLineColor(1);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        tr_bit = dr_bit;
+        dr_bit = memorycode[i];
+        pc_bit = pc_bit + 1;
+
+        rtlStatement.Text = "STAC 2";
+        dataMovement.Text = "TR <- DR, DR <- M, PC <- PC + 1";
+
+        await Task.WhenAll(MToioInV());
+        await Task.WhenAll(ioInVToD());
+        await Task.WhenAll(DToCPU());
+
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+        TR_txt.Text = SpaceInserter(tr_bit, "tr");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task STAC3()
     {
+        Read(0);
+        EN1(0);
+        ReadColor(0);
+        MemoryColor(0);
 
+        AR(1);
+        PC(0);
+        DR(1);
+        TR(1);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
+
+        ARLineColor(1);
+        PCLineColor(0);
+        DRLineColor(1);
+        TRLineColor(1);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        ar_bit = dr_bit | tr_bit;
+
+        rtlStatement.Text = "STAC 3";
+        dataMovement.Text = "AR <- DR | TR";
+
+        await Task.WhenAll(CPUToA());
+        await Task.WhenAll(AToVDc());
+        await Task.WhenAll(VDcToM(), vDcTohDc());
+        await Task.WhenAll(hDcToDc());
+
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task STAC4()
     {
+        AR(0);
+        PC(0);
+        DR(1);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(1);
+        Z(0);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(1);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(1);
+        ZLineColor(0);
+
+        dr_bit = ac_bit;
+
+        rtlStatement.Text = "STAC 4";
+        dataMovement.Text = "DR <- AC";
+
+        await Task.Delay(1000);
+
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
+    }
+    public async Task STAC5()
+    {
+        Write(1);
+        EN1(1);
+        WriteColor(1);
+        MemoryColor(1);
+
+        AR(0);
+        PC(0);
+        DR(1);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(1);
+
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(1);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        memorycode[i] = (short)dr_bit;
+
+        rtlStatement.Text = "STAC 5";
+        dataMovement.Text = "M <- DR";
+
+        await Task.WhenAll(CPUToD());
+        await Task.WhenAll(DToioInV());
+        await Task.WhenAll(ioInVToM());
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     #endregion
-    public async Task NOP()
-    {
 
-        await Task.Delay(4000);
-    }
     public async Task MVAC()
     {
-        
+        AR(1);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(1);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
+
+        ARLineColor(1);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(1);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        r_bit = ac_bit;
+        rtlStatement.Text = "MVAC";
+        dataMovement.Text = "R <- AC";
+
+        await Task.Delay(1000);
+
+        R_txt.Text = SpaceInserter(r_bit, "r");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task MOVR()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(1);
+        AC(1);
+        Z(0);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(1);
+        ACLineColor(1);
+        ZLineColor(0);
+
+        ac_bit = r_bit;
+        rtlStatement.Text = "MOVR";
+        dataMovement.Text = "AC <- R";
+        
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task JUMP()
     {
-
+        int position = memorycode[i]-1;
+        rtlStatement.Text = "JUMP";
+        if (position >= 0 && position < memorycode.Length)
+        {
+            dataMovement.Text = "Go To " + position;
+            TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
+            i = position;
+        }
+        else
+        {
+            // Handle invalid jump, e.g., by throwing an exception or setting position to a default value
+            dataMovement.Text = "Invalid Jump";
+            Debug.Print("Invalid memory line JUMP");
+        }
+        await Task.Delay(1000);
     }
     public async Task JMPZ()
     {
-
+        rtlStatement.Text = "JMPZ";
+        if (z_bit == 1)
+        {
+            int position = memorycode[i]-1;
+            dataMovement.Text = "Go To " + position;
+            TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
+            i = position;
+        }
+        else
+        {
+            dataMovement.Text = "Continue";
+            TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
+        }
+        await Task.Delay(1000);
     }
     public async Task JPNZ()
     {
+        rtlStatement.Text = "JPNZ";
+        if (z_bit == 0)
+        {
+            int position = memorycode[i] - 1;
+            dataMovement.Text = "Go To " + position;
+            TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
+            i = position;
+        }
+        else
+        {
+            dataMovement.Text = "Continue";
+            TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
+        }
+        await Task.Delay(1000);
+    }
 
+    public async Task NOP()
+    {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
+
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        rtlStatement.Text = "NOP";
+        dataMovement.Text = "No Operation";
+
+        await Task.Delay(1000);
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
+    }
+
+    public async Task END()
+    {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(0);
+        Z(0);
+        Read(0);
+        Write(0);
+
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(0);
+        ZLineColor(0);
+
+        cpuStatus.Text = "Ended";
+        rtlStatement.Text = "END";
+        dataMovement.Text = "NONE";
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+        TR_txt.Text = SpaceInserter(tr_bit, "tr");
+        IR_txt.Text = SpaceInserter(ir_bit, "ir");
+        R_txt.Text = SpaceInserter(r_bit, "r");
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        await Task.Delay(1000);
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     #endregion
     #region Arithmetic
     public async Task ADD()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(1);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(1);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        ac_bit = ac_bit + r_bit;
+
+        // Set z based on the result
+        z_bit = (ac_bit == 0) ? 1 : 0;
+
+        rtlStatement.Text = "ADD";
+        dataMovement.Text = "AC <- AC + R";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task SUB()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(1);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(1);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        ac_bit = ac_bit - r_bit;
+
+        // Set z based on the result
+        z_bit = (ac_bit == 0) ? 1 : 0;
+
+        rtlStatement.Text = "SUB";
+        dataMovement.Text = "AC <- AC - R";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task INAC()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        ac_bit = ac_bit + 1;
+
+        // Set z based on the result
+        z_bit = (ac_bit == 0) ? 1 : 0;
+
+        rtlStatement.Text = "INAC";
+        dataMovement.Text = "AC <- AC + 1";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task CLAC()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        ac_bit = 0;
+        z_bit = 1;
+
+        rtlStatement.Text = "CLAC";
+        dataMovement.Text = "AC <- 0, Z <- 1";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     #endregion
     #region Logical
     public async Task AND()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(1);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(1);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        // Perform bitwise AND on ac and r
+        ac_bit = ac_bit & r_bit;
+
+        // Set z based on the result
+        z_bit = (ac_bit == 0) ? 1 : 0;
+
+        rtlStatement.Text = "AND";
+        dataMovement.Text = "AC <- AC & r";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task OR()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        ac_bit = ac_bit | 1;
+        z_bit = (ac_bit == 0) ? 1 : 0;
+
+        rtlStatement.Text = "OR";
+        dataMovement.Text = "AC <- AC | r";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task XOR()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        // Perform bitwise XOR on ac and 1
+        ac_bit = ac_bit ^ 1;
+
+        // Set z based on the result
+        z_bit = (ac_bit == 0) ? 1 : 0;
+
+        rtlStatement.Text = "XOR";
+        dataMovement.Text = "AC <- AC ^ r";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     public async Task NOT()
     {
+        AR(0);
+        PC(0);
+        DR(0);
+        TR(0);
+        IR(0);
+        R(0);
+        AC(1);
+        Z(1);
+        Read(0);
+        Write(0);
 
+        ARLineColor(0);
+        PCLineColor(0);
+        DRLineColor(0);
+        TRLineColor(0);
+        IRLineColor(0);
+        RLineColor(0);
+        ACLineColor(1);
+        ZLineColor(1);
+
+        // Perform bitwise NOT on ac
+        ac_bit = ~ac_bit;
+
+        // Set z based on the result
+        z_bit = (ac_bit == 0) ? 1 : 0;
+
+        rtlStatement.Text = "NOT";
+        dataMovement.Text = "AC <- ~AC";
+
+        await Task.Delay(1000);
+
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+
+        TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
     #endregion
     #endregion
@@ -664,6 +1619,17 @@ public partial class Animations : Node
 
         await MoveToPosition(redBall, destination);
     }
+    public async Task CPUToD()
+    {
+        CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
+        GetParent().FindChild("Databalls").AddChild(redBall);
+        redBall.Position = cpuIn.Position;
+        redBall.Name = "RedBall";
+
+        destination = dOut.Position;
+
+        await MoveToPosition(redBall, destination);
+    }
     public async Task ioInVToD()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
@@ -675,6 +1641,17 @@ public partial class Animations : Node
 
         await MoveToPosition(redBall, destination);
     }
+    public async Task DToioInV()
+    {
+        CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
+        GetParent().FindChild("Databalls").AddChild(redBall);
+        redBall.Position = dIn.Position;
+        redBall.Name = "RedBall";
+
+        destination = ioInV.Position;
+
+        await MoveToPosition(redBall, destination);
+    }
     public async Task MToioInV()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
@@ -683,6 +1660,17 @@ public partial class Animations : Node
         redBall.Name = "RedBall";
 
         destination = ioInV.Position;
+
+        await MoveToPosition(redBall, destination);
+    }
+    public async Task ioInVToM()
+    {
+        CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
+        GetParent().FindChild("Databalls").AddChild(redBall);
+        redBall.Position = ioInV.Position;
+        redBall.Name = "RedBall";
+
+        destination = mOut1.Position;
 
         await MoveToPosition(redBall, destination);
     }
@@ -712,8 +1700,13 @@ public partial class Animations : Node
     private async Task MoveToPosition(CharacterBody2D character, Vector2 destination)
     {
         while (character.Position != destination)
-        {
-            if(destination == mIn.Position || destination == dIn.Position)
+        {   
+            if(destination == dIn.Position)
+            {
+                character.Position = character.Position.MoveToward(destination, (float)((moveSpeed * 5) * GetProcessDeltaTime()));
+                await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+            }
+            else if(destination == mIn.Position )
             {
                 character.Position = character.Position.MoveToward(destination, (float)((moveSpeed*2.7) * GetProcessDeltaTime()));
                 await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
@@ -729,48 +1722,49 @@ public partial class Animations : Node
     #endregion
 
     #region Color Me Lines
-    public void MemoryColor()
+    public void MemoryColor(int num)
     {
-        if(line4.DefaultColor == Colors.White)
-        {
-            line4.DefaultColor = Colors.Red;
-        }
-        else
+        if(num == 0)
         {
             line4.DefaultColor = Colors.White;
         }
-    }
-    public void ReadColor()
-    {
-        if (line6.DefaultColor == Colors.White)
-        {
-            line6.DefaultColor = Colors.Red;
-        }
         else
+        {
+            line4.DefaultColor = Colors.Red;
+        }
+    }
+    public void ReadColor(int num)
+    {
+
+        if (num == 0)
         {
             line6.DefaultColor = Colors.White;
         }
-    }
-    public void WriteColor()
-    {
-        if (line7.DefaultColor == Colors.White)
-        {
-            line7.DefaultColor = Colors.Red;
-        }
         else
+        {
+            line6.DefaultColor = Colors.Red;
+        }
+    }
+    public void WriteColor(int num)
+    {
+        if (num == 0)
         {
             line7.DefaultColor = Colors.White;
         }
-    }
-    public void ClkColor()
-    {
-        if (line8.DefaultColor == Colors.White)
+        else
         {
-            line8.DefaultColor = Colors.Red;
+            line7.DefaultColor = Colors.Red;
+        }
+    }
+    public void ClkColor(int num)
+    {
+        if (num == 0)
+        {
+            line8.DefaultColor = Colors.White;
         }
         else
         {
-            line8.DefaultColor = Colors.White;
+            line8.DefaultColor = Colors.Red;
         }
     }
     #endregion
@@ -1083,6 +2077,76 @@ public partial class Animations : Node
         this.rtlStatement = rtlStatement;
         this.dataMovement = dataMovement;
         this.currentMemoryLocation = currentMemoryLocation;
+    }
+
+    public async Task ClockPulse()
+    {
+        Clock(1);
+        CLK(1);
+        ClkColor(1);
+        await Task.Delay(500);
+        Clock(0);
+        CLK(0);
+        ClkColor(0);
+    }
+
+    public async Task StepInstruction()
+    {
+        while (stepThroughInstruction)
+        {
+            await Task.Delay(100);
+            if (!stepThroughInstruction)
+            {
+                break;
+            }
+        }
+    }
+    public async Task StepCycle()
+    {
+        while (stepThroughCycle)
+        {
+            await Task.Delay(100);
+            if (!stepThroughCycle)
+            {
+                break;
+            }
+        }
+    }
+
+    public void ToBinary()
+    {
+        isHex = false;
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+        TR_txt.Text = SpaceInserter(tr_bit, "tr");
+        IR_txt.Text = SpaceInserter(ir_bit, "ir");
+        R_txt.Text = SpaceInserter(r_bit, "r");
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+    }
+    public void ToHex()
+    {
+        isHex = true;
+        AR_txt.Text = SpaceInserter(ar_bit, "ar");
+        PC_txt.Text = SpaceInserter(pc_bit, "pc");
+        DR_txt.Text = SpaceInserter(dr_bit, "dr");
+        TR_txt.Text = SpaceInserter(tr_bit, "tr");
+        IR_txt.Text = SpaceInserter(ir_bit, "ir");
+        R_txt.Text = SpaceInserter(r_bit, "r");
+        AC_txt.Text = SpaceInserter(ac_bit, "ac");
+        Z_txt.Text = SpaceInserter(z_bit, "z");
+    }
+
+    static int BinaryStringToInt(string binaryString)
+    {
+        // Remove spaces
+        string cleanedBinaryString = binaryString.Replace(" ", "");
+
+        // Convert binary string to integer
+        int result = Convert.ToInt32(cleanedBinaryString, 2);
+
+        return result;
     }
     #endregion
 }

@@ -97,6 +97,7 @@ offset_left = 33.0
 offset_top = 49.0
 offset_right = 133.0
 offset_bottom = 226.0
+scale = Vector2(0.76, 0.44)
 texture_normal = ExtResource("4_3r6y2")
 texture_pressed = ExtResource("5_1qe46")
 texture_hover = ExtResource("6_d1lji")

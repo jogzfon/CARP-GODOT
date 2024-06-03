@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=22 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -14,6 +14,11 @@
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="14_r5kqw"]
+[ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="15_827pa"]
+[ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="16_0ocfo"]
+[ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="17_5wjgb"]
+[ext_resource type="Script" path="res://Scripts/FileHandler.cs" id="18_lnwlk"]
+[ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/InstructionSet.png" id="19_f2wtp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
 font = ExtResource("13_0fq7n")
@@ -65,6 +70,13 @@ offset_right = 350.0
 offset_bottom = 1080.0
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
+[node name="ColorRect4" type="ColorRect" parent="."]
+layout_mode = 2
+offset_top = 100.0
+offset_right = 350.0
+offset_bottom = 1080.0
+color = Color(0.168627, 0.176471, 0.188235, 1)
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 offset_left = 15.0
@@ -94,7 +106,7 @@ layout_mode = 2
 offset_left = 15.0
 offset_top = 146.0
 offset_right = 335.0
-offset_bottom = 646.0
+offset_bottom = 471.0
 
 [node name="Label" type="Label" parent="ProjectList"]
 layout_mode = 2
@@ -114,20 +126,35 @@ layout_mode = 2
 text = "DOCUMENTATION"
 label_settings = SubResource("LabelSettings_qri6r")
 
-[node name="Button" type="Button" parent="DocumentationsList"]
+[node name="Wit" type="Button" parent="DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
-text = "Project 1"
+text = "What is this?"
 
-[node name="Button2" type="Button" parent="DocumentationsList"]
+[node name="Hdtw" type="Button" parent="DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
-text = "Project 2"
+text = "How does this work?"
 
-[node name="Button3" type="Button" parent="DocumentationsList"]
+[node name="Pex" type="Button" parent="DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
-text = "Project 3"
+text = "Program Example"
+
+[node name="Nc" type="Button" parent="DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "Numeric Constants"
+
+[node name="Ad" type="Button" parent="DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "Assembler Directives"
+
+[node name="Aap" type="Button" parent="DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "Assembling a program"
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 2
@@ -152,10 +179,10 @@ label_settings = SubResource("LabelSettings_qv4bw")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 2
-offset_left = 1804.0
-offset_top = 10.0
-offset_right = 1884.0
-offset_bottom = 90.0
+offset_left = 1817.0
+offset_top = 23.0
+offset_right = 1897.0
+offset_bottom = 69.0
 texture = ExtResource("4_2bfqo")
 expand_mode = 3
 stretch_mode = 5
@@ -167,10 +194,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -201.0
-offset_top = -2.0
-offset_right = -21.0
-offset_bottom = 178.0
+offset_left = -153.0
+offset_top = 44.0
+offset_right = -64.0
+offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("4_rgqy0")
@@ -183,14 +210,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -201.0
-offset_top = 196.0
-offset_right = -21.0
-offset_bottom = 231.0
+offset_left = -193.0
+offset_top = 147.0
+offset_right = -13.0
+offset_bottom = 185.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_6c80f")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 20
 text = "New Project"
 horizontal_alignment = 1
 
@@ -201,10 +228,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 199.0
-offset_top = -2.0
-offset_right = 379.0
-offset_bottom = 178.0
+offset_left = 206.0
+offset_top = 44.0
+offset_right = 295.0
+offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("5_2n6so")
@@ -217,14 +244,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 199.0
-offset_top = 196.0
-offset_right = 379.0
-offset_bottom = 231.0
+offset_left = 157.0
+offset_top = 147.0
+offset_right = 337.0
+offset_bottom = 185.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_6c80f")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 20
 text = "Open"
 horizontal_alignment = 1
 
@@ -405,3 +432,478 @@ theme_override_font_sizes/font_size = 25
 text = "SUBMIT"
 icon_alignment = 1
 expand_icon = true
+
+[node name="Back" type="TextureButton" parent="ProjectNamePanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 29.0
+offset_right = 132.0
+offset_bottom = 206.0
+scale = Vector2(0.76, 0.44)
+texture_normal = ExtResource("15_827pa")
+texture_pressed = ExtResource("16_0ocfo")
+texture_hover = ExtResource("17_5wjgb")
+
+[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
+script = ExtResource("18_lnwlk")
+dialogue = NodePath("FileDialog")
+newProject = NodePath("../NewProject")
+openProject = NodePath("../OpenProject")
+documentationRect = NodePath("../DocumentationRect")
+witbtn = NodePath("../DocumentationsList/Wit")
+witexit = NodePath("../DocumentationRect/WhatIsThis/VBoxContainer/Exit")
+WIT = NodePath("../DocumentationRect/WhatIsThis")
+htdwbtn = NodePath("../DocumentationsList/Hdtw")
+htdwexit = NodePath("../DocumentationRect/HowDoesThisWork/VBoxContainer/Exit")
+HDTW = NodePath("../DocumentationRect/HowDoesThisWork")
+pexbtn = NodePath("../DocumentationsList/Pex")
+pexexit = NodePath("../DocumentationRect/ProgramExample/VBoxContainer/Exit")
+PEX = NodePath("../DocumentationRect/ProgramExample")
+ncbtn = NodePath("../DocumentationsList/Nc")
+ncexit = NodePath("../DocumentationRect/NumericConstants/VBoxContainer/Exit")
+NC = NodePath("../DocumentationRect/NumericConstants")
+adbtn = NodePath("../DocumentationsList/Ad")
+adexit = NodePath("../DocumentationRect/AssemblerDirectives/VBoxContainer/Exit")
+AD = NodePath("../DocumentationRect/AssemblerDirectives")
+aapbtn = NodePath("../DocumentationsList/Aap")
+aapexit = NodePath("../DocumentationRect/AssemblingAProgram/VBoxContainer/Exit")
+AAP = NodePath("../DocumentationRect/AssemblingAProgram")
+
+[node name="FileDialog" type="FileDialog" parent="FileHandler"]
+title = "Open a File"
+position = Vector2i(400, 36)
+size = Vector2i(780, 680)
+ok_button_text = "Open"
+file_mode = 0
+
+[node name="DocumentationRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 361.0
+offset_top = 110.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="WhatIsThis" type="PanelContainer" parent="DocumentationRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/WhatIsThis"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="DocumentationRect/WhatIsThis/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/WhatIsThis/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "CARP, or short for Carpinelli, is the creator of the Relatively Simple Computer System Simulator.
+
+Unlike the old RSCPU system that he made, we now have CARP -- provided to make it
+more user friendly for you.
+
+
+Here are some of his documentations that was provided:
+
+The Relatively Simple CPU Simulator is an instructional aid for students studying computer 
+architecture and CPU design, typically at the junior or senior level. It simulates the Relatively 
+Simple CPU, a 16-instruction processor introduced in the textbook Computer Systems 
+Organization and Architecture1
+. Students first enter an assembly language program, which is 
+assembled by the simulator. After correcting any syntax errors, the user simulates the fetch, 
+decode, and execute cycles for each instruction in the program. The user may simulate the 
+execution of the program by clock cycle, by instruction, using breakpoints, or as a single, 
+continuous execution."
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Space3" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="HowDoesThisWork" type="PanelContainer" parent="DocumentationRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/HowDoesThisWork"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="DocumentationRect/HowDoesThisWork/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/HowDoesThisWork/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "yOw Shane"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Space3" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="ProgramExample" type="PanelContainer" parent="DocumentationRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/ProgramExample"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="DocumentationRect/ProgramExample/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/ProgramExample/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "Yow Elijah"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Space3" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="NumericConstants" type="PanelContainer" parent="DocumentationRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/NumericConstants"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="DocumentationRect/NumericConstants/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/NumericConstants/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "Yow Mich"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Space3" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="AssemblerDirectives" type="PanelContainer" parent="DocumentationRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblerDirectives"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="DocumentationRect/AssemblerDirectives/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/AssemblerDirectives/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "yow Ruff"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Space3" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="AssemblingAProgram" type="PanelContainer" parent="DocumentationRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblingAProgram"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="DocumentationRect/AssemblingAProgram/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/AssemblingAProgram/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "Yow JD"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Space3" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1

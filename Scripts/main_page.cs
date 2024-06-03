@@ -1,5 +1,8 @@
 using Godot;
+using OpenAI_API.Files;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 public partial class main_page : Control
 {
@@ -7,8 +10,8 @@ public partial class main_page : Control
 	Panel projectNamePnl;
 	LineEdit projectName;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
         projectList = GetNode<VBoxContainer>("ProjectList");
 		projectNamePnl = GetNode<Panel>("ProjectNamePanel");
@@ -19,14 +22,11 @@ public partial class main_page : Control
         var submitName = GetNode<Button>("ProjectNamePanel/SubmitName");
         submitName.Connect("pressed", new Callable(this, nameof(SubmitName)));
 
-        var newProject = GetNode<TextureButton>("NewProject");
-        newProject.Connect("pressed", new Callable(this, nameof(NewProject)));
-
-        var openProject = GetNode<TextureButton>("OpenProject");
-        openProject.Connect("pressed", new Callable(this, nameof(OpenProject)));
-
         var signIn = GetNode<TextureButton>("Sign-In");
         signIn.Connect("pressed", new Callable(this, nameof(SignIn)));
+
+        var back = GetNode<TextureButton>("ProjectNamePanel/Back");
+        back.Connect("pressed", new Callable(this, nameof(CancelNewProject)));
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,13 +45,9 @@ public partial class main_page : Control
         GetTree().Root.AddChild(simultaneousScene);
         Hide();
     }
-    private void NewProject()
+    private void CancelNewProject()
     {
-        projectNamePnl.Show();
-    }
-    private void OpenProject()
-    {
-       
+        projectNamePnl.Hide();
     }
     private void SignIn()
     {

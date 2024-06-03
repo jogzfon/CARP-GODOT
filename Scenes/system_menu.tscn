@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dw860tmmffkxq"]
 
 [ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="1_g1du5"]
-[ext_resource type="Script" path="res://Scripts/system_menu.cs" id="1_m153t"]
 [ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="2_dln5b"]
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="3_7qyq1"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="5_ldypl"]
+[ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="5_lq116"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_rn65p"]
 
 [node name="SystemMenu" type="Control"]
@@ -16,12 +16,11 @@ offset_right = -640.0
 offset_bottom = -360.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_m153t")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 offset_right = 1280.0
-offset_bottom = 184.0
+offset_bottom = 146.0
 
 [node name="ExitViewSystem" type="TextureButton" parent="HBoxContainer"]
 visible = false
@@ -51,7 +50,7 @@ text = "AR: "
 [node name="AR" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000 0000 0000"
 expand_to_text_length = true
@@ -68,7 +67,7 @@ text = "PC: "
 [node name="PC" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000 0000 0000"
 expand_to_text_length = true
@@ -85,7 +84,7 @@ text = "DR: "
 [node name="DR" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000"
 expand_to_text_length = true
@@ -102,7 +101,7 @@ text = "TR: "
 [node name="TR" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000"
 expand_to_text_length = true
@@ -128,7 +127,7 @@ text = "IR:  "
 [node name="IR" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000"
 expand_to_text_length = true
@@ -145,7 +144,7 @@ text = "R:   "
 [node name="R" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000"
 expand_to_text_length = true
@@ -162,7 +161,7 @@ text = "AC: "
 [node name="AC" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000"
 expand_to_text_length = true
@@ -179,17 +178,33 @@ text = "Z:   "
 [node name="Z" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer7"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "0"
 expand_to_text_length = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="Hex" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "HEX"
+
+[node name="Binary" type="Button" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "BINARY"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 1
 offset_left = 435.0
 offset_top = 608.0
 offset_right = 1274.0
-offset_bottom = 715.0
+offset_bottom = 712.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
 layout_mode = 2
@@ -201,13 +216,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_rn65p")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "Start Location:"
 
 [node name="MemoryLocation" type="LineEdit" parent="HBoxContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 25
 text = "0"
 alignment = 1
@@ -219,14 +234,14 @@ size_flags_vertical = 3
 [node name="Start" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "START"
 
 [node name="Stop" type="Button" parent="HBoxContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
+theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 20
 text = "STOP"
 
@@ -238,20 +253,20 @@ size_flags_stretch_ratio = 0.8
 [node name="ResetRegisters" type="Button" parent="HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("5_lq116")
+theme_override_font_sizes/font_size = 19
 text = "RESET REGISTERS"
 
 [node name="StepThroughCycle" type="Button" parent="HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("5_lq116")
+theme_override_font_sizes/font_size = 19
 text = "STEP THROUGH CYCLE"
 
 [node name="StepThroughInstruction" type="Button" parent="HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rn65p")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("5_lq116")
+theme_override_font_sizes/font_size = 19
 text = "STEP THROUGH INSTRUCTION"
