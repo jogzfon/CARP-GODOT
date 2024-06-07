@@ -3,38 +3,61 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using Godot;
 using System;
-
+using System.IO;
 
 public partial class StartUpPage : Control
 {
-	IFirebaseConfig config = new FirebaseConfig
+    #region Login and Create Details
+    [Export] private LineEdit username;
+    [Export] private LineEdit password;
+    [Export] private LineEdit firstname;
+    [Export] private LineEdit lastname;
+
+    [Export] private OptionButton rolePick;
+
+    [Export] private LineEdit loginUsername;
+	[Export] private LineEdit logInPassword;
+
+    [Export] private VBoxContainer createAccount;
+    [Export] private VBoxContainer loginAccount;
+    #endregion
+    #region Buttons
+    [Export] private Button registerBtn;
+    [Export] private Button loginBtn;
+    [Export] private Button createBtn;
+    [Export] private Button cancelBtn;
+
+    [Export] private TextureButton backBtn;
+    #endregion
+
+    #region PackedScenes
+    [Export] private PackedScene mainPage;
+    #endregion
+
+    IFirebaseConfig config = new FirebaseConfig
 	{
 		AuthSecret = "sl5J6RLP0fMsh6OJNNj978xIelPyaSCuwr6hOf8R",
 		BasePath = "https://carp-70436-default-rtdb.asia-southeast1.firebasedatabase.app/",
 	};
 
 	IFirebaseClient client;
-	VBoxContainer createAccount;
-    VBoxContainer loginAccount;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
 		client = new FireSharp.FirebaseClient(config);
 		
-		createAccount = GetNode<VBoxContainer>("CreateAccount");
         createAccount.Visible = false;
-        loginAccount = GetNode<VBoxContainer>("Login");
         loginAccount.Visible = true;
-		var registerButton = GetNode<Button>("Login/register");
-		registerButton.Connect("pressed", new Callable(this, nameof(RegisterPressed)));
+
+		registerBtn.Connect("pressed", new Callable(this, nameof(RegisterPressed)));
 		
-		var loginButton = GetNode<Button>("Login/login");
-		loginButton.Connect("pressed", new Callable(this, nameof(LogInPressed)));
+		loginBtn.Connect("pressed", new Callable(this, nameof(LogInPressed)));
 		
-		var createButton = GetNode<Button>("CreateAccount/create");
-		createButton.Connect("pressed", new Callable(this, nameof(CreatePressed)));
-        var cancelButton = GetNode<Button>("CreateAccount/cancel");
-        cancelButton.Connect("pressed", new Callable(this, nameof(CancelPressed)));
+		createBtn.Connect("pressed", new Callable(this, nameof(CreatePressed)));
+
+        cancelBtn.Connect("pressed", new Callable(this, nameof(CancelPressed)));
+
+        backBtn.Connect("pressed", new Callable(this, nameof(BackPressed)));
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,8 +77,8 @@ public partial class StartUpPage : Control
 	}
 	private async void LogInPressed()
 	{
-		String username = GetNode<LineEdit>("Login/username").Text;
-		String password = GetNode<LineEdit>("Login/password").Text;
+		String username = loginUsername.Text;
+		String password = logInPassword.Text;
 
 		FirebaseResponse response = await client.GetAsync("Users/" + username);
 		UserData userObj = response.ResultAs<UserData>();
@@ -64,6 +87,7 @@ public partial class StartUpPage : Control
 		{
 			if (password.Equals(userObj.Password))
 			{
+				AccountManager.SetUser(userObj);
 				Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/main_page.tscn").Instantiate();
 				GetTree().Root.AddChild(simultaneousScene);
 				Hide();
@@ -82,12 +106,13 @@ public partial class StartUpPage : Control
 	{
 		var data = new UserData
 		{
-			Username = GetNode<LineEdit>("CreateAccount/cusername").Text,
-			Password = GetNode<LineEdit>("CreateAccount/cusername").Text,
-			Firstname = GetNode<LineEdit>("CreateAccount/HBoxContainer/firstname").Text,
-			Lastname = GetNode<LineEdit>("CreateAccount/HBoxContainer/lastname").Text,
+			Username = username.Text,
+			Password = password.Text,
+			Firstname = firstname.Text,
+			Lastname = lastname.Text,
 			Subscription = "NONE",
-		};
+			Role = rolePick.Selected.ToString()
+        };
 		FirebaseResponse getresponse = await client.GetAsync("Users/" + GetNode<LineEdit>("CreateAccount/cusername").Text);
 		UserData userObj = getresponse.ResultAs<UserData>();
 		if (userObj != null)
@@ -103,15 +128,23 @@ public partial class StartUpPage : Control
 			SetResponse response = await client.SetAsync("Users/" + GetNode<LineEdit>("CreateAccount/cusername").Text, data);
 			UserData result = response.ResultAs<UserData>();
 
-			GD.Print("User Inserted " + result.Username);
-		}
+			createAccount.Visible = false;
+			loginAccount.Visible = true;
+            GD.Print("User Inserted " + result.Username);
+            AccountManager.SetUser(result);
+        }
 	}
 	private void CancelPressed()
 	{
         loginAccount.Visible = true;
 
         createAccount.Visible = false;
+    }
 
+	private void BackPressed()
+	{
+        Node simultaneousScene = mainPage.Instantiate();
+        GetTree().Root.AddChild(simultaneousScene);
     }
 }
 

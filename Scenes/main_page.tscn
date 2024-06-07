@@ -1,22 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=16 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
 [ext_resource type="Texture2D" uid="uid://c4woa0garcmfn" path="res://Sprites/Rectangle 92.png" id="2_dsjfr"]
-[ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="3_3awsc"]
 [ext_resource type="Texture2D" uid="uid://6uq758q03qox" path="res://Sprites/pp.png" id="4_2bfqo"]
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="4_6c80f"]
 [ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
-[ext_resource type="Texture2D" uid="uid://1d5ieyywjcp7" path="res://Sprites/Settings.png" id="7_3qjo1"]
-[ext_resource type="Texture2D" uid="uid://7lrh782hri2" path="res://Sprites/User.png" id="8_u8is3"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
-[ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="14_r5kqw"]
-[ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="15_827pa"]
-[ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="16_0ocfo"]
-[ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="17_5wjgb"]
+[ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
 [ext_resource type="Script" path="res://Scripts/FileHandler.cs" id="18_lnwlk"]
 [ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/InstructionSet.png" id="19_f2wtp"]
 
@@ -30,7 +24,7 @@ font_size = 35
 shadow_color = Color(0.298039, 0.305882, 0.572549, 1)
 shadow_offset = Vector2(-3, 1)
 
-[node name="MainPage" type="Control"]
+[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "options", "logout", "settings")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +32,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tloas")
+signIn = NodePath("Sign-In")
+options = NodePath("Sign-In/Options")
+logout = NodePath("Sign-In/Options/Logout")
+settings = NodePath("Sign-In/Options/Settings")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -77,15 +75,18 @@ offset_right = 350.0
 offset_bottom = 1080.0
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 15.0
-offset_top = 102.0
+offset_top = 104.0
 offset_right = 335.0
-offset_bottom = 142.0
+offset_bottom = 878.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
 texture = ExtResource("2_dsjfr")
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Label" type="Label" parent="VBoxContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,60 +102,99 @@ grow_vertical = 2
 text = "PROJECTS"
 label_settings = SubResource("LabelSettings_qri6r")
 
-[node name="ProjectList" type="VBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 15.0
-offset_top = 146.0
-offset_right = 335.0
-offset_bottom = 471.0
-
-[node name="Label" type="Label" parent="ProjectList"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6c80f")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Recents"
 
-[node name="DocumentationsList" type="VBoxContainer" parent="."]
+[node name="ProjectContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
-offset_left = 15.0
-offset_top = 475.0
-offset_right = 335.0
-offset_bottom = 875.0
+size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="DocumentationsList"]
+[node name="ProjectList" type="VBoxContainer" parent="VBoxContainer/ProjectContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "DOCUMENTATION"
 label_settings = SubResource("LabelSettings_qri6r")
 
-[node name="Wit" type="Button" parent="DocumentationsList"]
+[node name="DocumentationContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DocumentationsList" type="VBoxContainer" parent="VBoxContainer/DocumentationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Wit" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "What is this?"
 
-[node name="Hdtw" type="Button" parent="DocumentationsList"]
+[node name="Hdtw" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "How does this work?"
 
-[node name="Pex" type="Button" parent="DocumentationsList"]
+[node name="Pex" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Program Example"
 
-[node name="Nc" type="Button" parent="DocumentationsList"]
+[node name="Nc" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Numeric Constants"
 
-[node name="Ad" type="Button" parent="DocumentationsList"]
+[node name="Ad" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembler Directives"
 
-[node name="Aap" type="Button" parent="DocumentationsList"]
+[node name="Aap" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembling a program"
+
+[node name="Sign-In" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -100.0
+offset_right = 321.0
+offset_bottom = -55.0
+grow_vertical = 0
+text = "Sign-In"
+icon = ExtResource("17_587en")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Options" type="VBoxContainer" parent="Sign-In"]
+visible = false
+layout_mode = 0
+offset_left = 6.0
+offset_top = -62.0
+offset_right = 288.0
+offset_bottom = 4.0
+
+[node name="Logout" type="Button" parent="Sign-In/Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+text = "LOGOUT"
+
+[node name="Settings" type="Button" parent="Sign-In/Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+text = "SETTINGS"
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 2
@@ -308,166 +348,30 @@ theme_override_fonts/font = ExtResource("10_8xef3")
 theme_override_font_sizes/font_size = 30
 text = ">M4J"
 
-[node name="Sign-In" type="TextureButton" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = -126.0
-offset_right = 334.0
-offset_bottom = -79.0
-grow_vertical = 0
-texture_normal = ExtResource("3_3awsc")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Sign-In"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 62.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Sign-in"
-vertical_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="Sign-In"]
-layout_mode = 0
-offset_left = 4.0
-offset_right = 56.0
-offset_bottom = 47.0
-texture = ExtResource("8_u8is3")
-
-[node name="Settings" type="TextureButton" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 17.0
-offset_top = -67.0
-offset_right = 67.0
-offset_bottom = -22.0
-grow_vertical = 0
-texture_normal = ExtResource("7_3qjo1")
-stretch_mode = 0
-
-[node name="ProjectNamePanel" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -260.0
-offset_top = -340.0
-offset_right = 540.0
-offset_bottom = 260.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="ProjectNamePanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -3.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.290196, 0.298039, 0.321569, 1)
-
-[node name="ProjectName" type="LineEdit" parent="ProjectNamePanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -40.5
-offset_right = 250.0
-offset_bottom = 40.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("12_e728k")
-placeholder_text = "Enter name..."
-alignment = 1
-right_icon = ExtResource("1_iv1we")
-
-[node name="Label" type="Label" parent="ProjectNamePanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -152.0
-offset_top = -99.0
-offset_right = 152.0
-offset_bottom = -64.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("13_0fq7n")
-theme_override_font_sizes/font_size = 30
-text = "Enter Project Name"
-
-[node name="SubmitName" type="Button" parent="ProjectNamePanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = 87.0
-offset_right = 100.0
-offset_bottom = 124.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("14_r5kqw")
-theme_override_font_sizes/font_size = 25
-text = "SUBMIT"
-icon_alignment = 1
-expand_icon = true
-
-[node name="Back" type="TextureButton" parent="ProjectNamePanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 29.0
-offset_right = 132.0
-offset_bottom = 206.0
-scale = Vector2(0.76, 0.44)
-texture_normal = ExtResource("15_827pa")
-texture_pressed = ExtResource("16_0ocfo")
-texture_hover = ExtResource("17_5wjgb")
-
 [node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
 script = ExtResource("18_lnwlk")
 dialogue = NodePath("FileDialog")
 newProject = NodePath("../NewProject")
 openProject = NodePath("../OpenProject")
-documentationRect = NodePath("../DocumentationRect")
-witbtn = NodePath("../DocumentationsList/Wit")
-witexit = NodePath("../DocumentationRect/WhatIsThis/VBoxContainer/Exit")
-WIT = NodePath("../DocumentationRect/WhatIsThis")
-htdwbtn = NodePath("../DocumentationsList/Hdtw")
-htdwexit = NodePath("../DocumentationRect/HowDoesThisWork/VBoxContainer/Exit")
-HDTW = NodePath("../DocumentationRect/HowDoesThisWork")
-pexbtn = NodePath("../DocumentationsList/Pex")
-pexexit = NodePath("../DocumentationRect/ProgramExample/VBoxContainer/Exit")
-PEX = NodePath("../DocumentationRect/ProgramExample")
-ncbtn = NodePath("../DocumentationsList/Nc")
-ncexit = NodePath("../DocumentationRect/NumericConstants/VBoxContainer/Exit")
-NC = NodePath("../DocumentationRect/NumericConstants")
-adbtn = NodePath("../DocumentationsList/Ad")
-adexit = NodePath("../DocumentationRect/AssemblerDirectives/VBoxContainer/Exit")
-AD = NodePath("../DocumentationRect/AssemblerDirectives")
-aapbtn = NodePath("../DocumentationsList/Aap")
-aapexit = NodePath("../DocumentationRect/AssemblingAProgram/VBoxContainer/Exit")
-AAP = NodePath("../DocumentationRect/AssemblingAProgram")
+documentationRect = NodePath("DocumentationRect")
+witbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
+witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")
+WIT = NodePath("DocumentationRect/WhatIsThis")
+htdwbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Hdtw")
+htdwexit = NodePath("DocumentationRect/HowDoesThisWork/VBoxContainer/Exit")
+HDTW = NodePath("DocumentationRect/HowDoesThisWork")
+pexbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Pex")
+pexexit = NodePath("DocumentationRect/ProgramExample/VBoxContainer/Exit")
+PEX = NodePath("DocumentationRect/ProgramExample")
+ncbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Nc")
+ncexit = NodePath("DocumentationRect/NumericConstants/VBoxContainer/Exit")
+NC = NodePath("DocumentationRect/NumericConstants")
+adbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Ad")
+adexit = NodePath("DocumentationRect/AssemblerDirectives/VBoxContainer/Exit")
+AD = NodePath("DocumentationRect/AssemblerDirectives")
+aapbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Aap")
+aapexit = NodePath("DocumentationRect/AssemblingAProgram/VBoxContainer/Exit")
+AAP = NodePath("DocumentationRect/AssemblingAProgram")
 
 [node name="FileDialog" type="FileDialog" parent="FileHandler"]
 title = "Open a File"
@@ -475,9 +379,10 @@ position = Vector2i(400, 36)
 size = Vector2i(780, 680)
 ok_button_text = "Open"
 file_mode = 0
+access = 2
 
-[node name="DocumentationRect" type="ColorRect" parent="."]
-layout_mode = 1
+[node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -490,7 +395,7 @@ grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
-[node name="WhatIsThis" type="PanelContainer" parent="DocumentationRect"]
+[node name="WhatIsThis" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -499,10 +404,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/WhatIsThis"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/WhatIsThis"]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="DocumentationRect/WhatIsThis/VBoxContainer"]
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -510,15 +415,15 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/WhatIsThis/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Space" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -526,7 +431,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -551,7 +456,7 @@ execution of the program by clock cycle, by instruction, using breakpoints, or a
 continuous execution."
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -559,13 +464,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
 
-[node name="Space3" type="Label" parent="DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -573,7 +478,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="HowDoesThisWork" type="PanelContainer" parent="DocumentationRect"]
+[node name="HowDoesThisWork" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -582,10 +487,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/HowDoesThisWork"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/HowDoesThisWork"]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="DocumentationRect/HowDoesThisWork/VBoxContainer"]
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -593,15 +498,15 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/HowDoesThisWork/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Space" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -609,7 +514,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -618,7 +523,7 @@ theme_override_font_sizes/font_size = 25
 text = "yOw Shane"
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -626,13 +531,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
 
-[node name="Space3" type="Label" parent="DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -640,7 +545,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="ProgramExample" type="PanelContainer" parent="DocumentationRect"]
+[node name="ProgramExample" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -649,10 +554,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/ProgramExample"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/ProgramExample"]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="DocumentationRect/ProgramExample/VBoxContainer"]
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -660,15 +565,15 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/ProgramExample/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Space" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -676,7 +581,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -685,7 +590,7 @@ theme_override_font_sizes/font_size = 25
 text = "Yow Elijah"
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -693,13 +598,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
 
-[node name="Space3" type="Label" parent="DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -707,7 +612,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="NumericConstants" type="PanelContainer" parent="DocumentationRect"]
+[node name="NumericConstants" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -716,10 +621,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/NumericConstants"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/NumericConstants"]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="DocumentationRect/NumericConstants/VBoxContainer"]
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -727,15 +632,15 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/NumericConstants/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Space" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -743,7 +648,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -752,7 +657,7 @@ theme_override_font_sizes/font_size = 25
 text = "Yow Mich"
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -760,13 +665,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
 
-[node name="Space3" type="Label" parent="DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -774,7 +679,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="AssemblerDirectives" type="PanelContainer" parent="DocumentationRect"]
+[node name="AssemblerDirectives" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -783,10 +688,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblerDirectives"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives"]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="DocumentationRect/AssemblerDirectives/VBoxContainer"]
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -794,15 +699,15 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/AssemblerDirectives/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Space" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -810,7 +715,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -819,7 +724,7 @@ theme_override_font_sizes/font_size = 25
 text = "yow Ruff"
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -827,13 +732,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
 
-[node name="Space3" type="Label" parent="DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -841,7 +746,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="AssemblingAProgram" type="PanelContainer" parent="DocumentationRect"]
+[node name="AssemblingAProgram" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -850,10 +755,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblingAProgram"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblingAProgram"]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="DocumentationRect/AssemblingAProgram/VBoxContainer"]
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -861,15 +766,15 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DocumentationRect/AssemblingAProgram/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Space" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -877,7 +782,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -886,7 +791,7 @@ theme_override_font_sizes/font_size = 25
 text = "Yow JD"
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -894,13 +799,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
 
-[node name="Space3" type="Label" parent="DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3

@@ -37,21 +37,46 @@ public partial class project_page : Control
     public Window notificationWindow;
     public Label message;
 
+    #region Buttons
+    [Export] private Button toSystem;
+    [Export] private Button assemble;
+    [Export] private Button toAI;
+
+    [Export] private TextureButton back;
+    #endregion
+    #region PackedScenes
+    [Export] private PackedScene mainPage;
+    #endregion
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         #region Buttons
         //Side buttons
-        var toSystem = GetNode<Button>("VBoxContainer/HBoxContainer/ViewSystem");
         toSystem.Connect("pressed", new Callable(this, nameof(GoToSystem)));
 
-        var assemble = GetNode<Button>("LeftContainer/Assemble");
+        if (AccountManager.GetUser() != null)
+        {
+            if (AccountManager.GetRole().Equals("Teacher"))
+            {
+                toAI.Visible = true;
+                toAI.Disabled = false;
+                toAI.Connect("pressed", new Callable(this, nameof(GoToAI)));
+            }
+            else
+            {
+                toAI.Visible = false;
+                toAI.Disabled = true;
+            }
+        }
+        else
+        {
+            toAI.Visible = false;
+            toAI.Disabled = true;
+        }
+
         assemble.Connect("pressed", new Callable(this, nameof(Assemble)));
 
-        var toAI = GetNode<Button>("VBoxContainer/HBoxContainer/AIBtn");
-        toAI.Connect("pressed", new Callable(this, nameof(GoToAI)));
-
-        var back = GetNode<TextureButton>("Back");
         back.Connect("pressed", new Callable(this, nameof(BackToProject)));
 
         //Main Buttons
@@ -162,7 +187,7 @@ public partial class project_page : Control
     }
     public void BackToProject()
     {
-        Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/main_page.tscn").Instantiate();
+        Node simultaneousScene = mainPage.Instantiate();
         GetTree().Root.AddChild(simultaneousScene);
         Hide();
     }

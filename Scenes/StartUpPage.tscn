@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://whq7hnglcf2a"]
+[gd_scene load_steps=12 format=3 uid="uid://whq7hnglcf2a"]
 
 [ext_resource type="Script" path="res://Scripts/StartUpPage.cs" id="1_xp5mf"]
+[ext_resource type="PackedScene" uid="uid://gc328eisvff8" path="res://Scenes/main_page.tscn" id="2_pd6lq"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vforg"]
+[ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="4_c63x4"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_qe5aq"]
+[ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_rk4c2"]
+[ext_resource type="Texture2D" uid="uid://crw0ynt4f2q8" path="res://Sprites/student.png" id="6_kkq3x"]
+[ext_resource type="Texture2D" uid="uid://c5o7ufnrwmo4d" path="res://Sprites/teacher.png" id="7_r3025"]
+[ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="8_4c8we"]
+[ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="9_eimhp"]
+[ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="10_jajpt"]
 
-[node name="Intro" type="Control"]
+[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "firstname", "lastname", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +22,21 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_xp5mf")
+username = NodePath("CreateAccount/cusername")
+password = NodePath("CreateAccount/cpassword")
+firstname = NodePath("CreateAccount/HBoxContainer/firstname")
+lastname = NodePath("CreateAccount/HBoxContainer/lastname")
+rolePick = NodePath("CreateAccount/RolePick")
+loginUsername = NodePath("LoginAccount/username")
+logInPassword = NodePath("LoginAccount/password")
+createAccount = NodePath("CreateAccount")
+loginAccount = NodePath("LoginAccount")
+registerBtn = NodePath("LoginAccount/register")
+loginBtn = NodePath("LoginAccount/login")
+createBtn = NodePath("CreateAccount/create")
+cancelBtn = NodePath("CreateAccount/cancel")
+backBtn = NodePath("Back")
+mainPage = ExtResource("2_pd6lq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -30,7 +53,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
-[node name="Login" type="VBoxContainer" parent="."]
+[node name="LoginAccount" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,13 +70,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="username" type="LineEdit" parent="Login"]
+[node name="username" type="LineEdit" parent="LoginAccount"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Username"
 
-[node name="password" type="LineEdit" parent="Login"]
+[node name="password" type="LineEdit" parent="LoginAccount"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vforg")
 theme_override_font_sizes/font_size = 30
@@ -61,13 +84,13 @@ placeholder_text = "Password"
 caret_blink = true
 secret = true
 
-[node name="login" type="Button" parent="Login"]
+[node name="login" type="Button" parent="LoginAccount"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_qe5aq")
 theme_override_font_sizes/font_size = 45
 text = "Login"
 
-[node name="register" type="Button" parent="Login"]
+[node name="register" type="Button" parent="LoginAccount"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_qe5aq")
 theme_override_font_sizes/font_size = 45
@@ -82,9 +105,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -100.0
+offset_top = -196.0
 offset_right = 300.0
-offset_bottom = 100.0
+offset_bottom = 239.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -127,6 +150,30 @@ theme_override_font_sizes/font_size = 30
 placeholder_text = "Password"
 secret = true
 
+[node name="Label" type="Label" parent="CreateAccount"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_c63x4")
+theme_override_font_sizes/font_size = 25
+text = "Please select your role"
+vertical_alignment = 1
+
+[node name="RolePick" type="OptionButton" parent="CreateAccount"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_rk4c2")
+theme_override_font_sizes/font_size = 25
+item_count = 2
+selected = 0
+popup/item_0/text = "Student"
+popup/item_0/icon = ExtResource("6_kkq3x")
+popup/item_0/id = 0
+popup/item_1/text = "Teacher"
+popup/item_1/icon = ExtResource("7_r3025")
+popup/item_1/id = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CreateAccount"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="create" type="Button" parent="CreateAccount"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_qe5aq")
@@ -138,3 +185,13 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_qe5aq")
 theme_override_font_sizes/font_size = 45
 text = "Cancel"
+
+[node name="Back" type="TextureButton" parent="."]
+offset_left = 32.0
+offset_top = 29.0
+offset_right = 132.0
+offset_bottom = 206.0
+scale = Vector2(0.76, 0.44)
+texture_normal = ExtResource("8_4c8we")
+texture_pressed = ExtResource("9_eimhp")
+texture_hover = ExtResource("10_jajpt")
