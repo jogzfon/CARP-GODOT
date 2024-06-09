@@ -6,9 +6,9 @@ public partial class FileHandler : Node
     [Export]
     FileDialog dialogue;
     [Export]
-    TextureButton newProject;
+    Button newProject;
     [Export]
-    TextureButton openProject;
+    Button openProject;
 
     #region DocumentationBtn
     [Export]

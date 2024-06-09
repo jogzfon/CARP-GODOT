@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=16 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="10_ccj8c"]
 [ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="11_pawad"]
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="12_83o58"]
+[ext_resource type="Script" path="res://Scenes/ExitController.cs" id="14_r5c7n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgeug"]
+bg_color = Color(0.388235, 0.388235, 0.396078, 1)
 
 [node name="ProjectPage" type="Control" node_paths=PackedStringArray("toSystem", "assemble", "toAI", "back")]
 layout_mode = 3
@@ -414,3 +418,69 @@ text = "MESSAGE"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
+script = ExtResource("14_r5c7n")
+exitbtn = NodePath("ExitButton")
+savePanel = NodePath("SavePanel")
+yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
+nobtn = NodePath("SavePanel/HBoxContainer/No")
+
+[node name="ExitButton" type="Button" parent="Exit"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = -32.0
+offset_bottom = 41.0
+grow_horizontal = 0
+text = "X"
+
+[node name="SavePanel" type="Panel" parent="Exit"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kgeug")
+
+[node name="Label" type="Label" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = 84.0
+offset_right = 14.0
+offset_bottom = 107.0
+grow_horizontal = 2
+text = "Do you want to save file?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -155.0
+offset_top = 147.0
+offset_right = 145.0
+offset_bottom = 187.0
+grow_horizontal = 2
+
+[node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="No" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"

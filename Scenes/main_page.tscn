@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=18 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -8,8 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
+[ext_resource type="Script" path="res://Scripts/ProfileHandler.cs" id="12_dw1ay"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
+[ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="14_5bdyj"]
 [ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
 [ext_resource type="Script" path="res://Scripts/FileHandler.cs" id="18_lnwlk"]
 [ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/InstructionSet.png" id="19_f2wtp"]
@@ -32,13 +34,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tloas")
-signIn = NodePath("Sign-In")
-options = NodePath("Sign-In/Options")
-logout = NodePath("Sign-In/Options/Logout")
-settings = NodePath("Sign-In/Options/Settings")
+signIn = NodePath("MainContent/Sign-In")
+options = NodePath("MainContent/Sign-In/Options")
+logout = NodePath("MainContent/Sign-In/Options/Logout")
+settings = NodePath("MainContent/Sign-In/Options/Settings")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
+[node name="MainContent" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="MainContent"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -47,7 +50,7 @@ grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+[node name="ColorRect" type="ColorRect" parent="MainContent/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,32 +64,29 @@ grow_vertical = 2
 scale = Vector2(0.998594, 0.350686)
 color = Color(0.291716, 0.299233, 0.321761, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-layout_mode = 2
+[node name="ColorRect2" type="ColorRect" parent="MainContent"]
 offset_top = 100.0
 offset_right = 350.0
 offset_bottom = 1080.0
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
-[node name="ColorRect4" type="ColorRect" parent="."]
-layout_mode = 2
+[node name="ColorRect4" type="ColorRect" parent="MainContent"]
 offset_top = 100.0
 offset_right = 350.0
 offset_bottom = 1080.0
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent"]
 offset_left = 15.0
 offset_top = 104.0
 offset_right = 335.0
 offset_bottom = 878.0
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainContent/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_dsjfr")
 
-[node name="Label" type="Label" parent="VBoxContainer/TextureRect"]
+[node name="Label" type="Label" parent="MainContent/VBoxContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -102,67 +102,66 @@ grow_vertical = 2
 text = "PROJECTS"
 label_settings = SubResource("LabelSettings_qri6r")
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="MainContent/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6c80f")
 theme_override_font_sizes/font_size = 25
 text = "Recents"
 
-[node name="ProjectContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ProjectContainer" type="ScrollContainer" parent="MainContent/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ProjectList" type="VBoxContainer" parent="VBoxContainer/ProjectContainer"]
+[node name="ProjectList" type="VBoxContainer" parent="MainContent/VBoxContainer/ProjectContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="Label2" type="Label" parent="MainContent/VBoxContainer"]
 layout_mode = 2
 text = "DOCUMENTATION"
 label_settings = SubResource("LabelSettings_qri6r")
 
-[node name="DocumentationContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="DocumentationContainer" type="ScrollContainer" parent="MainContent/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DocumentationsList" type="VBoxContainer" parent="VBoxContainer/DocumentationContainer"]
+[node name="DocumentationsList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Wit" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Wit" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "What is this?"
 
-[node name="Hdtw" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Hdtw" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "How does this work?"
 
-[node name="Pex" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Pex" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Program Example"
 
-[node name="Nc" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Nc" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Numeric Constants"
 
-[node name="Ad" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Ad" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembler Directives"
 
-[node name="Aap" type="Button" parent="VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Aap" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembling a program"
 
-[node name="Sign-In" type="Button" parent="."]
-layout_mode = 1
+[node name="Sign-In" type="Button" parent="MainContent"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -178,7 +177,7 @@ clip_text = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Options" type="VBoxContainer" parent="Sign-In"]
+[node name="Options" type="VBoxContainer" parent="MainContent/Sign-In"]
 visible = false
 layout_mode = 0
 offset_left = 6.0
@@ -186,39 +185,36 @@ offset_top = -62.0
 offset_right = 288.0
 offset_bottom = 4.0
 
-[node name="Logout" type="Button" parent="Sign-In/Options"]
+[node name="Logout" type="Button" parent="MainContent/Sign-In/Options"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_8xef3")
 text = "LOGOUT"
 
-[node name="Settings" type="Button" parent="Sign-In/Options"]
+[node name="Settings" type="Button" parent="MainContent/Sign-In/Options"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_8xef3")
 text = "SETTINGS"
 
-[node name="ColorRect3" type="ColorRect" parent="."]
-layout_mode = 2
+[node name="ColorRect3" type="ColorRect" parent="MainContent"]
 offset_right = 1920.0
 offset_bottom = 100.0
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent"]
 offset_right = 1920.0
 offset_bottom = 100.0
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MainContent/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_iv1we")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="MainContent/HBoxContainer"]
 layout_mode = 2
 text = "WELCOME TO CARP"
 label_settings = SubResource("LabelSettings_qv4bw")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-layout_mode = 2
+[node name="TextureRect2" type="TextureRect" parent="MainContent"]
 offset_left = 1817.0
 offset_top = 23.0
 offset_right = 1897.0
@@ -227,76 +223,7 @@ texture = ExtResource("4_2bfqo")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="NewProject" type="TextureButton" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -153.0
-offset_top = 44.0
-offset_right = -64.0
-offset_bottom = 133.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("4_rgqy0")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -193.0
-offset_top = 147.0
-offset_right = -13.0
-offset_bottom = 185.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_6c80f")
-theme_override_font_sizes/font_size = 20
-text = "New Project"
-horizontal_alignment = 1
-
-[node name="OpenProject" type="TextureButton" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 206.0
-offset_top = 44.0
-offset_right = 295.0
-offset_bottom = 133.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("5_2n6so")
-stretch_mode = 0
-
-[node name="Label2" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 157.0
-offset_top = 147.0
-offset_right = 337.0
-offset_bottom = 185.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_6c80f")
-theme_override_font_sizes/font_size = 20
-text = "Open"
-horizontal_alignment = 1
-
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
+[node name="Title" type="Label" parent="MainContent"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -313,8 +240,7 @@ theme_override_font_sizes/font_size = 50
 text = "RELATIVELY SIMPLE COMPUTER 
 SYSTEM SIMULATOR"
 
-[node name="SubTitle" type="Label" parent="."]
-layout_mode = 1
+[node name="SubTitle" type="Label" parent="MainContent"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -331,7 +257,7 @@ theme_override_font_sizes/font_size = 25
 text = "Create a new instruction set or start from scratch.
 Open existing project from file."
 
-[node name="SubTitle" type="Label" parent="SubTitle"]
+[node name="SubTitle" type="Label" parent="MainContent/SubTitle"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -351,25 +277,25 @@ text = ">M4J"
 [node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
 script = ExtResource("18_lnwlk")
 dialogue = NodePath("FileDialog")
-newProject = NodePath("../NewProject")
-openProject = NodePath("../OpenProject")
+newProject = NodePath("../ProfileHandler/HBoxContainer/New Project")
+openProject = NodePath("../ProfileHandler/HBoxContainer/Open Project")
 documentationRect = NodePath("DocumentationRect")
-witbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
+witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
 witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")
 WIT = NodePath("DocumentationRect/WhatIsThis")
-htdwbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Hdtw")
+htdwbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Hdtw")
 htdwexit = NodePath("DocumentationRect/HowDoesThisWork/VBoxContainer/Exit")
 HDTW = NodePath("DocumentationRect/HowDoesThisWork")
-pexbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Pex")
+pexbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Pex")
 pexexit = NodePath("DocumentationRect/ProgramExample/VBoxContainer/Exit")
 PEX = NodePath("DocumentationRect/ProgramExample")
-ncbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Nc")
+ncbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Nc")
 ncexit = NodePath("DocumentationRect/NumericConstants/VBoxContainer/Exit")
 NC = NodePath("DocumentationRect/NumericConstants")
-adbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Ad")
+adbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Ad")
 adexit = NodePath("DocumentationRect/AssemblerDirectives/VBoxContainer/Exit")
 AD = NodePath("DocumentationRect/AssemblerDirectives")
-aapbtn = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/Aap")
+aapbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Aap")
 aapexit = NodePath("DocumentationRect/AssemblingAProgram/VBoxContainer/Exit")
 AAP = NodePath("DocumentationRect/AssemblingAProgram")
 
@@ -380,6 +306,7 @@ size = Vector2i(780, 680)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
 visible = false
@@ -812,3 +739,49 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
+
+[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin")]
+script = ExtResource("12_dw1ay")
+schoolBtn = NodePath("HBoxContainer/New Project3")
+centerMargin = NodePath("HBoxContainer/MarginContainer2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ProfileHandler"]
+offset_left = 805.0
+offset_top = 578.0
+offset_right = 1257.0
+offset_bottom = 711.0
+alignment = 1
+
+[node name="New Project" type="Button" parent="ProfileHandler/HBoxContainer"]
+layout_mode = 2
+text = "New"
+icon = ExtResource("4_rgqy0")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ProfileHandler/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Open Project" type="Button" parent="ProfileHandler/HBoxContainer"]
+layout_mode = 2
+text = "Open"
+icon = ExtResource("5_2n6so")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="ProfileHandler/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="New Project3" type="Button" parent="ProfileHandler/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "School"
+icon = ExtResource("14_5bdyj")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
