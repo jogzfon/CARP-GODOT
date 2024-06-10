@@ -12,7 +12,7 @@
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
 [ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="14_5bdyj"]
-[ext_resource type="Script" path="res://Scenes/ExitController.cs" id="16_metue"]
+[ext_resource type="Script" path="res://Scripts/ExitController.cs" id="16_metue"]
 [ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
 [ext_resource type="Script" path="res://Scripts/FileHandler.cs" id="18_lnwlk"]
 [ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/InstructionSet.png" id="19_f2wtp"]

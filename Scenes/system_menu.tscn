@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dw860tmmffkxq"]
+[gd_scene load_steps=8 format=3 uid="uid://dw860tmmffkxq"]
 
+[ext_resource type="Script" path="res://Scripts/system_menu.cs" id="1_0jddp"]
 [ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="1_g1du5"]
 [ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="2_dln5b"]
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="3_7qyq1"]
@@ -7,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="5_lq116"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_rn65p"]
 
-[node name="SystemMenu" type="Control"]
+[node name="SystemMenu" type="Control" node_paths=PackedStringArray("AR", "PC", "DR", "TR", "IR", "R", "AC", "Z")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +17,15 @@ offset_right = -640.0
 offset_bottom = -360.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0jddp")
+AR = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/AR")
+PC = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/PC")
+DR = NodePath("HBoxContainer/VBoxContainer/HBoxContainer3/DR")
+TR = NodePath("HBoxContainer/VBoxContainer/HBoxContainer4/TR")
+IR = NodePath("HBoxContainer/VBoxContainer2/HBoxContainer4/IR")
+R = NodePath("HBoxContainer/VBoxContainer2/HBoxContainer5/R")
+AC = NodePath("HBoxContainer/VBoxContainer2/HBoxContainer6/AC")
+Z = NodePath("HBoxContainer/VBoxContainer2/HBoxContainer7/Z")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
