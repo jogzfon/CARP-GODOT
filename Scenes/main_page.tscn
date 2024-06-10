@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=20 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
 [ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="14_5bdyj"]
+[ext_resource type="Script" path="res://Scenes/ExitController.cs" id="16_metue"]
 [ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
 [ext_resource type="Script" path="res://Scripts/FileHandler.cs" id="18_lnwlk"]
 [ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/InstructionSet.png" id="19_f2wtp"]
@@ -25,6 +26,9 @@ font = ExtResource("13_0fq7n")
 font_size = 35
 shadow_color = Color(0.298039, 0.305882, 0.572549, 1)
 shadow_offset = Vector2(-3, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
+bg_color = Color(0.388235, 0.388235, 0.396078, 1)
 
 [node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "options", "logout", "settings")]
 layout_mode = 3
@@ -45,6 +49,8 @@ settings = NodePath("MainContent/Sign-In/Options/Settings")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
@@ -215,10 +221,10 @@ text = "WELCOME TO CARP"
 label_settings = SubResource("LabelSettings_qv4bw")
 
 [node name="TextureRect2" type="TextureRect" parent="MainContent"]
-offset_left = 1817.0
-offset_top = 23.0
-offset_right = 1897.0
-offset_bottom = 69.0
+offset_left = 1782.0
+offset_top = 12.0
+offset_right = 1862.0
+offset_bottom = 85.0
 texture = ExtResource("4_2bfqo")
 expand_mode = 3
 stretch_mode = 5
@@ -785,3 +791,69 @@ icon = ExtResource("14_5bdyj")
 flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
+
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
+script = ExtResource("16_metue")
+exitbtn = NodePath("ExitButton")
+savePanel = NodePath("SavePanel")
+yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
+nobtn = NodePath("SavePanel/HBoxContainer/No")
+
+[node name="ExitButton" type="Button" parent="Exit"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = 39.0
+grow_horizontal = 0
+text = "X"
+
+[node name="SavePanel" type="Panel" parent="Exit"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ce0sa")
+
+[node name="Label" type="Label" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = 84.0
+offset_right = 14.0
+offset_bottom = 107.0
+grow_horizontal = 2
+text = "Do you want to save file?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -155.0
+offset_top = 147.0
+offset_right = 145.0
+offset_bottom = 187.0
+grow_horizontal = 2
+
+[node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="No" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
