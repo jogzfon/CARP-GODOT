@@ -11,7 +11,7 @@ public partial class ProfileHandler : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        if (AccountManager.GetUser() != null)
+        if (AccountManager.GetUser() != null && AccountManager.schoolOn)
         {
             schoolBtn.Visible = true;
             centerMargin.Visible = true;

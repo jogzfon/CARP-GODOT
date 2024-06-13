@@ -53,7 +53,6 @@ public partial class FileHandler : Node
     #endregion
 
     string path;
-    public static string message = "Hello World";
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -102,43 +101,19 @@ public partial class FileHandler : Node
     }
     private void OnFileSelected(string path)
     {
+        DataToSave.filePath = path;
         if (dialogue.FileMode == FileDialog.FileModeEnum.SaveFile)
         {
-            SaveToFile(path);
+            DataToSave.SaveFile();
         }
         else if (dialogue.FileMode == FileDialog.FileModeEnum.OpenFile)
         {
-            OpenFromFile(path);
+            DataToSave.OpenFile();
         }
         Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/project_page.tscn").Instantiate();
         GetTree().Root.AddChild(simultaneousScene);
         GetTree().Root.Hide();
     }
-    private void SaveToFile(string path)
-    {
-        string dataToSave = message;
-        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-        file.StoreString(dataToSave);
-        file.Close();
-        GD.Print("File saved: " + path);
-    }
-
-    private void OpenFromFile(string path)
-    {
-        if (!FileAccess.FileExists(path))
-        {
-            GD.PrintErr("File does not exist: " + path);
-            return;
-        }
-
-        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-        string content = file.GetAsText();
-        file.Close();
-        GD.Print("File opened: " + path);
-        GD.Print("Content: " + content);
-        message = content;
-    }
-
     #endregion
 
     #region Documentations

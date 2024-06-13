@@ -261,12 +261,13 @@ theme_override_fonts/font = ExtResource("2_rnxid")
 text = "CLEAR"
 
 [node name="SystemViewContainer" type="SubViewportContainer" parent="VBoxContainer/PanelContainer"]
+visible = false
 layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/PanelContainer/SystemViewContainer"]
 handle_input_locally = false
 size = Vector2i(1280, 720)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Main" parent="VBoxContainer/PanelContainer/SystemViewContainer/SubViewport" node_paths=PackedStringArray("cpuStatus", "rtlStatement", "dataMovement", "currentMemoryLocation") instance=ExtResource("5_squa4")]
 position = Vector2(0, -3)

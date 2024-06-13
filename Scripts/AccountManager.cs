@@ -4,6 +4,7 @@ using System;
 public static class AccountManager
 {
     private static UserData user = null;
+    public static bool schoolOn = false;
 
     public static void SetUser(UserData userIn)
     {

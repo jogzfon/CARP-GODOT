@@ -187,6 +187,7 @@ theme_override_font_sizes/font_size = 45
 text = "Cancel"
 
 [node name="Back" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 29.0
 offset_right = 132.0
