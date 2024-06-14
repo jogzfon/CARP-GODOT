@@ -2,7 +2,7 @@
 Status: Idle
 RtlStatement: 
 DataMovement: 
-CurrentMemoryLocation: 
+CurrentMemoryLocation:  
 
 
 ---------- Memory And IO ----------
@@ -10,7 +10,7 @@ MemoryText:
 
 
 ---------- Break Points  ----------
-BreakPointList: 
+BreakPointList:
 
 
 ---------- Trace Results ----------
