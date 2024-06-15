@@ -152,6 +152,11 @@ public partial class Animations : Node
 
         this.breakpoints = proj.breakpointList;
 
+        if(AccountManager.GetUser() != null)
+        {
+            i = Int32.Parse(DataToSave.currentMemoryLocation);
+        }
+
         memorycode = Memory.contents;
         TraceResults.RemoveAllStatements();
         #endregion
@@ -222,7 +227,25 @@ public partial class Animations : Node
 	public override void _Process(double delta)
 	{
         ioB.Text = IO;
-        currentMemoryLocation.Text = i.ToString();
+        if (currentMemoryLocation != null)
+        {
+            currentMemoryLocation.Text = i.ToString();
+
+            //Save Data
+            if (AccountManager.GetUser() != null)
+            {
+                DataToSave.currentMemoryLocation = i.ToString();
+
+                DataToSave.ar = ar_bit;
+                DataToSave.pc = pc_bit;
+                DataToSave.dr = dr_bit;
+                DataToSave.tr = tr_bit;
+                DataToSave.ir = ir_bit;
+                DataToSave.r = r_bit;
+                DataToSave.ac = ac_bit;
+                DataToSave.z = z_bit;
+            }
+        }
     }
     #region Animation Controls
     public async void StartAnimation(int memoryStartLocation)

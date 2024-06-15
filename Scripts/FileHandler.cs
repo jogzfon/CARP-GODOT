@@ -9,6 +9,12 @@ public partial class FileHandler : Node
     Button newProject;
     [Export]
     Button openProject;
+    [Export]
+    Button goToSystem;
+    [Export]
+    HBoxContainer directToSystem;
+    [Export]
+    HBoxContainer manageFile;
 
     #region DocumentationBtn
     [Export]
@@ -60,6 +66,8 @@ public partial class FileHandler : Node
 
         openProject.Connect("pressed", new Callable(this, nameof(OpenProject)));
 
+        goToSystem.Connect("pressed", new Callable(this, nameof(GoToSystem)));
+
         dialogue.Connect("file_selected", new Callable(this, nameof(OnFileSelected)));
 
         witbtn.Connect("pressed", new Callable(this, nameof(WitOpen)));
@@ -86,8 +94,23 @@ public partial class FileHandler : Node
         {
             documentationRect.Visible = false;
         }
-	}
+        if (AccountManager.GetUser() != null)
+        {
+            manageFile.Visible = true;
+            directToSystem.Visible = false;
+        }
+        else
+        {
+            manageFile.Visible = false;
+            directToSystem.Visible = true;
+        }
+    }
 
+    private void GoToSystem() {
+        Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/project_page.tscn").Instantiate();
+        GetTree().Root.AddChild(simultaneousScene);
+        GetTree().Root.Hide();
+    }
     #region FileHandler
     private void NewProject()
     {

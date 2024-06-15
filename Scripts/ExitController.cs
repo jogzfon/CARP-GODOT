@@ -8,6 +8,8 @@ public partial class ExitController : Node
 	[Export] private Panel savePanel;
 	[Export] private Button yesbtn;
 	[Export] private Button nobtn;
+
+    [Export] private bool saveAvailable = true;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -24,7 +26,7 @@ public partial class ExitController : Node
 	}
 	private async void Exit()
 	{
-        if (AccountManager.GetUser() != null)
+        if (AccountManager.GetUser() != null && saveAvailable)
         {
             savePanel.Visible = true;
 		}
@@ -38,8 +40,8 @@ public partial class ExitController : Node
     {
         GD.Print("Data saved!!!");
         DataToSave.SaveFile();
-        await WaitTime();
         DataToSave.ResetDatas();
+        await WaitTime();
         GetTree().Quit();
     }
     private void NotSave()

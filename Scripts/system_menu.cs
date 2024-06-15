@@ -18,6 +18,17 @@ public partial class system_menu : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+        if(AccountManager.GetUser()!= null)
+        {
+            ConvertAR(DataToSave.ar.ToString());
+            ConvertPC(DataToSave.pc.ToString());
+            ConvertDR(DataToSave.dr.ToString());
+            ConvertTR(DataToSave.tr.ToString());
+            ConvertIR(DataToSave.ir.ToString());
+            ConvertR(DataToSave.r.ToString());
+            ConvertAC(DataToSave.ac.ToString());
+            ConvertZ(DataToSave.z.ToString());
+        }
         AR.Connect("text_submitted", new Callable(this, nameof(ConvertAR)));
         PC.Connect("text_submitted", new Callable(this, nameof(ConvertPC)));
         DR.Connect("text_submitted", new Callable(this, nameof(ConvertDR)));

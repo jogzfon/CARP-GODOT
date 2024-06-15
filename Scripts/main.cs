@@ -11,13 +11,23 @@ public partial class main : Node2D
     [Export] public Label rtlStatement;
     [Export] public Label dataMovement;
     [Export] public LineEdit currentMemoryLocation;
+    [Export] public TextEdit instructionCode;
 
     LineEdit memoryLocation;
     int memoryStartLocation;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-		animations = animationNode as Animations;
+        if (AccountManager.GetUser()!=null)
+        {
+            cpuStatus.Text = DataToSave.status;
+            rtlStatement.Text = DataToSave.rtlStatement;
+            dataMovement.Text = DataToSave.dataMovement;
+
+            instructionCode.Text = DataToSave.intructionCodes;
+        }
+
+        animations = animationNode as Animations;
 
         var startAnimation = GetNode<Button>("SystemMenu/HBoxContainer2/VBoxContainer/HBoxContainer2/Start");
         startAnimation.Connect("pressed", new Callable(this, nameof(StartAnimation)));
@@ -42,7 +52,15 @@ public partial class main : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-	}
+        if (AccountManager.GetUser() != null)
+        {
+             DataToSave.status = cpuStatus.Text;
+             DataToSave.rtlStatement = rtlStatement.Text;
+             DataToSave.dataMovement = dataMovement.Text;
+
+             DataToSave.intructionCodes = instructionCode.Text;
+        }
+    }
 	private void StartAnimation()
 	{
 		animations.StartAnimation(memoryStartLocation);

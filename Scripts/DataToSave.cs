@@ -16,7 +16,7 @@ public static class DataToSave
     public static string intructionCodes = "";
 
     //Memory and IO
-    public static string memoryText = "";
+    public static short[] memoryContents = new short[Memory.MEMORY_SIZE];
 
     //Break Points
     public static List<int> breakpointList = new List<int>();
@@ -25,14 +25,16 @@ public static class DataToSave
     public static string traceText = "";
 
     //View System
-    private static int ar = 0x00000000;
-    private static int pc = 0x00000000;
-    private static int dr = 0x00000000;
-    private static int tr = 0x00000000;
-    private static int ir = 0x00000000;
-    private static int r = 0x00000000;
-    private static int ac = 0x00000000;
-    private static int z = 0;
+    public static int ar = 0x00000000;
+    public static int pc = 0x00000000;
+    public static int dr = 0x00000000;
+    public static int tr = 0x00000000;
+    public static int ir = 0x00000000;
+    public static int r = 0x00000000;
+    public static int ac = 0x00000000;
+    public static int z = 0;
+
+    private static bool isInstructionCode = false;
 
     public static void SaveFile()
     {
@@ -69,7 +71,7 @@ public static class DataToSave
             "CurrentMemoryLocation: " + currentMemoryLocation + "\n" +
             "InstructionCodes: "+ intructionCodes + "\n\n\n" +
             "---------- Memory And IO ----------\n" +
-            "MemoryText: " + memoryText + "\n\n\n" +
+            "MemoryContents: " + AllMemoryContent() + "\n\n\n" +
             "---------- Break Points  ----------\n" +
             "BreakPointList: " + AllBreakPoints() + "\n\n\n" +
             "---------- Trace Results ----------\n" +
@@ -94,6 +96,15 @@ public static class DataToSave
         }
         return allnum;
     }
+    private static string AllMemoryContent()
+    {
+        string allnum = "";
+        foreach (short s in memoryContents)
+        {
+            allnum += s + " ";
+        }
+        return allnum;
+    }
     #endregion
 
     #region Distribute Values
@@ -101,7 +112,7 @@ public static class DataToSave
     {
         List<List<Tokens>> tokens = new List<List<Tokens>>();
 
-        string pattern = @"\b(Status:|RtlStatement:|DataMovement:|CurrentMemoryLocation:|InstructionCodes:|MemoryText:|BreakPointList:|TraceText:|AR:|PC:|DR:|TR:|IR:|R:|AC:|Z:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
+        string pattern = @"\b(Status:|RtlStatement:|DataMovement:|CurrentMemoryLocation:|InstructionCodes:|MemoryContents:|BreakPointList:|TraceText:|AR:|PC:|DR:|TR:|IR:|R:|AC:|Z:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
 
         string[] lines = content.Split('\n');
 
@@ -112,11 +123,22 @@ public static class DataToSave
                 tokens.Add(TokenizeLines(line, pattern));
             }
         }
+       /* foreach (List<Tokens> token in tokens)
+        {
+            foreach(Tokens tok in token)
+            {
+                GD.Print("Type: "+ tok.type+ " Value: "+ tok.value);
+            }
+            GD.Print(token.Count+" ENDLINE----------------\n\n");
+        }*/
         foreach (List<Tokens> token in tokens)
         {
-            SetValues(token);
+            if (token.Count > 0)
+            {
+                SetValues(token);
+            }
         }
-        GD.Print(AllData());
+        //GD.Print(AllData());
     }
     private static List<Tokens> TokenizeLines(string line, string pattern)
     {
@@ -133,7 +155,7 @@ public static class DataToSave
                 {
                     tokens.Add(new Tokens(TokenType.COLON, token));
                 }
-                else if (Regex.IsMatch(token, @"\b(Status|RtlStatement|DataMovement|CurrentMemoryLocation|InstructionCodes|MemoryText|BreakPointList|TraceText|AR|PC|DR|TR|IR|R|AC|Z)\b"))
+                else if (Regex.IsMatch(token, @"\b(Status|RtlStatement|DataMovement|CurrentMemoryLocation|InstructionCodes|MemoryContents|BreakPointList|TraceText|AR|PC|DR|TR|IR|R|AC|Z)\b"))
                 {
                     tokens.Add(new Tokens(TokenType.LABEL, token));
                 }
@@ -147,164 +169,170 @@ public static class DataToSave
     }
     private static void SetValues(List<Tokens> tokens)
     {
-        try
+        switch (tokens[0].value)
         {
-            GD.Print(tokens[2].value);
-            switch (tokens[0].value)
-            {
-                case "Status":
-                    if (2 < tokens.Count)
+            case "Status":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i<tokens.Count; i++)
                     {
-                        for (int i = 2; i<tokens.Count; i++)
-                        {
-                            status += tokens[i].value+" ";
-                        } 
-                    }
-                    break;
-                case "RtlStatement":
-                    if (2 < tokens.Count)
+                        status = tokens[2].value+" ";
+                    } 
+                }
+                break;
+            case "RtlStatement":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            rtlStatement += tokens[i].value + " ";
-                        }
+                        rtlStatement += tokens[i].value + " ";
                     }
-                    break;
-                case "DataMovement":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "DataMovement":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            dataMovement += tokens[i].value + " ";
-                        }
+                        dataMovement += tokens[i].value + " ";
                     }
-                    break;
-                case "CurrentMemoryLocation":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "CurrentMemoryLocation":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            currentMemoryLocation += tokens[i].value + " ";
-                        }
+                        currentMemoryLocation += tokens[i].value + " ";
                     }
-                    break;
-                case "InstructionCodes":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "InstructionCodes":
+                if (2 < tokens.Count)
+                {
+                    isInstructionCode = true;
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            intructionCodes += tokens[i].value + " ";
-                        }
+                        intructionCodes += tokens[i].value + " ";
                     }
-                    break;
-                case "MemoryText":
-                    if (2 < tokens.Count)
+                    intructionCodes += "\n";
+                }
+                break;
+            case "MemoryContents":
+                if (2 < tokens.Count)
+                {
+                    isInstructionCode = false;
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            memoryText += tokens[i].value + " ";
-                        }
+                        memoryContents[i-2] = Int16.Parse(tokens[i].value);
                     }
-                    break;
-                case "BreakPointList":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "BreakPointList":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            breakpointList.Add(Int32.Parse(tokens[i].value));
-                        }
+                        breakpointList.Add(Int32.Parse(tokens[i].value));
                     }
-                    break;
-                case "TraceText":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "TraceText":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            traceText += tokens[i].value + " ";
-                        }
+                        traceText += tokens[i].value + " ";
                     }
-                    break;
-                case "AR":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "AR":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            ar = Int32.Parse(tokens[i].value);
-                        }
+                        ar = Int32.Parse(tokens[i].value);
                     }
-                    break;
-                case "PC":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "PC":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            pc = Int32.Parse(tokens[i].value);
-                        }
+                        pc = Int32.Parse(tokens[i].value);
                     }
-                    break;
-                case "DR":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "DR":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            dr = Int32.Parse(tokens[i].value);
-                        }
+                        dr = Int32.Parse(tokens[i].value);
                     }
-                    break;
-                case "TR":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "TR":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            tr = Int32.Parse(tokens[i].value);
-                        }
+                        tr = Int32.Parse(tokens[i].value);
                     }
-                    break;
-                case "IR":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "IR":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            ir = Int32.Parse(tokens[i].value);
-                        }
+                        ir = Int32.Parse(tokens[i].value);
                     }
-                    break;
-                case "R":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "R":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            r = Int32.Parse(tokens[i].value);
-                        }
+                        r = Int32.Parse(tokens[i].value);
                     }
-                    break;
-                case "AC":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "AC":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            ac = Int32.Parse(tokens[i].value);
-                        }
+                        ac = Int32.Parse(tokens[i].value);
                     }
-                    break;
-                case "Z":
-                    if (2 < tokens.Count)
+                }
+                break;
+            case "Z":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
                     {
-                        for (int i = 2; i < tokens.Count; i++)
-                        {
-                            z = Int32.Parse(tokens[i].value);
-                        }
+                        z = Int32.Parse(tokens[i].value);
                     }
-                    break;
+                }
+                break;
 
-                default:
+            default:
+                if (isInstructionCode)
+                {
+                    for (int i = 0; i < tokens.Count; i++)
+                    {
+                        intructionCodes += tokens[i].value + " ";
+                    }
+                    intructionCodes += "\n";
+                }
+                else
+                {
                     GD.PrintErr("Label " + tokens[0].value + " does not exist!");
-                    break;
-            }
-        }
-        catch (Exception ex)
-        {
-            GD.Print(ex.Message + " at index: " + tokens[0]);
+                }
+                break;
         }
        
     }
@@ -321,7 +349,7 @@ public static class DataToSave
         intructionCodes = "";
 
         //Memory and IO
-        memoryText = "";
+        memoryContents = new short[Memory.MEMORY_SIZE];
 
         //Break Points
         breakpointList = new List<int>();

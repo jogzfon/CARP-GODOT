@@ -4,16 +4,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-[GlobalClass, Icon("res://icon.svg")]
 public partial class project_page : Control
 {
     CheckButton hardwired;
     CheckButton microprogrammed;
 
-    Panel memoryPnl;
-    Panel breakPointsPnl;
-    Panel traceResultsPnl;
-    SubViewportContainer viewSystem;
+    [Export] private Panel memoryPnl;
+    [Export] private Panel breakPointsPnl;
+    [Export] private Panel traceResultsPnl;
+    [Export] private SubViewportContainer viewSystem;
 
     TextEdit instructionCodes;
     LineEdit memoryLocation;
@@ -29,12 +28,16 @@ public partial class project_page : Control
     private LineEdit addressInput;
     private VBoxContainer breakPointAddressList;
 
+    private bool firstOpenBreakPoint = true;
+
     //Trace Results
     private TextEdit traceResultBox;
 
     //NotificationWindow
     public Window notificationWindow;
     public Label message;
+
+
 
     #region Buttons
     [Export] private Button toSystem;
@@ -67,22 +70,8 @@ public partial class project_page : Control
                 toAI.Visible = false;
                 toAI.Disabled = true;
             }
-            //Presets All Datas Found
-            memoryLocation.Text = DataToSave.currentMemoryLocation;
-            instructionCodes.Text = DataToSave.intructionCodes;
-
-            memoryBox.Text = DataToSave.memoryText;
+            Memory.contents = DataToSave.memoryContents;
             breakpointList = DataToSave.breakpointList;
-            foreach(int breakpoint in breakpointList)
-            {
-                Label breakPoint = new Label();
-                breakPoint.Text = " Address: " + breakpoint.ToString();
-                breakPoint.Name = breakpoint.ToString();
-                breakPoint.Set("theme_override_fonts/font", "res://Fonts/Inter-Regular.ttf");
-
-                breakPointAddressList.AddChild(breakPoint);
-            }
-            traceResultBox.Text = DataToSave.traceText;
         }
         else
         {
@@ -156,11 +145,6 @@ public partial class project_page : Control
         hardwired.ButtonPressed = false;
         #endregion
         #region Panels
-        memoryPnl = GetNode<Panel>("VBoxContainer/PanelContainer/MemoryAndIO");
-        breakPointsPnl = GetNode<Panel>("VBoxContainer/PanelContainer/Breakpoints");
-        traceResultsPnl = GetNode<Panel>("VBoxContainer/PanelContainer/TraceResult");
-        viewSystem = GetNode<SubViewportContainer>("VBoxContainer/PanelContainer/SystemViewContainer");
-
         notificationWindow = GetNode<Window>("NotificationWindow");
         notificationWindow.Visible = false;
         notificationWindow.Connect("close_requested", new Callable(this, nameof(CloseNotification)));
@@ -178,7 +162,18 @@ public partial class project_page : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
-        
+        if (AccountManager.GetUser() != null)
+        {
+            DataToSave.memoryContents = Memory.contents;
+            DataToSave.breakpointList = breakpointList;
+            DataToSave.traceText = traceResultBox.Text;
+
+            if (Input.IsActionPressed("Ctrl") && Input.IsActionPressed("S"))
+            {
+                GD.Print("Printed");
+                DataToSave.SaveFile();
+            }
+        }
 	}
     public void CloseNotification()
     {
@@ -203,8 +198,13 @@ public partial class project_page : Control
     public void BackToProject()
     {
         Node simultaneousScene = mainPage.Instantiate();
-        DataToSave.SaveFile();
-        DataToSave.ResetDatas();
+
+        /*if(AccountManager.GetUser() != null)
+        {
+            DataToSave.SaveFile();
+            DataToSave.ResetDatas();
+        }*/
+
         GetTree().Root.AddChild(simultaneousScene);
         Hide();
     }
@@ -298,6 +298,20 @@ public partial class project_page : Control
         breakPointsPnl.Show();
         traceResultsPnl.Hide();
         viewSystem.Hide();
+
+        if (firstOpenBreakPoint && AccountManager.GetUser()!=null)
+        {
+            firstOpenBreakPoint = false;
+            foreach (int breakpoint in breakpointList)
+            {
+                Label breakPoint = new Label();
+                breakPoint.Text = " Address: " + breakpoint.ToString();
+                breakPoint.Name = breakpoint.ToString();
+                breakPoint.Set("theme_override_fonts/font", "res://Fonts/Inter-Regular.ttf");
+
+                breakPointAddressList.AddChild(breakPoint);
+            }
+        }
     }
 
     private void AddBreakPoint()
@@ -365,6 +379,11 @@ public partial class project_page : Control
         breakPointsPnl.Hide();
         traceResultsPnl.Show();
         viewSystem.Hide();
+
+        if(AccountManager.GetUser() != null)
+        {
+            traceResultBox.Text = DataToSave.traceText;
+        }
     }
     private void ViewResults()
     {

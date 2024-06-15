@@ -280,11 +280,14 @@ theme_override_fonts/font = ExtResource("10_8xef3")
 theme_override_font_sizes/font_size = 30
 text = ">M4J"
 
-[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
+[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
 script = ExtResource("18_lnwlk")
 dialogue = NodePath("FileDialog")
-newProject = NodePath("../ProfileHandler/HBoxContainer/New Project")
-openProject = NodePath("../ProfileHandler/HBoxContainer/Open Project")
+newProject = NodePath("../ProfileHandler/ManageFile/New Project")
+openProject = NodePath("../ProfileHandler/ManageFile/Open Project")
+goToSystem = NodePath("../ProfileHandler/DirectToSystem/GoToSystem")
+directToSystem = NodePath("../ProfileHandler/DirectToSystem")
+manageFile = NodePath("../ProfileHandler/ManageFile")
 documentationRect = NodePath("DocumentationRect")
 witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
 witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")
@@ -748,17 +751,18 @@ vertical_alignment = 1
 
 [node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin")]
 script = ExtResource("12_dw1ay")
-schoolBtn = NodePath("HBoxContainer/New Project3")
-centerMargin = NodePath("HBoxContainer/MarginContainer2")
+schoolBtn = NodePath("ManageFile/New Project3")
+centerMargin = NodePath("ManageFile/MarginContainer2")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ProfileHandler"]
+[node name="ManageFile" type="HBoxContainer" parent="ProfileHandler"]
+visible = false
 offset_left = 805.0
 offset_top = 578.0
 offset_right = 1257.0
 offset_bottom = 711.0
 alignment = 1
 
-[node name="New Project" type="Button" parent="ProfileHandler/HBoxContainer"]
+[node name="New Project" type="Button" parent="ProfileHandler/ManageFile"]
 layout_mode = 2
 text = "New"
 icon = ExtResource("4_rgqy0")
@@ -766,11 +770,11 @@ flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="ProfileHandler/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ProfileHandler/ManageFile"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Open Project" type="Button" parent="ProfileHandler/HBoxContainer"]
+[node name="Open Project" type="Button" parent="ProfileHandler/ManageFile"]
 layout_mode = 2
 text = "Open"
 icon = ExtResource("5_2n6so")
@@ -778,12 +782,12 @@ flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="MarginContainer2" type="MarginContainer" parent="ProfileHandler/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="ProfileHandler/ManageFile"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="New Project3" type="Button" parent="ProfileHandler/HBoxContainer"]
+[node name="New Project3" type="Button" parent="ProfileHandler/ManageFile"]
 visible = false
 layout_mode = 2
 text = "School"
@@ -792,12 +796,30 @@ flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 
+[node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
+visible = false
+offset_left = 805.0
+offset_top = 578.0
+offset_right = 1257.0
+offset_bottom = 711.0
+alignment = 1
+
+[node name="GoToSystem" type="Button" parent="ProfileHandler/DirectToSystem"]
+layout_mode = 2
+text = "GoToSystem"
+icon = ExtResource("4_rgqy0")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
 savePanel = NodePath("SavePanel")
 yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
 nobtn = NodePath("SavePanel/HBoxContainer/No")
+saveAvailable = false
 
 [node name="ExitButton" type="Button" parent="Exit"]
 anchors_preset = 1
