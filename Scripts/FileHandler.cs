@@ -16,6 +16,8 @@ public partial class FileHandler : Node
     [Export]
     HBoxContainer manageFile;
 
+    [Export] PackedScene projectPage;
+
     #region DocumentationBtn
     [Export]
     public ColorRect documentationRect;
@@ -107,9 +109,9 @@ public partial class FileHandler : Node
     }
 
     private void GoToSystem() {
-        Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/project_page.tscn").Instantiate();
-        GetTree().Root.AddChild(simultaneousScene);
-        GetTree().Root.Hide();
+        Node simultaneous = projectPage.Instantiate();
+        GetTree().Root.AddChild(simultaneous);
+        //GetTree().ChangeSceneToPacked(projectPage);
     }
     #region FileHandler
     private void NewProject()
@@ -133,9 +135,8 @@ public partial class FileHandler : Node
         {
             DataToSave.OpenFile();
         }
-        Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/project_page.tscn").Instantiate();
-        GetTree().Root.AddChild(simultaneousScene);
-        GetTree().Root.Hide();
+        Node simultaneous = projectPage.Instantiate();
+        GetTree().Root.AddChild(simultaneous);
     }
     #endregion
 

@@ -30,10 +30,6 @@ public partial class StartUpPage : Control
     [Export] private TextureButton backBtn;
     #endregion
 
-    #region PackedScenes
-    [Export] private PackedScene mainPage;
-    #endregion
-
     IFirebaseConfig config = new FirebaseConfig
 	{
 		AuthSecret = "sl5J6RLP0fMsh6OJNNj978xIelPyaSCuwr6hOf8R",
@@ -85,10 +81,8 @@ public partial class StartUpPage : Control
 			if (password.Equals(userObj.Password))
 			{
 				AccountManager.SetUser(userObj);
-				Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/main_page.tscn").Instantiate();
-				GetTree().Root.AddChild(simultaneousScene);
-				Hide();
-			}
+                this.QueueFree();
+            }
 			else
 			{
 				GD.Print("Wrong Password!!!");
@@ -140,8 +134,7 @@ public partial class StartUpPage : Control
 
 	private void BackPressed()
 	{
-        Node simultaneousScene = mainPage.Instantiate();
-        GetTree().Root.AddChild(simultaneousScene);
+        this.QueueFree();
     }
 }
 

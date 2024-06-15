@@ -1,13 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=22 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
 [ext_resource type="Texture2D" uid="uid://c4woa0garcmfn" path="res://Sprites/Rectangle 92.png" id="2_dsjfr"]
+[ext_resource type="PackedScene" uid="uid://whq7hnglcf2a" path="res://Scenes/logInPage.tscn" id="2_fqqk8"]
 [ext_resource type="Texture2D" uid="uid://6uq758q03qox" path="res://Sprites/pp.png" id="4_2bfqo"]
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="4_6c80f"]
 [ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
+[ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]
 [ext_resource type="Script" path="res://Scripts/ProfileHandler.cs" id="12_dw1ay"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
@@ -30,7 +32,7 @@ shadow_offset = Vector2(-3, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
 
-[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "options", "logout", "settings")]
+[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "options", "logout", "settings")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,9 +41,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tloas")
 signIn = NodePath("MainContent/Sign-In")
-options = NodePath("MainContent/Sign-In/Options")
-logout = NodePath("MainContent/Sign-In/Options/Logout")
-settings = NodePath("MainContent/Sign-In/Options/Settings")
+signOut = NodePath("MainContent/SignOut")
+options = NodePath("MainContent/SignOut/Options")
+logout = NodePath("MainContent/SignOut/Options/Logout")
+settings = NodePath("MainContent/SignOut/Options/Settings")
+logInPage = ExtResource("2_fqqk8")
 
 [node name="MainContent" type="Node" parent="."]
 
@@ -183,7 +187,23 @@ clip_text = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Options" type="VBoxContainer" parent="MainContent/Sign-In"]
+[node name="SignOut" type="Button" parent="MainContent"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -100.0
+offset_right = 321.0
+offset_bottom = -55.0
+grow_vertical = 0
+text = "Sign-In"
+icon = ExtResource("17_587en")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Options" type="VBoxContainer" parent="MainContent/SignOut"]
 visible = false
 layout_mode = 0
 offset_left = 6.0
@@ -191,12 +211,12 @@ offset_top = -62.0
 offset_right = 288.0
 offset_bottom = 4.0
 
-[node name="Logout" type="Button" parent="MainContent/Sign-In/Options"]
+[node name="Logout" type="Button" parent="MainContent/SignOut/Options"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_8xef3")
 text = "LOGOUT"
 
-[node name="Settings" type="Button" parent="MainContent/Sign-In/Options"]
+[node name="Settings" type="Button" parent="MainContent/SignOut/Options"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_8xef3")
 text = "SETTINGS"
@@ -288,6 +308,7 @@ openProject = NodePath("../ProfileHandler/ManageFile/Open Project")
 goToSystem = NodePath("../ProfileHandler/DirectToSystem/GoToSystem")
 directToSystem = NodePath("../ProfileHandler/DirectToSystem")
 manageFile = NodePath("../ProfileHandler/ManageFile")
+projectPage = ExtResource("11_5fqup")
 documentationRect = NodePath("DocumentationRect")
 witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
 witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")
@@ -797,7 +818,6 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 
 [node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
-visible = false
 offset_left = 805.0
 offset_top = 578.0
 offset_right = 1257.0

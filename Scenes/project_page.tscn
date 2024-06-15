@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="2_2pl7i"]
-[ext_resource type="PackedScene" uid="uid://gc328eisvff8" path="res://Scenes/main_page.tscn" id="2_cmshp"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="2_rnxid"]
 [ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_jdv15"]
 [ext_resource type="PackedScene" uid="uid://b8fqwku1kjuqn" path="res://Scenes/main.tscn" id="5_squa4"]
@@ -14,11 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="11_pawad"]
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="12_83o58"]
 [ext_resource type="Script" path="res://Scripts/ExitController.cs" id="14_r5c7n"]
+[ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgeug"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "viewSystem", "toSystem", "assemble", "toAI", "back")]
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "toSystem", "assemble", "toAI", "back")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,12 +31,12 @@ script = ExtResource("1_lst7x")
 memoryPnl = NodePath("VBoxContainer/PanelContainer/MemoryAndIO")
 breakPointsPnl = NodePath("VBoxContainer/PanelContainer/Breakpoints")
 traceResultsPnl = NodePath("VBoxContainer/PanelContainer/TraceResult")
+aiPnl = NodePath("AISystem")
 viewSystem = NodePath("VBoxContainer/PanelContainer/SystemViewContainer")
 toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
 assemble = NodePath("LeftContainer/Assemble")
 toAI = NodePath("VBoxContainer/HBoxContainer/AIBtn")
 back = NodePath("Back")
-mainPage = ExtResource("2_cmshp")
 metadata/_edit_horizontal_guides_ = [-53.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -348,6 +348,7 @@ theme_override_font_sizes/font_size = 30
 text = "0"
 placeholder_text = "Enter Memory Location"
 alignment = 1
+editable = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LeftContainer"]
 layout_mode = 2
@@ -494,3 +495,7 @@ text = "YES"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NO"
+
+[node name="AISystem" parent="." instance=ExtResource("15_jp5cw")]
+visible = false
+layout_mode = 1

@@ -12,6 +12,7 @@ public partial class project_page : Control
     [Export] private Panel memoryPnl;
     [Export] private Panel breakPointsPnl;
     [Export] private Panel traceResultsPnl;
+    [Export] private Control aiPnl;
     [Export] private SubViewportContainer viewSystem;
 
     TextEdit instructionCodes;
@@ -37,8 +38,6 @@ public partial class project_page : Control
     public Window notificationWindow;
     public Label message;
 
-
-
     #region Buttons
     [Export] private Button toSystem;
     [Export] private Button assemble;
@@ -46,10 +45,6 @@ public partial class project_page : Control
 
     [Export] private TextureButton back;
     #endregion
-    #region PackedScenes
-    [Export] private PackedScene mainPage;
-    #endregion
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -70,6 +65,8 @@ public partial class project_page : Control
                 toAI.Visible = false;
                 toAI.Disabled = true;
             }
+            
+            aiPnl.Visible = false;
             Memory.contents = DataToSave.memoryContents;
             breakpointList = DataToSave.breakpointList;
         }
@@ -197,16 +194,16 @@ public partial class project_page : Control
     }
     public void BackToProject()
     {
-        Node simultaneousScene = mainPage.Instantiate();
-
-        /*if(AccountManager.GetUser() != null)
+        if (AccountManager.GetUser() != null)
         {
             DataToSave.SaveFile();
             DataToSave.ResetDatas();
+        }
+        /*if(mainPage != null)
+        {
+            GetTree().ChangeSceneToPacked(mainPage);
         }*/
-
-        GetTree().Root.AddChild(simultaneousScene);
-        Hide();
+        this.QueueFree();
     }
     #region LeftButtons
     private void Assemble()
@@ -244,9 +241,7 @@ public partial class project_page : Control
     }
     private void GoToAI()
     {
-        Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://Scenes/ai_system.tscn").Instantiate();
-        GetTree().Root.AddChild(simultaneousScene);
-        Hide();
+        aiPnl.Visible = true;
     }
     private void HardWired()
     {

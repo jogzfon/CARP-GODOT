@@ -3,7 +3,8 @@ Status: Idle
 RtlStatement: 
 DataMovement: 
 CurrentMemoryLocation: 0
-InstructionCodes: MVAC 
+InstructionCodes: LDAC 100 
+MVAC 
 ADD 
 STAC 
 
@@ -14,7 +15,7 @@ MemoryContents: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 
 
 ---------- Break Points  ----------
-BreakPointList: 5 6 
+BreakPointList: 
 
 
 ---------- Trace Results ----------
