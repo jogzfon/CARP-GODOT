@@ -306,24 +306,6 @@ public partial class Assembler
         return new AssemblyResults(assemblyErrors, code);
     }
 
-    private static string[] ToBinaryNybble(short byteShort)
-    {
-        string upperNybble = Convert.ToString(byteShort / 0x10, 2);
-        string lowerNybble = Convert.ToString(byteShort % 0x10, 2);
-
-        while (upperNybble.Length < 4)
-        {
-            upperNybble = "0" + upperNybble;
-        }
-
-        while (lowerNybble.Length < 4)
-        {
-            lowerNybble = "0" + lowerNybble;
-        }
-
-        return new string[] { upperNybble, lowerNybble };
-    }
-
     private static bool IsLabel(string token)
     {
         if (token.IndexOf(':') != -1 && token.IndexOf(':') == token.Length - 1 && token.Length > 1)

@@ -13,6 +13,7 @@ public static class DataToSave
     public static string rtlStatement = "";
     public static string dataMovement = "";
     public static string currentMemoryLocation = "";
+    public static string intructionCodes = "";
 
     //Memory and IO
     public static string memoryText = "";
@@ -57,6 +58,7 @@ public static class DataToSave
         //Make this part so the content will update all the values in here
     }
 
+    #region Get All Datas
     private static string AllData()
     {
         string allData =
@@ -64,7 +66,8 @@ public static class DataToSave
             "Status: " + status + "\n" +
             "RtlStatement: " + rtlStatement + "\n" +
             "DataMovement: " + dataMovement + "\n" +
-            "CurrentMemoryLocation: " + currentMemoryLocation + "\n\n\n" +
+            "CurrentMemoryLocation: " + currentMemoryLocation + "\n" +
+            "InstructionCodes: "+ intructionCodes + "\n\n\n" +
             "---------- Memory And IO ----------\n" +
             "MemoryText: " + memoryText + "\n\n\n" +
             "---------- Break Points  ----------\n" +
@@ -91,12 +94,14 @@ public static class DataToSave
         }
         return allnum;
     }
+    #endregion
 
+    #region Distribute Values
     private static void DistributeValues(string content)
     {
-        List<Tokens> tokens = new List<Tokens>();
+        List<List<Tokens>> tokens = new List<List<Tokens>>();
 
-        string pattern = @"\b(Status:|RtlStatement:|DataMovement:|CurrentMemoryLocation:|MemoryText:|BreakPointList:|TraceText:|AR:|PC:|DR:|TR:|IR:|R:|AC:|Z:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
+        string pattern = @"\b(Status:|RtlStatement:|DataMovement:|CurrentMemoryLocation:|InstructionCodes:|MemoryText:|BreakPointList:|TraceText:|AR:|PC:|DR:|TR:|IR:|R:|AC:|Z:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
 
         string[] lines = content.Split('\n');
 
@@ -104,21 +109,18 @@ public static class DataToSave
         {
             if (!line.Trim().StartsWith("-"))
             {
-                tokens = TokenizeLines(line, pattern, tokens);
+                tokens.Add(TokenizeLines(line, pattern));
             }
         }
-        /*foreach (Tokens token in tokens)
+        foreach (List<Tokens> token in tokens)
         {
-            GD.Print("Type: "+ token.type+ " Value: "+token.value);
-        }*/
-        for (int i = 0; i < tokens.Count; i++)
-        {
-            i = SetValues(tokens, i);
+            SetValues(token);
         }
         GD.Print(AllData());
     }
-    private static List<Tokens> TokenizeLines(string line, string pattern, List<Tokens> tokens)
+    private static List<Tokens> TokenizeLines(string line, string pattern)
     {
+        List<Tokens> tokens = new List<Tokens>();
         MatchCollection matches = Regex.Matches(line, pattern);
 
         foreach (Match match in matches)
@@ -131,7 +133,7 @@ public static class DataToSave
                 {
                     tokens.Add(new Tokens(TokenType.COLON, token));
                 }
-                else if (Regex.IsMatch(token, @"\b(Status|RtlStatement|DataMovement|CurrentMemoryLocation|MemoryText|BreakPointList|TraceText|AR|PC|DR|TR|IR|R|AC|Z)\b"))
+                else if (Regex.IsMatch(token, @"\b(Status|RtlStatement|DataMovement|CurrentMemoryLocation|InstructionCodes|MemoryText|BreakPointList|TraceText|AR|PC|DR|TR|IR|R|AC|Z)\b"))
                 {
                     tokens.Add(new Tokens(TokenType.LABEL, token));
                 }
@@ -143,185 +145,198 @@ public static class DataToSave
         }
         return tokens;
     }
-
-    private static int SetValues(List<Tokens> tokens, int index)
+    private static void SetValues(List<Tokens> tokens)
     {
-        switch (tokens[index].value)
+        try
         {
-            case "Status":
-                if(tokens[index+2].type!= TokenType.LABEL)
-                {
-                    index += 2;
-                    status = tokens[index].value;
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "RtlStatement":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    rtlStatement = tokens[index].value;
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "DataMovement":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    dataMovement = tokens[index].value;
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "CurrentMemoryLocation":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    currentMemoryLocation = tokens[index].value;
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "MemoryText":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    memoryText = tokens[index].value;
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "BreakPointList":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    GD.Print(tokens[index].value);
-                    while (tokens[index].type != TokenType.LABEL)
+            GD.Print(tokens[2].value);
+            switch (tokens[0].value)
+            {
+                case "Status":
+                    if (2 < tokens.Count)
                     {
-                        breakpointList.Add(Int32.Parse(tokens[index].value));
-                        index++;
+                        for (int i = 2; i<tokens.Count; i++)
+                        {
+                            status += tokens[i].value+" ";
+                        } 
                     }
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "TraceText":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    traceText = tokens[index].value;
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "AR":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    ar = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "PC":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    pc = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "DR":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    dr = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "TR":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    tr = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "IR":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    ir = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "R":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    r = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "AC":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    ac = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            case "Z":
-                if (tokens[index + 2].type != TokenType.LABEL)
-                {
-                    index += 2;
-                    z = Int32.Parse(tokens[index].value);
-                }
-                else
-                {
-                    index++;
-                }
-                break;
-            default:
-                GD.PrintErr("Label " + tokens[index].value + " does not Exist!");
-                break;
+                    break;
+                case "RtlStatement":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            rtlStatement += tokens[i].value + " ";
+                        }
+                    }
+                    break;
+                case "DataMovement":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            dataMovement += tokens[i].value + " ";
+                        }
+                    }
+                    break;
+                case "CurrentMemoryLocation":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            currentMemoryLocation += tokens[i].value + " ";
+                        }
+                    }
+                    break;
+                case "InstructionCodes":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            intructionCodes += tokens[i].value + " ";
+                        }
+                    }
+                    break;
+                case "MemoryText":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            memoryText += tokens[i].value + " ";
+                        }
+                    }
+                    break;
+                case "BreakPointList":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            breakpointList.Add(Int32.Parse(tokens[i].value));
+                        }
+                    }
+                    break;
+                case "TraceText":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            traceText += tokens[i].value + " ";
+                        }
+                    }
+                    break;
+                case "AR":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            ar = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+                case "PC":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            pc = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+                case "DR":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            dr = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+                case "TR":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            tr = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+                case "IR":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            ir = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+                case "R":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            r = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+                case "AC":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            ac = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+                case "Z":
+                    if (2 < tokens.Count)
+                    {
+                        for (int i = 2; i < tokens.Count; i++)
+                        {
+                            z = Int32.Parse(tokens[i].value);
+                        }
+                    }
+                    break;
+
+                default:
+                    GD.PrintErr("Label " + tokens[0].value + " does not exist!");
+                    break;
+            }
         }
-        return index;
+        catch (Exception ex)
+        {
+            GD.Print(ex.Message + " at index: " + tokens[0]);
+        }
+       
+    }
+    #endregion
+
+    public static void ResetDatas()
+    {
+        filePath = "";
+
+        status = "Idle";
+        rtlStatement = "";
+        dataMovement = "";
+        currentMemoryLocation = "";
+        intructionCodes = "";
+
+        //Memory and IO
+        memoryText = "";
+
+        //Break Points
+        breakpointList = new List<int>();
+
+        //Trace Results
+        traceText = "";
+
+        //View System
+        ar = 0x00000000;
+        pc = 0x00000000;
+        dr = 0x00000000;
+        tr = 0x00000000;
+        ir = 0x00000000;
+        r = 0x00000000;
+        ac = 0x00000000;
+        z = 0;
     }
 }

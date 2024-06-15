@@ -39,6 +39,7 @@ public partial class ExitController : Node
         GD.Print("Data saved!!!");
         DataToSave.SaveFile();
         await WaitTime();
+        DataToSave.ResetDatas();
         GetTree().Quit();
     }
     private void NotSave()

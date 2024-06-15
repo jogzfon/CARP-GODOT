@@ -150,7 +150,7 @@ public partial class Animations : Node
         var node = GetNode<Control>("/root/ProjectPage");
         project_page proj = node as project_page;
 
-        this.breakpoints = proj.breakpoints;
+        this.breakpoints = proj.breakpointList;
 
         memorycode = Memory.contents;
         TraceResults.RemoveAllStatements();

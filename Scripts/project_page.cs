@@ -19,14 +19,13 @@ public partial class project_page : Control
     LineEdit memoryLocation;
 
     private Assembler assembler = new Assembler();
-    public List<int> breakpoints = new List<int>();
 
     //Memory
     private bool isHex = false;
     private TextEdit memoryBox;
 
     //Break Points
-    private List<int> breakpointList = new List<int>();
+    public List<int> breakpointList = new List<int>();
     private LineEdit addressInput;
     private VBoxContainer breakPointAddressList;
 
@@ -68,6 +67,22 @@ public partial class project_page : Control
                 toAI.Visible = false;
                 toAI.Disabled = true;
             }
+            //Presets All Datas Found
+            memoryLocation.Text = DataToSave.currentMemoryLocation;
+            instructionCodes.Text = DataToSave.intructionCodes;
+
+            memoryBox.Text = DataToSave.memoryText;
+            breakpointList = DataToSave.breakpointList;
+            foreach(int breakpoint in breakpointList)
+            {
+                Label breakPoint = new Label();
+                breakPoint.Text = " Address: " + breakpoint.ToString();
+                breakPoint.Name = breakpoint.ToString();
+                breakPoint.Set("theme_override_fonts/font", "res://Fonts/Inter-Regular.ttf");
+
+                breakPointAddressList.AddChild(breakPoint);
+            }
+            traceResultBox.Text = DataToSave.traceText;
         }
         else
         {
@@ -188,6 +203,8 @@ public partial class project_page : Control
     public void BackToProject()
     {
         Node simultaneousScene = mainPage.Instantiate();
+        DataToSave.SaveFile();
+        DataToSave.ResetDatas();
         GetTree().Root.AddChild(simultaneousScene);
         Hide();
     }

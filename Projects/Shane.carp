@@ -1,8 +1,9 @@
 ---------- Detail Info   ----------
 Status: Idle
-RtlStatement: 
-DataMovement: 
-CurrentMemoryLocation:  
+RtlStatement: x
+DataMovement: AR <- DR | TR
+CurrentMemoryLocation: 4
+InstructionCodes: ldac 100 mvac 100 stac 100 end 100
 
 
 ---------- Memory And IO ----------
@@ -10,7 +11,7 @@ MemoryText:
 
 
 ---------- Break Points  ----------
-BreakPointList:
+BreakPointList: 
 
 
 ---------- Trace Results ----------
