@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=24 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
 [ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]
+[ext_resource type="Texture2D" uid="uid://bnq1jayfkitby" path="res://Sprites/light.png" id="11_g3t7t"]
 [ext_resource type="Script" path="res://Scripts/ProfileHandler.cs" id="12_dw1ay"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
@@ -28,6 +29,9 @@ font = ExtResource("13_0fq7n")
 font_size = 35
 shadow_color = Color(0.298039, 0.305882, 0.572549, 1)
 shadow_offset = Vector2(-3, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_60ifs"]
+light_mode = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
@@ -240,15 +244,6 @@ layout_mode = 2
 text = "WELCOME TO CARP"
 label_settings = SubResource("LabelSettings_qv4bw")
 
-[node name="TextureRect2" type="TextureRect" parent="MainContent"]
-offset_left = 1782.0
-offset_top = 12.0
-offset_right = 1862.0
-offset_bottom = 85.0
-texture = ExtResource("4_2bfqo")
-expand_mode = 3
-stretch_mode = 5
-
 [node name="Title" type="Label" parent="MainContent"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -299,6 +294,26 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_8xef3")
 theme_override_font_sizes/font_size = 30
 text = ">M4J"
+
+[node name="ProfileBtn" type="TextureButton" parent="MainContent"]
+material = SubResource("CanvasItemMaterial_60ifs")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -122.0
+offset_top = 16.0
+offset_right = -51.0
+offset_bottom = 78.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_2bfqo")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="PointLight2D" type="PointLight2D" parent="MainContent/ProfileBtn"]
+position = Vector2(35, 31)
+blend_mode = 2
+texture = ExtResource("11_g3t7t")
+texture_scale = 0.15
 
 [node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
 script = ExtResource("18_lnwlk")
