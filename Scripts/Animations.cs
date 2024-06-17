@@ -154,9 +154,9 @@ public partial class Animations : Node
 
         if(AccountManager.GetUser() != null)
         {
-            i = Int32.Parse(DataToSave.currentMemoryLocation);
+            Int32.TryParse(DataToSave.currentMemoryLocation, out i);
         }
-
+        
         memorycode = Memory.contents;
         TraceResults.RemoveAllStatements();
         #endregion
@@ -258,6 +258,7 @@ public partial class Animations : Node
         else if (!animationRunning)
         {
             animationRunning = true;
+
             ar_bit = BinaryStringToInt(AR_txt.Text);
             pc_bit = BinaryStringToInt(PC_txt.Text);
             dr_bit = BinaryStringToInt(DR_txt.Text);
