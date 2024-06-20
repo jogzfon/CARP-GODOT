@@ -10,7 +10,7 @@ public partial class ProfileHandler : Node
     [Export]
     TextureButton accountProfile;
     [Export]
-    Panel profilePanel;
+    PanelContainer profilePanel;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
