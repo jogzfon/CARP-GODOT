@@ -17,13 +17,14 @@ public partial class ProfileHandler : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        if (AccountManager.GetUser() != null && AccountManager.schoolOn)
+        if (AccountManager.GetUser() != null)
         {
-            schoolBtn.Visible = true;
-            accountProfile.Disabled = false;
-            centerMargin.Visible = true;
-            schoolBtn.Connect("pressed", new Callable(this, nameof(SchoolPage)));
-            accountProfile.Connect("pressed", new Callable(this, nameof(OpenProfilePage)));
+            if (AccountManager.schoolOn)
+            {
+                schoolBtn.Visible = true;
+                centerMargin.Visible = true;
+                schoolBtn.Connect("pressed", new Callable(this, nameof(SchoolPage)));
+            }
         }
         else
         {
@@ -32,11 +33,16 @@ public partial class ProfileHandler : Node
             schoolBtn.Visible = false;
             centerMargin.Visible = false;
         }
-	}
+        accountProfile.Connect("pressed", new Callable(this, nameof(OpenProfilePage)));
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+        if (AccountManager.GetUser() != null)
+        {
+            accountProfile.Disabled = false;
+        }
 	}
     private void SchoolPage()
     {
