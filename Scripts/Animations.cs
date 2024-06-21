@@ -1395,7 +1395,7 @@ public partial class Animations : Node
         z_bit = (ac_bit == 0) ? 1 : 0;
 
         rtlStatement.Text = "AND";
-        dataMovement.Text = "AC <- AC & r";
+        dataMovement.Text = "AC <- AC & R";
 
         await Task.Delay(1000);
 
@@ -1430,7 +1430,7 @@ public partial class Animations : Node
         z_bit = (ac_bit == 0) ? 1 : 0;
 
         rtlStatement.Text = "OR";
-        dataMovement.Text = "AC <- AC | r";
+        dataMovement.Text = "AC <- AC | R";
 
         await Task.Delay(1000);
 
@@ -1468,7 +1468,7 @@ public partial class Animations : Node
         z_bit = (ac_bit == 0) ? 1 : 0;
 
         rtlStatement.Text = "XOR";
-        dataMovement.Text = "AC <- AC ^ r";
+        dataMovement.Text = "AC <- AC ^ R";
 
         await Task.Delay(1000);
 

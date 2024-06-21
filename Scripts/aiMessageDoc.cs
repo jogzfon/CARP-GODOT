@@ -44,7 +44,40 @@ public static class aiMessageDoc
             "OR 0000 1101 AC = AC | R, If (AC | R = 0) Then Z = 1 Else Z = 0 " +
             "XOR 0000 1110 AC = AC ^ R, If (AC ^ R = 0) Then Z = 1 Else Z = 0 " +
             "NOT 0000 1111 AC = ~AC, If (~AC = 0) Then Z = 1 Else Z = 0 " +
-            "Example:" +
+            "Necessary data movement at the beginning before the scan of each instruction:" +
+            "Fetch 1: PC -> AR" +
+            "Fetch 2: M -> DR, PC+1 -> PC" +
+            "Fetch 3: DR -> IR, PC -> AR" +
+            "--START OF SCAN INSTRUCTION--" +
+            "For LDAC Instruction:" +
+            "LDAC 1: M -> DR, PC+1 -> PC, AR+1 -> AR" +
+            "LDAC 2: DR -> TR, M -> DR, PC+1 -> PC" +
+            "LDAC 3: DR | TR -> AR" +
+            "LDAC 4: M -> DR" +
+            "LDAC 5: DR -> AC" +
+            "For STAC Instruction:" +
+            "STAC 1: M -> DR, PC+1 -> PC, AR+1 -> AR" +
+            "STAC 2: DR -> TR, M -> DR, PC+1 -> PC" +
+            "STAC 3: DR | TR -> AR" +
+            "STAC 4: AC -> DR" +
+            "STAC 5: DR -> M" +
+            "For Other Instructions:" +
+            "MVAC: AC -> R" +
+            "MOVR: R -> AC" +
+            "JUMP: jump to memory location" +
+            "JMPZ: if Z = 1 jump to memory location" +
+            "JPNZ: if Z = 0 jump to memory location" +
+            "NOP: No Operation" +
+            "END: End Animation" +
+            "ADD:  AC + R -> AC" +
+            "SUB: AC - R -> AC" +
+            "INAC: AC + 1 -> AC" +
+            "CLAC: 0 -> AC, 1 -> Z" +
+            "AND: AC & R -> AC" +
+            "OR: AC | R -> AC" +
+            "XOR: AC ^ R -> AC" +
+            "NOT: ~AC -> AC" +
+            "Example Result:" +
             "double a number.  i=i+i " +
             "i at 100 " +
             "Code Generated example: " +
