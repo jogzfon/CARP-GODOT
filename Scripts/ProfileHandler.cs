@@ -10,7 +10,9 @@ public partial class ProfileHandler : Node
     [Export]
     TextureButton accountProfile;
     [Export]
-    PanelContainer profilePanel;
+    Panel profilePanel;
+    [Export]
+    Button exitProfile;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -18,11 +20,15 @@ public partial class ProfileHandler : Node
         if (AccountManager.GetUser() != null && AccountManager.schoolOn)
         {
             schoolBtn.Visible = true;
+            accountProfile.Disabled = false;
             centerMargin.Visible = true;
             schoolBtn.Connect("pressed", new Callable(this, nameof(SchoolPage)));
+            accountProfile.Connect("pressed", new Callable(this, nameof(OpenProfilePage)));
         }
         else
         {
+            accountProfile.Disabled = true;
+            profilePanel.Visible = false;
             schoolBtn.Visible = false;
             centerMargin.Visible = false;
         }
@@ -35,5 +41,14 @@ public partial class ProfileHandler : Node
     private void SchoolPage()
     {
 
+    }
+    private void OpenProfilePage()
+    {
+        profilePanel.Visible = true;
+        exitProfile.Connect("pressed", new Callable(this, nameof(CloseProfilePage)));
+    }
+    private void CloseProfilePage()
+    {
+        profilePanel.Visible = false;
     }
 }

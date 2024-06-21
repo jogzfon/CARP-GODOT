@@ -785,12 +785,29 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel")]
+[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile")]
 script = ExtResource("12_dw1ay")
 schoolBtn = NodePath("ManageFile/New Project3")
 centerMargin = NodePath("ManageFile/MarginContainer2")
 accountProfile = NodePath("../MainContent/ProfileBtn")
-profilePanel = NodePath("")
+profilePanel = NodePath("ProfilePanel")
+exitProfile = NodePath("ProfilePanel/ExitButton")
+
+[node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
+offset_left = 805.0
+offset_top = 578.0
+offset_right = 1257.0
+offset_bottom = 711.0
+alignment = 1
+
+[node name="GoToSystem" type="Button" parent="ProfileHandler/DirectToSystem"]
+layout_mode = 2
+text = "GoToSystem"
+icon = ExtResource("4_rgqy0")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
 [node name="ManageFile" type="HBoxContainer" parent="ProfileHandler"]
 visible = false
@@ -834,23 +851,8 @@ flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
-offset_left = 805.0
-offset_top = 578.0
-offset_right = 1257.0
-offset_bottom = 711.0
-alignment = 1
-
-[node name="GoToSystem" type="Button" parent="ProfileHandler/DirectToSystem"]
-layout_mode = 2
-text = "GoToSystem"
-icon = ExtResource("4_rgqy0")
-flat = true
-icon_alignment = 1
-vertical_icon_alignment = 0
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="ProfileHandler"]
+[node name="ProfilePanel" type="Panel" parent="ProfileHandler"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -863,7 +865,7 @@ offset_bottom = 278.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="ProfileHandler/Panel"]
+[node name="ColorRect" type="ColorRect" parent="ProfileHandler/ProfilePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -872,7 +874,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.298039, 0.321569, 1)
 
-[node name="ProfileBtn" type="TextureButton" parent="ProfileHandler/Panel"]
+[node name="ProfileBtn" type="TextureButton" parent="ProfileHandler/ProfilePanel"]
 material = SubResource("CanvasItemMaterial_60ifs")
 layout_mode = 1
 anchors_preset = 8
@@ -890,14 +892,14 @@ texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="PointLight2D" type="PointLight2D" parent="ProfileHandler/Panel/ProfileBtn"]
+[node name="PointLight2D" type="PointLight2D" parent="ProfileHandler/ProfilePanel/ProfileBtn"]
 position = Vector2(175, 183)
 scale = Vector2(5.8, 5.55)
 blend_mode = 2
 texture = ExtResource("11_g3t7t")
 texture_scale = 0.15
 
-[node name="Label" type="Label" parent="ProfileHandler/Panel"]
+[node name="Label" type="Label" parent="ProfileHandler/ProfilePanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -914,7 +916,7 @@ theme_override_fonts/font = ExtResource("4_6c80f")
 theme_override_font_sizes/font_size = 35
 text = "GOOD DAY, Jun Cyric Shane Dela Torre"
 
-[node name="SaveBtn" type="Button" parent="ProfileHandler/Panel"]
+[node name="SaveBtn" type="Button" parent="ProfileHandler/ProfilePanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -932,7 +934,7 @@ icon = ExtResource("2_dsjfr")
 flat = true
 icon_alignment = 1
 
-[node name="ExitButton" type="Button" parent="ProfileHandler/Panel"]
+[node name="ExitButton" type="Button" parent="ProfileHandler/ProfilePanel"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
