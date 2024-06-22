@@ -102,7 +102,8 @@ public partial class StartUpPage : Control
 			Firstname = firstname.Text,
 			Lastname = lastname.Text,
 			Subscription = "NONE",
-			Role = rolePick.Selected.ToString()
+			Role = rolePick.Selected.ToString(),
+			ProfileImage = "NONE"
         };
 		FirebaseResponse getresponse = await client.GetAsync("Users/" + GetNode<LineEdit>("CreateAccount/cusername").Text);
 		UserData userObj = getresponse.ResultAs<UserData>();

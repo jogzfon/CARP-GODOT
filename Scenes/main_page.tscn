@@ -311,7 +311,10 @@ stretch_mode = 0
 
 [node name="PointLight2D" type="PointLight2D" parent="MainContent/ProfileBtn"]
 position = Vector2(35, 31)
+color = Color(0.808676, 0.907015, 0.979161, 1)
 blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.509804)
 texture = ExtResource("11_g3t7t")
 texture_scale = 0.15
 
@@ -785,13 +788,17 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile")]
+[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage")]
 script = ExtResource("12_dw1ay")
 schoolBtn = NodePath("ManageFile/New Project3")
 centerMargin = NodePath("ManageFile/MarginContainer2")
 accountProfile = NodePath("../MainContent/ProfileBtn")
 profilePanel = NodePath("ProfilePanel")
 exitProfile = NodePath("ProfilePanel/ExitButton")
+profileDialog = NodePath("ProfilePanel/ProfileDialog")
+changeProfileBtn = NodePath("ProfilePanel/ProfileBtn")
+defaultProfileTexture = ExtResource("4_2bfqo")
+saveProfileImage = NodePath("ProfilePanel/SaveBtn")
 
 [node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
 offset_left = 805.0
@@ -945,6 +952,15 @@ offset_right = -12.0
 offset_bottom = 39.0
 grow_horizontal = 0
 text = "X"
+
+[node name="ProfileDialog" type="FileDialog" parent="ProfileHandler/ProfilePanel"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(800, 800)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg")
 
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
 script = ExtResource("16_metue")
