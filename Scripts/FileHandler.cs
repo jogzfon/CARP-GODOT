@@ -112,6 +112,7 @@ public partial class FileHandler : Node
         Node simultaneous = projectPage.Instantiate();
         GetTree().Root.AddChild(simultaneous);
         //GetTree().ChangeSceneToPacked(projectPage);
+
     }
     #region FileHandler
     private void NewProject()

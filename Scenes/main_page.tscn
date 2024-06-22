@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=25 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
+[ext_resource type="Shader" path="res://Shader/circleImage.gdshader" id="10_urm6c"]
 [ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]
-[ext_resource type="Texture2D" uid="uid://bnq1jayfkitby" path="res://Sprites/light.png" id="11_g3t7t"]
 [ext_resource type="Script" path="res://Scripts/ProfileHandler.cs" id="12_dw1ay"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
@@ -30,8 +30,17 @@ font_size = 35
 shadow_color = Color(0.298039, 0.305882, 0.572549, 1)
 shadow_offset = Vector2(-3, 1)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_60ifs"]
-light_mode = 2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dme4"]
+shader = ExtResource("10_urm6c")
+shader_parameter/circle_size = 0.4
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if5nb"]
+shader = ExtResource("10_urm6c")
+shader_parameter/circle_size = 0.5
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
@@ -296,27 +305,18 @@ theme_override_font_sizes/font_size = 30
 text = ">M4J"
 
 [node name="ProfileBtn" type="TextureButton" parent="MainContent"]
-material = SubResource("CanvasItemMaterial_60ifs")
+material = SubResource("ShaderMaterial_2dme4")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -122.0
-offset_top = 16.0
-offset_right = -51.0
-offset_bottom = 78.0
+offset_left = -149.0
+offset_top = 5.0
+offset_right = -59.0
+offset_bottom = 95.0
 grow_horizontal = 0
 texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0
-
-[node name="PointLight2D" type="PointLight2D" parent="MainContent/ProfileBtn"]
-position = Vector2(35, 31)
-color = Color(0.808676, 0.907015, 0.979161, 1)
-blend_mode = 2
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.509804)
-texture = ExtResource("11_g3t7t")
-texture_scale = 0.15
 
 [node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
 script = ExtResource("18_lnwlk")
@@ -882,7 +882,7 @@ grow_vertical = 2
 color = Color(0.290196, 0.298039, 0.321569, 1)
 
 [node name="ProfileBtn" type="TextureButton" parent="ProfileHandler/ProfilePanel"]
-material = SubResource("CanvasItemMaterial_60ifs")
+material = SubResource("ShaderMaterial_if5nb")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -898,13 +898,6 @@ grow_vertical = 2
 texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0
-
-[node name="PointLight2D" type="PointLight2D" parent="ProfileHandler/ProfilePanel/ProfileBtn"]
-position = Vector2(175, 183)
-scale = Vector2(5.8, 5.55)
-blend_mode = 2
-texture = ExtResource("11_g3t7t")
-texture_scale = 0.15
 
 [node name="Label" type="Label" parent="ProfileHandler/ProfilePanel"]
 layout_mode = 1
