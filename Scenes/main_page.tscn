@@ -84,7 +84,7 @@ offset_right = -16.0
 offset_bottom = 361.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.998594, 0.350686)
+scale = Vector2(0.996013, 0.352359)
 color = Color(0.291716, 0.299233, 0.321761, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="MainContent"]
@@ -193,6 +193,7 @@ offset_top = -100.0
 offset_right = 321.0
 offset_bottom = -55.0
 grow_vertical = 0
+scale = Vector2(1, 0.893349)
 text = "Sign-In"
 icon = ExtResource("17_587en")
 flat = true
@@ -201,6 +202,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="SignOut" type="Button" parent="MainContent"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -314,6 +316,7 @@ offset_top = 5.0
 offset_right = -59.0
 offset_bottom = 95.0
 grow_horizontal = 0
+scale = Vector2(0.999445, 0.999049)
 texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0

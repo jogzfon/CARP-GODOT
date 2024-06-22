@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpt486otnrqkv"]
+[gd_scene load_steps=9 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="2_6b6m3"]
+[ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vad0u"]
 [ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="4_3r6y2"]
 [ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="5_1qe46"]
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="6_d1lji"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
+shader = ExtResource("2_cu0w3")
 
 [node name="AISystem" type="Control"]
 layout_mode = 3
@@ -17,6 +21,7 @@ grow_vertical = 2
 script = ExtResource("1_hxjp6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_elcsl")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -105,6 +105,16 @@ public partial class StartUpPage : Control
 			Role = rolePick.Selected.ToString(),
 			ProfileImage = "NONE"
         };
+
+		if (data.Role.Equals("1"))
+		{
+			data.Role = "Teacher";
+		}
+		else
+		{
+            data.Role = "Student";
+        }
+
 		FirebaseResponse getresponse = await client.GetAsync("Users/" + GetNode<LineEdit>("CreateAccount/cusername").Text);
 		UserData userObj = getresponse.ResultAs<UserData>();
 		if (userObj != null)
