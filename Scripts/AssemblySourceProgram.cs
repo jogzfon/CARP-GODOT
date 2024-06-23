@@ -75,7 +75,7 @@ public partial class AssemblySourceProgram
 
         sourceLineArray = lineVector.ToArray();*/
         List<AssemblySourceLine> lineVector = new List<AssemblySourceLine>();
-        string pattern = @"([^;\r\n]+)";
+        string pattern = @"([^;\r\n]+)(?=;|$)";
         Regex regex = new Regex(pattern);
         int lineNumber = 1;
 
