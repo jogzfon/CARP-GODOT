@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=26 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="4_6c80f"]
 [ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
+[ext_resource type="PackedScene" uid="uid://b15huxyjqmigj" path="res://Scenes/recent_file.tscn" id="6_nbcor"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
 [ext_resource type="Shader" path="res://Shader/circleImage.gdshader" id="10_urm6c"]
 [ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]
@@ -321,7 +322,7 @@ texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
+[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "recentFileList", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
 script = ExtResource("18_lnwlk")
 dialogue = NodePath("FileDialog")
 newProject = NodePath("../ProfileHandler/ManageFile/New Project")
@@ -330,6 +331,8 @@ goToSystem = NodePath("../ProfileHandler/DirectToSystem/GoToSystem")
 directToSystem = NodePath("../ProfileHandler/DirectToSystem")
 manageFile = NodePath("../ProfileHandler/ManageFile")
 projectPage = ExtResource("11_5fqup")
+recentFile = ExtResource("6_nbcor")
+recentFileList = NodePath("../MainContent/VBoxContainer/ProjectContainer/ProjectList")
 documentationRect = NodePath("DocumentationRect")
 witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
 witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")

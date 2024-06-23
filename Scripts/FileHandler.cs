@@ -18,6 +18,9 @@ public partial class FileHandler : Node
 
     [Export] PackedScene projectPage;
 
+    [Export] PackedScene recentFile;
+    [Export] VBoxContainer recentFileList;
+
     #region DocumentationBtn
     [Export]
     public ColorRect documentationRect;
@@ -136,6 +139,15 @@ public partial class FileHandler : Node
         {
             DataToSave.OpenFile();
         }
+
+        var file = (Node)recentFile.Instantiate();
+        if (file is RecentFile recentFileScript)
+        {
+            recentFileScript.path = path;
+            recentFileScript.SetFileName();
+        }
+        recentFileList.AddChild(file);
+
         Node simultaneous = projectPage.Instantiate();
         GetTree().Root.AddChild(simultaneous);
     }
