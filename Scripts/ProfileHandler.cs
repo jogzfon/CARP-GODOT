@@ -24,6 +24,9 @@ public partial class ProfileHandler : Node
     Texture2D defaultProfileTexture;
     [Export]
     Button saveProfileImage;
+    [Export]
+    Label userName;
+
 
     IFirebaseConfig config = new FirebaseConfig
     {
@@ -78,6 +81,7 @@ public partial class ProfileHandler : Node
             {
                 accountProfile.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
             }
+            userName.Text = AccountManager.GetUser().Firstname +" "+ AccountManager.GetUser().Lastname;
         }
         else
         {

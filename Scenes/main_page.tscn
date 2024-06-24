@@ -34,14 +34,22 @@ shadow_offset = Vector2(-3, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2dme4"]
 shader = ExtResource("10_urm6c")
 shader_parameter/circle_size = 0.4
+shader_parameter/glow_size = 0.05
+shader_parameter/glow_color = Color(0, 0.5, 1, 0.5)
 shader_parameter/ratio_width = 1.0
 shader_parameter/ratio_height = 1.0
+shader_parameter/glow_intensity = 1.0
+shader_parameter/pulse_speed = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_if5nb"]
 shader = ExtResource("10_urm6c")
 shader_parameter/circle_size = 0.5
+shader_parameter/glow_size = 0.05
+shader_parameter/glow_color = Color(0, 0.5, 1, 0.5)
 shader_parameter/ratio_width = 1.0
 shader_parameter/ratio_height = 1.0
+shader_parameter/glow_intensity = 1.0
+shader_parameter/pulse_speed = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
@@ -794,7 +802,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage")]
+[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName")]
 script = ExtResource("12_dw1ay")
 schoolBtn = NodePath("ManageFile/New Project3")
 centerMargin = NodePath("ManageFile/MarginContainer2")
@@ -805,6 +813,7 @@ profileDialog = NodePath("ProfilePanel/ProfileDialog")
 changeProfileBtn = NodePath("ProfilePanel/ProfileBtn")
 defaultProfileTexture = ExtResource("4_2bfqo")
 saveProfileImage = NodePath("ProfilePanel/SaveBtn")
+userName = NodePath("ProfilePanel/Name")
 
 [node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
 offset_left = 805.0
@@ -865,7 +874,6 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 
 [node name="ProfilePanel" type="Panel" parent="ProfileHandler"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -883,6 +891,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -20.0
+offset_right = 6.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.298039, 0.321569, 1)
@@ -905,7 +917,7 @@ texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ProfileHandler/ProfilePanel"]
+[node name="Name" type="Label" parent="ProfileHandler/ProfilePanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -920,7 +932,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_6c80f")
 theme_override_font_sizes/font_size = 35
-text = "GOOD DAY, Jun Cyric Shane Dela Torre"
+text = "GOOD DAY!!!"
+horizontal_alignment = 1
 
 [node name="SaveBtn" type="Button" parent="ProfileHandler/ProfilePanel"]
 layout_mode = 1
@@ -958,7 +971,7 @@ initial_position = 1
 size = Vector2i(800, 800)
 ok_button_text = "Open"
 file_mode = 0
-access = 2
+access = 1
 filters = PackedStringArray("*.png", "*.jpg")
 
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
