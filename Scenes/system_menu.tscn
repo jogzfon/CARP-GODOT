@@ -1,9 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw860tmmffkxq"]
+[gd_scene load_steps=5 format=3 uid="uid://dw860tmmffkxq"]
 
 [ext_resource type="Script" path="res://Scripts/system_menu.cs" id="1_0jddp"]
-[ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="1_g1du5"]
-[ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="2_dln5b"]
-[ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="3_7qyq1"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="5_ldypl"]
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="5_lq116"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_rn65p"]
@@ -31,13 +28,6 @@ Z = NodePath("HBoxContainer/VBoxContainer2/HBoxContainer7/Z")
 layout_mode = 1
 offset_right = 1280.0
 offset_bottom = 146.0
-
-[node name="ExitViewSystem" type="TextureButton" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture_normal = ExtResource("1_g1du5")
-texture_pressed = ExtResource("2_dln5b")
-texture_hover = ExtResource("3_7qyq1")
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -194,7 +184,6 @@ text = "0"
 expand_to_text_length = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
