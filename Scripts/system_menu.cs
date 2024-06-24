@@ -1,23 +1,26 @@
 using Godot;
-using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Text;
 using System;
 
 public partial class system_menu : Control
 {
-	[Export] LineEdit AR;
-	[Export] LineEdit PC;
-	[Export] LineEdit DR;
-	[Export] LineEdit TR;
-	[Export] LineEdit IR;
-	[Export] LineEdit R;
-	[Export] LineEdit AC;
-	[Export] LineEdit Z;
+    [Export] LineEdit AR;
+    [Export] LineEdit PC;
+    [Export] LineEdit DR;
+    [Export] LineEdit TR;
+    [Export] LineEdit IR;
+    [Export] LineEdit R;
+    [Export] LineEdit AC;
+    [Export] LineEdit Z;
+
+    [Export] Button hexBtn;
+    [Export] Button binaryBtn;
 
     public bool isHex = false;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
+
+    public override void _Ready()
+    {
         AR.Connect("text_submitted", new Callable(this, nameof(ConvertAR)));
         PC.Connect("text_submitted", new Callable(this, nameof(ConvertPC)));
         DR.Connect("text_submitted", new Callable(this, nameof(ConvertDR)));
@@ -26,102 +29,100 @@ public partial class system_menu : Control
         R.Connect("text_submitted", new Callable(this, nameof(ConvertR)));
         AC.Connect("text_submitted", new Callable(this, nameof(ConvertAC)));
         Z.Connect("text_submitted", new Callable(this, nameof(ConvertZ)));
+
+        hexBtn.Connect("pressed", new Callable(this, nameof(IsHex)));
+        binaryBtn.Connect("pressed", new Callable(this, nameof(IsBinary)));
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-	private void ConvertAR(String input)
-	{
-        UpdateRegisters(AR, input, "ar");
-    }
-    private void ConvertPC(String input)
-    {
-        UpdateRegisters(PC, input, "pc");
-    }
-    private void ConvertDR(String input)
-    {
-        UpdateRegisters(DR, input, "dr");
-    }
-    private void ConvertTR(String input)
-    {
-        UpdateRegisters(TR, input, "tr");
-    }
-    private void ConvertIR(String input)
-    {
-        UpdateRegisters(IR, input, "ir");
-    }
-    private void ConvertR(String input)
-    {
-        UpdateRegisters(R, input, "r");
-    }
-    private void ConvertAC(String input)
-    {
-        UpdateRegisters(AC, input, "ac");
-    }
-    private void ConvertZ(String input)
-    {
-        UpdateRegisters(Z, input,"z");
-    }
-    public void UpdateRegisters(LineEdit textBox, string value, string regname)
+    private void ConvertAR(string input) => UpdateRegisters(AR, input, 16);
+    private void ConvertPC(string input) => UpdateRegisters(PC, input, 16);
+    private void ConvertDR(string input) => UpdateRegisters(DR, input, 8);
+    private void ConvertTR(string input) => UpdateRegisters(TR, input, 8);
+    private void ConvertIR(string input) => UpdateRegisters(IR, input, 8);
+    private void ConvertR(string input) => UpdateRegisters(R, input, 8);
+    private void ConvertAC(string input) => UpdateRegisters(AC, input, 8);
+    private void ConvertZ(string input) => UpdateRegisters(Z, input, 1);
+
+    public void UpdateRegisters(LineEdit textBox, string value, int bits)
     {
         try
         {
-            int num;
-
-            if (IsHexadecimal(value))
-            {
-                // Convert the hex string to an integer
-                num = Convert.ToInt32(value, 16);
-            }
-            else
-            {
-                // Convert the decimal string to an integer
-                num = Convert.ToInt32(value);
-            }
-
-            // Determine the binary representation with padding
-            string binaryString;
-            if (regname == "ar" || regname == "pc")
-            {
-                binaryString = Convert.ToString(num & 0xFFFF, 2).PadLeft(16, '0');
-            }
-            else
-            {
-                binaryString = Convert.ToString(num & 0xFF, 2).PadLeft(8, '0');
-            }
-
-            // Insert spaces every 4 digits in the binary string
-            binaryString = InsertSpaces(binaryString, 4);
-
-            // Set the textBox text
-            textBox.Text = binaryString;
+            string result = isHex ? ToHex(value) : ToBinary(value, bits) ;
+            textBox.Text = result;
         }
-        catch (FormatException)
+        catch
         {
-            // Handle format exception if the input string cannot be converted to an integer
-            textBox.Text = "Invalid Input";
-        }
-        catch (OverflowException)
-        {
-            // Handle overflow exception if the input string represents a number out of the integer range
-            textBox.Text = "Overflow";
+            textBox.Text = isHex ? new string('0', bits) : "0";
         }
     }
 
-    private string InsertSpaces(string binaryString, int groupSize)
+    private string ToBinary(string hex, int bits)
     {
-        for (int i = groupSize; i < binaryString.Length; i += (groupSize + 1))
+        hex = hex.Replace(" ", "");
+        StringBuilder binary = new StringBuilder();
+        foreach (char c in hex)
         {
-            binaryString = binaryString.Insert(i, " ");
+            int value = Convert.ToInt32(c.ToString(), 16);
+            binary.Append(Convert.ToString(value, 2).PadLeft(4, '0'));
         }
-        return binaryString;
-    }
-    private bool IsHexadecimal(string value)
-    {
-        // A simple regex to check if a string is a valid hexadecimal number
-        return Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z");
+        string result = binary.ToString().PadLeft(bits, '0');
+        return bits == 1 ? result : InsertSpaces(result, 4);
     }
 
+    private string ToHex(string binary)
+    {
+        binary = binary.Replace(" ", "");
+        StringBuilder hex = new StringBuilder();
+        for (int i = 0; i < binary.Length; i += 4)
+        {
+            string chunk = binary.Substring(i, Math.Min(4, binary.Length - i)).PadLeft(4, '0');
+            int value = Convert.ToInt32(chunk, 2);
+            hex.Append(value.ToString("X"));
+        }
+        return hex.ToString();
+    }
+
+    private string InsertSpaces(string input, int groupSize)
+    {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (i > 0 && i % groupSize == 0)
+                result.Append(' ');
+            result.Append(input[i]);
+        }
+        return result.ToString();
+    }
+
+    private void IsHex()
+    {
+        if (!isHex)
+        {
+            isHex = true;
+            GD.Print("Binary");
+            Conversion();
+        }
+    }
+
+    private void IsBinary()
+    {
+        if (isHex)
+        {
+            isHex = false;
+            GD.Print("Binary");
+            Conversion();
+        }
+    }
+
+    public void Conversion()
+    {
+        ConvertAR(AR.Text);
+        ConvertPC(PC.Text);
+        ConvertDR(DR.Text);
+        ConvertTR(TR.Text);
+        ConvertIR(IR.Text);
+        ConvertR(R.Text);
+        ConvertAC(AC.Text);
+        ConvertZ(Z.Text);
+    }
 }
