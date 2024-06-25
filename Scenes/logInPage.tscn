@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://whq7hnglcf2a"]
+[gd_scene load_steps=12 format=3 uid="uid://whq7hnglcf2a"]
 
 [ext_resource type="Script" path="res://Scripts/StartUpPage.cs" id="1_rodxs"]
 [ext_resource type="Texture2D" uid="uid://cygbnemxkcw14" path="res://SplashScreen.png" id="2_l8do1"]
@@ -8,9 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="6_pdg0q"]
 [ext_resource type="Texture2D" uid="uid://crw0ynt4f2q8" path="res://Sprites/student.png" id="7_akmoh"]
 [ext_resource type="Texture2D" uid="uid://c5o7ufnrwmo4d" path="res://Sprites/teacher.png" id="8_ut75j"]
-[ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="9_5rfoy"]
-[ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="10_ql2cw"]
-[ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="11_a8yxe"]
+[ext_resource type="Texture2D" uid="uid://hgcx1pekg3iu" path="res://Sprites/Reply Arrow.png" id="9_kffjw"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="11_mw4ej"]
 [ext_resource type="Texture2D" uid="uid://cswoyeiu3o407" path="res://Sprites/Logob.png" id="12_iol47"]
 
@@ -215,14 +213,13 @@ text = "Cancel"
 
 [node name="Back" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 29.0
-offset_right = 132.0
-offset_bottom = 206.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 90.0
+offset_bottom = 140.0
 scale = Vector2(0.76, 0.44)
-texture_normal = ExtResource("9_5rfoy")
-texture_pressed = ExtResource("10_ql2cw")
-texture_hover = ExtResource("11_a8yxe")
+texture_normal = ExtResource("9_kffjw")
+stretch_mode = 0
 
 [node name="NotificationHandler" parent="." instance=ExtResource("11_mw4ej")]
 layout_mode = 1

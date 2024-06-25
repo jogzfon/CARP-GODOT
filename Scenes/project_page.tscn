@@ -1,17 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=15 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
-[ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="2_2pl7i"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="2_rnxid"]
+[ext_resource type="Texture2D" uid="uid://pr17leipx0lk" path="res://Sprites/Bot.png" id="3_587b7"]
 [ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_jdv15"]
 [ext_resource type="PackedScene" uid="uid://b8fqwku1kjuqn" path="res://Scenes/main.tscn" id="5_squa4"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="6_is7gs"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
-[ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="10_ccj8c"]
-[ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="11_pawad"]
-[ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="12_83o58"]
+[ext_resource type="Texture2D" uid="uid://hgcx1pekg3iu" path="res://Sprites/Reply Arrow.png" id="10_ga2ho"]
 [ext_resource type="Script" path="res://Scripts/ExitController.cs" id="14_r5c7n"]
 [ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="15_nhij1"]
@@ -96,7 +94,8 @@ text = "View System"
 
 [node name="AIBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-icon = ExtResource("2_2pl7i")
+icon = ExtResource("3_587b7")
+flat = true
 icon_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
@@ -399,14 +398,13 @@ text = "ASSEMBLE"
 
 [node name="Back" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 29.0
-offset_right = 132.0
-offset_bottom = 206.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 90.0
+offset_bottom = 140.0
 scale = Vector2(0.76, 0.44)
-texture_normal = ExtResource("10_ccj8c")
-texture_pressed = ExtResource("11_pawad")
-texture_hover = ExtResource("12_83o58")
+texture_normal = ExtResource("10_ga2ho")
+stretch_mode = 0
 
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
 script = ExtResource("14_r5c7n")
