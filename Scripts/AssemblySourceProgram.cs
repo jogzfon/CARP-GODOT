@@ -87,7 +87,6 @@ public partial class AssemblySourceProgram
                 if (line != null)
                 {
                     lineVector.Add(line);
-                    GD.Print(line);
                 }
                 if (line.SourceTokenLength() > 0)
                 {

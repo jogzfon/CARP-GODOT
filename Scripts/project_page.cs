@@ -34,9 +34,8 @@ public partial class project_page : Control
     //Trace Results
     private TextEdit traceResultBox;
 
-    //NotificationWindow
-    public Window notificationWindow;
-    public Label message;
+    //NotificationHandler
+    [Export] private NotificationHandler notification;
 
     #region Buttons
     [Export] private Button toSystem;
@@ -142,12 +141,6 @@ public partial class project_page : Control
         hardwired.ButtonPressed = false;
         #endregion
         #region Panels
-        notificationWindow = GetNode<Window>("NotificationWindow");
-        notificationWindow.Visible = false;
-        notificationWindow.Connect("close_requested", new Callable(this, nameof(CloseNotification)));
-
-        message = GetNode<Label>("NotificationWindow/ScrollContainer/Message");
-
         memoryPnl.Show();
         breakPointsPnl.Hide();
         traceResultsPnl.Hide();
@@ -172,26 +165,7 @@ public partial class project_page : Control
             }
         }
 	}
-    public void CloseNotification()
-    {
-        notificationWindow.Visible = false;
-    }
-    public void MessageBox(string value, int color)
-    {
-        Color red = Colors.Red;
-        Color white = Colors.White;
-        notificationWindow.Popup();
-        if (color == 0)
-        {
-            message.Text = value;
-            message.AddThemeColorOverride("font_color", white);
-        }
-        else
-        {
-            message.Text = value;
-            message.AddThemeColorOverride("font_color", red);
-        }
-    }
+ 
     public void BackToProject()
     {
         if (AccountManager.GetUser() != null)
@@ -219,7 +193,7 @@ public partial class project_page : Control
             {
                 Debug.Print(errors[i].GetString());
 
-                MessageBox(errors[i].GetString(), 1);
+                notification.MessageBox(errors[i].GetString(), 1);
 
                 //MessageBox.Show(errors[i].GetString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 i++;
@@ -228,14 +202,14 @@ public partial class project_page : Control
             {
                 Debug.Print("Assembly Successful.");
 
-                MessageBox("Assembly Successful.", 0);
+                notification.MessageBox("Assembly Successful.", 0);
                 //MessageBox.Show("Assembly Successful.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         else
         {
             Debug.Print(memoryLocation.Text + " is not a valid memory location.");
-            MessageBox(memoryLocation.Text + " is not a valid memory location.", 1);
+            notification.MessageBox(memoryLocation.Text + " is not a valid memory location.", 1);
             //MessageBox.Show(memLocation.Text + " is not a valid memory location.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -312,7 +286,7 @@ public partial class project_page : Control
     private void AddBreakPoint()
     {
         int result = int.Parse(addressInput.Text);
-        if (!string.IsNullOrEmpty(addressInput.Text) && IsDigitsRegex(addressInput.Text) && result < 65536 && result > 0 && !breakpointList.Contains(result))
+        if (!string.IsNullOrEmpty(addressInput.Text) && IsDigitsRegex(addressInput.Text) && result < 65536 && result >= 0 && !breakpointList.Contains(result))
         {
             breakpointList.Add(result);
 
@@ -328,7 +302,7 @@ public partial class project_page : Control
         {
             addressInput.Clear();
             Debug.Print("Please enter a valid breakpoint.");
-            MessageBox("Please enter a valid breakpoint.", 1);
+            notification.MessageBox("Please enter a valid breakpoint.", 1);
             //MessageBox.Show("Please enter a valid breakpoint.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -352,7 +326,7 @@ public partial class project_page : Control
         {
             addressInput.Clear();
             Debug.Print("Please enter a valid breakpoint.");
-            MessageBox("Please enter a valid breakpoint.", 1);
+            notification.MessageBox("Please enter a valid breakpoint.", 1);
             //MessageBox.Show("Please enter a valid breakpoint.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }

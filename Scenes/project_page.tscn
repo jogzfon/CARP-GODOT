@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=17 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
@@ -14,11 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="12_83o58"]
 [ext_resource type="Script" path="res://Scripts/ExitController.cs" id="14_r5c7n"]
 [ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
+[ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="15_nhij1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgeug"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "toSystem", "assemble", "toAI", "back")]
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +34,7 @@ breakPointsPnl = NodePath("VBoxContainer/PanelContainer/Breakpoints")
 traceResultsPnl = NodePath("VBoxContainer/PanelContainer/TraceResult")
 aiPnl = NodePath("AISystem")
 viewSystem = NodePath("VBoxContainer/PanelContainer/SystemViewContainer")
+notification = NodePath("NotificationHandler")
 toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
 assemble = NodePath("LeftContainer/Assemble")
 toAI = NodePath("VBoxContainer/HBoxContainer/AIBtn")
@@ -406,30 +408,6 @@ texture_normal = ExtResource("10_ccj8c")
 texture_pressed = ExtResource("11_pawad")
 texture_hover = ExtResource("12_83o58")
 
-[node name="NotificationWindow" type="Window" parent="."]
-position = Vector2i(500, 320)
-size = Vector2i(1080, 400)
-visible = false
-popup_window = true
-
-[node name="ScrollContainer" type="ScrollContainer" parent="NotificationWindow"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Message" type="Label" parent="NotificationWindow/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("1_tcw3m")
-theme_override_font_sizes/font_size = 30
-text = "MESSAGE"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
 script = ExtResource("14_r5c7n")
 exitbtn = NodePath("ExitButton")
@@ -498,4 +476,7 @@ text = "NO"
 
 [node name="AISystem" parent="." instance=ExtResource("15_jp5cw")]
 visible = false
+layout_mode = 1
+
+[node name="NotificationHandler" parent="." instance=ExtResource("15_nhij1")]
 layout_mode = 1

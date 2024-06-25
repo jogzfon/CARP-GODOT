@@ -27,6 +27,9 @@ public partial class ProfileHandler : Node
     [Export]
     Label userName;
 
+    [Export]
+    private NotificationHandler notification;
+
 
     IFirebaseConfig config = new FirebaseConfig
     {
@@ -115,11 +118,11 @@ public partial class ProfileHandler : Node
 
         if (texture != null)
         {
-            GD.Print("Texture loaded successfully");
+            notification.MessageBox("Texture loaded successfully", 0);
         }
         else
         {
-            GD.Print("Failed to load texture");
+            notification.MessageBox("Failed to load texture", 1);
         }
         changeProfileBtn.TextureNormal = texture;
     }
@@ -134,7 +137,8 @@ public partial class ProfileHandler : Node
         SetResponse response = await client.SetAsync("Users/" + currentUser.Username, currentUser);
         UserData result = response.ResultAs<UserData>();
 
-        GD.Print("User Updated " + result.Username);
+        notification.MessageBox(result.Username+" Profile Updated", 0);
+
         AccountManager.SetUser(result);
     }
     public string TextureToBase64(Texture2D texture)

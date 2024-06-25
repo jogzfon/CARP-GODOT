@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://whq7hnglcf2a"]
+[gd_scene load_steps=14 format=3 uid="uid://whq7hnglcf2a"]
 
 [ext_resource type="Script" path="res://Scripts/StartUpPage.cs" id="1_rodxs"]
+[ext_resource type="Texture2D" uid="uid://cygbnemxkcw14" path="res://SplashScreen.png" id="2_l8do1"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_hbf6b"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_5444m"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_30tmb"]
@@ -10,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://du2onrge3yfqq" path="res://Sprites/open.png" id="9_5rfoy"]
 [ext_resource type="Texture2D" uid="uid://bp1te56nxv3wr" path="res://Sprites/close.png" id="10_ql2cw"]
 [ext_resource type="Texture2D" uid="uid://1uuoij0vbqmk" path="res://Sprites/Hover.png" id="11_a8yxe"]
+[ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="11_mw4ej"]
+[ext_resource type="Texture2D" uid="uid://cswoyeiu3o407" path="res://Sprites/Logob.png" id="12_iol47"]
 
-[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "firstname", "lastname", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
+[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "firstname", "lastname", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "notification", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,11 +33,21 @@ loginUsername = NodePath("LoginAccount/username")
 logInPassword = NodePath("LoginAccount/password")
 createAccount = NodePath("CreateAccount")
 loginAccount = NodePath("LoginAccount")
+notification = NodePath("NotificationHandler")
 registerBtn = NodePath("LoginAccount/register")
 loginBtn = NodePath("LoginAccount/login")
 createBtn = NodePath("CreateAccount/create")
 cancelBtn = NodePath("CreateAccount/cancel")
 backBtn = NodePath("Back")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l8do1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -43,30 +56,46 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -981.0
-offset_top = -556.5
-offset_right = 981.0
-offset_bottom = 556.5
+offset_left = -539.0
+offset_top = -247.0
+offset_right = 541.0
+offset_bottom = 253.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
-[node name="LoginAccount" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -297.0
+offset_top = -217.0
+offset_right = 203.0
+offset_bottom = 283.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="LoginAccount" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.519444
+anchor_right = 0.5
+anchor_bottom = 0.519444
 offset_left = -300.0
-offset_top = -108.0
+offset_top = -115.0
 offset_right = 300.0
-offset_bottom = 108.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="username" type="LineEdit" parent="LoginAccount"]
 layout_mode = 2
@@ -103,9 +132,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -196.0
+offset_top = -190.0
 offset_right = 300.0
-offset_bottom = 239.0
+offset_bottom = 245.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -194,3 +223,21 @@ scale = Vector2(0.76, 0.44)
 texture_normal = ExtResource("9_5rfoy")
 texture_pressed = ExtResource("10_ql2cw")
 texture_hover = ExtResource("11_a8yxe")
+
+[node name="NotificationHandler" parent="." instance=ExtResource("11_mw4ej")]
+layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -459.0
+offset_right = 204.0
+offset_bottom = -216.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_iol47")

@@ -20,6 +20,8 @@ public partial class StartUpPage : Control
 
     [Export] private VBoxContainer createAccount;
     [Export] private VBoxContainer loginAccount;
+
+    [Export] private NotificationHandler notification;
     #endregion
     #region Buttons
     [Export] private Button registerBtn;
@@ -85,12 +87,12 @@ public partial class StartUpPage : Control
             }
 			else
 			{
-				GD.Print("Wrong Password!!!");
+                notification.MessageBox("Wrong Password!", 1);
 			}
 		}
 		else
 		{
-			GD.Print("User Does Not Exist!!!");
+            notification.MessageBox("User Does Not Exist!", 1);
 		}
 	}
 	private async void CreatePressed()
@@ -119,11 +121,11 @@ public partial class StartUpPage : Control
 		UserData userObj = getresponse.ResultAs<UserData>();
 		if (userObj != null)
 		{
-			GD.Print("User already exists!!!");
-		}
+            notification.MessageBox("User already exists...", 1);
+        }
 		else if (data.Password.Length < 6)
 		{
-			GD.Print("Password must be 6 characters or more!!!");
+            notification.MessageBox("Password must be 6 characters or more...", 1);
 		}
 		else
 		{
@@ -132,7 +134,8 @@ public partial class StartUpPage : Control
 
 			createAccount.Visible = false;
 			loginAccount.Visible = true;
-            GD.Print("User Inserted " + result.Username);
+
+            notification.MessageBox("Account Created Successfully \n Welcome " + result.Username, 0);
             AccountManager.SetUser(result);
         }
 	}
