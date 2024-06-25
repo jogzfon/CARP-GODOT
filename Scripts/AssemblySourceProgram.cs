@@ -6,7 +6,6 @@ public partial class AssemblySourceProgram
 {
     private AssemblySourceLine[] sourceLineArray;
     private string sourceString;
-    private bool empty = true;
 
     public AssemblySourceProgram(string source)
     {
@@ -75,28 +74,26 @@ public partial class AssemblySourceProgram
 
         sourceLineArray = lineVector.ToArray();*/
         List<AssemblySourceLine> lineVector = new List<AssemblySourceLine>();
-        string pattern = @"([^;\r\n]+)(?=;|$)";
-        Regex regex = new Regex(pattern);
+        string pattern = @"^(?!;)([^;\r\n]+)";
+        Regex regex = new Regex(pattern, RegexOptions.Multiline);
         int lineNumber = 1;
-
         MatchCollection matches = regex.Matches(sourceString);
-
         foreach (Match match in matches)
         {
-            string lineString = match.Value;
-            AssemblySourceLine line = FindSourceLine(lineString, lineNumber);
-
-            if (line != null)
+            string lineString = match.Value.Trim();
+            if (!string.IsNullOrWhiteSpace(lineString))
             {
-                lineVector.Add(line);
+                AssemblySourceLine line = FindSourceLine(lineString, lineNumber);
+                if (line != null)
+                {
+                    lineVector.Add(line);
+                    GD.Print(line);
+                }
+                if (line.SourceTokenLength() > 0)
+                {
+                    lineNumber++;
+                }
             }
-
-            if (line.SourceTokenLength() > 0)
-            {
-                empty = true;
-            }
-
-            lineNumber++;
         }
         sourceLineArray = lineVector.ToArray();
     }
@@ -146,11 +143,6 @@ public partial class AssemblySourceProgram
     public int SourceLineLength()
     {
         return sourceLineArray.Length;
-    }
-
-    public bool IsEmpty()
-    {
-        return empty;
     }
 
     /* private AssemblySourceLine FindSourceLine(string sourceLine, int searchIndex, int line)

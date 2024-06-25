@@ -14,6 +14,7 @@ public partial class Animations : Node
     private LineEdit currentMemoryLocation;
 
     private List<int> breakpoints;
+    private bool breaks = false;
 
     int i = 0;
     private bool animationRunning = false;
@@ -214,10 +215,6 @@ public partial class Animations : Node
         AC_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer6/AC");
         Z_txt = systemMenu.GetNode<LineEdit>("HBoxContainer/VBoxContainer2/HBoxContainer7/Z");
 
-        var isHex = systemMenu.GetNode<Button>("HBoxContainer/VBoxContainer3/Hex");
-        isHex.Connect("pressed", new Callable(this, nameof(ToHex)));
-        var isBinary = systemMenu.GetNode<Button>("HBoxContainer/VBoxContainer3/Binary");
-        isBinary.Connect("pressed", new Callable(this, nameof(ToBinary)));
         #endregion
 
         DrawSystemLines();
@@ -245,6 +242,13 @@ public partial class Animations : Node
                 DataToSave.ac = ac_bit;
                 DataToSave.z = z_bit;
             }
+            foreach(int brake in breakpoints){
+                if (i == brake)
+                {
+                    breaks = true;
+                    break;
+                }
+            }
         }
     }
     #region Animation Controls
@@ -255,7 +259,7 @@ public partial class Animations : Node
             stepThroughInstruction = false;
             stepThroughCycle = false;
         }
-        else if (!animationRunning)
+        else if (!animationRunning && !breaks)
         {
             animationRunning = true;
 
@@ -268,36 +272,26 @@ public partial class Animations : Node
             ac_bit = BinaryStringToInt(AC_txt.Text);
             z_bit = BinaryStringToInt(Z_txt.Text);
 
-
             for (i = memoryStartLocation; i < memorycode.Length; i++)
             {
                 await FETCH1();
                 await ClockPulse();
-                if (stopAnimation == true)
+                if (PauseOrStopAnimation())
                 {
-                    stopAnimation = false;
-                    animationRunning = false;
-                    cpuStatus.Text = "Stopped";
                     return;
                 }
                 await StepCycle();
                 await FETCH2();
                 await ClockPulse();
-                if (stopAnimation == true)
+                if (PauseOrStopAnimation())
                 {
-                    stopAnimation = false;
-                    animationRunning = false;
-                    cpuStatus.Text = "Stopped";
                     return;
                 }
                 await StepCycle();
                 await FETCH3();
                 await ClockPulse();
-                if (stopAnimation == true)
+                if (PauseOrStopAnimation())
                 {
-                    stopAnimation = false;
-                    animationRunning = false;
-                    cpuStatus.Text = "Stopped";
                     return;
                 }
                 await StepCycle();
@@ -313,41 +307,29 @@ public partial class Animations : Node
                         i++;
                         await LDAC1();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
                         await LDAC2();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
                         await LDAC3();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
                         await LDAC4();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
@@ -358,41 +340,29 @@ public partial class Animations : Node
                         i++;
                         await STAC1();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
                         await STAC2();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
                         await STAC3();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
                         await STAC4();
                         await ClockPulse();
-                        if (stopAnimation == true)
+                        if (PauseOrStopAnimation())
                         {
-                            stopAnimation = false;
-                            animationRunning = false;
-                            cpuStatus.Text = "Stopped";
                             return;
                         }
                         await StepCycle();
@@ -463,11 +433,193 @@ public partial class Animations : Node
                         break;
                 }
                 await ClockPulse();
-                if (stopAnimation == true)
+                if (PauseOrStopAnimation())
                 {
-                    stopAnimation = false;
-                    animationRunning = false;
-                    cpuStatus.Text = "Stopped";
+                    return;
+                }
+                await StepCycle();
+                await StepInstruction();
+            }
+            animationRunning = false;
+        }
+        else if (!animationRunning && breaks)
+        {
+            breaks = false;
+            animationRunning = true;
+
+            ar_bit = BinaryStringToInt(AR_txt.Text);
+            pc_bit = BinaryStringToInt(PC_txt.Text);
+            dr_bit = BinaryStringToInt(DR_txt.Text);
+            tr_bit = BinaryStringToInt(TR_txt.Text);
+            ir_bit = BinaryStringToInt(IR_txt.Text);
+            r_bit = BinaryStringToInt(R_txt.Text);
+            ac_bit = BinaryStringToInt(AC_txt.Text);
+            z_bit = BinaryStringToInt(Z_txt.Text);
+
+
+            for (i = i+1; i < memorycode.Length; i++)
+            {
+                await FETCH1();
+                await ClockPulse();
+                if (PauseOrStopAnimation())
+                {
+                    return;
+                }
+                await StepCycle();
+                await FETCH2();
+                await ClockPulse();
+                if (PauseOrStopAnimation())
+                {
+                    return;
+                }
+                await StepCycle();
+                await FETCH3();
+                await ClockPulse();
+                if (PauseOrStopAnimation())
+                {
+                    return;
+                }
+                await StepCycle();
+                switch (memorycode[i])
+                {
+                    case opcodeNOP:
+                        Debug.Print("NOP encountered");
+                        await NOP();
+                        await StepCycle();
+                        break;
+                    case opcodeLDAC:
+                        Debug.Print("LDAC encountered");
+                        i++;
+                        await LDAC1();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await LDAC2();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await LDAC3();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await LDAC4();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await LDAC5();
+                        break;
+                    case opcodeSTAC:
+                        Debug.Print("STAC encountered");
+                        i++;
+                        await STAC1();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await STAC2();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await STAC3();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await STAC4();
+                        await ClockPulse();
+                        if (PauseOrStopAnimation())
+                        {
+                            return;
+                        }
+                        await StepCycle();
+                        await STAC5();
+                        break;
+                    case opcodeMVAC:
+                        Debug.Print("MVAC encountered");
+                        await MVAC();
+                        break;
+                    case opcodeMOVR:
+                        Debug.Print("MOVR encountered");
+                        await MOVR();
+                        break;
+                    case opcodeJUMP:
+                        Debug.Print("JUMP encountered");
+                        i++;
+                        await JUMP();
+                        break;
+                    case opcodeJMPZ:
+                        Debug.Print("JMPZ encountered");
+                        i++;
+                        await JMPZ();
+                        break;
+                    case opcodeJPNZ:
+                        Debug.Print("JPNZ encountered");
+                        i++;
+                        await JPNZ();
+                        break;
+                    case opcodeADD:
+                        Debug.Print("ADD encountered");
+                        await ADD();
+                        break;
+                    case opcodeSUB:
+                        Debug.Print("SUB encountered");
+                        await SUB();
+                        break;
+                    case opcodeINAC:
+                        Debug.Print("INAC encountered");
+                        await INAC();
+                        break;
+                    case opcodeCLAC:
+                        Debug.Print("CLAC encountered");
+                        await CLAC();
+                        break;
+                    case opcodeAND:
+                        Debug.Print("AND encountered");
+                        await AND();
+                        break;
+                    case opcodeOR:
+                        Debug.Print("OR encountered");
+                        await OR();
+                        break;
+                    case opcodeXOR:
+                        Debug.Print("XOR encountered");
+                        await XOR();
+                        break;
+                    case opcodeNOT:
+                        Debug.Print("NOT encountered");
+                        await NOT();
+                        break;
+                    case opcodeEND:
+                        Debug.Print("END encountered");
+                        await END();
+                        return;
+                    default:
+                        // Handle unknown instructions or implement additional instructions
+                        Debug.Print("Instruction Does not Exist");
+                        break;
+                }
+                await ClockPulse();
+                if (PauseOrStopAnimation())
+                {
                     return;
                 }
                 await StepCycle();
@@ -476,18 +628,61 @@ public partial class Animations : Node
             animationRunning = false;
         }
     }
-
+    public bool PauseOrStopAnimation()
+    {
+        if (stopAnimation == true)
+        {
+            stopAnimation = false;
+            animationRunning = false;
+            cpuStatus.Text = "Stopped";
+            return true;
+        }
+        if(breaks == true)
+        {
+            stopAnimation = false;
+            animationRunning = false;
+            cpuStatus.Text = "Breaks";
+            return true;
+        }
+        return false;
+    }
     public void StopAnimation()
     {
         stopAnimation = true;  
     }
     public void StepThroughCycle()
     {
-        stepThroughCycle = true;
+        if (!animationRunning)
+        {
+            StartAnimation(Int32.Parse(currentMemoryLocation.Text));
+        }
+
+        if (stepThroughCycle)
+        {
+            stepThroughCycle = false;
+        }
+        else
+        {
+            stepThroughCycle = true;
+            stepThroughInstruction = false;
+        }
     }
     public void StepThroughInstruction()
     {
-        stepThroughInstruction = true;
+        if (!animationRunning)
+        {
+            StartAnimation(Int32.Parse(currentMemoryLocation.Text));
+        }
+
+        if (stepThroughInstruction)
+        {
+            stepThroughInstruction = false;
+        }
+        else
+        {
+            stepThroughInstruction = true;
+            stepThroughCycle = false;
+        }
     }
     public void ResetRegisters()
     {
@@ -2118,9 +2313,11 @@ public partial class Animations : Node
     {
         while (stepThroughInstruction)
         {
+            cpuStatus.Text = "Instruction Ended";
             await Task.Delay(100);
             if (!stepThroughInstruction)
             {
+                cpuStatus.Text = "Running";
                 break;
             }
         }
@@ -2129,37 +2326,14 @@ public partial class Animations : Node
     {
         while (stepThroughCycle)
         {
+            cpuStatus.Text = "Cycle Ended";
             await Task.Delay(100);
             if (!stepThroughCycle)
             {
+                cpuStatus.Text = "Running";
                 break;
             }
         }
-    }
-
-    public void ToBinary()
-    {
-        isHex = false;
-        AR_txt.Text = SpaceInserter(ar_bit, "ar");
-        PC_txt.Text = SpaceInserter(pc_bit, "pc");
-        DR_txt.Text = SpaceInserter(dr_bit, "dr");
-        TR_txt.Text = SpaceInserter(tr_bit, "tr");
-        IR_txt.Text = SpaceInserter(ir_bit, "ir");
-        R_txt.Text = SpaceInserter(r_bit, "r");
-        AC_txt.Text = SpaceInserter(ac_bit, "ac");
-        Z_txt.Text = SpaceInserter(z_bit, "z");
-    }
-    public void ToHex()
-    {
-        isHex = true;
-        AR_txt.Text = SpaceInserter(ar_bit, "ar");
-        PC_txt.Text = SpaceInserter(pc_bit, "pc");
-        DR_txt.Text = SpaceInserter(dr_bit, "dr");
-        TR_txt.Text = SpaceInserter(tr_bit, "tr");
-        IR_txt.Text = SpaceInserter(ir_bit, "ir");
-        R_txt.Text = SpaceInserter(r_bit, "r");
-        AC_txt.Text = SpaceInserter(ac_bit, "ac");
-        Z_txt.Text = SpaceInserter(z_bit, "z");
     }
 
     static int BinaryStringToInt(string binaryString)
