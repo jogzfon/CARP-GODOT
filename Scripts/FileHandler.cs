@@ -146,7 +146,18 @@ public partial class FileHandler : Node
             recentFileScript.path = path;
             recentFileScript.SetFileName();
         }
-        recentFileList.AddChild(file);
+        int counter = 0;
+        foreach (RecentFile child in recentFileList.GetChildren())
+        {
+            if (child.path == path)
+            {
+                counter++;
+            }
+        }
+        if(counter == 0)
+        {
+            recentFileList.AddChild(file);
+        }
 
         Node simultaneous = projectPage.Instantiate();
         GetTree().Root.AddChild(simultaneous);

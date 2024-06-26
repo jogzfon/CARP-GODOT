@@ -61,6 +61,6 @@ public partial class RecentFile : VBoxContainer
     private void RemoveFile()
     {
         GetParent().RemoveChild(this);
-        Free();
+        this.QueueFree();
     }
 }
