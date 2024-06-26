@@ -502,7 +502,7 @@ initial_position = 1
 size = Vector2i(800, 800)
 ok_button_text = "Open"
 file_mode = 0
-access = 1
+access = 2
 filters = PackedStringArray("*.png", "*.jpg")
 
 [node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "recentFileList", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
