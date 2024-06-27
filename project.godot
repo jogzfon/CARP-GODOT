@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0.137255, 0.137255, 0.137255, 1)
 boot_splash/image="res://SplashScreen.png"
 boot_splash/fullsize=false
-config/icon="res://Sprites/BigBot.png"
+config/icon="res://AppLogo.png"
 run/size/viewport_height=1080
 
 [display]
