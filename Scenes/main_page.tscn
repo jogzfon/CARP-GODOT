@@ -1045,3 +1045,42 @@ text = "NO"
 
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
+
+[node name="SubscriptionHandler" type="Node" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="SubscriptionHandler"]
+visible = false
+anchors_preset = -1
+anchor_left = -0.0125
+anchor_top = -0.0268519
+anchor_right = 0.755729
+anchor_bottom = 0.603704
+offset_left = 394.0
+offset_top = 149.0
+offset_right = 453.0
+offset_bottom = 189.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="SubscriptionHandler/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("2_dsjfr")
+stretch_mode = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubscriptionHandler/PanelContainer"]
+layout_mode = 2
+
+[node name="Bronze" type="Button" parent="SubscriptionHandler/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BRONZE"
+
+[node name="Gold" type="Button" parent="SubscriptionHandler/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "GOLD"
+icon_alignment = 1
+
+[node name="Diamond" type="Button" parent="SubscriptionHandler/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DIAMOND"
