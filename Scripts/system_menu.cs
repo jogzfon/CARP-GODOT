@@ -99,7 +99,6 @@ public partial class system_menu : Control
         if (!isHex)
         {
             isHex = true;
-            GD.Print("Binary");
             Conversion();
         }
     }
@@ -109,7 +108,6 @@ public partial class system_menu : Control
         if (isHex)
         {
             isHex = false;
-            GD.Print("Binary");
             Conversion();
         }
     }
