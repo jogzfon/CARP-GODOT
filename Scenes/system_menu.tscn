@@ -220,6 +220,12 @@ theme_override_font_sizes/font_size = 25
 text = "0"
 alignment = 1
 
+[node name="AnimationOn" type="CheckButton" parent="HBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Animation"
+alignment = 1
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
