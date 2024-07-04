@@ -16,8 +16,10 @@ public partial class system_menu : Control
 
     [Export] Button hexBtn;
     [Export] Button binaryBtn;
+    [Export] CheckButton AnimationOn;
 
     public bool isHex = false;
+    public bool animationOn = true;
 
     public override void _Ready()
     {
@@ -33,7 +35,10 @@ public partial class system_menu : Control
         hexBtn.Connect("pressed", new Callable(this, nameof(IsHex)));
         binaryBtn.Connect("pressed", new Callable(this, nameof(IsBinary)));
     }
-
+    public override void _Process(double delta)
+    {
+        animationOn = AnimationOn.ButtonPressed;
+    }
     private void ConvertAR(string input) => UpdateRegisters(AR, input, 16);
     private void ConvertPC(string input) => UpdateRegisters(PC, input, 16);
     private void ConvertDR(string input) => UpdateRegisters(DR, input, 8);

@@ -11,7 +11,7 @@
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("animationNode")]
 script = ExtResource("1_uto1p")
-animationNode = NodePath("Node")
+animationNode = NodePath("Animation")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -296,7 +296,7 @@ text = "ALU"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("systemMenu", "en1", "en2", "readL", "writeL", "clock", "clk", "ar", "pc", "dr", "tr", "ir", "r", "ac", "z", "a", "d", "cu", "alu", "ioB")]
+[node name="Animation" type="Node" parent="." node_paths=PackedStringArray("systemMenu", "en1", "en2", "readL", "writeL", "clock", "clk", "ar", "pc", "dr", "tr", "ir", "r", "ac", "z", "a", "d", "cu", "alu", "ioB")]
 script = ExtResource("1_rmn0d")
 systemMenu = NodePath("../SystemMenu")
 moveSpeed = 100.0
@@ -320,205 +320,205 @@ cu = NodePath("../SystemMenu/CU")
 alu = NodePath("../SystemMenu/ALU")
 ioB = NodePath("../SystemMenu/IOBinary")
 
-[node name="CpuOut" type="Sprite2D" parent="Node"]
+[node name="CpuOut" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(342.5, 212)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="CpuIn" type="Sprite2D" parent="Node"]
+[node name="CpuIn" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(342.5, 288)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="aIn" type="Sprite2D" parent="Node"]
+[node name="aIn" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(403.8, 211.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="aOut" type="Sprite2D" parent="Node"]
+[node name="aOut" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(509, 212)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="dIn" type="Sprite2D" parent="Node"]
+[node name="dIn" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(509, 287.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="dOut" type="Sprite2D" parent="Node"]
+[node name="dOut" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(403.8, 288)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="vDc" type="Sprite2D" parent="Node"]
+[node name="vDc" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(620, 212)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="hDc" type="Sprite2D" parent="Node"]
+[node name="hDc" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(620, 400)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="dcIn" type="Sprite2D" parent="Node"]
+[node name="dcIn" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(676, 400)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="Min" type="Sprite2D" parent="Node"]
+[node name="Min" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(1113, 212)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="Mout1" type="Sprite2D" parent="Node"]
+[node name="Mout1" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(1113, 288)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="Mout2" type="Sprite2D" parent="Node"]
+[node name="Mout2" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(1113, 325)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="vDc2" type="Sprite2D" parent="Node"]
+[node name="vDc2" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(920.8, 325)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="hDc2" type="Sprite2D" parent="Node"]
+[node name="hDc2" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(920.8, 387)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="dcIn2" type="Sprite2D" parent="Node"]
+[node name="dcIn2" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(853.8, 387)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="ioInV" type="Sprite2D" parent="Node"]
+[node name="ioInV" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(1060, 288)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="ioInH" type="Sprite2D" parent="Node"]
+[node name="ioInH" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(1060, 400)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="IO" type="Sprite2D" parent="Node"]
+[node name="IO" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(1113, 400)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="outIO" type="Sprite2D" parent="Node"]
+[node name="outIO" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(1113, 450)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="dcIn3" type="Sprite2D" parent="Node"]
+[node name="dcIn3" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(853.8, 450)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="dcOut1" type="Sprite2D" parent="Node"]
+[node name="dcOut1" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(676, 482.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="dcOut2" type="Sprite2D" parent="Node"]
+[node name="dcOut2" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(676, 530)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="read" type="Sprite2D" parent="Node"]
+[node name="read" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(342.5, 482.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="write" type="Sprite2D" parent="Node"]
+[node name="write" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(342.5, 530)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="clkOut" type="Sprite2D" parent="Node"]
+[node name="clkOut" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(93.5, 482.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="clkV" type="Sprite2D" parent="Node"]
+[node name="clkV" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(45, 482.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="clkH" type="Sprite2D" parent="Node"]
+[node name="clkH" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(45, 660)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="clkEnd" type="Sprite2D" parent="Node"]
+[node name="clkEnd" type="Sprite2D" parent="Animation"]
 visible = false
 position = Vector2(168, 660)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
-[node name="Line" type="Line2D" parent="Node"]
+[node name="Line" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line2" type="Line2D" parent="Node"]
+[node name="Line2" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line3" type="Line2D" parent="Node"]
+[node name="Line3" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line4" type="Line2D" parent="Node"]
+[node name="Line4" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line5" type="Line2D" parent="Node"]
+[node name="Line5" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line6" type="Line2D" parent="Node"]
+[node name="Line6" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line7" type="Line2D" parent="Node"]
+[node name="Line7" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line8" type="Line2D" parent="Node"]
+[node name="Line8" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line9" type="Line2D" parent="Node"]
+[node name="Line9" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line10" type="Line2D" parent="Node"]
+[node name="Line10" type="Line2D" parent="Animation"]
 width = 5.0
 
-[node name="Line11" type="Line2D" parent="Node"]
+[node name="Line11" type="Line2D" parent="Animation"]
 width = 5.0
 
 [node name="Boxes" type="Node" parent="."]

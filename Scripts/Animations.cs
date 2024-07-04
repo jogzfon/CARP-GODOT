@@ -144,9 +144,12 @@ public partial class Animations : Node
     private int z_bit = 0;
     #endregion
 
+    system_menu sysmenu;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        sysmenu = systemMenu as system_menu;
         #region Animation Requirements
         var node = GetNode<Control>("/root/ProjectPage");
         project_page proj = node as project_page;
@@ -742,10 +745,13 @@ public partial class Animations : Node
         rtlStatement.Text = "Fetch 1";
         dataMovement.Text = "AR <- PC";
 
-        await Task.WhenAll(CPUToA());
-        await Task.WhenAll(AToVDc());
-        await Task.WhenAll(VDcToM(),vDcTohDc());
-        await Task.WhenAll(hDcToDc());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(CPUToA());
+            await Task.WhenAll(AToVDc());
+            await Task.WhenAll(VDcToM(), vDcTohDc());
+            await Task.WhenAll(hDcToDc());
+        }
 
         AR_txt.Text = SpaceInserter(ar_bit, "ar");
         PC_txt.Text = SpaceInserter(pc_bit, "pc");
@@ -777,10 +783,13 @@ public partial class Animations : Node
         dr_bit = memorycode[i];
         rtlStatement.Text = "Fetch 2";
         dataMovement.Text = "DR <- M, PC <- PC+1";
-
-        await Task.WhenAll(MToioInV());
-        await Task.WhenAll(ioInVToD());
-        await Task.WhenAll(DToCPU());
+        
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(MToioInV());
+            await Task.WhenAll(ioInVToD());
+            await Task.WhenAll(DToCPU());
+        }
 
         PC_txt.Text = SpaceInserter(pc_bit, "pc");
         DR_txt.Text = SpaceInserter(dr_bit, "dr");
@@ -809,10 +818,13 @@ public partial class Animations : Node
         rtlStatement.Text = "Fetch 3";
         dataMovement.Text = "IR <- DR, AR <- PC";
 
-        await Task.WhenAll(CPUToA());
-        await Task.WhenAll(AToVDc());
-        await Task.WhenAll(VDcToM(), vDcTohDc());
-        await Task.WhenAll(hDcToDc());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(CPUToA());
+            await Task.WhenAll(AToVDc());
+            await Task.WhenAll(VDcToM(), vDcTohDc());
+            await Task.WhenAll(hDcToDc());
+        }
 
         AR_txt.Text = SpaceInserter(ar_bit, "ar");
         IR_txt.Text = SpaceInserter(ir_bit, "ir");
@@ -856,10 +868,13 @@ public partial class Animations : Node
         rtlStatement.Text = "LDAC 1";
         dataMovement.Text = "DR <- M, PC <- PC + 1, AR <- AR + 1";
 
-        await Task.WhenAll(CPUToA(), MToioInV());
-        await Task.WhenAll(AToVDc(), ioInVToD());
-        await Task.WhenAll(VDcToM(), vDcTohDc());
-        await Task.WhenAll(hDcToDc(), DToCPU());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(CPUToA(), MToioInV());
+            await Task.WhenAll(AToVDc(), ioInVToD());
+            await Task.WhenAll(VDcToM(), vDcTohDc());
+            await Task.WhenAll(hDcToDc(), DToCPU());
+        }
 
         AR_txt.Text = SpaceInserter(ar_bit, "ar");
         PC_txt.Text = SpaceInserter(pc_bit, "pc");
@@ -896,9 +911,12 @@ public partial class Animations : Node
         rtlStatement.Text = "LDAC 2";
         dataMovement.Text = "TR <- DR, DR <- M, PC = PC + 1";
 
-        await Task.WhenAll(MToioInV());
-        await Task.WhenAll(ioInVToD());
-        await Task.WhenAll(DToCPU());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(MToioInV());
+            await Task.WhenAll(ioInVToD());
+            await Task.WhenAll(DToCPU());
+        }
 
         PC_txt.Text = SpaceInserter(pc_bit, "pc");
         DR_txt.Text = SpaceInserter(dr_bit, "dr");
@@ -938,10 +956,13 @@ public partial class Animations : Node
         rtlStatement.Text = "LDAC 3";
         dataMovement.Text = "AR <- DR | TR";
 
-        await Task.WhenAll(CPUToA());
-        await Task.WhenAll(AToVDc());
-        await Task.WhenAll(VDcToM(), vDcTohDc());
-        await Task.WhenAll(hDcToDc());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(CPUToA());
+            await Task.WhenAll(AToVDc());
+            await Task.WhenAll(VDcToM(), vDcTohDc());
+            await Task.WhenAll(hDcToDc());
+        }
 
         AR_txt.Text = SpaceInserter(ar_bit, "ar");
 
@@ -979,9 +1000,12 @@ public partial class Animations : Node
         rtlStatement.Text = "LDAC 4";
         dataMovement.Text = "DR <- M";
 
-        await Task.WhenAll(MToioInV());
-        await Task.WhenAll(ioInVToD());
-        await Task.WhenAll(DToCPU());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(MToioInV());
+            await Task.WhenAll(ioInVToD());
+            await Task.WhenAll(DToCPU());
+        }
 
         DR_txt.Text = SpaceInserter(dr_bit, "dr");
 
@@ -1018,8 +1042,11 @@ public partial class Animations : Node
 
         rtlStatement.Text = "LDAC 5";
         dataMovement.Text = "AC <- DR";
-        
-        await Task.Delay(1000);
+
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
         
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
 
@@ -1062,10 +1089,13 @@ public partial class Animations : Node
         rtlStatement.Text = "STAC 1";
         dataMovement.Text = "DR <- M, PC <- PC + 1, AR <- AR + 1";
 
-        await Task.WhenAll(CPUToA(), MToioInV());
-        await Task.WhenAll(AToVDc(), ioInVToD());
-        await Task.WhenAll(VDcToM(), vDcTohDc());
-        await Task.WhenAll(hDcToDc(), DToCPU());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(CPUToA(), MToioInV());
+            await Task.WhenAll(AToVDc(), ioInVToD());
+            await Task.WhenAll(VDcToM(), vDcTohDc());
+            await Task.WhenAll(hDcToDc(), DToCPU());
+        }
 
         AR_txt.Text = SpaceInserter(ar_bit, "ar");
         PC_txt.Text = SpaceInserter(pc_bit, "pc");
@@ -1102,9 +1132,12 @@ public partial class Animations : Node
         rtlStatement.Text = "STAC 2";
         dataMovement.Text = "TR <- DR, DR <- M, PC <- PC + 1";
 
-        await Task.WhenAll(MToioInV());
-        await Task.WhenAll(ioInVToD());
-        await Task.WhenAll(DToCPU());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(MToioInV());
+            await Task.WhenAll(ioInVToD());
+            await Task.WhenAll(DToCPU());
+        }
 
         PC_txt.Text = SpaceInserter(pc_bit, "pc");
         DR_txt.Text = SpaceInserter(dr_bit, "dr");
@@ -1144,10 +1177,13 @@ public partial class Animations : Node
         rtlStatement.Text = "STAC 3";
         dataMovement.Text = "AR <- DR | TR";
 
-        await Task.WhenAll(CPUToA());
-        await Task.WhenAll(AToVDc());
-        await Task.WhenAll(VDcToM(), vDcTohDc());
-        await Task.WhenAll(hDcToDc());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(CPUToA());
+            await Task.WhenAll(AToVDc());
+            await Task.WhenAll(VDcToM(), vDcTohDc());
+            await Task.WhenAll(hDcToDc());
+        }
 
         AR_txt.Text = SpaceInserter(ar_bit, "ar");
 
@@ -1180,7 +1216,10 @@ public partial class Animations : Node
         rtlStatement.Text = "STAC 4";
         dataMovement.Text = "DR <- AC";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         DR_txt.Text = SpaceInserter(dr_bit, "dr");
 
@@ -1218,9 +1257,12 @@ public partial class Animations : Node
         rtlStatement.Text = "STAC 5";
         dataMovement.Text = "M <- DR";
 
-        await Task.WhenAll(CPUToD());
-        await Task.WhenAll(DToioInV());
-        await Task.WhenAll(ioInVToM());
+        if (sysmenu.animationOn)
+        {
+            await Task.WhenAll(CPUToD());
+            await Task.WhenAll(DToioInV());
+            await Task.WhenAll(ioInVToM());
+        }
 
         TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
@@ -1252,7 +1294,10 @@ public partial class Animations : Node
         rtlStatement.Text = "MVAC";
         dataMovement.Text = "R <- AC";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         R_txt.Text = SpaceInserter(r_bit, "r");
 
@@ -1283,8 +1328,11 @@ public partial class Animations : Node
         ac_bit = r_bit;
         rtlStatement.Text = "MOVR";
         dataMovement.Text = "AC <- R";
-        
-        await Task.Delay(1000);
+
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
 
@@ -1306,7 +1354,10 @@ public partial class Animations : Node
             dataMovement.Text = "Invalid Jump";
             Debug.Print("Invalid memory line JUMP");
         }
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
     }
     public async Task JMPZ()
     {
@@ -1323,7 +1374,10 @@ public partial class Animations : Node
             dataMovement.Text = "Continue";
             TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
         }
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
     }
     public async Task JPNZ()
     {
@@ -1340,7 +1394,10 @@ public partial class Animations : Node
             dataMovement.Text = "Continue";
             TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
         }
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
     }
 
     public async Task NOP()
@@ -1368,7 +1425,10 @@ public partial class Animations : Node
         rtlStatement.Text = "NOP";
         dataMovement.Text = "No Operation";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
@@ -1407,7 +1467,10 @@ public partial class Animations : Node
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
@@ -1443,7 +1506,10 @@ public partial class Animations : Node
         rtlStatement.Text = "ADD";
         dataMovement.Text = "AC <- AC + R";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
@@ -1480,7 +1546,10 @@ public partial class Animations : Node
         rtlStatement.Text = "SUB";
         dataMovement.Text = "AC <- AC - R";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
@@ -1517,7 +1586,10 @@ public partial class Animations : Node
         rtlStatement.Text = "INAC";
         dataMovement.Text = "AC <- AC + 1";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
@@ -1552,7 +1624,10 @@ public partial class Animations : Node
         rtlStatement.Text = "CLAC";
         dataMovement.Text = "AC <- 0, Z <- 1";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
@@ -1592,7 +1667,10 @@ public partial class Animations : Node
         rtlStatement.Text = "AND";
         dataMovement.Text = "AC <- AC & R";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
@@ -1627,7 +1705,10 @@ public partial class Animations : Node
         rtlStatement.Text = "OR";
         dataMovement.Text = "AC <- AC | R";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
@@ -1665,7 +1746,10 @@ public partial class Animations : Node
         rtlStatement.Text = "XOR";
         dataMovement.Text = "AC <- AC ^ R";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
@@ -1703,7 +1787,10 @@ public partial class Animations : Node
         rtlStatement.Text = "NOT";
         dataMovement.Text = "AC <- ~AC";
 
-        await Task.Delay(1000);
+        if (sysmenu.animationOn)
+        {
+            await Task.Delay(1000);
+        }
 
         AC_txt.Text = SpaceInserter(ac_bit, "ac");
         Z_txt.Text = SpaceInserter(z_bit, "z");
