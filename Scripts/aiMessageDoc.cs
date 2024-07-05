@@ -77,7 +77,7 @@ public static class aiMessageDoc
             "OR: AC | R -> AC" +
             "XOR: AC ^ R -> AC" +
             "NOT: ~AC -> AC" +
-            "Example Result:" +
+            "Result should be based on this example Result:" +
             "double a number.  i=i+i " +
             "i at 100 " +
             "Code Generated example: " +
@@ -86,5 +86,10 @@ public static class aiMessageDoc
             "add ;i+i" +
             "stac 100 ;store back to i" +
             "end " +
-            "From the above ; is a start of a comment, using the instruction set code me a program that will do the request below: ";
+            "Basically it's format is like this: "    +
+            "; is a start of a comment" +
+            "[InstructionCode] [Value]" +
+            "END" +
+            "where InstructionCode is all the instructions and Value is the value and code must end in END" +
+            "Using the instruction set code me a program according to this request:";
 }

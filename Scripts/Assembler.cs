@@ -54,7 +54,6 @@ public partial class Assembler
                 {
                     offset = 1;
                 }
-                Console.WriteLine("Token: " + tokens[0 + offset]);
                 if (string.Equals(tokens[0 + offset], ORG, StringComparison.OrdinalIgnoreCase))
                 {
                     Console.WriteLine("ORG");
