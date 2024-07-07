@@ -546,7 +546,6 @@ access = 2
 filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -564,6 +563,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -579,67 +579,33 @@ theme_override_font_sizes/font_size = 20
 text = "X"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer"]
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Space" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
-vertical_alignment = 1
 
 [node name="Label" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(1500, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 25
-text = "CARP, or short for Carpinelli, is the creator of the Relatively Simple Computer System Simulator.
+text = "The Relatively Simple CPU Simulator is an instructional aid for students studying Computer Organization And Architecture, typically at the junior or senior level. It simulates the Relatively Simple CPU based on John D. Carpinelli's Relatively Simple Computer System Simulator. 
 
-Unlike the old RSCPU system that he made, we now have CARP -- provided to make it
-more user friendly for you.
-
-
-Here are some of his documentations that was provided:
-
-The Relatively Simple CPU Simulator is an instructional aid for students studying computer 
-architecture and CPU design, typically at the junior or senior level. It simulates the Relatively 
-Simple CPU, a 16-instruction processor introduced in the textbook Computer Systems 
-Organization and Architecture1
-. Students first enter an assembly language program, which is 
-assembled by the simulator. After correcting any syntax errors, the user simulates the fetch, 
-decode, and execute cycles for each instruction in the program. The user may simulate the 
-execution of the program by clock cycle, by instruction, using breakpoints, or as a single, 
-continuous execution."
-vertical_alignment = 1
-
-[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
-vertical_alignment = 1
+Students first enter an assembly language program, which is assembled by the simulator. After correcting any syntax errors, the user simulates the fetch, decode, and execute cycles for each instruction in the program. The user may simulate the execution of the program by clock cycle, by instruction, using breakpoints, or as a single, continuous execution."
+autowrap_mode = 3
+clip_text = true
 
 [node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 2
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
-
-[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 40
-vertical_alignment = 1
 
 [node name="HowDoesThisWork" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
@@ -647,6 +613,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -714,6 +681,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -781,6 +749,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -848,6 +817,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -915,6 +885,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
