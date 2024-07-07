@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=33 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -19,8 +19,14 @@
 [ext_resource type="Script" path="res://Scripts/ExitController.cs" id="16_metue"]
 [ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
 [ext_resource type="Script" path="res://Scripts/FileHandler.cs" id="18_lnwlk"]
-[ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/InstructionSet.png" id="19_f2wtp"]
+[ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/Documentation/InstructionSet.png" id="19_f2wtp"]
+[ext_resource type="Texture2D" uid="uid://cimg5xsnd3w80" path="res://Sprites/Documentation/ProjectPage.png" id="20_t3kpw"]
+[ext_resource type="Texture2D" uid="uid://bpoqpdeukbide" path="res://Sprites/Documentation/Assembly.png" id="21_dmdda"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="21_iog1l"]
+[ext_resource type="Texture2D" uid="uid://brtc5luckr666" path="res://Sprites/Documentation/Memory.png" id="22_t4v1g"]
+[ext_resource type="Texture2D" uid="uid://bk5xps8cjaxia" path="res://Sprites/Documentation/Breakpoint.png" id="23_b17yx"]
+[ext_resource type="Texture2D" uid="uid://kw5ui1f46s23" path="res://Sprites/Documentation/TraceResult.png" id="24_rhk4k"]
+[ext_resource type="Texture2D" uid="uid://cylpotkojiv3a" path="res://Sprites/Documentation/System.png" id="25_7m7ga"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
 font = ExtResource("13_0fq7n")
@@ -546,6 +552,7 @@ access = 2
 filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -636,44 +643,41 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Space" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect6" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 25
-text = "yOw Shane"
-vertical_alignment = 1
-
-[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
-vertical_alignment = 1
+texture = ExtResource("20_t3kpw")
+stretch_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("19_f2wtp")
+texture = ExtResource("21_dmdda")
 stretch_mode = 3
 
-[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 40
-vertical_alignment = 1
+texture = ExtResource("22_t4v1g")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("23_b17yx")
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("24_rhk4k")
+stretch_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("25_7m7ga")
+stretch_mode = 3
 
 [node name="ProgramExample" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
