@@ -13,11 +13,14 @@ public partial class main : Node2D
     [Export] public LineEdit currentMemoryLocation;
     [Export] public TextEdit instructionCode;
 
-    LineEdit memoryLocation;
+    [Export] public Control systemMenu;
+    system_menu sysmenu;
     int memoryStartLocation;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        sysmenu = systemMenu as system_menu;
+
         if (AccountManager.GetUser()!=null)
         {
             cpuStatus.Text = DataToSave.status;
@@ -44,9 +47,6 @@ public partial class main : Node2D
         var stepThroughInstruction = GetNode<Button>("SystemMenu/HBoxContainer2/VBoxContainer2/StepThroughInstruction");
         stepThroughInstruction.Connect("pressed", new Callable(this, nameof(StepThroughInstruction)));
 
-        memoryLocation = GetNode<LineEdit>("SystemMenu/HBoxContainer2/VBoxContainer/HBoxContainer/MemoryLocation");
-        memoryStartLocation = Int32.Parse(memoryLocation.Text);
-
         animations.SetRequirements(cpuStatus, rtlStatement, dataMovement, currentMemoryLocation);
     }
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,7 +63,8 @@ public partial class main : Node2D
     }
 	private void StartAnimation()
 	{
-		animations.StartAnimation(memoryStartLocation);
+        memoryStartLocation = Int32.Parse(sysmenu.start_location.Text);
+        animations.StartAnimation(memoryStartLocation);
     }
     private void StopAnimation()
     {

@@ -367,7 +367,6 @@ theme_override_font_sizes/font_size = 30
 text = "0"
 placeholder_text = "Enter Memory Location"
 alignment = 1
-editable = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LeftContainer"]
 layout_mode = 2
@@ -422,7 +421,7 @@ offset_left = 40.0
 offset_top = 40.0
 offset_right = 90.0
 offset_bottom = 140.0
-scale = Vector2(0.76, 0.44)
+scale = Vector2(0.76447, 0.438668)
 texture_normal = ExtResource("10_ga2ho")
 stretch_mode = 0
 

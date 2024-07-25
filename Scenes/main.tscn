@@ -9,9 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="5_47uae"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_embvk"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("animationNode")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("animationNode", "systemMenu")]
 script = ExtResource("1_uto1p")
 animationNode = NodePath("Animation")
+systemMenu = NodePath("SystemMenu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

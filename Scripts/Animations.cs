@@ -229,7 +229,15 @@ public partial class Animations : Node
         ioB.Text = IO;
         if (currentMemoryLocation != null)
         {
-            currentMemoryLocation.Text = i.ToString();
+            if (animationRunning && !stepThroughCycle && !stepThroughInstruction)
+            {
+                currentMemoryLocation.Text = i.ToString();
+                sysmenu.start_location.Text = i.ToString();
+            }
+            else {
+
+                i = Int32.Parse(sysmenu.start_location.Text);
+            }
 
             //Save Data
             if (AccountManager.GetUser() != null)
@@ -428,6 +436,7 @@ public partial class Animations : Node
                         break;
                     case opcodeEND:
                         Debug.Print("END encountered");
+                        animationRunning = false;
                         await END();
                         return;
                     default:
@@ -613,6 +622,7 @@ public partial class Animations : Node
                         break;
                     case opcodeEND:
                         Debug.Print("END encountered");
+                        animationRunning = false;
                         await END();
                         return;
                     default:

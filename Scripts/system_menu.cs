@@ -13,6 +13,8 @@ public partial class system_menu : Control
     [Export] LineEdit R;
     [Export] LineEdit AC;
     [Export] LineEdit Z;
+    
+    [Export] public LineEdit start_location;
 
     [Export] Button hexBtn;
     [Export] Button binaryBtn;
