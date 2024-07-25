@@ -262,6 +262,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_6x74r")
+editable = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
 layout_mode = 2
