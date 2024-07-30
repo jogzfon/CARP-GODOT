@@ -91,5 +91,6 @@ public static class aiMessageDoc
             "[InstructionCode] [Value]" +
             "END" +
             "where InstructionCode is all the instructions and Value is the value and code must end in END" +
+            "Limit the output result with just instruction codes and their value" +
             "Using the instruction set code me a program according to this request:";
 }

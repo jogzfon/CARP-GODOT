@@ -720,9 +720,9 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 25
-text = "Yow Elijah"
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "PROGRAM EXAMPLES"
 vertical_alignment = 1
 
 [node name="Space2" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -733,11 +733,81 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program00" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("19_f2wtp")
-stretch_mode = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";double a number.  i=i+i
+;i at 100
+
+ldac 	100	                                  ;load i
+mvac		                                       ;copy to R
+add		                                          ;i+i
+stac 100                                 ;store back to i
+end
+"
+vertical_alignment = 1
+
+[node name="Space4" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Program01" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";add two numbers.  x+y   Show overflow.
+;x at 100, y at 101, sum at 102
+
+ldac 	100	                                 ;load x
+mvac		                                      ;copy to R
+ldac 101                                 ;load y
+add		                                        ;x+y
+stac 102                                ;store to sum
+end
+"
+vertical_alignment = 1
+
+[node name="Space5" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Program02" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";IF example.  
+;if x+y==0 then I/O port = 0 else I/O port = 1
+;x at 100. y at 101
+
+ldac 100                                ;load x
+mvac
+ldac 101                                ;load y
+add	
+                                               ;if not equal to 0 goto Else:
+jpnz	 15                                  ;skip to !=0 case (else part)
+                                              ;Then:
+clac		                                       ;0
+jump 17	                                ;jump over else part to Endif:
+                                              ;Else:
+clac
+inac		                                       ;1
+                                              ;Endif:
+stac 65535
+end
+"
+vertical_alignment = 1
 
 [node name="Space3" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
