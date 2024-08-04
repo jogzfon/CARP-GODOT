@@ -92,7 +92,7 @@ public partial class Animations : Node
     [Export] Label d;
     [Export] Label cu;
     [Export] Label alu;
-    [Export] Label ioB;
+    [Export] LineEdit ioB;
     #endregion
 
     #region LineEdits
@@ -132,8 +132,8 @@ public partial class Animations : Node
     short instructadv1;
     short instructadv2;
 
-    public long IOint = 0;
-    public string IO = "00000000";
+    public int IOint = 0;
+    public string IO = "0000 0000";
     private int ar_bit = 0x00000000;
     private int pc_bit = 0x00000000;
     private int dr_bit = 0x00000000;
@@ -226,16 +226,15 @@ public partial class Animations : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        ioB.Text = IO;
         if (currentMemoryLocation != null)
         {
             if (animationRunning && !stepThroughCycle && !stepThroughInstruction)
             {
                 currentMemoryLocation.Text = i.ToString();
                 sysmenu.start_location.Text = i.ToString();
+                ioB.Text = SpaceInserter(IOint, "io");
             }
             else {
-
                 i = Int32.Parse(sysmenu.start_location.Text);
             }
 
@@ -273,6 +272,11 @@ public partial class Animations : Node
         else if (!animationRunning && !breaks)
         {
             animationRunning = true;
+
+            if (BinaryStringToInt(ioB.Text) > 0)
+            {
+                IOint = BinaryStringToInt(ioB.Text);
+            }
 
             ar_bit = BinaryStringToInt(AR_txt.Text);
             pc_bit = BinaryStringToInt(PC_txt.Text);
@@ -709,7 +713,7 @@ public partial class Animations : Node
         Z_txt.Text = "0";
 
         IOint = 0;
-        IO = "00000000";
+        IO = "0000 0000";
         ar_bit = 0x00000000;
         pc_bit = 0x00000000;
         dr_bit = 0x00000000;
@@ -718,6 +722,8 @@ public partial class Animations : Node
         r_bit = 0x00000000;
         ac_bit = 0x00000000;
         z_bit = 0;
+
+        ioB.Text = SpaceInserter(IOint, "io");
     }
     #endregion
 
@@ -728,10 +734,11 @@ public partial class Animations : Node
         Write(0);
         Read(0);
         EN1(0);
+        EN2(0);
+        EN2Color(0);
         WriteColor(0);
         ReadColor(0);
         MemoryColor(0);
-
         AR(1);
         PC(1);
         DR(0);
@@ -1005,7 +1012,10 @@ public partial class Animations : Node
         ACLineColor(0);
         ZLineColor(0);
 
-        dr_bit = memorycode[i];
+        int pos1 = (int)memorycode[i];
+        int pos2 = (int)memorycode[i + 1];
+        i++;
+        dr_bit = memorycode[pos1 + pos2];
 
         rtlStatement.Text = "LDAC 4";
         dataMovement.Text = "DR <- M";
@@ -1237,10 +1247,22 @@ public partial class Animations : Node
     }
     public async Task STAC5()
     {
-        Write(1);
-        EN1(1);
+        int pos1 = ((int)memorycode[i] << 8);
+        int pos2 = (int)memorycode[i + 1];
+
+        i++;
+        GD.Print((pos1 | pos2));
+        if ((pos1|pos2) >= 65535)
+        {
+            EN2(1);
+            EN2Color(1);
+        }
+        else
+        {
+            EN1(1);
+            MemoryColor(1);
+        }
         WriteColor(1);
-        MemoryColor(1);
 
         AR(0);
         PC(0);
@@ -1262,16 +1284,34 @@ public partial class Animations : Node
         ACLineColor(0);
         ZLineColor(0);
 
-        memorycode[i] = (short)dr_bit;
+        // memorycode[i] = (short)dr_bit;
 
         rtlStatement.Text = "STAC 5";
         dataMovement.Text = "M <- DR";
 
-        if (sysmenu.animationOn)
+        if ((pos1 | pos2) >= 65535)
         {
-            await Task.WhenAll(CPUToD());
-            await Task.WhenAll(DToioInV());
-            await Task.WhenAll(ioInVToM());
+            ioB.Text = SpaceInserter(dr_bit, "dr");
+            IOint = BinaryStringToInt(ioB.Text);
+            if (sysmenu.animationOn)
+            {
+                await Task.WhenAll(CPUToD());
+                await Task.WhenAll(DToioInV());
+                await Task.WhenAll(ioInVToioInH());
+                await Task.WhenAll(ioInHToIO());
+            }
+        }
+        else
+        {
+            memorycode[pos1 | pos2] = (short)dr_bit;
+
+            if (sysmenu.animationOn)
+            {
+                await Task.WhenAll(CPUToD());
+                await Task.WhenAll(DToioInV());
+                await Task.WhenAll(ioInVToM());
+            }
+
         }
 
         TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
@@ -1350,7 +1390,10 @@ public partial class Animations : Node
     }
     public async Task JUMP()
     {
-        int position = memorycode[i]-1;
+        int pos1 = ((int)memorycode[i] << 8);
+        int pos2 = (int)memorycode[i + 1];
+
+        int position = memorycode[pos1 | pos2];
         rtlStatement.Text = "JUMP";
         if (position >= 0 && position < memorycode.Length)
         {
@@ -1374,7 +1417,10 @@ public partial class Animations : Node
         rtlStatement.Text = "JMPZ";
         if (z_bit == 1)
         {
-            int position = memorycode[i]-1;
+            int pos1 = ((int)memorycode[i] << 8);
+            int pos2 = (int)memorycode[i + 1];
+
+            int position = memorycode[pos1 | pos2];
             dataMovement.Text = "Go To " + position;
             TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
             i = position;
@@ -1394,7 +1440,10 @@ public partial class Animations : Node
         rtlStatement.Text = "JPNZ";
         if (z_bit == 0)
         {
-            int position = memorycode[i] - 1;
+            int pos1 = ((int)memorycode[i] << 8);
+            int pos2 = (int)memorycode[i + 1];
+
+            int position = memorycode[pos1 | pos2];
             dataMovement.Text = "Go To " + position;
             TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
             i = position;
@@ -1979,6 +2028,28 @@ public partial class Animations : Node
 
         await MoveToPosition(redBall, destination);
     }
+    public async Task ioInVToioInH()
+    {
+        CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
+        GetParent().FindChild("Databalls").AddChild(redBall);
+        redBall.Position = ioInV.Position;
+        redBall.Name = "RedBall";
+
+        destination = ioInH.Position;
+
+        await MoveToPosition(redBall, destination);
+    }
+    public async Task ioInHToIO()
+    {
+        CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
+        GetParent().FindChild("Databalls").AddChild(redBall);
+        redBall.Position = ioInH.Position;
+        redBall.Name = "RedBall";
+
+        destination = io.Position;
+
+        await MoveToPosition(redBall, destination);
+    }
     public async Task ioInVToM()
     {
         CharacterBody2D redBall = (CharacterBody2D)ResourceLoader.Load<PackedScene>("res://Scenes/data_ball.tscn").Instantiate();
@@ -2081,6 +2152,28 @@ public partial class Animations : Node
         else
         {
             line8.DefaultColor = Colors.Red;
+        }
+    }
+    public void EN1Color(int num)
+    {
+        if (num == 0)
+        {
+            line4.DefaultColor = Colors.White;
+        }
+        else
+        {
+            line4.DefaultColor = Colors.Red;
+        }
+    }
+    public void EN2Color(int num)
+    {
+        if (num == 0)
+        {
+            line5.DefaultColor = Colors.White;
+        }
+        else
+        {
+            line5.DefaultColor = Colors.Red;
         }
     }
     #endregion

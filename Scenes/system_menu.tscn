@@ -180,7 +180,6 @@ theme_override_font_sizes/font_size = 20
 text = "0"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8fqwku1kjuqn"]
+[gd_scene load_steps=8 format=3 uid="uid://b8fqwku1kjuqn"]
 
 [ext_resource type="PackedScene" uid="uid://dw860tmmffkxq" path="res://Scenes/system_menu.tscn" id="1_or0nw"]
 [ext_resource type="Script" path="res://Scripts/Animations.cs" id="1_rmn0d"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="3_taic5"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_ehxc6"]
 [ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="5_47uae"]
-[ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_embvk"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("animationNode", "systemMenu")]
 script = ExtResource("1_uto1p")
@@ -69,17 +68,17 @@ text = "DECODER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="IOBinary" type="Label" parent="SystemMenu"]
+[node name="IOBinary" type="LineEdit" parent="SystemMenu"]
 layout_mode = 0
-offset_left = 1113.0
-offset_top = 407.0
-offset_right = 1246.37
-offset_bottom = 453.0
-theme_override_fonts/font = ExtResource("5_embvk")
+offset_left = 1115.0
+offset_top = 413.0
+offset_right = 1243.0
+offset_bottom = 456.0
+theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000"
-horizontal_alignment = 1
-vertical_alignment = 1
+alignment = 1
+expand_to_text_length = true
 
 [node name="EN1" type="Label" parent="SystemMenu"]
 layout_mode = 0

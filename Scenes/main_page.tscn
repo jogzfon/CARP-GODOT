@@ -196,6 +196,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembler Directives"
 
 [node name="Aap" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembling a program"
@@ -595,7 +596,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(1500, 300)
+custom_minimum_size = Vector2(1500, 650)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -603,7 +604,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 25
 text = "The Relatively Simple CPU Simulator is an instructional aid for students studying Computer Organization And Architecture, typically at the junior or senior level. It simulates the Relatively Simple CPU based on John D. Carpinelli's Relatively Simple Computer System Simulator. 
 
-Students first enter an assembly language program, which is assembled by the simulator. After correcting any syntax errors, the user simulates the fetch, decode, and execute cycles for each instruction in the program. The user may simulate the execution of the program by clock cycle, by instruction, using breakpoints, or as a single, continuous execution."
+Students first enter an assembly language program, which is assembled by the simulator. After correcting any syntax errors, the user simulates the fetch, decode, and execute cycles for each instruction in the program. The user may simulate the execution of the program by clock cycle, by instruction, using breakpoints, or as a single, continuous execution.
+
+The Relatively Simple Computer System simulator is an instructional aid for teaching computer system design.  It allows the user to simulate the flow of data within a computer consisting of the Relatively Simple CPU, memory, and a memory-mapped I/O port, as it fetches, decodes, and executes instructions.  It uses animation to illustrate the flow of data between components.
+
+The Relatively Simple CPU can access 64K bytes of memory, each byte being 8 bits wide. The CPU does this by outputting a 16-bit address on its output pins A[15..0] and reading in the 8-bit value from memory on its inputs D[7..0].  This CPU has two programmer-accessible registers: an 8-bit accumulator labeled AC, and an 8-bit general purpose register R.  It also has a 1-bit zero flag, Z. It has sixteen instructions in its instruction set, as shown below.
+
+"
 autowrap_mode = 3
 clip_text = true
 
@@ -613,6 +620,16 @@ size_flags_horizontal = 0
 size_flags_vertical = 2
 texture = ExtResource("19_f2wtp")
 stretch_mode = 3
+
+[node name="Label2" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(1500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+autowrap_mode = 3
 
 [node name="HowDoesThisWork" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
@@ -716,7 +733,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -817,6 +834,159 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
+[node name="Program03" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";example from online Help
+org 0	                                      ;assembly start address
+db 2         	                              ;defines a byte of decimal value 2
+db 4                                       ;defines a byte of decimal value 4
+org 10                                    ;assembly start address
+ldac 0                                    ;load AC with data at location 0
+mvac                                      ;move AC data to register R
+ldac 1                                     ;load AC with data at location 1
+add	                                         ;store the sum of AC, R in AC
+stac 2                                     ;store AC at location 2
+stac ffffh                                ; send AC to I/O Port
+end                                         ;stop"
+vertical_alignment = 1
+
+[node name="Space6" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program04" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";example from textbook
+;Variables memory locations: total=100  i=101  n=102  
+;Label loop=7
+;Need to manually Edit Memory location 102 for n value.
+
+clac
+stac 100	                                           ;total=0
+stac 101	                                            ;i=0
+                                                          ;Loop:
+ldac 101	                                            ;i++
+inac		
+stac 101
+
+mvac		                                                ;i to R
+ldac 100	                                          ;total to AC
+add		                                                  ;total+i
+stac 100                                         	;total+=i
+
+ldac 102                                         	;n to AC
+sub		                                            ;n-i
+jpnz 7		                                        ;if n-i!=0 (i.e. i!=n) goto Loop
+		                                                ;else continue here
+end                                                  ;added to book's code."
+vertical_alignment = 1
+
+[node name="Space7" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program05" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";test logic operations
+;15=00001111 in 100
+;85=01010101 in 101
+
+ldac	100
+mvac
+ldac	101
+and
+stac	102	                                    ;AND in 102
+ldac	101
+or
+stac	103	                                    ;OR in 103
+ldac	101
+xor
+stac	104	                                    ;XOR in 104
+ldac	101
+not	
+stac 	105	                                   ;NOT in 105
+end"
+vertical_alignment = 1
+
+[node name="Space8" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program06" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";loop x times  x value in 100
+clac		                                             ;i=0
+mvac		                                           ;R=i
+                                                    ;Loop:
+movr		                                           ;AC=i
+inac		                                             ;i++
+mvac		                                           ;i back to R
+ldac	100                                      	;load x
+sub		                                             ;x-i
+jpnz	2	                                          ;loop again if i<x
+end
+
+; set breakpoint at 9 (jpnz) to count the loops..."
+vertical_alignment = 1
+
+[node name="Space9" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program07" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";busy-wait poll of I/O port until nonzero
+clac
+mvac		                                          ;R=0
+                                                   ;Loop:
+ldac	65535	
+sub		                                            ;I/O port value - 0
+jmpz	2	                                        ;jump to Loop if I/O port value is 0
+
+ldac	65535	                                ;assume it hasn't changed...
+stac 	100	                                    ;put it to \"regular\" memory
+end"
+vertical_alignment = 1
+
+[node name="Space10" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
 [node name="NumericConstants" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
 layout_mode = 1
@@ -843,6 +1013,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -858,32 +1029,101 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 25
-text = "Yow Mich"
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 40
+text = "NUMERIC CONSTRAINTS"
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="number" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 530)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
+text = "
+Numeric constants can be used in source statements. If there is no postfix, the assembler assumes the number is decimal.
+
+number can be one of the following:
+
+                   - bin_numB
+                   - dec_num (or dec_numD)
+                   - oct_numO (or oct_numQ)
+                   - hex_numH
+
+                   Lowercase equivalences are allowed: b, d, o, q, h
+
+"
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="number2" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
 layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("19_f2wtp")
-stretch_mode = 3
-
-[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
+text = "bin_num is a binary number consisting of the digits '0'-'1' and ending with a 'B' or 'b'.
+
+Examples:
+                   11000101B
+                   1011B
+                   1110110b
+
+"
 vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="number3" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "dec_num is a decimal number consisting of the digits '0'-'9', optionally followed by 'D' or 'd'.
+
+Examples:
+                   364
+                   7534D
+                   435d
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="number4" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "oct_num is an octal number consisting of the digits '0'-'7' and ending with an 'O', 'o', 'Q' or 'q'.
+
+Examples:
+                   77O
+                   542o
+                   2324q
+                   34241Q
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="number5" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "hex_num is a hexadecimal number consisting of '0'-'9' and 'a'-'f' or 'A'-'F' ending with a 'H', or 'h'.
+
+Examples:
+                   84H
+                   ABDEh
+                   f12aH
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="AssemblerDirectives" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
@@ -926,32 +1166,79 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 25
-text = "yow Ruff"
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 40
+text = "ASSEMBLER DIRECTIVES"
 vertical_alignment = 1
 
-[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="number" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
+text = "
+The assembly process can be controlled by assembler directives. The assembler interprets the assembler directives instead of translating them into machine instructions. The assembler supports the following directives:"
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="number2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("19_f2wtp")
-stretch_mode = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "
+Directive                          Description
 
-[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+ORG <address>  Assemble the subsequent source statements starting at the specified address, <address>.
+
+                              Examples:
+                                               ORG 1123H ; Start assembling at address 4387
+                                               ORG 567o ; Start assembling at address 375
+
+DB <number>     Store the specified 1-byte constant <number> in memory.
+
+                              Examples:
+                                               DB 11 ; Store the 8-bit constant 11 in memory
+                                               DB 333o ; Store the 8-bit constant 219 in memory
+DW <number>    Store the specified 2-byte constant <number> in memory. The assembler initializes the 
+                              memory with the least significant byte first.
+
+                              Examples:
+                                               DW 23785 ; Store the 16-bit constant 23785 in memory
+                                               DW af43h ; Store the 16-bit constant 44867 in memory
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 40
+text = "Assembler Labels"
 vertical_alignment = 1
+
+[node name="number3" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "The assembler also supports jump to lables of the form label_name: (notice the : after the label name). The labels are not case censetive.
+
+Example:
+                 JMP MyLabel
+                  ....
+                  MyLabel: ....
+
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="AssemblingAProgram" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
