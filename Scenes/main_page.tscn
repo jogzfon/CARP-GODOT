@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=43 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -31,6 +31,11 @@
 [ext_resource type="Texture2D" uid="uid://bhkfa0v2lfu07" path="res://Sprites/Subscription/Rectangle 91.png" id="27_1kmlf"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="27_41f47"]
 [ext_resource type="Texture2D" uid="uid://vvu0807gwg2x" path="res://Sprites/Subscription/Rectangle 92.png" id="28_o5xks"]
+[ext_resource type="Script" path="res://Scripts/SubscriptionHandler.cs" id="28_wwcii"]
+[ext_resource type="Texture2D" uid="uid://c4uvbuprkvnnd" path="res://Sprites/Subscription/School_Logo3.png" id="30_up4sm"]
+[ext_resource type="Texture2D" uid="uid://bog35ofpaqh01" path="res://Sprites/Subscription/School_Logo1.png" id="31_5pwgi"]
+[ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
+[ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
 font = ExtResource("13_0fq7n")
@@ -64,6 +69,16 @@ shader_parameter/pulse_speed = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t46w3"]
+shader = ExtResource("10_urm6c")
+shader_parameter/circle_size = 0.5
+shader_parameter/glow_size = 0.05
+shader_parameter/glow_color = Color(1, 1, 1, 0.5)
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/glow_intensity = 1.0
+shader_parameter/pulse_speed = 1.0
 
 [node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "options", "logout", "settings")]
 layout_mode = 3
@@ -1312,160 +1327,6 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="SubscriptionRect" type="ColorRect" parent="FileHandler"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 361.0
-offset_top = 110.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.998594, 0.994333)
-color = Color(0.117647, 0.121569, 0.133333, 1)
-
-[node name="WhatIsThis" type="PanelContainer" parent="FileHandler/SubscriptionRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 85.0
-offset_top = 101.0
-offset_right = -80.0
-offset_bottom = -208.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="FileHandler/SubscriptionRect/WhatIsThis"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("26_egcgx")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
-layout_mode = 0
-offset_left = 36.1704
-offset_top = 94.1057
-offset_right = 209.17
-offset_bottom = 221.106
-theme_override_fonts/font = ExtResource("27_41f47")
-theme_override_font_sizes/font_size = 50
-text = "Guest 
-Tier "
-
-[node name="Price" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
-layout_mode = 0
-offset_left = 46.1844
-offset_top = 265.075
-offset_right = 219.184
-offset_bottom = 366.075
-theme_override_fonts/font = ExtResource("13_0fq7n")
-theme_override_font_sizes/font_size = 50
-text = "$ 0"
-
-[node name="Label2" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
-layout_mode = 0
-offset_left = 15.1408
-offset_top = 402.855
-offset_right = 415.141
-offset_bottom = 727.855
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 25
-text = "👌Basic simulations
-👌Fundamental documentation
-👌AI-generated text interactions."
-autowrap_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-
-[node name="TextureButton2" type="TextureButton" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("27_1kmlf")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
-offset_left = 36.1704
-offset_top = 94.1057
-offset_right = 231.17
-offset_bottom = 221.106
-theme_override_fonts/font = ExtResource("27_41f47")
-theme_override_font_sizes/font_size = 50
-text = "Student 
-Tier "
-
-[node name="Price" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
-offset_left = 46.1844
-offset_top = 265.075
-offset_right = 219.184
-offset_bottom = 366.075
-scale = Vector2(1, 0.986299)
-theme_override_fonts/font = ExtResource("13_0fq7n")
-theme_override_font_sizes/font_size = 50
-text = "$ 10"
-
-[node name="Label2" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
-offset_left = 15.1408
-offset_top = 402.855
-offset_right = 415.141
-offset_bottom = 727.855
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 25
-text = "👌Advanced Visualization
-👌Customizable Simulation
-👌Limited AI-generated text"
-autowrap_mode = 2
-
-[node name="MarginContainer3" type="MarginContainer" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.1
-
-[node name="TextureButton3" type="TextureButton" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture_normal = ExtResource("28_o5xks")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
-offset_left = 36.1704
-offset_top = 94.1057
-offset_right = 283.17
-offset_bottom = 221.106
-theme_override_fonts/font = ExtResource("27_41f47")
-theme_override_font_sizes/font_size = 50
-text = "Education 
-Tier "
-
-[node name="Price" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
-offset_left = 46.1844
-offset_top = 265.075
-offset_right = 219.184
-offset_bottom = 366.075
-theme_override_fonts/font = ExtResource("13_0fq7n")
-theme_override_font_sizes/font_size = 50
-text = "$ 15"
-
-[node name="Label2" type="Label" parent="FileHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
-offset_left = 15.1408
-offset_top = 402.855
-offset_right = 415.141
-offset_bottom = 727.855
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 25
-text = "👌Basic simulations
-👌Customizable Simulation
-👌No Limit AI-generated Text"
-autowrap_mode = 2
-
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
@@ -1536,41 +1397,183 @@ text = "NO"
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
 
-[node name="SubscriptionHandler" type="Node" parent="."]
+[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "subscriptionPanel")]
+script = ExtResource("28_wwcii")
+subscriptionBtn = NodePath("SubscriptionBtn")
+subscriptionPanel = NodePath("SubscriptionRect")
+logInPage = ExtResource("2_fqqk8")
+freeTier = ExtResource("32_mcsfd")
+guestTier = ExtResource("30_up4sm")
+studentTier = ExtResource("31_5pwgi")
+teacherTier = ExtResource("32_5ac3u")
 
-[node name="PanelContainer" type="PanelContainer" parent="SubscriptionHandler"]
+[node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
 visible = false
-anchors_preset = -1
-anchor_left = -0.0125
-anchor_top = -0.0268519
-anchor_right = 0.755729
-anchor_bottom = 0.603704
-offset_left = 394.0
-offset_top = 149.0
-offset_right = 453.0
-offset_bottom = 189.0
-metadata/_edit_use_anchors_ = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 361.0
+offset_top = 110.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+color = Color(0.117647, 0.121569, 0.133333, 1)
 
-[node name="TextureRect" type="TextureRect" parent="SubscriptionHandler/PanelContainer"]
+[node name="WhatIsThis" type="PanelContainer" parent="SubscriptionHandler/SubscriptionRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 85.0
+offset_top = 101.0
+offset_right = -80.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis"]
 layout_mode = 2
-texture = ExtResource("2_dsjfr")
-stretch_mode = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubscriptionHandler/PanelContainer"]
-layout_mode = 2
-
-[node name="Bronze" type="Button" parent="SubscriptionHandler/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "BRONZE"
-
-[node name="Gold" type="Button" parent="SubscriptionHandler/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "GOLD"
-icon_alignment = 1
-
-[node name="Diamond" type="Button" parent="SubscriptionHandler/PanelContainer/HBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "DIAMOND"
+texture_normal = ExtResource("26_egcgx")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
+layout_mode = 0
+offset_left = 36.1704
+offset_top = 94.1057
+offset_right = 209.17
+offset_bottom = 221.106
+theme_override_fonts/font = ExtResource("27_41f47")
+theme_override_font_sizes/font_size = 50
+text = "Guest 
+Tier "
+
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
+layout_mode = 0
+offset_left = 46.1844
+offset_top = 265.075
+offset_right = 219.184
+offset_bottom = 366.075
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "$ 0"
+
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
+layout_mode = 0
+offset_left = 15.1408
+offset_top = 402.855
+offset_right = 415.141
+offset_bottom = 727.855
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "👌Basic simulations
+👌Fundamental documentation
+👌AI-generated text interactions."
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="TextureButton2" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("27_1kmlf")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
+layout_mode = 0
+offset_left = 36.1704
+offset_top = 94.1057
+offset_right = 231.17
+offset_bottom = 221.106
+theme_override_fonts/font = ExtResource("27_41f47")
+theme_override_font_sizes/font_size = 50
+text = "Student 
+Tier "
+
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
+layout_mode = 0
+offset_left = 46.1844
+offset_top = 265.075
+offset_right = 219.184
+offset_bottom = 366.075
+scale = Vector2(1, 0.986299)
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "$ 10"
+
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
+layout_mode = 0
+offset_left = 15.1408
+offset_top = 402.855
+offset_right = 415.141
+offset_bottom = 727.855
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "👌Advanced Visualization
+👌Customizable Simulation
+👌Limited AI-generated text"
+autowrap_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="TextureButton3" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("28_o5xks")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
+layout_mode = 0
+offset_left = 36.1704
+offset_top = 94.1057
+offset_right = 283.17
+offset_bottom = 221.106
+theme_override_fonts/font = ExtResource("27_41f47")
+theme_override_font_sizes/font_size = 50
+text = "Education 
+Tier "
+
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
+layout_mode = 0
+offset_left = 46.1844
+offset_top = 265.075
+offset_right = 219.184
+offset_bottom = 366.075
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "$ 15"
+
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
+layout_mode = 0
+offset_left = 15.1408
+offset_top = 402.855
+offset_right = 415.141
+offset_bottom = 727.855
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "👌Basic simulations
+👌Customizable Simulation
+👌No Limit AI-generated Text"
+autowrap_mode = 2
+
+[node name="SubscriptionBtn" type="TextureButton" parent="SubscriptionHandler"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_t46w3")
+offset_left = 1767.0
+offset_top = 57.0
+offset_right = 1797.0
+offset_bottom = 87.0
+texture_normal = ExtResource("32_mcsfd")
+ignore_texture_size = true
+stretch_mode = 0
