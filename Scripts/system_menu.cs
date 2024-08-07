@@ -16,8 +16,8 @@ public partial class system_menu : Control
     
     [Export] public LineEdit start_location;
 
-    [Export] Button hexBtn;
-    [Export] Button binaryBtn;
+    [Export] public Button hexBtn;
+    [Export] public Button binaryBtn;
     [Export] CheckButton AnimationOn;
 
     public bool isHex = false;

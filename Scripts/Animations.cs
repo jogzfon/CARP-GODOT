@@ -228,6 +228,18 @@ public partial class Animations : Node
 	{
         if (currentMemoryLocation != null)
         {
+            if (cpuStatus.Text != "Running")
+            {
+                sysmenu.hexBtn.Disabled = false;
+                sysmenu.binaryBtn.Disabled = false;
+            }
+            else
+            {
+                sysmenu.isHex = false;
+                sysmenu.hexBtn.Disabled = true;
+                sysmenu.binaryBtn.Disabled = true;
+            }
+
             if (animationRunning && !stepThroughCycle && !stepThroughInstruction)
             {
                 currentMemoryLocation.Text = i.ToString();
