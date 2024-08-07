@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=46 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://bog35ofpaqh01" path="res://Sprites/Subscription/School_Logo1.png" id="31_5pwgi"]
 [ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
 [ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
+[ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="34_pirgk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
 font = ExtResource("13_0fq7n")
@@ -67,8 +68,42 @@ shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xwly2"]
+shader = ExtResource("34_pirgk")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wfjx"]
+shader = ExtResource("34_pirgk")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t46w3"]
 shader = ExtResource("10_urm6c")
@@ -573,6 +608,7 @@ filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
 visible = false
+material = SubResource("ShaderMaterial_xwly2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -611,6 +647,23 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer"]
 layout_mode = 2
+
+[node name="Title" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "WHAT IS THIS?"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
 clip_contents = true
@@ -677,6 +730,23 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "HOW DOES THIS WORK?"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
 
 [node name="TextureRect6" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1411,6 +1481,7 @@ teacherTier = ExtResource("32_5ac3u")
 
 [node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
 visible = false
+material = SubResource("ShaderMaterial_2wfjx")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
