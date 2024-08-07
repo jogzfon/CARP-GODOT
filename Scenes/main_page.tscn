@@ -1411,6 +1411,7 @@ studentTier = ExtResource("31_5pwgi")
 teacherTier = ExtResource("32_5ac3u")
 
 [node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
