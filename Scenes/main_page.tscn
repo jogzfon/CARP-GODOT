@@ -1397,9 +1397,12 @@ text = "NO"
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
 
-[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "subscriptionPanel")]
+[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "subscriptionPanel")]
 script = ExtResource("28_wwcii")
 subscriptionBtn = NodePath("SubscriptionBtn")
+guestTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier")
+studentTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier")
+teacherTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier")
 subscriptionPanel = NodePath("SubscriptionRect")
 logInPage = ExtResource("2_fqqk8")
 freeTier = ExtResource("32_mcsfd")
@@ -1408,7 +1411,6 @@ studentTier = ExtResource("31_5pwgi")
 teacherTier = ExtResource("32_5ac3u")
 
 [node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1436,13 +1438,13 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis"]
 layout_mode = 2
 
-[node name="TextureButton" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+[node name="GuesTier" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("26_egcgx")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier"]
 layout_mode = 0
 offset_left = 36.1704
 offset_top = 94.1057
@@ -1453,7 +1455,7 @@ theme_override_font_sizes/font_size = 50
 text = "Guest 
 Tier "
 
-[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier"]
 layout_mode = 0
 offset_left = 46.1844
 offset_top = 265.075
@@ -1463,7 +1465,7 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 50
 text = "$ 0"
 
-[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton"]
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier"]
 layout_mode = 0
 offset_left = 15.1408
 offset_top = 402.855
@@ -1481,13 +1483,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="TextureButton2" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+[node name="StudentTier" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("27_1kmlf")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier"]
 layout_mode = 0
 offset_left = 36.1704
 offset_top = 94.1057
@@ -1498,7 +1500,7 @@ theme_override_font_sizes/font_size = 50
 text = "Student 
 Tier "
 
-[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier"]
 layout_mode = 0
 offset_left = 46.1844
 offset_top = 265.075
@@ -1509,7 +1511,7 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 50
 text = "$ 10"
 
-[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton2"]
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier"]
 layout_mode = 0
 offset_left = 15.1408
 offset_top = 402.855
@@ -1527,13 +1529,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="TextureButton3" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+[node name="EducationTier" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("28_o5xks")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier"]
 layout_mode = 0
 offset_left = 36.1704
 offset_top = 94.1057
@@ -1544,7 +1546,7 @@ theme_override_font_sizes/font_size = 50
 text = "Education 
 Tier "
 
-[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier"]
 layout_mode = 0
 offset_left = 46.1844
 offset_top = 265.075
@@ -1554,7 +1556,7 @@ theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 50
 text = "$ 15"
 
-[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/TextureButton3"]
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier"]
 layout_mode = 0
 offset_left = 15.1408
 offset_top = 402.855

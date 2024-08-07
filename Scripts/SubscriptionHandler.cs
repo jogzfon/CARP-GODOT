@@ -7,6 +7,13 @@ public partial class SubscriptionHandler : Node
 	[Export]
 	TextureButton subscriptionBtn;
     [Export]
+    TextureButton guestTierBtn;
+    [Export]
+    TextureButton studentTierBtn;
+    [Export]
+    TextureButton teacherTierBtn;
+
+    [Export]
     ColorRect subscriptionPanel;
 
     [Export] PackedScene logInPage;
@@ -36,15 +43,36 @@ public partial class SubscriptionHandler : Node
         {
             if(AccountManager.GetUser().Subscription == "Student")
             {
-                subscriptionBtn.TextureNormal = guestTier;
+                subscriptionBtn.TextureNormal = studentTier;
+                studentTierBtn.Modulate = new Color("5d5d5d");
+                teacherTierBtn.Modulate = new Color("ffffff");
+                guestTierBtn.Modulate = new Color("ffffff");
+
+                studentTierBtn.Disabled = true;
+                teacherTierBtn.Disabled = false;
+                guestTierBtn.Disabled = false;
             }
             else if(AccountManager.GetUser().Subscription == "Teacher")
             {
                 subscriptionBtn.TextureNormal = teacherTier;
+                teacherTierBtn.Modulate = new Color("5d5d5d");
+                studentTierBtn.Modulate = new Color("ffffff");
+                guestTierBtn.Modulate = new Color("ffffff");
+
+                studentTierBtn.Disabled = false;
+                teacherTierBtn.Disabled = true;
+                guestTierBtn.Disabled = false;
             }
             else
             {
                 subscriptionBtn.TextureNormal = guestTier;
+                guestTierBtn.Modulate = new Color("5d5d5d");
+                studentTierBtn.Modulate = new Color("ffffff");
+                teacherTierBtn.Modulate = new Color("ffffff");
+
+                studentTierBtn.Disabled = false;
+                teacherTierBtn.Disabled = false;
+                guestTierBtn.Disabled = true;
             }
         }
         else
