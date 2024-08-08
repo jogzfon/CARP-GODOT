@@ -64,7 +64,7 @@ public partial class main_page : Control
         options.Visible = false;
         AccountManager.SetUser(null);
         signIn.Text = "Sign-In";
-        signIn.Disconnect("pressed", new Callable(this, nameof(Options)));
-        signIn.Connect("pressed", new Callable(this, nameof(SignIn)));
+        /*signIn.Disconnect("pressed", new Callable(this, nameof(Options)));
+        signIn.Connect("pressed", new Callable(this, nameof(SignIn)));*/
     }
 }
