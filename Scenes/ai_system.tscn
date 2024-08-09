@@ -10,7 +10,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
 
-[node name="AISystem" type="Control"]
+[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_backButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +18,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hxjp6")
+_chatContainer = NodePath("ScrollContainer/ChatContainer")
+_request = NodePath("RequestEdit")
+_sendRequestButton = NodePath("SendRequest")
+_backButton = NodePath("Back")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_elcsl")

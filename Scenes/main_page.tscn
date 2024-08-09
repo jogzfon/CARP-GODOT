@@ -607,7 +607,6 @@ access = 2
 filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
-visible = false
 material = SubResource("ShaderMaterial_xwly2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -622,11 +621,14 @@ scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
 [node name="WhatIsThis" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 18.0
+offset_left = 36.0
+offset_right = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -704,6 +706,7 @@ autowrap_mode = 3
 
 [node name="HowDoesThisWork" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -785,12 +788,13 @@ texture = ExtResource("25_7m7ga")
 stretch_mode = 3
 
 [node name="ProgramExample" type="PanelContainer" parent="FileHandler/DocumentationRect"]
-visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
+offset_left = 31.0
+offset_right = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -838,21 +842,18 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Program00" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program00" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";double a number.  i=i+i
 ;i at 100
 
-ldac 	100	                                  ;load i
-mvac		                                       ;copy to R
+ldac 100	                                  	  ;load i
+mvac		                                      ;copy to R
 add		                                          ;i+i
-stac 100                                 ;store back to i
-end
-"
-vertical_alignment = 1
+stac 100                               		  ;store back to i
+end"
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space4" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -862,22 +863,19 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Program01" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program01" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";add two numbers.  x+y   Show overflow.
 ;x at 100, y at 101, sum at 102
 
-ldac 	100	                                 ;load x
+ldac 100	                           		      ;load x
 mvac		                                      ;copy to R
-ldac 101                                 ;load y
-add		                                        ;x+y
-stac 102                                ;store to sum
-end
-"
-vertical_alignment = 1
+ldac 101                           		      ;load y
+add		                               	         ;x+y
+stac 102                            		    ;store to sum
+end"
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space5" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -887,11 +885,8 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Program02" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program02" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";IF example.  
 ;if x+y==0 then I/O port = 0 else I/O port = 1
 ;x at 100. y at 101
@@ -910,9 +905,9 @@ clac
 inac		                                       ;1
                                               ;Endif:
 stac 65535
-end
-"
-vertical_alignment = 1
+end"
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space3" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -922,13 +917,10 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="Program03" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program03" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";example from online Help
-org 0	                                      ;assembly start address
+org 	0	                                      ;assembly start address
 db 2         	                              ;defines a byte of decimal value 2
 db 4                                       ;defines a byte of decimal value 4
 org 10                                    ;assembly start address
@@ -939,7 +931,8 @@ add	                                         ;store the sum of AC, R in AC
 stac 2                                     ;store AC at location 2
 stac ffffh                                ; send AC to I/O Port
 end                                         ;stop"
-vertical_alignment = 1
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space6" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -949,11 +942,8 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="Program04" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program04" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";example from textbook
 ;Variables memory locations: total=100  i=101  n=102  
 ;Label loop=7
@@ -977,7 +967,8 @@ sub		                                            ;n-i
 jpnz 7		                                        ;if n-i!=0 (i.e. i!=n) goto Loop
 		                                                ;else continue here
 end                                                  ;added to book's code."
-vertical_alignment = 1
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space7" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -987,11 +978,8 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="Program05" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program05" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";test logic operations
 ;15=00001111 in 100
 ;85=01010101 in 101
@@ -1009,9 +997,10 @@ xor
 stac	104	                                    ;XOR in 104
 ldac	101
 not	
-stac 	105	                                   ;NOT in 105
+stac 105	                                   ;NOT in 105
 end"
-vertical_alignment = 1
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space8" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1021,25 +1010,23 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="Program06" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program06" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";loop x times  x value in 100
-clac		                                             ;i=0
+clac		         	                                    ;i=0
 mvac		                                           ;R=i
-                                                    ;Loop:
+                       	  		                           ;Loop:
 movr		                                           ;AC=i
-inac		                                             ;i++
+inac		                                               ;i++
 mvac		                                           ;i back to R
-ldac	100                                      	;load x
-sub		                                             ;x-i
-jpnz	2	                                          ;loop again if i<x
+ldac	100                             		         	;load x
+sub		                          	                    ;x-i
+jpnz	2	                          		                ;loop again if i<x
 end
 
 ; set breakpoint at 9 (jpnz) to count the loops..."
-vertical_alignment = 1
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space9" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1049,23 +1036,21 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="Program07" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Program07" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("12_e728k")
-theme_override_font_sizes/font_size = 30
 text = ";busy-wait poll of I/O port until nonzero
 clac
-mvac		                                          ;R=0
-                                                   ;Loop:
-ldac	65535	
+mvac		                                        ;R=0
+          		                                        ;Loop:
+ldac	 65535	
 sub		                                            ;I/O port value - 0
-jmpz	2	                                        ;jump to Loop if I/O port value is 0
+jmpz 2	                                        ;jump to Loop if I/O port value is 0
 
-ldac	65535	                                ;assume it hasn't changed...
-stac 	100	                                    ;put it to \"regular\" memory
+ldac 65535		                                ;assume it hasn't changed...
+stac 100		                                    ;put it to \"regular\" memory
 end"
-vertical_alignment = 1
+editable = false
+scroll_fit_content_height = true
 
 [node name="Space10" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1077,11 +1062,12 @@ vertical_alignment = 1
 
 [node name="NumericConstants" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
+offset_left = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1215,11 +1201,13 @@ autowrap_mode = 2
 
 [node name="AssemblerDirectives" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 13.0
+offset_left = 24.0
+offset_right = -35.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1238,11 +1226,12 @@ text = "X"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Space" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -1250,7 +1239,7 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 30
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -1259,8 +1248,8 @@ theme_override_font_sizes/font_size = 40
 text = "ASSEMBLER DIRECTIVES"
 vertical_alignment = 1
 
-[node name="number" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1529, 0)
+[node name="number" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
@@ -1268,10 +1257,10 @@ theme_override_font_sizes/font_size = 30
 text = "
 The assembly process can be controlled by assembler directives. The assembler interprets the assembler directives instead of translating them into machine instructions. The assembler supports the following directives:"
 vertical_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 3
 
-[node name="number2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1529, 0)
+[node name="number2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
@@ -1279,7 +1268,8 @@ theme_override_font_sizes/font_size = 30
 text = "
 Directive                          Description
 
-ORG <address>  Assemble the subsequent source statements starting at the specified address, <address>.
+ORG <address>  Assemble the subsequent source statements starting at the specified address, 
+                              <address>.
 
                               Examples:
                                                ORG 1123H ; Start assembling at address 4387
@@ -1299,19 +1289,20 @@ DW <number>    Store the specified 2-byte constant <number> in memory. The assem
 
 "
 vertical_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("13_0fq7n")
 theme_override_font_sizes/font_size = 40
 text = "Assembler Labels"
 vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="number3" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1529, 0)
+[node name="number3" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
@@ -1326,10 +1317,11 @@ Example:
 
 "
 vertical_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 3
 
 [node name="AssemblingAProgram" type="PanelContainer" parent="FileHandler/DocumentationRect"]
 visible = false
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
