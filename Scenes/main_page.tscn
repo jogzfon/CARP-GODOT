@@ -607,6 +607,7 @@ access = 2
 filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
+visible = false
 material = SubResource("ShaderMaterial_xwly2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -621,7 +622,6 @@ scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
 [node name="WhatIsThis" type="PanelContainer" parent="FileHandler/DocumentationRect"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -787,7 +787,25 @@ size_flags_vertical = 3
 texture = ExtResource("25_7m7ga")
 stretch_mode = 3
 
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6c80f")
+theme_override_font_sizes/font_size = 25
+text = "
+ANIMATION CONTROLS
+START                                        : Begins or resumes the animation.
+STOP                                          : Pauses or stops the animation.
+Animation Toggle                     : Turns the animation on or off.
+Reset Registers                        : Resets all registers to their default state.
+Step Through Cycle                 : After starting the animation, click twice to step through each cycle. 
+                                                       Clicking it once will play the animation normally.
+Step Through Instruction        : After starting the animation, click twice to step through each instruction. 
+                                                       Clicking it once will play the animation normally."
+autowrap_mode = 2
+
 [node name="ProgramExample" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -844,6 +862,8 @@ vertical_alignment = 1
 
 [node name="Program00" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";double a number.  i=i+i
 ;i at 100
 
@@ -865,6 +885,8 @@ vertical_alignment = 1
 
 [node name="Program01" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";add two numbers.  x+y   Show overflow.
 ;x at 100, y at 101, sum at 102
 
@@ -887,6 +909,8 @@ vertical_alignment = 1
 
 [node name="Program02" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";IF example.  
 ;if x+y==0 then I/O port = 0 else I/O port = 1
 ;x at 100. y at 101
@@ -919,6 +943,8 @@ vertical_alignment = 1
 
 [node name="Program03" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";example from online Help
 org 	0	                                      ;assembly start address
 db 2         	                              ;defines a byte of decimal value 2
@@ -944,6 +970,8 @@ vertical_alignment = 1
 
 [node name="Program04" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";example from textbook
 ;Variables memory locations: total=100  i=101  n=102  
 ;Label loop=7
@@ -980,6 +1008,8 @@ vertical_alignment = 1
 
 [node name="Program05" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";test logic operations
 ;15=00001111 in 100
 ;85=01010101 in 101
@@ -1012,6 +1042,8 @@ vertical_alignment = 1
 
 [node name="Program06" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";loop x times  x value in 100
 clac		         	                                    ;i=0
 mvac		                                           ;R=i
@@ -1038,6 +1070,8 @@ vertical_alignment = 1
 
 [node name="Program07" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
 text = ";busy-wait poll of I/O port until nonzero
 clac
 mvac		                                        ;R=0

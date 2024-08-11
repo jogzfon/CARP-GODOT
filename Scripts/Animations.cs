@@ -250,6 +250,9 @@ public partial class Animations : Node
                 i = Int32.Parse(sysmenu.start_location.Text);
             }
 
+            sysmenu.isCycle = stepThroughCycle;
+            sysmenu.isInstruction = stepThroughInstruction;
+
             //Save Data
             if (AccountManager.GetUser() != null)
             {
@@ -1263,7 +1266,7 @@ public partial class Animations : Node
         int pos2 = (int)memorycode[i + 1];
 
         i++;
-        GD.Print((pos1 | pos2));
+        //GD.Print((pos1 | pos2));
         if ((pos1|pos2) >= 65535)
         {
             EN2(1);

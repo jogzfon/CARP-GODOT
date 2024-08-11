@@ -77,7 +77,7 @@ public partial class ai_system : Control
 
             _chatContainer.RemoveChild(loadingLabel);
 
-            GD.Print($"Generated Text: {completionResult.Completions[0].Text}");
+            //GD.Print($"Generated Text: {completionResult.Completions[0].Text}");
 
             DisplayGeneratedCode(completionResult.Completions[0].Text);
         }

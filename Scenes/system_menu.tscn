@@ -1,11 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw860tmmffkxq"]
+[gd_scene load_steps=7 format=3 uid="uid://dw860tmmffkxq"]
 
 [ext_resource type="Script" path="res://Scripts/system_menu.cs" id="1_0jddp"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="5_ldypl"]
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="5_lq116"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_rn65p"]
 
-[node name="SystemMenu" type="Control" node_paths=PackedStringArray("AR", "PC", "DR", "TR", "IR", "R", "AC", "Z", "start_location", "hexBtn", "binaryBtn", "AnimationOn")]
+[sub_resource type="Gradient" id="Gradient_y1pa2"]
+colors = PackedColorArray(1, 0.388307, 0.418088, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y5btr"]
+gradient = SubResource("Gradient_y1pa2")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="SystemMenu" type="Control" node_paths=PackedStringArray("AR", "PC", "DR", "TR", "IR", "R", "AC", "Z", "start_location", "hexBtn", "binaryBtn", "startBtn", "stopBtn", "resetBtn", "stepCycleBtn", "stepInstructionBtn", "AnimationOn", "cycleLight", "instructionLight")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +35,14 @@ Z = NodePath("HBoxContainer/VBoxContainer2/HBoxContainer7/Z")
 start_location = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer/MemoryLocation")
 hexBtn = NodePath("HBoxContainer/VBoxContainer3/HexBtn")
 binaryBtn = NodePath("HBoxContainer/VBoxContainer3/BinaryBtn")
+startBtn = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer2/Start")
+stopBtn = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer2/Stop")
+resetBtn = NodePath("HBoxContainer2/VBoxContainer2/ResetRegisters")
+stepCycleBtn = NodePath("HBoxContainer2/VBoxContainer2/StepThroughCycle")
+stepInstructionBtn = NodePath("HBoxContainer2/VBoxContainer2/StepThroughInstruction")
 AnimationOn = NodePath("HBoxContainer2/VBoxContainer/HBoxContainer/AnimationOn")
+cycleLight = NodePath("HBoxContainer2/VBoxContainer2/StepThroughCycle/CycleLight")
+instructionLight = NodePath("HBoxContainer2/VBoxContainer2/StepThroughInstruction/InstructionLight")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -265,9 +281,33 @@ theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 19
 text = "STEP THROUGH CYCLE"
 
+[node name="CycleLight" type="TextureRect" parent="HBoxContainer2/VBoxContainer2/StepThroughCycle"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 339.0
+offset_top = 3.0
+offset_right = 403.0
+offset_bottom = 35.0
+grow_vertical = 2
+scale = Vector2(0.458925, 0.412369)
+texture = SubResource("GradientTexture2D_y5btr")
+
 [node name="StepThroughInstruction" type="Button" parent="HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_lq116")
 theme_override_font_sizes/font_size = 19
 text = "STEP THROUGH INSTRUCTION"
+
+[node name="InstructionLight" type="TextureRect" parent="HBoxContainer2/VBoxContainer2/StepThroughInstruction"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 339.0
+offset_top = 3.0
+offset_right = 403.0
+offset_bottom = 35.0
+grow_vertical = 2
+scale = Vector2(0.458925, 0.412369)
+texture = SubResource("GradientTexture2D_y5btr")

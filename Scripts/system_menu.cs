@@ -18,7 +18,19 @@ public partial class system_menu : Control
 
     [Export] public Button hexBtn;
     [Export] public Button binaryBtn;
+    [Export] public Button startBtn;
+    [Export] public Button stopBtn;
+    [Export] public Button resetBtn;
+    [Export] public Button stepCycleBtn;
+    [Export] public Button stepInstructionBtn;
     [Export] CheckButton AnimationOn;
+
+
+    [Export] private TextureRect cycleLight;
+    [Export] private TextureRect instructionLight;
+
+    public bool isCycle;
+    public bool isInstruction;
 
     public bool isHex = false;
     public bool animationOn = true;
@@ -40,6 +52,39 @@ public partial class system_menu : Control
     public override void _Process(double delta)
     {
         animationOn = AnimationOn.ButtonPressed;
+
+        if (isHex)
+        {
+            startBtn.Disabled = true;
+            stopBtn.Disabled = true;
+            resetBtn.Disabled = true;
+            stepCycleBtn.Disabled = true;
+            stepInstructionBtn.Disabled = true;
+        }
+        else
+        {
+            startBtn.Disabled = false;
+            stopBtn.Disabled = false;
+            resetBtn.Disabled = false;
+            stepCycleBtn.Disabled = false;
+            stepInstructionBtn.Disabled = false;
+        }
+        if (isCycle)
+        {
+            cycleLight.Visible = true;
+        }
+        else
+        {
+            cycleLight.Visible = false;
+        }
+        if (isInstruction)
+        {
+            instructionLight.Visible = true;
+        }
+        else
+        {
+            instructionLight.Visible = false;
+        }
     }
     private void ConvertAR(string input) => UpdateRegisters(AR, input, 16);
     private void ConvertPC(string input) => UpdateRegisters(PC, input, 16);
