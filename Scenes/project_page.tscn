@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=20 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dkst6hgkr3nre" path="res://Sprites/Button.png" id="3_22c0e"]
 [ext_resource type="Texture2D" uid="uid://pr17leipx0lk" path="res://Sprites/Bot.png" id="3_587b7"]
 [ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_jdv15"]
+[ext_resource type="Shader" path="res://Shader/loading.gdshader" id="5_qj6bc"]
 [ext_resource type="PackedScene" uid="uid://b8fqwku1kjuqn" path="res://Scenes/main.tscn" id="5_squa4"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="6_is7gs"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
@@ -18,7 +19,31 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgeug"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aydvx"]
+shader = ExtResource("5_qj6bc")
+shader_parameter/spiral_type = 1
+shader_parameter/primary_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/secondary_color = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/rays = 6.0
+shader_parameter/speed = 0.5
+shader_parameter/fade = 0.1
+shader_parameter/thickness = 0.3
+shader_parameter/clockwise = true
+shader_parameter/tiers = 4.0
+shader_parameter/stretch = 6.28
+
+[sub_resource type="Gradient" id="Gradient_4dhc3"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nqaa8"]
+gradient = SubResource("Gradient_4dhc3")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0.5, 0.5)
+
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "loadingIcon", "notification", "toSystem", "assemble", "toAI", "back")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +58,7 @@ breakPointsPnl = NodePath("VBoxContainer/PanelContainer/Breakpoints")
 traceResultsPnl = NodePath("VBoxContainer/PanelContainer/TraceResult")
 aiPnl = NodePath("AISystem")
 viewSystem = NodePath("VBoxContainer/PanelContainer/SystemViewContainer")
+loadingIcon = NodePath("LoadingIcon")
 notification = NodePath("NotificationHandler")
 toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
 assemble = NodePath("LeftContainer/Assemble")
@@ -497,3 +523,20 @@ layout_mode = 1
 
 [node name="NotificationHandler" parent="." instance=ExtResource("15_nhij1")]
 layout_mode = 1
+
+[node name="LoadingIcon" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_aydvx")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -746.0
+offset_top = -536.0
+offset_right = -618.0
+offset_bottom = -408.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_nqaa8")
