@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjoi18xm4kdgo"]
+
+[ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_jarin"]
+[ext_resource type="Script" path="res://Scripts/NotificationHandler.cs" id="1_t5tot"]
+[ext_resource type="Texture2D" uid="uid://bvhfcm8kjr7yf" path="res://Sprites/notification.png" id="2_25n1e"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="3_le842"]
+
+[node name="NotificationHandler" type="Control" node_paths=PackedStringArray("notificationWindow", "closeNotification", "message")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t5tot")
+notificationWindow = NodePath("NotificationWindow")
+closeNotification = NodePath("NotificationWindow/Exit")
+message = NodePath("NotificationWindow/ScrollContainer/Message")
+
+[node name="NotificationWindow" type="Window" parent="."]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(1080, 400)
+visible = false
+unresizable = true
+borderless = true
+always_on_top = true
+popup_window = true
+
+[node name="TextureRect" type="TextureRect" parent="NotificationWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_25n1e")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="NotificationWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Message" type="Label" parent="NotificationWindow/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_jarin")
+theme_override_font_sizes/font_size = 30
+text = "MESSAGE"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Exit" type="Button" parent="NotificationWindow"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 30.0
+offset_right = -36.9999
+offset_bottom = 63.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_le842")
+theme_override_font_sizes/font_size = 20
+text = "X"
+flat = true

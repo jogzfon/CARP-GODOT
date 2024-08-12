@@ -1,0 +1,1678 @@
+[gd_scene load_steps=46 format=3 uid="uid://gc328eisvff8"]
+
+[ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
+[ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
+[ext_resource type="Texture2D" uid="uid://c4woa0garcmfn" path="res://Sprites/Rectangle 92.png" id="2_dsjfr"]
+[ext_resource type="PackedScene" uid="uid://whq7hnglcf2a" path="res://Scenes/logInPage.tscn" id="2_fqqk8"]
+[ext_resource type="Texture2D" uid="uid://6uq758q03qox" path="res://Sprites/pp.png" id="4_2bfqo"]
+[ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="4_6c80f"]
+[ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
+[ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
+[ext_resource type="PackedScene" uid="uid://b15huxyjqmigj" path="res://Scenes/recent_file.tscn" id="6_nbcor"]
+[ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
+[ext_resource type="Shader" path="res://Shader/circleImage.gdshader" id="10_urm6c"]
+[ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]
+[ext_resource type="Script" path="res://Scripts/ProfileHandler.cs" id="12_dw1ay"]
+[ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="12_e728k"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="13_0fq7n"]
+[ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="14_5bdyj"]
+[ext_resource type="Script" path="res://Scripts/ExitController.cs" id="16_metue"]
+[ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
+[ext_resource type="Script" path="res://Scripts/FileHandler.cs" id="18_lnwlk"]
+[ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/Documentation/InstructionSet.png" id="19_f2wtp"]
+[ext_resource type="Texture2D" uid="uid://cimg5xsnd3w80" path="res://Sprites/Documentation/ProjectPage.png" id="20_t3kpw"]
+[ext_resource type="Texture2D" uid="uid://bpoqpdeukbide" path="res://Sprites/Documentation/Assembly.png" id="21_dmdda"]
+[ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="21_iog1l"]
+[ext_resource type="Texture2D" uid="uid://brtc5luckr666" path="res://Sprites/Documentation/Memory.png" id="22_t4v1g"]
+[ext_resource type="Texture2D" uid="uid://bk5xps8cjaxia" path="res://Sprites/Documentation/Breakpoint.png" id="23_b17yx"]
+[ext_resource type="Texture2D" uid="uid://kw5ui1f46s23" path="res://Sprites/Documentation/TraceResult.png" id="24_rhk4k"]
+[ext_resource type="Texture2D" uid="uid://cylpotkojiv3a" path="res://Sprites/Documentation/System.png" id="25_7m7ga"]
+[ext_resource type="Texture2D" uid="uid://b1n8h8f7y7o0a" path="res://Sprites/Subscription/Rectangle 90.png" id="26_egcgx"]
+[ext_resource type="Texture2D" uid="uid://bhkfa0v2lfu07" path="res://Sprites/Subscription/Rectangle 91.png" id="27_1kmlf"]
+[ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="27_41f47"]
+[ext_resource type="Texture2D" uid="uid://vvu0807gwg2x" path="res://Sprites/Subscription/Rectangle 92.png" id="28_o5xks"]
+[ext_resource type="Script" path="res://Scripts/SubscriptionHandler.cs" id="28_wwcii"]
+[ext_resource type="Texture2D" uid="uid://c4uvbuprkvnnd" path="res://Sprites/Subscription/School_Logo3.png" id="30_up4sm"]
+[ext_resource type="Texture2D" uid="uid://bog35ofpaqh01" path="res://Sprites/Subscription/School_Logo1.png" id="31_5pwgi"]
+[ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
+[ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
+[ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="34_pirgk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
+font = ExtResource("13_0fq7n")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_qv4bw"]
+font = ExtResource("13_0fq7n")
+font_size = 35
+shadow_color = Color(0.298039, 0.305882, 0.572549, 1)
+shadow_offset = Vector2(-3, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dme4"]
+shader = ExtResource("10_urm6c")
+shader_parameter/circle_size = 0.4
+shader_parameter/glow_size = 0.05
+shader_parameter/glow_color = Color(0, 0.5, 1, 0.5)
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/glow_intensity = 1.0
+shader_parameter/pulse_speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if5nb"]
+shader = ExtResource("10_urm6c")
+shader_parameter/circle_size = 0.5
+shader_parameter/glow_size = 0.05
+shader_parameter/glow_color = Color(0, 0.5, 1, 0.5)
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/glow_intensity = 1.0
+shader_parameter/pulse_speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xwly2"]
+shader = ExtResource("34_pirgk")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
+bg_color = Color(0.388235, 0.388235, 0.396078, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wfjx"]
+shader = ExtResource("34_pirgk")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t46w3"]
+shader = ExtResource("10_urm6c")
+shader_parameter/circle_size = 0.5
+shader_parameter/glow_size = 0.05
+shader_parameter/glow_color = Color(1, 1, 1, 0.5)
+shader_parameter/ratio_width = 1.0
+shader_parameter/ratio_height = 1.0
+shader_parameter/glow_intensity = 1.0
+shader_parameter/pulse_speed = 1.0
+
+[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "options", "logout", "settings")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tloas")
+signIn = NodePath("MainContent/Sign-In")
+signOut = NodePath("MainContent/SignOut")
+options = NodePath("MainContent/SignOut/Options")
+logout = NodePath("MainContent/SignOut/Options/Logout")
+settings = NodePath("MainContent/SignOut/Options/Settings")
+logInPage = ExtResource("2_fqqk8")
+
+[node name="MainContent" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="MainContent"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="ColorRect" type="ColorRect" parent="MainContent/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 370.0
+offset_top = 859.0
+offset_right = -16.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.996013, 0.352359)
+color = Color(0.291716, 0.299233, 0.321761, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="MainContent"]
+offset_top = 100.0
+offset_right = 350.0
+offset_bottom = 1080.0
+color = Color(0.168627, 0.176471, 0.188235, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="MainContent"]
+offset_top = 100.0
+offset_right = 350.0
+offset_bottom = 1080.0
+color = Color(0.168627, 0.176471, 0.188235, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent"]
+offset_left = 15.0
+offset_top = 104.0
+offset_right = 335.0
+offset_bottom = 878.0
+
+[node name="TextureRect" type="TextureRect" parent="MainContent/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_dsjfr")
+
+[node name="Label" type="Label" parent="MainContent/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -11.0
+offset_right = 160.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PROJECTS"
+label_settings = SubResource("LabelSettings_qri6r")
+
+[node name="Label" type="Label" parent="MainContent/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6c80f")
+theme_override_font_sizes/font_size = 25
+text = "Recents"
+
+[node name="ProjectContainer" type="ScrollContainer" parent="MainContent/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProjectList" type="VBoxContainer" parent="MainContent/VBoxContainer/ProjectContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="MainContent/VBoxContainer"]
+layout_mode = 2
+text = "DOCUMENTATION"
+label_settings = SubResource("LabelSettings_qri6r")
+
+[node name="DocumentationContainer" type="ScrollContainer" parent="MainContent/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DocumentationsList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Wit" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "What is this?"
+
+[node name="Hdtw" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "How does this work?"
+
+[node name="Pex" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "Program Example"
+
+[node name="Nc" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "Numeric Constants"
+
+[node name="Ad" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "Assembler Directives"
+
+[node name="Aap" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+text = "Assembling a program"
+
+[node name="Sign-In" type="Button" parent="MainContent"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -100.0
+offset_right = 321.0
+offset_bottom = -55.0
+grow_vertical = 0
+scale = Vector2(1, 0.893349)
+text = "Sign-In"
+icon = ExtResource("17_587en")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SignOut" type="Button" parent="MainContent"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -100.0
+offset_right = 321.0
+offset_bottom = -55.0
+grow_vertical = 0
+text = "Sign-In"
+icon = ExtResource("17_587en")
+flat = true
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Options" type="VBoxContainer" parent="MainContent/SignOut"]
+visible = false
+layout_mode = 0
+offset_left = 6.0
+offset_top = -62.0
+offset_right = 288.0
+offset_bottom = 4.0
+
+[node name="Logout" type="Button" parent="MainContent/SignOut/Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+text = "LOGOUT"
+
+[node name="Settings" type="Button" parent="MainContent/SignOut/Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+text = "SETTINGS"
+
+[node name="ColorRect3" type="ColorRect" parent="MainContent"]
+offset_right = 1920.0
+offset_bottom = 100.0
+color = Color(0.168627, 0.176471, 0.188235, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent"]
+offset_right = 1920.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="MainContent/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_iv1we")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="MainContent/HBoxContainer"]
+layout_mode = 2
+text = "WELCOME TO CARP"
+label_settings = SubResource("LabelSettings_qv4bw")
+
+[node name="Title" type="Label" parent="MainContent"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.0
+offset_top = -266.0
+offset_right = 559.0
+offset_bottom = -127.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "RELATIVELY SIMPLE COMPUTER 
+SYSTEM SIMULATOR"
+
+[node name="SubTitle" type="Label" parent="MainContent"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -233.0
+offset_top = -121.0
+offset_right = 567.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+theme_override_font_sizes/font_size = 25
+text = "Create a new instruction set or start from scratch.
+Open existing project from file."
+
+[node name="SubTitle" type="Label" parent="MainContent/SubTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -446.0
+offset_top = -240.0
+offset_right = -346.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_8xef3")
+theme_override_font_sizes/font_size = 30
+text = ">M4J"
+
+[node name="ProfileBtn" type="TextureButton" parent="MainContent"]
+material = SubResource("ShaderMaterial_2dme4")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -149.0
+offset_top = 5.0
+offset_right = -59.0
+offset_bottom = 95.0
+grow_horizontal = 0
+scale = Vector2(0.999445, 0.999049)
+texture_normal = ExtResource("4_2bfqo")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "notification")]
+script = ExtResource("12_dw1ay")
+schoolBtn = NodePath("ManageFile/New Project3")
+centerMargin = NodePath("ManageFile/MarginContainer2")
+accountProfile = NodePath("../MainContent/ProfileBtn")
+profilePanel = NodePath("ProfilePanel")
+exitProfile = NodePath("ProfilePanel/ExitButton")
+profileDialog = NodePath("ProfilePanel/ProfileDialog")
+changeProfileBtn = NodePath("ProfilePanel/ProfileBtn")
+defaultProfileTexture = ExtResource("4_2bfqo")
+saveProfileImage = NodePath("ProfilePanel/SaveBtn")
+userName = NodePath("ProfilePanel/Name")
+notification = NodePath("../NotificationHandler")
+
+[node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
+offset_left = 805.0
+offset_top = 578.0
+offset_right = 1257.0
+offset_bottom = 711.0
+alignment = 1
+
+[node name="GoToSystem" type="Button" parent="ProfileHandler/DirectToSystem"]
+layout_mode = 2
+text = "GoToSystem"
+icon = ExtResource("4_rgqy0")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="ManageFile" type="HBoxContainer" parent="ProfileHandler"]
+visible = false
+offset_left = 805.0
+offset_top = 578.0
+offset_right = 1257.0
+offset_bottom = 711.0
+alignment = 1
+
+[node name="New Project" type="Button" parent="ProfileHandler/ManageFile"]
+layout_mode = 2
+text = "New"
+icon = ExtResource("4_rgqy0")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ProfileHandler/ManageFile"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Open Project" type="Button" parent="ProfileHandler/ManageFile"]
+layout_mode = 2
+text = "Open"
+icon = ExtResource("5_2n6so")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="ProfileHandler/ManageFile"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="New Project3" type="Button" parent="ProfileHandler/ManageFile"]
+visible = false
+layout_mode = 2
+text = "School"
+icon = ExtResource("14_5bdyj")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="ProfilePanel" type="Panel" parent="ProfileHandler"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -481.0
+offset_top = -422.0
+offset_right = 819.0
+offset_bottom = 278.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ProfileHandler/ProfilePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -20.0
+offset_right = 6.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.290196, 0.298039, 0.321569, 1)
+
+[node name="ProfileBtn" type="TextureButton" parent="ProfileHandler/ProfilePanel"]
+material = SubResource("ShaderMaterial_if5nb")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = -178.0
+offset_right = 176.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_2bfqo")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Name" type="Label" parent="ProfileHandler/ProfilePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -335.0
+offset_top = -258.0
+offset_right = 340.0
+offset_bottom = -215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_6c80f")
+theme_override_font_sizes/font_size = 35
+text = "GOOD DAY!!!"
+horizontal_alignment = 1
+
+[node name="SaveBtn" type="Button" parent="ProfileHandler/ProfilePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.5
+offset_top = 233.0
+offset_right = 95.5
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+icon = ExtResource("2_dsjfr")
+flat = true
+icon_alignment = 1
+
+[node name="ExitButton" type="Button" parent="ProfileHandler/ProfilePanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = 39.0
+grow_horizontal = 0
+text = "X"
+
+[node name="ProfileDialog" type="FileDialog" parent="ProfileHandler/ProfilePanel"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(800, 800)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg")
+
+[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "recentFileList", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
+script = ExtResource("18_lnwlk")
+dialogue = NodePath("FileDialog")
+newProject = NodePath("../ProfileHandler/ManageFile/New Project")
+openProject = NodePath("../ProfileHandler/ManageFile/Open Project")
+goToSystem = NodePath("../ProfileHandler/DirectToSystem/GoToSystem")
+directToSystem = NodePath("../ProfileHandler/DirectToSystem")
+manageFile = NodePath("../ProfileHandler/ManageFile")
+projectPage = ExtResource("11_5fqup")
+recentFile = ExtResource("6_nbcor")
+recentFileList = NodePath("../MainContent/VBoxContainer/ProjectContainer/ProjectList")
+documentationRect = NodePath("DocumentationRect")
+witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
+witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")
+WIT = NodePath("DocumentationRect/WhatIsThis")
+htdwbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Hdtw")
+htdwexit = NodePath("DocumentationRect/HowDoesThisWork/VBoxContainer/Exit")
+HDTW = NodePath("DocumentationRect/HowDoesThisWork")
+pexbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Pex")
+pexexit = NodePath("DocumentationRect/ProgramExample/VBoxContainer/Exit")
+PEX = NodePath("DocumentationRect/ProgramExample")
+ncbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Nc")
+ncexit = NodePath("DocumentationRect/NumericConstants/VBoxContainer/Exit")
+NC = NodePath("DocumentationRect/NumericConstants")
+adbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Ad")
+adexit = NodePath("DocumentationRect/AssemblerDirectives/VBoxContainer/Exit")
+AD = NodePath("DocumentationRect/AssemblerDirectives")
+aapbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Aap")
+aapexit = NodePath("DocumentationRect/AssemblingAProgram/VBoxContainer/Exit")
+AAP = NodePath("DocumentationRect/AssemblingAProgram")
+
+[node name="FileDialog" type="FileDialog" parent="FileHandler"]
+title = "Open a File"
+position = Vector2i(400, 36)
+size = Vector2i(780, 680)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.carp")
+
+[node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
+visible = false
+material = SubResource("ShaderMaterial_xwly2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 361.0
+offset_top = 110.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="WhatIsThis" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_right = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/WhatIsThis"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "WHAT IS THIS?"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(1500, 650)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "The Relatively Simple CPU Simulator is an instructional aid for students studying Computer Organization And Architecture, typically at the junior or senior level. It simulates the Relatively Simple CPU based on John D. Carpinelli's Relatively Simple Computer System Simulator. 
+
+Students first enter an assembly language program, which is assembled by the simulator. After correcting any syntax errors, the user simulates the fetch, decode, and execute cycles for each instruction in the program. The user may simulate the execution of the program by clock cycle, by instruction, using breakpoints, or as a single, continuous execution.
+
+The Relatively Simple Computer System simulator is an instructional aid for teaching computer system design.  It allows the user to simulate the flow of data within a computer consisting of the Relatively Simple CPU, memory, and a memory-mapped I/O port, as it fetches, decodes, and executes instructions.  It uses animation to illustrate the flow of data between components.
+
+The Relatively Simple CPU can access 64K bytes of memory, each byte being 8 bits wide. The CPU does this by outputting a 16-bit address on its output pins A[15..0] and reading in the 8-bit value from memory on its inputs D[7..0].  This CPU has two programmer-accessible registers: an 8-bit accumulator labeled AC, and an 8-bit general purpose register R.  It also has a 1-bit zero flag, Z. It has sixteen instructions in its instruction set, as shown below.
+
+"
+autowrap_mode = 3
+clip_text = true
+
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="FileHandler/DocumentationRect/WhatIsThis/VBoxContainer/ScrollContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(1500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+autowrap_mode = 3
+
+[node name="HowDoesThisWork" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/HowDoesThisWork"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "HOW DOES THIS WORK?"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect6" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("20_t3kpw")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("21_dmdda")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("22_t4v1g")
+stretch_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("23_b17yx")
+stretch_mode = 3
+
+[node name="TextureRect4" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("24_rhk4k")
+stretch_mode = 3
+
+[node name="TextureRect5" type="TextureRect" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("25_7m7ga")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/HowDoesThisWork/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6c80f")
+theme_override_font_sizes/font_size = 25
+text = "
+ANIMATION CONTROLS
+START                                        : Begins or resumes the animation.
+STOP                                          : Pauses or stops the animation.
+Animation Toggle                     : Turns the animation on or off.
+Reset Registers                        : Resets all registers to their default state.
+Step Through Cycle                 : After starting the animation, click twice to step through each cycle. 
+                                                       Clicking it once will play the animation normally.
+Step Through Instruction        : After starting the animation, click twice to step through each instruction. 
+                                                       Clicking it once will play the animation normally."
+autowrap_mode = 2
+
+[node name="ProgramExample" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_right = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/ProgramExample"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "PROGRAM EXAMPLES"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Program00" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";double a number.  i=i+i
+;i at 100
+
+ldac 100	                                  	  ;load i
+mvac		                                      ;copy to R
+add		                                          ;i+i
+stac 100                               		  ;store back to i
+end"
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space4" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Program01" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";add two numbers.  x+y   Show overflow.
+;x at 100, y at 101, sum at 102
+
+ldac 100	                           		      ;load x
+mvac		                                      ;copy to R
+ldac 101                           		      ;load y
+add		                               	         ;x+y
+stac 102                            		    ;store to sum
+end"
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space5" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Program02" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";IF example.  
+;if x+y==0 then I/O port = 0 else I/O port = 1
+;x at 100. y at 101
+
+ldac 100                                ;load x
+mvac
+ldac 101                                ;load y
+add	
+                                               ;if not equal to 0 goto Else:
+jpnz	 15                                  ;skip to !=0 case (else part)
+                                              ;Then:
+clac		                                       ;0
+jump 17	                                ;jump over else part to Endif:
+                                              ;Else:
+clac
+inac		                                       ;1
+                                              ;Endif:
+stac 65535
+end"
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program03" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";example from online Help
+org 	0	                                      ;assembly start address
+db 2         	                              ;defines a byte of decimal value 2
+db 4                                       ;defines a byte of decimal value 4
+org 10                                    ;assembly start address
+ldac 0                                    ;load AC with data at location 0
+mvac                                      ;move AC data to register R
+ldac 1                                     ;load AC with data at location 1
+add	                                         ;store the sum of AC, R in AC
+stac 2                                     ;store AC at location 2
+stac ffffh                                ; send AC to I/O Port
+end                                         ;stop"
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space6" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program04" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";example from textbook
+;Variables memory locations: total=100  i=101  n=102  
+;Label loop=7
+;Need to manually Edit Memory location 102 for n value.
+
+clac
+stac 100	                                           ;total=0
+stac 101	                                            ;i=0
+                                                          ;Loop:
+ldac 101	                                            ;i++
+inac		
+stac 101
+
+mvac		                                                ;i to R
+ldac 100	                                          ;total to AC
+add		                                                  ;total+i
+stac 100                                         	;total+=i
+
+ldac 102                                         	;n to AC
+sub		                                            ;n-i
+jpnz 7		                                        ;if n-i!=0 (i.e. i!=n) goto Loop
+		                                                ;else continue here
+end                                                  ;added to book's code."
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space7" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program05" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";test logic operations
+;15=00001111 in 100
+;85=01010101 in 101
+
+ldac	100
+mvac
+ldac	101
+and
+stac	102	                                    ;AND in 102
+ldac	101
+or
+stac	103	                                    ;OR in 103
+ldac	101
+xor
+stac	104	                                    ;XOR in 104
+ldac	101
+not	
+stac 105	                                   ;NOT in 105
+end"
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space8" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program06" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";loop x times  x value in 100
+clac		         	                                    ;i=0
+mvac		                                           ;R=i
+                       	  		                           ;Loop:
+movr		                                           ;AC=i
+inac		                                               ;i++
+mvac		                                           ;i back to R
+ldac	100                             		         	;load x
+sub		                          	                    ;x-i
+jpnz	2	                          		                ;loop again if i<x
+end
+
+; set breakpoint at 9 (jpnz) to count the loops..."
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space9" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Program07" type="TextEdit" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = ";busy-wait poll of I/O port until nonzero
+clac
+mvac		                                        ;R=0
+          		                                        ;Loop:
+ldac	 65535	
+sub		                                            ;I/O port value - 0
+jmpz 2	                                        ;jump to Loop if I/O port value is 0
+
+ldac 65535		                                ;assume it hasn't changed...
+stac 100		                                    ;put it to \"regular\" memory
+end"
+editable = false
+scroll_fit_content_height = true
+
+[node name="Space10" type="Label" parent="FileHandler/DocumentationRect/ProgramExample/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="NumericConstants" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/NumericConstants"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 40
+text = "NUMERIC CONSTRAINTS"
+vertical_alignment = 1
+
+[node name="number" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 530)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "
+Numeric constants can be used in source statements. If there is no postfix, the assembler assumes the number is decimal.
+
+number can be one of the following:
+
+                   - bin_numB
+                   - dec_num (or dec_numD)
+                   - oct_numO (or oct_numQ)
+                   - hex_numH
+
+                   Lowercase equivalences are allowed: b, d, o, q, h
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="number2" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "bin_num is a binary number consisting of the digits '0'-'1' and ending with a 'B' or 'b'.
+
+Examples:
+                   11000101B
+                   1011B
+                   1110110b
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="number3" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "dec_num is a decimal number consisting of the digits '0'-'9', optionally followed by 'D' or 'd'.
+
+Examples:
+                   364
+                   7534D
+                   435d
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="number4" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "oct_num is an octal number consisting of the digits '0'-'7' and ending with an 'O', 'o', 'Q' or 'q'.
+
+Examples:
+                   77O
+                   542o
+                   2324q
+                   34241Q
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="number5" type="Label" parent="FileHandler/DocumentationRect/NumericConstants/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1529, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "hex_num is a hexadecimal number consisting of '0'-'9' and 'a'-'f' or 'A'-'F' ending with a 'H', or 'h'.
+
+Examples:
+                   84H
+                   ABDEh
+                   f12aH
+
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AssemblerDirectives" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 40
+text = "ASSEMBLER DIRECTIVES"
+vertical_alignment = 1
+
+[node name="number" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "
+The assembly process can be controlled by assembler directives. The assembler interprets the assembler directives instead of translating them into machine instructions. The assembler supports the following directives:"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="number2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "
+Directive                          Description
+
+ORG <address>  Assemble the subsequent source statements starting at the specified address, 
+                              <address>.
+
+                              Examples:
+                                               ORG 1123H ; Start assembling at address 4387
+                                               ORG 567o ; Start assembling at address 375
+
+DB <number>     Store the specified 1-byte constant <number> in memory.
+
+                              Examples:
+                                               DB 11 ; Store the 8-bit constant 11 in memory
+                                               DB 333o ; Store the 8-bit constant 219 in memory
+DW <number>    Store the specified 2-byte constant <number> in memory. The assembler initializes the 
+                              memory with the least significant byte first.
+
+                              Examples:
+                                               DW 23785 ; Store the 16-bit constant 23785 in memory
+                                               DW af43h ; Store the 16-bit constant 44867 in memory
+
+"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 40
+text = "Assembler Labels"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="number3" type="Label" parent="FileHandler/DocumentationRect/AssemblerDirectives/VBoxContainer/ScrollContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+text = "The assembler also supports jump to lables of the form label_name: (notice the : after the label name). The labels are not case censetive.
+
+Example:
+                 JMP MyLabel
+                  ....
+                  MyLabel: ....
+
+
+"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AssemblingAProgram" type="PanelContainer" parent="FileHandler/DocumentationRect"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblingAProgram"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Space" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "Yow JD"
+vertical_alignment = 1
+
+[node name="Space2" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 30
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("19_f2wtp")
+stretch_mode = 3
+
+[node name="Space3" type="Label" parent="FileHandler/DocumentationRect/AssemblingAProgram/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 40
+vertical_alignment = 1
+
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
+script = ExtResource("16_metue")
+exitbtn = NodePath("ExitButton")
+savePanel = NodePath("SavePanel")
+yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
+nobtn = NodePath("SavePanel/HBoxContainer/No")
+saveAvailable = false
+
+[node name="ExitButton" type="Button" parent="Exit"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = 39.0
+grow_horizontal = 0
+text = "X"
+
+[node name="SavePanel" type="Panel" parent="Exit"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ce0sa")
+
+[node name="Label" type="Label" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = 84.0
+offset_right = 14.0
+offset_bottom = 107.0
+grow_horizontal = 2
+text = "Do you want to save file?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -155.0
+offset_top = 147.0
+offset_right = 145.0
+offset_bottom = 187.0
+grow_horizontal = 2
+
+[node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="No" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
+
+[node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
+layout_mode = 1
+
+[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "subscriptionPanel")]
+script = ExtResource("28_wwcii")
+subscriptionBtn = NodePath("SubscriptionBtn")
+guestTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier")
+studentTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier")
+teacherTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier")
+subscriptionPanel = NodePath("SubscriptionRect")
+logInPage = ExtResource("2_fqqk8")
+freeTier = ExtResource("32_mcsfd")
+guestTier = ExtResource("30_up4sm")
+studentTier = ExtResource("31_5pwgi")
+teacherTier = ExtResource("32_5ac3u")
+
+[node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
+visible = false
+material = SubResource("ShaderMaterial_2wfjx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 361.0
+offset_top = 110.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="WhatIsThis" type="PanelContainer" parent="SubscriptionHandler/SubscriptionRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 85.0
+offset_top = 101.0
+offset_right = -80.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis"]
+layout_mode = 2
+
+[node name="GuesTier" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("26_egcgx")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier"]
+layout_mode = 0
+offset_left = 36.1704
+offset_top = 94.1057
+offset_right = 209.17
+offset_bottom = 221.106
+theme_override_fonts/font = ExtResource("27_41f47")
+theme_override_font_sizes/font_size = 50
+text = "Guest 
+Tier "
+
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier"]
+layout_mode = 0
+offset_left = 46.1844
+offset_top = 265.075
+offset_right = 219.184
+offset_bottom = 366.075
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "$ 0"
+
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier"]
+layout_mode = 0
+offset_left = 15.1408
+offset_top = 402.855
+offset_right = 415.141
+offset_bottom = 727.855
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "👌Basic simulations
+👌Fundamental documentation
+👌AI-generated text interactions."
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="StudentTier" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("27_1kmlf")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier"]
+layout_mode = 0
+offset_left = 36.1704
+offset_top = 94.1057
+offset_right = 231.17
+offset_bottom = 221.106
+theme_override_fonts/font = ExtResource("27_41f47")
+theme_override_font_sizes/font_size = 50
+text = "Student 
+Tier "
+
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier"]
+layout_mode = 0
+offset_left = 46.1844
+offset_top = 265.075
+offset_right = 219.184
+offset_bottom = 366.075
+scale = Vector2(1, 0.986299)
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "$ 10"
+
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier"]
+layout_mode = 0
+offset_left = 15.1408
+offset_top = 402.855
+offset_right = 415.141
+offset_bottom = 727.855
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "👌Advanced Visualization
+👌Customizable Simulation
+👌Limited AI-generated text"
+autowrap_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="EducationTier" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("28_o5xks")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier"]
+layout_mode = 0
+offset_left = 36.1704
+offset_top = 94.1057
+offset_right = 283.17
+offset_bottom = 221.106
+theme_override_fonts/font = ExtResource("27_41f47")
+theme_override_font_sizes/font_size = 50
+text = "Education 
+Tier "
+
+[node name="Price" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier"]
+layout_mode = 0
+offset_left = 46.1844
+offset_top = 265.075
+offset_right = 219.184
+offset_bottom = 366.075
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 50
+text = "$ 15"
+
+[node name="Label2" type="Label" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier"]
+layout_mode = 0
+offset_left = 15.1408
+offset_top = 402.855
+offset_right = 415.141
+offset_bottom = 727.855
+theme_override_fonts/font = ExtResource("12_e728k")
+theme_override_font_sizes/font_size = 25
+text = "👌Basic simulations
+👌Customizable Simulation
+👌No Limit AI-generated Text"
+autowrap_mode = 2
+
+[node name="SubscriptionBtn" type="TextureButton" parent="SubscriptionHandler"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_t46w3")
+offset_left = 1767.0
+offset_top = 57.0
+offset_right = 1797.0
+offset_bottom = 87.0
+texture_normal = ExtResource("32_mcsfd")
+ignore_texture_size = true
+stretch_mode = 0
