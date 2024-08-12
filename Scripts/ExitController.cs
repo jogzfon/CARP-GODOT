@@ -26,7 +26,7 @@ public partial class ExitController : Node
 	}
 	private async void Exit()
 	{
-        if (AccountManager.GetUser() != null && saveAvailable)
+        if (AccountManager.GetUser() != null && saveAvailable && (AccountManager.GetUser().Subscription == "Student" || AccountManager.GetUser().Subscription == "Teacher"))
         {
             savePanel.Visible = true;
 		}
@@ -38,7 +38,6 @@ public partial class ExitController : Node
 	}
     private async void Save()
     {
-        GD.Print("Data saved!!!");
         DataToSave.SaveFile();
         DataToSave.ResetDatas();
         await WaitTime();

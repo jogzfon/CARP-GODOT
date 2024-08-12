@@ -79,6 +79,7 @@ public partial class ProfileHandler : Node
 	{
         if (AccountManager.GetUser() != null)
         {
+            schoolBtn.Disabled = false;
             accountProfile.Disabled = false;
             if(AccountManager.GetUser().ProfileImage != "NONE")
             {

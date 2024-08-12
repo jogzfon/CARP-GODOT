@@ -12,7 +12,7 @@ public partial class ai_system : Control
     [Export] private Button _sendRequestButton;
     [Export] private TextureButton _backButton;
 
-    private string apiKey = "sk-Is_d8Ut7qdJkcnGqqogQw35GCGNwpGYtszZ8yJyRdcT3BlbkFJy1_hKpYEAl-c6am6m_TmsbeiPVNRxgCMWEhKkIy90A";  // Replace with your actual API key
+    private string apiKey = "sk-SyE75X15zKdupnh8v9O-DtOKzOsnPCMp0pwCdoidW0T3BlbkFJGfbtjheSvAP-XvOmUxqhlkyCqGT0m3u1fh0PR4jdIA";  // Replace with your actual API key
 
     public override void _Ready()
     {

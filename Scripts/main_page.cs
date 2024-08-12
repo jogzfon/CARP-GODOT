@@ -9,6 +9,8 @@ public partial class main_page : Control
     [Export] private Button signIn;
     [Export] private Button signOut;
 
+    [Export] private Label userName;
+
     [Export] private VBoxContainer options;
 
     [Export] private Button logout;
@@ -63,6 +65,7 @@ public partial class main_page : Control
     {
         options.Visible = false;
         AccountManager.SetUser(null);
+        userName.Text = "John Doe";
         signIn.Text = "Sign-In";
         /*signIn.Disconnect("pressed", new Callable(this, nameof(Options)));
         signIn.Connect("pressed", new Callable(this, nameof(SignIn)));*/

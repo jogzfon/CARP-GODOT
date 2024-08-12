@@ -125,6 +125,7 @@ public partial class FileHandler : Node
     }
     private void OpenProject()
     {
+        DataToSave.ResetDatas();
         dialogue.FileMode = FileDialog.FileModeEnum.OpenFile;
         dialogue.PopupCentered();
     }

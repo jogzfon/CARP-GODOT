@@ -115,7 +115,7 @@ shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
 
-[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "options", "logout", "settings")]
+[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "userName", "options", "logout", "settings")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,6 +125,7 @@ grow_vertical = 2
 script = ExtResource("1_tloas")
 signIn = NodePath("MainContent/Sign-In")
 signOut = NodePath("MainContent/SignOut")
+userName = NodePath("ProfileHandler/ProfilePanel/Name")
 options = NodePath("MainContent/SignOut/Options")
 logout = NodePath("MainContent/SignOut/Options/Logout")
 settings = NodePath("MainContent/SignOut/Options/Settings")
@@ -1571,8 +1572,7 @@ offset_bottom = 727.855
 theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 25
 text = "👌Basic simulations
-👌Fundamental documentation
-👌AI-generated text interactions."
+👌Fundamental documentation"
 autowrap_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/WhatIsThis/HBoxContainer"]

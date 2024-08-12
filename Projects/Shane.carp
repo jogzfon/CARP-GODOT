@@ -3,7 +3,8 @@ Status: Idle
 RtlStatement: 
 DataMovement: 
 CurrentMemoryLocation: 0
-InstructionCodes: 
+InstructionCodes: LDAC 100 
+
 
 
 ---------- Memory And IO ----------

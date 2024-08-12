@@ -51,6 +51,7 @@ public partial class RecentFile : VBoxContainer
     {
         if (path != "")
         {
+            DataToSave.ResetDatas();
             DataToSave.filePath = path;
             DataToSave.OpenFile();
         }
