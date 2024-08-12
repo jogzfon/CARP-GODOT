@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=49 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://b1n8h8f7y7o0a" path="res://Sprites/Subscription/Rectangle 90.png" id="26_egcgx"]
 [ext_resource type="Texture2D" uid="uid://bhkfa0v2lfu07" path="res://Sprites/Subscription/Rectangle 91.png" id="27_1kmlf"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="27_41f47"]
+[ext_resource type="Texture2D" uid="uid://dpqc25umpnjj" path="res://Cross.png" id="28_hdvbl"]
 [ext_resource type="Texture2D" uid="uid://vvu0807gwg2x" path="res://Sprites/Subscription/Rectangle 92.png" id="28_o5xks"]
 [ext_resource type="Script" path="res://Scripts/SubscriptionHandler.cs" id="28_wwcii"]
 [ext_resource type="Texture2D" uid="uid://c4uvbuprkvnnd" path="res://Sprites/Subscription/School_Logo3.png" id="30_up4sm"]
@@ -42,11 +43,18 @@
 font = ExtResource("13_0fq7n")
 font_size = 25
 
+[sub_resource type="Theme" id="Theme_s6t6r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2yi7"]
+bg_color = Color(0.0980392, 0.321569, 0.407843, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="LabelSettings" id="LabelSettings_qv4bw"]
 font = ExtResource("13_0fq7n")
 font_size = 35
-shadow_color = Color(0.298039, 0.305882, 0.572549, 1)
-shadow_offset = Vector2(-3, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2dme4"]
 shader = ExtResource("10_urm6c")
@@ -136,11 +144,13 @@ logInPage = ExtResource("2_fqqk8")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
 offset_right = 3.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
 [node name="ColorRect" type="ColorRect" parent="MainContent/ColorRect"]
@@ -148,50 +158,32 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 370.0
-offset_top = 859.0
-offset_right = -16.0
-offset_bottom = 361.0
+offset_left = 368.518
+offset_top = 851.827
+offset_right = -17.4818
+offset_bottom = 353.827
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.996013, 0.352359)
 color = Color(0.291716, 0.299233, 0.321761, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="MainContent"]
-offset_top = 100.0
-offset_right = 350.0
-offset_bottom = 1080.0
-color = Color(0.168627, 0.176471, 0.188235, 1)
-
 [node name="ColorRect4" type="ColorRect" parent="MainContent"]
-offset_top = 100.0
+anchors_preset = 9
+anchor_bottom = 1.0
 offset_right = 350.0
-offset_bottom = 1080.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainContent"]
-offset_left = 15.0
+offset_left = 27.0
 offset_top = 104.0
-offset_right = 335.0
+offset_right = 324.0
 offset_bottom = 878.0
 
-[node name="TextureRect" type="TextureRect" parent="MainContent/VBoxContainer"]
+[node name="Label3" type="Label" parent="MainContent/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_dsjfr")
-
-[node name="Label" type="Label" parent="MainContent/VBoxContainer/TextureRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -151.0
-offset_top = -11.0
-offset_right = 160.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
 text = "PROJECTS"
 label_settings = SubResource("LabelSettings_qri6r")
 
@@ -199,7 +191,7 @@ label_settings = SubResource("LabelSettings_qri6r")
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6c80f")
 theme_override_font_sizes/font_size = 25
-text = "Recents"
+text = "  Recents"
 
 [node name="ProjectContainer" type="ScrollContainer" parent="MainContent/VBoxContainer"]
 layout_mode = 2
@@ -214,6 +206,9 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "DOCUMENTATION"
 label_settings = SubResource("LabelSettings_qri6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContent/VBoxContainer"]
+layout_mode = 2
 
 [node name="DocumentationContainer" type="ScrollContainer" parent="MainContent/VBoxContainer"]
 layout_mode = 2
@@ -265,9 +260,10 @@ offset_right = 321.0
 offset_bottom = -55.0
 grow_vertical = 0
 scale = Vector2(1, 0.893349)
+theme = SubResource("Theme_s6t6r")
+theme_type_variation = &"Button"
+theme_override_styles/normal = SubResource("StyleBoxFlat_n2yi7")
 text = "Sign-In"
-icon = ExtResource("17_587en")
-flat = true
 clip_text = true
 icon_alignment = 1
 expand_icon = true
@@ -312,16 +308,24 @@ offset_right = 1920.0
 offset_bottom = 100.0
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContent"]
+[node name="TopBar" type="HBoxContainer" parent="MainContent"]
 offset_right = 1920.0
 offset_bottom = 100.0
 
-[node name="TextureRect" type="TextureRect" parent="MainContent/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MainContent/TopBar"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContent/TopBar"]
 layout_mode = 2
 texture = ExtResource("1_iv1we")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="MainContent/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MainContent/TopBar"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContent/TopBar"]
 layout_mode = 2
 text = "WELCOME TO CARP"
 label_settings = SubResource("LabelSettings_qv4bw")
@@ -332,10 +336,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -284.0
-offset_top = -266.0
-offset_right = 559.0
-offset_bottom = -127.0
+offset_left = -257.0
+offset_top = -228.0
+offset_right = 586.0
+offset_bottom = -89.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("13_0fq7n")
@@ -349,10 +353,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -233.0
-offset_top = -121.0
-offset_right = 567.0
-offset_bottom = -41.0
+offset_left = -206.0
+offset_top = -83.0
+offset_right = 594.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_8xef3")
@@ -382,10 +386,10 @@ material = SubResource("ShaderMaterial_2dme4")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -149.0
-offset_top = 5.0
-offset_right = -59.0
-offset_bottom = 95.0
+offset_left = -138.0
+offset_top = 14.0
+offset_right = -65.0
+offset_bottom = 87.0
 grow_horizontal = 0
 scale = Vector2(0.999445, 0.999049)
 texture_normal = ExtResource("4_2bfqo")
@@ -1434,12 +1438,14 @@ saveAvailable = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -30.0
-offset_top = 8.0
-offset_right = -12.0
-offset_bottom = 39.0
+offset_left = -34.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = 34.0
 grow_horizontal = 0
-text = "X"
+icon = ExtResource("28_hdvbl")
+flat = true
+expand_icon = true
 
 [node name="SavePanel" type="Panel" parent="Exit"]
 visible = false
@@ -1669,10 +1675,10 @@ autowrap_mode = 2
 [node name="SubscriptionBtn" type="TextureButton" parent="SubscriptionHandler"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_t46w3")
-offset_left = 1767.0
-offset_top = 57.0
-offset_right = 1797.0
-offset_bottom = 87.0
+offset_left = 1778.0
+offset_top = 58.0
+offset_right = 1804.0
+offset_bottom = 83.0
 texture_normal = ExtResource("32_mcsfd")
 ignore_texture_size = true
 stretch_mode = 0
