@@ -4,6 +4,7 @@ using FireSharp.Response;
 using Godot;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 public partial class StartUpPage : Control
 {
@@ -42,8 +43,17 @@ public partial class StartUpPage : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-		client = new FireSharp.FirebaseClient(config);
-		
+        // Initialize the connection and start checking for reconnections
+        TryConnectToDatabase().ContinueWith(task =>
+        {
+            if (task.Exception != null)
+            {
+                GD.Print($"Initial connection failed: {task.Exception.Message}");
+            }
+        });
+
+        CheckInternetConnectionAndReconnect();
+
         createAccount.Visible = false;
         loginAccount.Visible = true;
 
@@ -61,8 +71,11 @@ public partial class StartUpPage : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-	
-	}
+        if (client == null)
+        {
+            client = new FireSharp.FirebaseClient(config);
+        }
+    }
 	
 	private void RegisterPressed()
 	{
@@ -149,6 +162,33 @@ public partial class StartUpPage : Control
 	private void BackPressed()
 	{
         this.QueueFree();
+    }
+
+    private async Task TryConnectToDatabase()
+    {
+        try
+        {
+            client = new FireSharp.FirebaseClient(config);
+        }
+        catch (Exception ex)
+        {
+            GD.Print($"Connection failed: {ex.Message}");
+            notification.MessageBox("You are offline, try logging in after turning back online.", 1);
+            client = null;
+        }
+    }
+
+    private async Task CheckInternetConnectionAndReconnect()
+    {
+        while (true)
+        {
+            if (client == null)
+            {
+                await TryConnectToDatabase();
+            }
+
+            await Task.Delay(10000); // Check every 10 seconds
+        }
     }
 }
 

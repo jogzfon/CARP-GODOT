@@ -42,6 +42,7 @@ public static class DataToSave
 
         file.StoreString(AllData());
         file.Close();
+        ResetDatas();
     }
     public static void OpenFile()
     {

@@ -87,7 +87,7 @@ size_flags_vertical = 6
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("3_vad0u")
 theme_override_font_sizes/font_size = 30
-text = "Hi Carp here! How may I serve you?"
+text = "Hi CARPVisor here! How may I serve you?"
 
 [node name="SendRequest" type="Button" parent="."]
 layout_mode = 1

@@ -160,8 +160,11 @@ public partial class project_page : Control
 
             if (Input.IsActionPressed("Ctrl") && Input.IsActionPressed("S"))
             {
-                GD.Print("Printed");
-                DataToSave.SaveFile();
+                if (AccountManager.GetUser() != null && (AccountManager.GetUser().Subscription == "Student" || AccountManager.GetUser().Subscription == "Teacher"))
+                {
+                    GD.Print("Printed");
+                    DataToSave.SaveFile();
+                }
             }
         }
 	}

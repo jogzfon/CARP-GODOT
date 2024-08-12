@@ -3,11 +3,11 @@ Status: Ended
 RtlStatement: END 
 DataMovement: NONE 
 CurrentMemoryLocation: 0
-InstructionCodes: LDAC 100
-MVAC
-ADD
-STAC 100
-END
+InstructionCodes: LDAC 100 
+MVAC 
+ADD 
+STAC 100 
+END 
 
 
 
