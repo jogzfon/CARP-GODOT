@@ -1,0 +1,542 @@
+[gd_scene load_steps=20 format=3 uid="uid://c18fyoobswur4"]
+
+[ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
+[ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
+[ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="2_rnxid"]
+[ext_resource type="Texture2D" uid="uid://dkst6hgkr3nre" path="res://Sprites/Button.png" id="3_22c0e"]
+[ext_resource type="Texture2D" uid="uid://pr17leipx0lk" path="res://Sprites/Bot.png" id="3_587b7"]
+[ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_jdv15"]
+[ext_resource type="Shader" path="res://Shader/loading.gdshader" id="5_qj6bc"]
+[ext_resource type="PackedScene" uid="uid://b8fqwku1kjuqn" path="res://Scenes/main.tscn" id="5_squa4"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="6_is7gs"]
+[ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
+[ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
+[ext_resource type="Texture2D" uid="uid://hgcx1pekg3iu" path="res://Sprites/Reply Arrow.png" id="10_ga2ho"]
+[ext_resource type="Script" path="res://Scripts/ExitController.cs" id="14_r5c7n"]
+[ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
+[ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="15_nhij1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgeug"]
+bg_color = Color(0.388235, 0.388235, 0.396078, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aydvx"]
+shader = ExtResource("5_qj6bc")
+shader_parameter/spiral_type = 1
+shader_parameter/primary_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/secondary_color = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/rays = 6.0
+shader_parameter/speed = 0.5
+shader_parameter/fade = 0.1
+shader_parameter/thickness = 0.3
+shader_parameter/clockwise = true
+shader_parameter/tiers = 4.0
+shader_parameter/stretch = 6.28
+
+[sub_resource type="Gradient" id="Gradient_4dhc3"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nqaa8"]
+gradient = SubResource("Gradient_4dhc3")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0.5, 0.5)
+
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "loadingIcon", "notification", "toSystem", "assemble", "toAI", "back")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lst7x")
+memoryPnl = NodePath("VBoxContainer/PanelContainer/MemoryAndIO")
+breakPointsPnl = NodePath("VBoxContainer/PanelContainer/Breakpoints")
+traceResultsPnl = NodePath("VBoxContainer/PanelContainer/TraceResult")
+aiPnl = NodePath("AISystem")
+viewSystem = NodePath("VBoxContainer/PanelContainer/SystemViewContainer")
+loadingIcon = NodePath("LoadingIcon")
+notification = NodePath("NotificationHandler")
+toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
+assemble = NodePath("LeftContainer/Assemble")
+toAI = NodePath("VBoxContainer/HBoxContainer/AIBtn")
+back = NodePath("Back")
+metadata/_edit_horizontal_guides_ = [-53.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 125.0
+offset_right = 1870.0
+offset_bottom = 1025.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MemoryAndIO" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 25
+text = "Memory and IO"
+icon = ExtResource("3_22c0e")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="BreakPoints" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 25
+text = "Breakpoints"
+icon = ExtResource("3_22c0e")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TraceResults" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 25
+text = "Trace Results"
+icon = ExtResource("3_22c0e")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ViewSystem" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 25
+text = "View System"
+icon = ExtResource("3_22c0e")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="AIBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_587b7")
+flat = true
+icon_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MemoryAndIO" type="Panel" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+theme_override_font_sizes/font_size = 40
+text = "MEMORY AND IO"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MemoryText" type="TextEdit" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("8_6x74r")
+theme_override_font_sizes/font_size = 25
+editable = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
+layout_mode = 2
+
+[node name="View" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "VIEW"
+
+[node name="Clear" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "CLEAR"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+text = "Convert To"
+
+[node name="Hex" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "HEX"
+
+[node name="Binary" type="Button" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "BINARY"
+
+[node name="Breakpoints" type="Panel" parent="VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Breakpoints"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+theme_override_font_sizes/font_size = 40
+text = "BREAKPOINTS"
+
+[node name="AddressList" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "ADDRESS LINE: "
+
+[node name="AddressInput" type="LineEdit" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("8_6x74r")
+placeholder_text = "Input address line here..."
+
+[node name="Add" type="Button" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "ADD"
+
+[node name="Delete" type="Button" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "DELETE"
+
+[node name="TraceResult" type="Panel" parent="VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/TraceResult"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_is7gs")
+theme_override_font_sizes/font_size = 40
+text = "TRACE RESULT"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TraceText" type="TextEdit" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("8_6x74r")
+editable = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ViewResults" type="Button" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "VIEW"
+
+[node name="ClearResults" type="Button" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "CLEAR"
+
+[node name="SystemViewContainer" type="SubViewportContainer" parent="VBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/PanelContainer/SystemViewContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 0
+
+[node name="Main" parent="VBoxContainer/PanelContainer/SystemViewContainer/SubViewport" node_paths=PackedStringArray("cpuStatus", "rtlStatement", "dataMovement", "currentMemoryLocation", "instructionCode") instance=ExtResource("5_squa4")]
+position = Vector2(0, -3)
+cpuStatus = NodePath("../../../../../LeftContainer/HBoxContainer2/Status")
+rtlStatement = NodePath("../../../../../LeftContainer/HBoxContainer3/RTLStatement")
+dataMovement = NodePath("../../../../../LeftContainer/DataMovement")
+currentMemoryLocation = NodePath("../../../../../LeftContainer/MemoryLocation")
+instructionCode = NodePath("../../../../../LeftContainer/ScrollContainer/InstructionCode")
+
+[node name="LeftContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 125.0
+offset_right = 560.0
+offset_bottom = -41.0
+grow_vertical = 2
+scale = Vector2(0.99339, 0.993209)
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LeftContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 30
+text = "Current CPU Status:"
+
+[node name="Status" type="Label" parent="LeftContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_52ft5")
+theme_override_font_sizes/font_size = 30
+text = "Idle"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="LeftContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 30
+text = "Current RTL Statement:"
+
+[node name="RTLStatement" type="Label" parent="LeftContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_52ft5")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="DataMovement" type="Label" parent="LeftContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_52ft5")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="LeftContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 30
+text = "Current Memory Location:"
+
+[node name="MemoryLocation" type="LineEdit" parent="LeftContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_52ft5")
+theme_override_font_sizes/font_size = 30
+text = "0"
+placeholder_text = "Enter Memory Location"
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LeftContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InstructionCode" type="TextEdit" parent="LeftContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+theme_override_fonts/font = ExtResource("8_6x74r")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Input code here..."
+
+[node name="UnitType" type="Label" parent="LeftContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_tcw3m")
+theme_override_font_sizes/font_size = 25
+text = "Control Unit Type"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MicroProgrammed" type="CheckButton" parent="LeftContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_jdv15")
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+text = "Microprogrammed"
+
+[node name="Hardwired" type="CheckButton" parent="LeftContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_jdv15")
+theme_override_font_sizes/font_size = 20
+text = "Hardwired"
+
+[node name="Assemble" type="Button" parent="LeftContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+text = "ASSEMBLE"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Back" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 90.0
+offset_bottom = 140.0
+scale = Vector2(0.76447, 0.438668)
+texture_normal = ExtResource("10_ga2ho")
+stretch_mode = 0
+
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
+script = ExtResource("14_r5c7n")
+exitbtn = NodePath("ExitButton")
+savePanel = NodePath("SavePanel")
+yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
+nobtn = NodePath("SavePanel/HBoxContainer/No")
+
+[node name="ExitButton" type="Button" parent="Exit"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -34.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = 41.0
+grow_horizontal = 0
+text = "X"
+
+[node name="SavePanel" type="Panel" parent="Exit"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kgeug")
+
+[node name="Label" type="Label" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = 84.0
+offset_right = 14.0
+offset_bottom = 107.0
+grow_horizontal = 2
+text = "Do you want to save file?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -155.0
+offset_top = 147.0
+offset_right = 145.0
+offset_bottom = 187.0
+grow_horizontal = 2
+
+[node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="No" type="Button" parent="Exit/SavePanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
+
+[node name="AISystem" parent="." instance=ExtResource("15_jp5cw")]
+visible = false
+layout_mode = 1
+
+[node name="NotificationHandler" parent="." instance=ExtResource("15_nhij1")]
+layout_mode = 1
+
+[node name="LoadingIcon" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_aydvx")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -746.0
+offset_top = -536.0
+offset_right = -618.0
+offset_bottom = -408.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_nqaa8")
