@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class AssemblyInstructions
+public class AssemblyInstructions
 {
     public const string NOP = "NOP";
     public const string LDAC = "LDAC";

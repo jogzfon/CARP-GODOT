@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-public class AssemblyParser
+public partial class AssemblyParser
 {
     private List<int> breakpoints;
     private bool breaks = false;

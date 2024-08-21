@@ -108,7 +108,6 @@ public partial class FileHandler : Node
         {
             manageFile.Visible = false;
             directToSystem.Visible = true;
-
             // Clear the list of recent files
             foreach (Node child in recentFileList.GetChildren())
             {
