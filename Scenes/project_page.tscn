@@ -539,3 +539,16 @@ offset_bottom = -408.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
+
+[node name="ClassTask" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_top = 29.0
+offset_right = -64.0
+offset_bottom = 74.0
+grow_horizontal = 0
+text = "CLASS TASK"

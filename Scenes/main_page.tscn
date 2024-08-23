@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=47 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
 [ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="34_pirgk"]
+[ext_resource type="PackedScene" uid="uid://8b0f8dwrfcmk" path="res://Scenes/classroom_manager.tscn" id="38_4fga6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
 font = ExtResource("13_0fq7n")
@@ -1681,3 +1682,8 @@ offset_bottom = 87.0
 texture_normal = ExtResource("32_mcsfd")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="ClassroomManager" parent="." instance=ExtResource("38_4fga6")]
+visible = false
+top_level = true
+position = Vector2(384, 867)
