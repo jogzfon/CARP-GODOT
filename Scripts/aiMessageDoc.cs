@@ -90,22 +90,64 @@ public static class aiMessageDoc
             "mvac                                    ;copy to R" +
             "add                                     ;i+i" +
             "stac 100                                ;store back to i" +
-            "end " +
+            "end \n\n" +
             "IF example"+
             "if x+y==0 then I/O port = 0 else I/O port = 1"+
             "x at 100. y at 101"+
             "Generated program: "+
-            "ldac 101                                ;load y\r\nadd\t\r\n                                               ;if not equal to 0 goto Else:\r\njpnz\t 15                                  ;skip to !=0 case (else part)\r\n                                              ;Then:\r\nclac\t\t                                       ;0\r\njump 17\t                                ;jump over else part to Endif:\r\n                                              ;Else:\r\nclac\r\ninac\t\t                                       ;1\r\n                                              ;Endif:\r\nstac 65535\r\nend" +
+            "ldac 101                               ;load y\r\nadd\t\r\n   ;if not equal to 0 goto Else:\r\n" +
+            "jpnz 15                                ;skip to !=0 case (else part)\r\n" +
+            ";Then:\r\n" +
+            "clac\t\t                               ;0\r\n" +
+            "jump 17\t                              ;jump over else part to Endif:\r\n" +
+            ";Else:\r\n" +
+            "clac\r\n" +
+            "inac\t\t                               ;1\r\n " +
+            ";Endif:\r\n" +
+            "stac 65535\r\n" +
+            "end" +
             "example from online Help"+
             "Generated program: " +
-            "org \t0\t                                      ;assembly start address\r\ndb 2         \t                              ;defines a byte of decimal value 2\r\ndb 4                                       ;defines a byte of decimal value 4\r\norg 10                                    ;assembly start address\r\nldac 0                                    ;load AC with data at location 0\r\nmvac                                      ;move AC data to register R\r\nldac 1                                     ;load AC with data at location 1\r\nadd\t                                         ;store the sum of AC, R in AC\r\nstac 2                                     ;store AC at location 2\r\nstac ffffh                                ; send AC to I/O Port\r\nend                                         ;stop" +
+            "org \t0\t                              ;assembly start address\r\n" +
+            "db 2\t\t                               ;defines a byte of decimal value 2\r\n" +
+            "db 4                                   ;defines a byte of decimal value 4\r\n" +
+            "org 10                                 ;assembly start address\r\n" +
+            "ldac 0                                 ;load AC with data at location 0\r\n" +
+            "mvac                                   ;move AC data to register R\r\n" +
+            "ldac 1                                 ;load AC with data at location 1\r\n" +
+            "add                                    ;store the sum of AC, R in AC\r\n" +
+            "stac 2                                 ;store AC at location 2\r\n" +
+            "stac ffffh                             ;send AC to I/O Port\r\n" +
+            "end                                    ;stop" +
             "test logic operations\r\n15=00001111 in 100\r\n85=01010101 in 101"+
             "Generated program: " +
-            "ldac\t100\r\nmvac\r\nldac\t101\r\nand\r\nstac\t102\t                                    ;AND in 102\r\nldac\t101\r\nor\r\nstac\t103\t                                    ;OR in 103\r\nldac\t101\r\nxor\r\nstac\t104\t                                    ;XOR in 104\r\nldac\t101\r\nnot\t\r\nstac 105\t                                   ;NOT in 105\r\nend"+
+            "ldac\t100\r\n" +
+            "mvac\r\n" +
+            "ldac\t101\r\n" +
+            "and\r\n" +
+            "stac\t102\t                            ;AND in 102\r\n" +
+            "ldac\t101\r\n" +
+            "or\r\n" +
+            "stac\t103\t                            ;OR in 103\r\n" +
+            "ldac\t101\r\n" +
+            "xor\r\n" +
+            "stac\t104\t                            ;XOR in 104\r\n" +
+            "ldac\t101\r\n" +
+            "not\t\r\n" +
+            "stac 105\t                             ;NOT in 105\r\nend"+
             "loop x times  x value in 100" +
             "Generated program: " +
-            "clac\t\t         \t                                    ;i=0\r\nmvac\t\t                                           ;R=i\r\n                       \t  \t\t                           ;Loop:\r\nmovr\t\t                                           ;AC=i\r\ninac\t\t                                               ;i++\r\nmvac\t\t                                           ;i back to R\r\nldac\t100                             \t\t         \t;load x\r\nsub\t\t                          \t                    ;x-i\r\njpnz\t2\t                          \t\t                ;loop again if i<x\r\nend\r\n\r\n; set breakpoint at 9 (jpnz) to count the loops..."+
-            "The programs made must end in END";
+            "clac\t\t                               ;i=0\r\n" +
+            "mvac\t\t                               ;R=i\r\n" +
+            ";Loop:\r\n" +
+            "movr\t\t                               ;AC=i\r\n" +
+            "inac\t\t                               ;i++\r\n" +
+            "mvac\t\t                               ;i back to R\r\n" +
+            "ldac\t100\t                            ;load x\r\n" +
+            "sub\t\t                                ;x-i\r\n" +
+            "jpnz\t2\t                              ;loop again if i<x\r\n" +
+            "end\r\n\r\n; set breakpoint at 9 (jpnz) to count the loops..."+
+            "The programs generated must end in END";
             
     public static string userRequest = "";
 

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d0gda08hly5e6"]
+
+[node name="ClassroomManager" type="Node"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_top = 35.0
+offset_right = 250.0
+offset_bottom = 171.0
+
+[node name="Classrooms" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "Classroom 1"
+
+[node name="Enroll" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Find Room"
+
+[node name="Node2D" type="Node2D" parent="VBoxContainer"]
+visible = false
+
+[node name="ClassName" type="LineEdit" parent="VBoxContainer/Node2D"]
+offset_top = 70.0
+offset_right = 250.0
+offset_bottom = 101.0
+
+[node name="Enrollbtn" type="Button" parent="VBoxContainer/Node2D"]
+offset_top = 105.0
+offset_right = 250.0
+offset_bottom = 136.0
+text = "Enroll"
