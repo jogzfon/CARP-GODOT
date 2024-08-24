@@ -28,6 +28,9 @@ public partial class ProfileHandler : Node
     Label userName;
 
     [Export]
+    ColorRect subscriptionPanel;
+
+    [Export]
     private NotificationHandler notification;
 
 
@@ -57,13 +60,7 @@ public partial class ProfileHandler : Node
         }
         else
         {
-            accountProfile.Disabled = true;
-            profileDialog.Visible = false;
-            profilePanel.Visible = false;
-            schoolBtn.Visible = false;
-            centerMargin.Visible = false;
-            accountProfile.TextureNormal = defaultProfileTexture;
-            changeProfileBtn.TextureNormal = defaultProfileTexture;
+            DisableProfileAccess();
         }
 
         client = new FireSharp.FirebaseClient(config);
@@ -79,7 +76,7 @@ public partial class ProfileHandler : Node
 	{
         if (AccountManager.GetUser() != null)
         {
-            accountProfile.Disabled = false;
+            changeProfileBtn.Disabled = false;
             if(AccountManager.GetUser().ProfileImage != "NONE")
             {
                 accountProfile.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
@@ -96,12 +93,30 @@ public partial class ProfileHandler : Node
     {
 
     }
+    private void DisableProfileAccess()
+    {
+        profileDialog.Visible = false;
+        profilePanel.Visible = false;
+        schoolBtn.Visible = false;
+        centerMargin.Visible = false;
+        accountProfile.TextureNormal = defaultProfileTexture;
+        changeProfileBtn.TextureNormal = defaultProfileTexture;
+        changeProfileBtn.Disabled = true;
+    }
     private void OpenProfilePage()
     {
-        profilePanel.Visible = true;
-        if (AccountManager.GetUser().ProfileImage != "NONE")
+        if (AccountManager.GetUser() != null)
         {
-            changeProfileBtn.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
+            profilePanel.Visible = true;
+            subscriptionPanel.Visible = false;
+            if (AccountManager.GetUser().ProfileImage != "NONE")
+            {
+                changeProfileBtn.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
+            }
+        }
+        else
+        {
+            GD.Print("No user logged in.");
         }
     }
     private void CloseProfilePage()

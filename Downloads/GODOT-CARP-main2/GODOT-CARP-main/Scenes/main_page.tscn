@@ -130,6 +130,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_tloas")
 signIn = NodePath("MainContent/Sign-In")
 signOut = NodePath("MainContent/SignOut")
@@ -396,7 +398,7 @@ texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "notification")]
+[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "subscriptionPanel", "notification")]
 script = ExtResource("12_dw1ay")
 schoolBtn = NodePath("ManageFile/New Project3")
 centerMargin = NodePath("ManageFile/MarginContainer2")
@@ -408,18 +410,26 @@ changeProfileBtn = NodePath("ProfilePanel/ProfileBtn")
 defaultProfileTexture = ExtResource("4_2bfqo")
 saveProfileImage = NodePath("ProfilePanel/SaveBtn")
 userName = NodePath("ProfilePanel/Name")
+subscriptionPanel = NodePath("../SubscriptionHandler/SubscriptionRect")
 notification = NodePath("../NotificationHandler")
 
 [node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
-offset_left = 805.0
-offset_top = 578.0
-offset_right = 1257.0
-offset_bottom = 711.0
+anchors_preset = -1
+anchor_left = 0.594
+anchor_top = 0.612
+anchor_right = 0.594
+anchor_bottom = 0.612
+offset_left = -226.48
+offset_top = -66.96
+offset_right = 225.52
+offset_bottom = 66.04
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="GoToSystem" type="Button" parent="ProfileHandler/DirectToSystem"]
 layout_mode = 2
-text = "GoToSystem"
+text = "Go to System"
 icon = ExtResource("4_rgqy0")
 flat = true
 icon_alignment = 1
@@ -1498,13 +1508,14 @@ text = "NO"
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
 
-[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "subscriptionPanel")]
+[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "subscriptionPanel", "profilePanel")]
 script = ExtResource("28_wwcii")
 subscriptionBtn = NodePath("SubscriptionBtn")
 guestTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier")
 studentTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/StudentTier")
 teacherTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/EducationTier")
 subscriptionPanel = NodePath("SubscriptionRect")
+profilePanel = NodePath("../ProfileHandler/ProfilePanel")
 logInPage = ExtResource("2_fqqk8")
 freeTier = ExtResource("32_mcsfd")
 guestTier = ExtResource("30_up4sm")

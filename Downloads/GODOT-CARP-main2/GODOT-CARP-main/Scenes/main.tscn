@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8fqwku1kjuqn"]
+[gd_scene load_steps=7 format=3 uid="uid://b8fqwku1kjuqn"]
 
 [ext_resource type="PackedScene" uid="uid://dw860tmmffkxq" path="res://Scenes/system_menu.tscn" id="1_or0nw"]
 [ext_resource type="Script" path="res://Scripts/Animations.cs" id="1_rmn0d"]
-[ext_resource type="Texture2D" uid="uid://5vy1ar8mknsj" path="res://Sprites/darkbg.png" id="1_rocr5"]
 [ext_resource type="Script" path="res://Scripts/main.cs" id="1_uto1p"]
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="3_taic5"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_ehxc6"]
@@ -15,12 +14,6 @@ systemMenu = NodePath("SystemMenu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-3, 0)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("1_rocr5")
-centered = false
 
 [node name="SystemMenu" parent="." instance=ExtResource("1_or0nw")]
 anchors_preset = 0
@@ -35,9 +28,9 @@ size_flags_horizontal = 4
 [node name="M" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 1158.0
-offset_top = 300.0
+offset_top = 344.0
 offset_right = 1198.0
-offset_bottom = 346.0
+offset_bottom = 390.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 30
 text = "M"
@@ -47,9 +40,9 @@ vertical_alignment = 1
 [node name="IO" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 1145.0
-offset_top = 472.0
+offset_top = 516.0
 offset_right = 1213.0
-offset_bottom = 518.0
+offset_bottom = 562.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 30
 text = "I/O"
@@ -59,9 +52,9 @@ vertical_alignment = 1
 [node name="Decoder" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 697.0
-offset_top = 521.0
+offset_top = 565.0
 offset_right = 831.0
-offset_bottom = 567.0
+offset_bottom = 611.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 25
 text = "DECODER"
@@ -71,9 +64,9 @@ vertical_alignment = 1
 [node name="IOBinary" type="LineEdit" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 1115.0
-offset_top = 413.0
+offset_top = 457.0
 offset_right = 1243.0
-offset_bottom = 456.0
+offset_bottom = 500.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "0000 0000"
@@ -83,9 +76,9 @@ expand_to_text_length = true
 [node name="EN1" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 805.0
-offset_top = 367.0
+offset_top = 411.0
 offset_right = 845.0
-offset_bottom = 413.0
+offset_bottom = 457.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 25
 text = "EN"
@@ -95,9 +88,9 @@ vertical_alignment = 1
 [node name="EN2" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 805.0
-offset_top = 429.0
+offset_top = 473.0
 offset_right = 845.0
-offset_bottom = 475.0
+offset_bottom = 519.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 25
 text = "EN"
@@ -107,9 +100,9 @@ vertical_alignment = 1
 [node name="read" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 470.0
+offset_top = 514.0
 offset_right = 331.0
-offset_bottom = 500.0
+offset_bottom = 546.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 25
 text = "read"
@@ -119,9 +112,9 @@ vertical_alignment = 1
 [node name="write" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 510.0
+offset_top = 554.0
 offset_right = 334.0
-offset_bottom = 549.0
+offset_bottom = 593.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 25
 text = "write"
@@ -131,9 +124,9 @@ vertical_alignment = 1
 [node name="clock" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 101.0
-offset_top = 470.0
+offset_top = 514.0
 offset_right = 169.0
-offset_bottom = 500.0
+offset_bottom = 546.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 25
 text = "clock"
@@ -143,9 +136,9 @@ vertical_alignment = 1
 [node name="clk" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 167.0
-offset_top = 639.0
+offset_top = 683.0
 offset_right = 207.0
-offset_bottom = 685.0
+offset_bottom = 729.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 25
 text = "clk"
@@ -155,9 +148,9 @@ vertical_alignment = 1
 [node name="AR" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 184.0
+offset_top = 228.0
 offset_right = 310.0
-offset_bottom = 213.0
+offset_bottom = 257.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "AR"
@@ -167,9 +160,9 @@ vertical_alignment = 1
 [node name="PC" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 213.0
+offset_top = 257.0
 offset_right = 310.0
-offset_bottom = 242.0
+offset_bottom = 286.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "PC"
@@ -179,9 +172,9 @@ vertical_alignment = 1
 [node name="DR" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 242.0
+offset_top = 286.0
 offset_right = 310.0
-offset_bottom = 271.0
+offset_bottom = 315.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "DR"
@@ -191,9 +184,9 @@ vertical_alignment = 1
 [node name="TR" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 271.0
+offset_top = 315.0
 offset_right = 310.0
-offset_bottom = 300.0
+offset_bottom = 344.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "TR"
@@ -203,9 +196,9 @@ vertical_alignment = 1
 [node name="IR" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 298.0
+offset_top = 342.0
 offset_right = 310.0
-offset_bottom = 327.0
+offset_bottom = 371.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "IR"
@@ -215,9 +208,9 @@ vertical_alignment = 1
 [node name="R" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 326.0
+offset_top = 370.0
 offset_right = 310.0
-offset_bottom = 355.0
+offset_bottom = 399.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "R"
@@ -227,9 +220,9 @@ vertical_alignment = 1
 [node name="AC" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 355.0
+offset_top = 399.0
 offset_right = 310.0
-offset_bottom = 384.0
+offset_bottom = 428.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "AC"
@@ -239,9 +232,9 @@ vertical_alignment = 1
 [node name="Z" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 270.0
-offset_top = 384.0
+offset_top = 428.0
 offset_right = 310.0
-offset_bottom = 413.0
+offset_bottom = 457.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "Z"
@@ -251,9 +244,9 @@ vertical_alignment = 1
 [node name="A" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 414.0
-offset_top = 197.5
+offset_top = 241.5
 offset_right = 499.0
-offset_bottom = 226.5
+offset_bottom = 270.5
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "A[15..0]"
@@ -263,9 +256,9 @@ vertical_alignment = 1
 [node name="D" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 414.0
-offset_top = 273.5
+offset_top = 317.5
 offset_right = 499.0
-offset_bottom = 302.5
+offset_bottom = 346.5
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "D[7..0]"
@@ -275,9 +268,9 @@ vertical_alignment = 1
 [node name="CU" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 148.0
-offset_top = 227.0
+offset_top = 271.0
 offset_right = 188.0
-offset_bottom = 256.0
+offset_bottom = 300.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "CU"
@@ -287,9 +280,9 @@ vertical_alignment = 1
 [node name="ALU" type="Label" parent="SystemMenu"]
 layout_mode = 0
 offset_left = 140.5
-offset_top = 287.0
+offset_top = 331.0
 offset_right = 195.5
-offset_bottom = 316.0
+offset_bottom = 360.0
 theme_override_fonts/font = ExtResource("4_ehxc6")
 theme_override_font_sizes/font_size = 20
 text = "ALU"
@@ -322,169 +315,169 @@ ioB = NodePath("../SystemMenu/IOBinary")
 
 [node name="CpuOut" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(342.5, 212)
+position = Vector2(342.5, 260)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="CpuIn" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(342.5, 288)
+position = Vector2(342.5, 336)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="aIn" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(403.8, 211.8)
+position = Vector2(403.8, 259.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="aOut" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(509, 212)
+position = Vector2(509, 260)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="dIn" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(509, 287.8)
+position = Vector2(509, 335.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="dOut" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(403.8, 288)
+position = Vector2(403.8, 336)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="vDc" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(620, 212)
+position = Vector2(620, 260)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="hDc" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(620, 400)
+position = Vector2(620, 448)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="dcIn" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(676, 400)
+position = Vector2(676, 448)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="Min" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(1113, 212)
+position = Vector2(1113, 260)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="Mout1" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(1113, 288)
+position = Vector2(1113, 336)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="Mout2" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(1113, 325)
+position = Vector2(1113, 373)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="vDc2" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(920.8, 325)
+position = Vector2(920.8, 373)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="hDc2" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(920.8, 387)
+position = Vector2(920.8, 435)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="dcIn2" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(853.8, 387)
+position = Vector2(853.8, 435)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="ioInV" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(1060, 288)
+position = Vector2(1060, 336)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="ioInH" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(1060, 400)
+position = Vector2(1060, 448)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="IO" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(1113, 400)
+position = Vector2(1113, 448)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="outIO" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(1113, 450)
+position = Vector2(1113, 498)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="dcIn3" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(853.8, 450)
+position = Vector2(853.8, 498)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="dcOut1" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(676, 482.8)
+position = Vector2(676, 530.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="dcOut2" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(676, 530)
+position = Vector2(676, 578)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="read" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(342.5, 482.8)
+position = Vector2(342.5, 530.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="write" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(342.5, 530)
+position = Vector2(342.5, 578)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="clkOut" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(93.5, 482.8)
+position = Vector2(93.5, 530.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="clkV" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(45, 482.8)
+position = Vector2(45, 530.8)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="clkH" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(45, 660)
+position = Vector2(45, 708)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
 [node name="clkEnd" type="Sprite2D" parent="Animation"]
 visible = false
-position = Vector2(168, 660)
+position = Vector2(168, 708)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_taic5")
 
@@ -524,47 +517,47 @@ width = 5.0
 [node name="Boxes" type="Node" parent="."]
 
 [node name="CPU" type="Sprite2D" parent="Boxes"]
-position = Vector2(218, 374)
+position = Vector2(218, 418)
 scale = Vector2(2.8, 5.5)
 texture = ExtResource("5_47uae")
 
 [node name="CPU2" type="Sprite2D" parent="Boxes"]
-position = Vector2(291, 297)
+position = Vector2(291, 341)
 scale = Vector2(0.65, 3)
 texture = ExtResource("5_47uae")
 
 [node name="CPU3" type="Sprite2D" parent="Boxes"]
-position = Vector2(168, 239.75)
+position = Vector2(168, 283.75)
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("5_47uae")
 
 [node name="CPU4" type="Sprite2D" parent="Boxes"]
-position = Vector2(168, 300)
+position = Vector2(168, 344)
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("5_47uae")
 
 [node name="A" type="Sprite2D" parent="Boxes"]
-position = Vector2(456.5, 211.8)
+position = Vector2(456.5, 255.8)
 scale = Vector2(1.17978, 0.4)
 texture = ExtResource("5_47uae")
 
 [node name="D" type="Sprite2D" parent="Boxes"]
-position = Vector2(457, 288)
+position = Vector2(457, 332)
 scale = Vector2(1.17978, 0.4)
 texture = ExtResource("5_47uae")
 
 [node name="Memory" type="Sprite2D" parent="Boxes"]
-position = Vector2(1180, 267)
+position = Vector2(1180, 311)
 scale = Vector2(1.5, 2)
 texture = ExtResource("5_47uae")
 
 [node name="IO2" type="Sprite2D" parent="Boxes"]
-position = Vector2(1180, 439)
+position = Vector2(1180, 483)
 scale = Vector2(1.5, 2)
 texture = ExtResource("5_47uae")
 
 [node name="Decoder" type="Sprite2D" parent="Boxes"]
-position = Vector2(765, 456)
+position = Vector2(765, 500)
 scale = Vector2(2, 2.8)
 texture = ExtResource("5_47uae")
 

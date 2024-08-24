@@ -16,6 +16,9 @@ public partial class SubscriptionHandler : Node
     [Export]
     ColorRect subscriptionPanel;
 
+    [Export]
+    Panel profilePanel;
+
     [Export] PackedScene logInPage;
 
     [Export]
@@ -27,6 +30,8 @@ public partial class SubscriptionHandler : Node
     [Export]
     Texture2D teacherTier;
 
+    private bool isMouseOverPanel = false;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -34,6 +39,18 @@ public partial class SubscriptionHandler : Node
         subscriptionPanel.Visible = false;
 
         subscriptionBtn.Connect("pressed", new Callable(this, nameof(OpenSubscription)));
+
+        // Connect the mouse_exited signal to close the subscription panel when the mouse leaves it
+        subscriptionPanel.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
+        subscriptionPanel.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
+
+        // Connect the mouse_exited and mouse_entered signals for the buttons inside the panel
+        //guestTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
+        guestTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
+        // studentTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
+        studentTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
+        // teacherTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
+        teacherTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -85,6 +102,7 @@ public partial class SubscriptionHandler : Node
     {
         if (AccountManager.GetUser() != null)
         {
+            profilePanel.Visible = false;
             if (subscriptionPanel.Visible)
                 subscriptionPanel.Visible = false;
             else
@@ -94,6 +112,25 @@ public partial class SubscriptionHandler : Node
         {
             Node simultaneous = logInPage.Instantiate();
             GetTree().Root.AddChild(simultaneous);
+        }
+    }
+    private void OnMouseEnteredPanel()
+    {
+        isMouseOverPanel = true;
+    }
+
+    private void OnMouseExitedPanel()
+    {
+        isMouseOverPanel = false;
+        // Defer closing to the next frame to ensure other signals don't conflict
+        CallDeferred(nameof(CheckMouseOver));
+    }
+
+    private void CheckMouseOver()
+    {
+        if (!isMouseOverPanel && subscriptionPanel.Visible)
+        {
+            subscriptionPanel.Visible = false;
         }
     }
 }

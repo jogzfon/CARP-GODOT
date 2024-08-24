@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjoi18xm4kdgo"]
+[gd_scene load_steps=6 format=3 uid="uid://cjoi18xm4kdgo"]
 
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_jarin"]
 [ext_resource type="Script" path="res://Scripts/NotificationHandler.cs" id="1_t5tot"]
 [ext_resource type="Texture2D" uid="uid://bvhfcm8kjr7yf" path="res://Sprites/notification.png" id="2_25n1e"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="3_le842"]
+[ext_resource type="Texture2D" uid="uid://dpqc25umpnjj" path="res://Cross.png" id="5_eyc7l"]
 
 [node name="NotificationHandler" type="Control" node_paths=PackedStringArray("notificationWindow", "closeNotification", "message")]
 visible = false
@@ -11,6 +12,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -42.0
+offset_right = -2.0
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t5tot")
@@ -67,5 +72,6 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_le842")
 theme_override_font_sizes/font_size = 20
-text = "X"
+icon = ExtResource("5_eyc7l")
 flat = true
+expand_icon = true

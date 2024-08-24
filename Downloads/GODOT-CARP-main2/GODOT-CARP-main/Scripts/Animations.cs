@@ -279,6 +279,7 @@ public partial class Animations : Node
     #region Animation Controls
     public async void StartAnimation(int memoryStartLocation)
     {
+        memorycode = Memory.contents;
         if (stepThroughCycle || stepThroughInstruction)
         {
             stepThroughInstruction = false;

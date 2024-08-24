@@ -108,6 +108,11 @@ public partial class FileHandler : Node
         {
             manageFile.Visible = false;
             directToSystem.Visible = true;
+            // Clear the list of recent files
+            foreach (Node child in recentFileList.GetChildren())
+                {
+                    child.QueueFree(); // Remove each child from the scene
+                }
         }
     }
 
@@ -120,6 +125,7 @@ public partial class FileHandler : Node
     #region FileHandler
     private void NewProject()
     {
+        DataToSave.ResetDatas();
         dialogue.FileMode = FileDialog.FileModeEnum.SaveFile;
         dialogue.PopupCentered();
     }

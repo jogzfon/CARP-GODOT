@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpt486otnrqkv"]
+[gd_scene load_steps=9 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
 [ext_resource type="Texture2D" uid="uid://dy3etmq5s7r5j" path="res://Sprites/Rectangle 90.png" id="3_co66w"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vad0u"]
 [ext_resource type="Texture2D" uid="uid://b44pnrtokcm2" path="res://Sprites/Paper Plane.png" id="4_3xanh"]
-[ext_resource type="Texture2D" uid="uid://hgcx1pekg3iu" path="res://Sprites/Reply Arrow.png" id="5_rrvuv"]
+[ext_resource type="Theme" uid="uid://dvsm58vxhfluq" path="res://Theme/default.tres" id="4_qnl5w"]
+[ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://back.png" id="7_ps5gc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
@@ -35,6 +36,8 @@ scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.337255)
+self_modulate = Color(1, 1, 1, 0.678431)
 layout_mode = 0
 offset_left = 155.0
 offset_top = 906.0
@@ -55,7 +58,7 @@ offset_right = 715.0
 offset_bottom = 472.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/background_color = Color(0.270588, 0.270588, 0.270588, 1)
+theme = ExtResource("4_qnl5w")
 theme_override_fonts/font = ExtResource("3_vad0u")
 theme_override_font_sizes/font_size = 25
 placeholder_text = "Input Command here..."
@@ -114,5 +117,5 @@ offset_top = 40.0
 offset_right = 90.0
 offset_bottom = 140.0
 scale = Vector2(0.76, 0.44)
-texture_normal = ExtResource("5_rrvuv")
+texture_normal = ExtResource("7_ps5gc")
 stretch_mode = 0

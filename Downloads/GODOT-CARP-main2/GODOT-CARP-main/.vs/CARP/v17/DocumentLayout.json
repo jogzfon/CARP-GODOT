@@ -1,0 +1,296 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\Animations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\Animations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\project_page.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\project_page.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\DataToSave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\DataToSave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\AccountManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\AccountManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\ai_system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\ai_system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\FileHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\FileHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\ProfileHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\ProfileHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\StartUpPage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\StartUpPage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\NotificationHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\NotificationHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\main_page.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\main_page.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\SubscriptionHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\SubscriptionHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\aiMessageDoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\aiMessageDoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\Memory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\Memory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\AssemblySourceProgram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\AssemblySourceProgram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\system_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\system_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\UserData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\UserData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scripts\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "NotificationHandler.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\NotificationHandler.cs",
+              "RelativeDocumentMoniker": "Scripts\\NotificationHandler.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\NotificationHandler.cs",
+              "RelativeToolTip": "Scripts\\NotificationHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T02:34:54.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DataToSave.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\DataToSave.cs",
+              "RelativeDocumentMoniker": "Scripts\\DataToSave.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\DataToSave.cs",
+              "RelativeToolTip": "Scripts\\DataToSave.cs",
+              "ViewState": "AQIAAEIBAAAAAAAAAAAAAFgBAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T02:17:33.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FileHandler.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\FileHandler.cs",
+              "RelativeDocumentMoniker": "Scripts\\FileHandler.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\FileHandler.cs",
+              "RelativeToolTip": "Scripts\\FileHandler.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAHUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T21:42:04.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ai_system.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\ai_system.cs",
+              "RelativeDocumentMoniker": "Scripts\\ai_system.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\ai_system.cs",
+              "RelativeToolTip": "Scripts\\ai_system.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProfileHandler.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\ProfileHandler.cs",
+              "RelativeDocumentMoniker": "Scripts\\ProfileHandler.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\ProfileHandler.cs",
+              "RelativeToolTip": "Scripts\\ProfileHandler.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAAAE4AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "main_page.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\main_page.cs",
+              "RelativeDocumentMoniker": "Scripts\\main_page.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\main_page.cs",
+              "RelativeToolTip": "Scripts\\main_page.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "aiMessageDoc.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\aiMessageDoc.cs",
+              "RelativeDocumentMoniker": "Scripts\\aiMessageDoc.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\aiMessageDoc.cs",
+              "RelativeToolTip": "Scripts\\aiMessageDoc.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAiwG4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountManager.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\AccountManager.cs",
+              "RelativeDocumentMoniker": "Scripts\\AccountManager.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\AccountManager.cs",
+              "RelativeToolTip": "Scripts\\AccountManager.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Animations.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\Animations.cs",
+              "RelativeDocumentMoniker": "Scripts\\Animations.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\Animations.cs",
+              "RelativeToolTip": "Scripts\\Animations.cs",
+              "ViewState": "AQIAAOoCAAAAAAAAAAAAAHAHAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StartUpPage.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\StartUpPage.cs",
+              "RelativeDocumentMoniker": "Scripts\\StartUpPage.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\StartUpPage.cs",
+              "RelativeToolTip": "Scripts\\StartUpPage.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAAAE0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.457Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "project_page.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\project_page.cs",
+              "RelativeDocumentMoniker": "Scripts\\project_page.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\project_page.cs",
+              "RelativeToolTip": "Scripts\\project_page.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAAAJsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SubscriptionHandler.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\SubscriptionHandler.cs",
+              "RelativeDocumentMoniker": "Scripts\\SubscriptionHandler.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\SubscriptionHandler.cs",
+              "RelativeToolTip": "Scripts\\SubscriptionHandler.cs",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAYwHYAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AssemblySourceProgram.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\AssemblySourceProgram.cs",
+              "RelativeDocumentMoniker": "Scripts\\AssemblySourceProgram.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\AssemblySourceProgram.cs",
+              "RelativeToolTip": "Scripts\\AssemblySourceProgram.cs",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Memory.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\Memory.cs",
+              "RelativeDocumentMoniker": "Scripts\\Memory.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\Memory.cs",
+              "RelativeToolTip": "Scripts\\Memory.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAkwAUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.423Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "system_menu.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\system_menu.cs",
+              "RelativeDocumentMoniker": "Scripts\\system_menu.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\system_menu.cs",
+              "RelativeToolTip": "Scripts\\system_menu.cs",
+              "ViewState": "AQIAAIAAAAAAAAAAAAAmwB0AAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UserData.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\UserData.cs",
+              "RelativeDocumentMoniker": "Scripts\\UserData.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\UserData.cs",
+              "RelativeToolTip": "Scripts\\UserData.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "main.cs",
+              "DocumentMoniker": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\main.cs",
+              "RelativeDocumentMoniker": "Scripts\\main.cs",
+              "ToolTip": "C:\\Users\\abell\\Downloads\\GODOT-CARP-main2\\GODOT-CARP-main\\Scripts\\main.cs",
+              "RelativeToolTip": "Scripts\\main.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAIwEMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T20:44:59.459Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

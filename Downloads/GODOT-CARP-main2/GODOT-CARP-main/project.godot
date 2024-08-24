@@ -14,16 +14,18 @@ config/name="CARP"
 run/main_scene="res://Scenes/main_page.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0.137255, 0.137255, 0.137255, 1)
-boot_splash/image="res://SplashScreen.png"
+boot_splash/image="res://load.png"
 boot_splash/fullsize=false
 config/icon="res://AppLogo.png"
 run/size/viewport_height=1080
+boot_splash/stretch/mode="disabled"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+window/stretch/mode="viewport"
 
 [dotnet]
 

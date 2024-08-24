@@ -1,17 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=21 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
+[ext_resource type="Theme" uid="uid://dvsm58vxhfluq" path="res://Theme/default.tres" id="2_d75fn"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="2_rnxid"]
-[ext_resource type="Texture2D" uid="uid://dkst6hgkr3nre" path="res://Sprites/Button.png" id="3_22c0e"]
-[ext_resource type="Texture2D" uid="uid://pr17leipx0lk" path="res://Sprites/Bot.png" id="3_587b7"]
+[ext_resource type="Texture2D" uid="uid://dnlj5o57onopc" path="res://Message Bot.png" id="4_dp0y2"]
 [ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_jdv15"]
 [ext_resource type="Shader" path="res://Shader/loading.gdshader" id="5_qj6bc"]
 [ext_resource type="PackedScene" uid="uid://b8fqwku1kjuqn" path="res://Scenes/main.tscn" id="5_squa4"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="6_is7gs"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
-[ext_resource type="Texture2D" uid="uid://hgcx1pekg3iu" path="res://Sprites/Reply Arrow.png" id="10_ga2ho"]
+[ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://back.png" id="11_g1vms"]
+[ext_resource type="Texture2D" uid="uid://dpqc25umpnjj" path="res://Cross.png" id="13_ggbv5"]
 [ext_resource type="Script" path="res://Scripts/ExitController.cs" id="14_r5c7n"]
 [ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="15_nhij1"]
@@ -43,7 +44,7 @@ fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.5, 0.5)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "loadingIcon", "notification", "toSystem", "assemble", "toAI", "back")]
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +59,6 @@ breakPointsPnl = NodePath("VBoxContainer/PanelContainer/Breakpoints")
 traceResultsPnl = NodePath("VBoxContainer/PanelContainer/TraceResult")
 aiPnl = NodePath("AISystem")
 viewSystem = NodePath("VBoxContainer/PanelContainer/SystemViewContainer")
-loadingIcon = NodePath("LoadingIcon")
 notification = NodePath("NotificationHandler")
 toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
 assemble = NodePath("LeftContainer/Assemble")
@@ -94,63 +94,61 @@ size_flags_vertical = 0
 [node name="MemoryAndIO" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_d75fn")
 theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 25
 text = "Memory and IO"
-icon = ExtResource("3_22c0e")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
 [node name="BreakPoints" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_d75fn")
 theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 25
 text = "Breakpoints"
-icon = ExtResource("3_22c0e")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
 [node name="TraceResults" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_d75fn")
 theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 25
 text = "Trace Results"
-icon = ExtResource("3_22c0e")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
 [node name="ViewSystem" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_d75fn")
 theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 25
 text = "View System"
-icon = ExtResource("3_22c0e")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
 [node name="AIBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-icon = ExtResource("3_587b7")
-flat = true
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme = ExtResource("2_d75fn")
+icon = ExtResource("4_dp0y2")
 icon_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="MemoryAndIO" type="Panel" parent="VBoxContainer/PanelContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO"]
@@ -165,7 +163,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_is7gs")
 theme_override_font_sizes/font_size = 40
-text = "MEMORY AND IO"
+text = "   MEMORY AND IO"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
 layout_mode = 2
@@ -229,7 +227,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_is7gs")
 theme_override_font_sizes/font_size = 40
-text = "BREAKPOINTS"
+text = "  BREAKPOINTS"
 
 [node name="AddressList" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Breakpoints/VBoxContainer"]
 layout_mode = 2
@@ -277,7 +275,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_is7gs")
 theme_override_font_sizes/font_size = 40
-text = "TRACE RESULT"
+text = "  TRACE RESULT"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
 layout_mode = 2
@@ -312,10 +310,11 @@ text = "CLEAR"
 [node name="SystemViewContainer" type="SubViewportContainer" parent="VBoxContainer/PanelContainer"]
 visible = false
 layout_mode = 2
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/PanelContainer/SystemViewContainer"]
 handle_input_locally = false
-size = Vector2i(1280, 720)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="Main" parent="VBoxContainer/PanelContainer/SystemViewContainer/SubViewport" node_paths=PackedStringArray("cpuStatus", "rtlStatement", "dataMovement", "currentMemoryLocation", "instructionCode") instance=ExtResource("5_squa4")]
@@ -330,7 +329,7 @@ instructionCode = NodePath("../../../../../LeftContainer/ScrollContainer/Instruc
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 30.0
+offset_left = 62.0
 offset_top = 125.0
 offset_right = 560.0
 offset_bottom = -41.0
@@ -436,6 +435,8 @@ text = "Hardwired"
 
 [node name="Assemble" type="Button" parent="LeftContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 theme_override_fonts/font = ExtResource("2_rnxid")
 text = "ASSEMBLE"
 icon_alignment = 1
@@ -448,7 +449,7 @@ offset_top = 40.0
 offset_right = 90.0
 offset_bottom = 140.0
 scale = Vector2(0.76447, 0.438668)
-texture_normal = ExtResource("10_ga2ho")
+texture_normal = ExtResource("11_g1vms")
 stretch_mode = 0
 
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
@@ -467,7 +468,8 @@ offset_top = 10.0
 offset_right = -16.0
 offset_bottom = 41.0
 grow_horizontal = 0
-text = "X"
+icon = ExtResource("13_ggbv5")
+expand_icon = true
 
 [node name="SavePanel" type="Panel" parent="Exit"]
 visible = false
@@ -476,10 +478,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -250.0
-offset_right = 250.0
-offset_bottom = 36.0
+offset_left = -205.0
+offset_top = -164.0
+offset_right = 295.0
+offset_bottom = 122.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kgeug")
@@ -489,11 +491,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -26.0
-offset_top = 84.0
-offset_right = 14.0
-offset_bottom = 107.0
+offset_left = -95.0
+offset_top = 86.0
+offset_right = 97.0
+offset_bottom = 109.0
 grow_horizontal = 2
+theme = ExtResource("2_d75fn")
 text = "Do you want to save file?"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
@@ -510,11 +513,13 @@ grow_horizontal = 2
 [node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_d75fn")
 text = "YES"
 
 [node name="No" type="Button" parent="Exit/SavePanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_d75fn")
 text = "NO"
 
 [node name="AISystem" parent="." instance=ExtResource("15_jp5cw")]
