@@ -7,9 +7,10 @@
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_ehxc6"]
 [ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="5_47uae"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("animationNode", "systemMenu")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("animationNode", "IOBinary", "systemMenu")]
 script = ExtResource("1_uto1p")
 animationNode = NodePath("Animation")
+IOBinary = NodePath("SystemMenu/IOBinary")
 systemMenu = NodePath("SystemMenu")
 
 [node name="Camera2D" type="Camera2D" parent="."]

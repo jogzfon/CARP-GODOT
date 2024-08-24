@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b15huxyjqmigj"]
 
-[ext_resource type="Script" path="res://Scripts/RecentFile.cs" id="1_7so7v"]
+[ext_resource type="Script" path="res://Scripts/FileHandler/RecentFile.cs" id="1_7so7v"]
 [ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="2_oksl3"]
 
 [node name="RecentFile" type="VBoxContainer" node_paths=PackedStringArray("FileName", "FileOpen", "FileRemove")]

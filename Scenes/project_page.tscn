@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
-[ext_resource type="Theme" uid="uid://dvsm58vxhfluq" path="res://Theme/default.tres" id="2_d75fn"]
+[ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="2_d75fn"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="2_rnxid"]
 [ext_resource type="Texture2D" uid="uid://dnlj5o57onopc" path="res://Message Bot.png" id="4_dp0y2"]
 [ext_resource type="FontFile" uid="uid://cyt0c2tdop0ii" path="res://Fonts/Comfortaa-Regular.ttf" id="4_jdv15"]
@@ -12,8 +12,8 @@
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://back.png" id="11_g1vms"]
-[ext_resource type="Texture2D" uid="uid://dpqc25umpnjj" path="res://Cross.png" id="13_ggbv5"]
-[ext_resource type="Script" path="res://Scripts/ExitController.cs" id="14_r5c7n"]
+[ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Cross.png" id="13_ggbv5"]
+[ext_resource type="Script" path="res://Scripts/FileHandler/ExitController.cs" id="14_r5c7n"]
 [ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="15_nhij1"]
 

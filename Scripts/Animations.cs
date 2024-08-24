@@ -155,11 +155,6 @@ public partial class Animations : Node
         project_page proj = node as project_page;
 
         this.breakpoints = proj.breakpointList;
-
-        if(AccountManager.GetUser() != null)
-        {
-            Int32.TryParse(DataToSave.currentMemoryLocation, out i);
-        }
         
         memorycode = Memory.contents;
         TraceResults.RemoveAllStatements();
@@ -220,6 +215,20 @@ public partial class Animations : Node
 
         #endregion
 
+        if (AccountManager.GetUser() != null)
+        {
+            Int32.TryParse(DataToSave.currentMemoryLocation, out i);
+
+            AR_txt.Text = Convert.ToString(DataToSave.ar, 2).PadLeft(16, '0');
+            PC_txt.Text = Convert.ToString(DataToSave.pc, 2).PadLeft(16, '0');
+            DR_txt.Text = Convert.ToString(DataToSave.dr, 2).PadLeft(8, '0');
+            TR_txt.Text = Convert.ToString(DataToSave.tr, 2).PadLeft(8, '0');
+            IR_txt.Text = Convert.ToString(DataToSave.ir, 2).PadLeft(8, '0');
+            R_txt.Text = Convert.ToString(DataToSave.r, 2).PadLeft(8, '0');
+            AC_txt.Text = Convert.ToString(DataToSave.ac, 2).PadLeft(8, '0');
+            Z_txt.Text = Convert.ToString(DataToSave.z, 2).PadLeft(1, '0');
+        }
+
         DrawSystemLines();
     }
 
@@ -257,15 +266,14 @@ public partial class Animations : Node
             if (AccountManager.GetUser() != null)
             {
                 DataToSave.currentMemoryLocation = i.ToString();
-
-                DataToSave.ar = ar_bit;
-                DataToSave.pc = pc_bit;
-                DataToSave.dr = dr_bit;
-                DataToSave.tr = tr_bit;
-                DataToSave.ir = ir_bit;
-                DataToSave.r = r_bit;
-                DataToSave.ac = ac_bit;
-                DataToSave.z = z_bit;
+                DataToSave.ar = BinaryStringToInt(AR_txt.Text);
+                DataToSave.pc = BinaryStringToInt(PC_txt.Text);
+                DataToSave.dr = BinaryStringToInt(DR_txt.Text);
+                DataToSave.tr = BinaryStringToInt(TR_txt.Text);
+                DataToSave.ir = BinaryStringToInt(IR_txt.Text);
+                DataToSave.r = BinaryStringToInt(R_txt.Text);
+                DataToSave.ac = BinaryStringToInt(AC_txt.Text);
+                DataToSave.z = BinaryStringToInt(Z_txt.Text);
             }
             foreach(int brake in breakpoints){
                 if (i == brake)

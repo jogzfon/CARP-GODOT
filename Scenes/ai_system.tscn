@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bpt486otnrqkv"]
 
-[ext_resource type="Script" path="res://Scripts/ai_system.cs" id="1_hxjp6"]
+[ext_resource type="Script" path="res://Scripts/AI/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
 [ext_resource type="Texture2D" uid="uid://dy3etmq5s7r5j" path="res://Sprites/Rectangle 90.png" id="3_co66w"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vad0u"]

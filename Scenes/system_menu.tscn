@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="5_ldypl"]
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="5_lq116"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="5_rn65p"]
-[ext_resource type="Theme" uid="uid://dvsm58vxhfluq" path="res://Theme/default.tres" id="5_tprwi"]
+[ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="5_tprwi"]
 
 [sub_resource type="Gradient" id="Gradient_y1pa2"]
 colors = PackedColorArray(1, 0.388307, 0.418088, 1, 0, 0, 0, 0)

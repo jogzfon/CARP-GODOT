@@ -13,6 +13,7 @@ public partial class main : Node2D
     [Export] public LineEdit currentMemoryLocation;
     [Export] public TextEdit instructionCode;
 
+    [Export] public LineEdit IOBinary;
     [Export] public Control systemMenu;
     system_menu sysmenu;
     int memoryStartLocation;
@@ -27,6 +28,7 @@ public partial class main : Node2D
             rtlStatement.Text = DataToSave.rtlStatement;
             dataMovement.Text = DataToSave.dataMovement;
 
+            IOBinary.Text = Convert.ToString(DataToSave.io, 2).PadLeft(8, '0');
             instructionCode.Text = DataToSave.intructionCodes;
         }
 
@@ -59,6 +61,7 @@ public partial class main : Node2D
              DataToSave.dataMovement = dataMovement.Text;
 
              DataToSave.intructionCodes = instructionCode.Text;
+             DataToSave.io = BinaryStringToInt(IOBinary.Text);
         }
     }
 	private void StartAnimation()
@@ -81,5 +84,16 @@ public partial class main : Node2D
     private void StepThroughInstruction()
     {
         animations.StepThroughInstruction();
+    }
+
+    static int BinaryStringToInt(string binaryString)
+    {
+        // Remove spaces
+        string cleanedBinaryString = binaryString.Replace(" ", "");
+
+        // Convert binary string to integer
+        int result = Convert.ToInt32(cleanedBinaryString, 2);
+
+        return result;
     }
 }
