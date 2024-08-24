@@ -160,6 +160,8 @@ public partial class Animations : Node
         {
             Int32.TryParse(DataToSave.currentMemoryLocation, out i);
         }
+        
+        memorycode = Memory.contents;
         TraceResults.RemoveAllStatements();
         #endregion
 
@@ -245,13 +247,7 @@ public partial class Animations : Node
                 ioB.Text = SpaceInserter(IOint, "io");
             }
             else {
-                try
-                {
-                    i = Int32.Parse(sysmenu.start_location.Text);
-                }catch(Exception e)
-                {
-                    GD.Print(e.Message + "Hellow start location is not int");
-                }
+                i = Int32.Parse(sysmenu.start_location.Text);
             }
 
             sysmenu.isCycle = stepThroughCycle;

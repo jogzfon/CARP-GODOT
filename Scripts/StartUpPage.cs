@@ -85,31 +85,42 @@ public partial class StartUpPage : Control
 	}
 	private async void LogInPressed()
 	{
-		String username = loginUsername.Text;
-		String password = logInPassword.Text;
+        if (client == null)
+        {
+            notification.MessageBox("You are offline, try logging in after turning back online.", 1);
+        }
+        else
+        {
+            String username = loginUsername.Text;
+            String password = logInPassword.Text;
 
-		FirebaseResponse response = await client.GetAsync("Users/" + username);
-		UserData userObj = response.ResultAs<UserData>();
+            FirebaseResponse response = await client.GetAsync("Users/" + username);
+            UserData userObj = response.ResultAs<UserData>();
 
-		if (userObj != null)
-		{
-			if (password.Equals(userObj.Password))
-			{
-				AccountManager.SetUser(userObj);
-                this.QueueFree();
+            if (userObj != null)
+            {
+                if (password.Equals(userObj.Password))
+                {
+                    AccountManager.SetUser(userObj);
+                    this.QueueFree();
+                }
+                else
+                {
+                    notification.MessageBox("Wrong Password!", 1);
+                }
             }
-			else
-			{
-                notification.MessageBox("Wrong Password!", 1);
-			}
-		}
-		else
-		{
-            notification.MessageBox("User Does Not Exist!", 1);
-		}
+            else
+            {
+                notification.MessageBox("User Does Not Exist!", 1);
+            }
+        }
 	}
 	private async void CreatePressed()
 	{
+        if(client == null)
+        {
+            notification.MessageBox("You are offline, try logging in after turning back online.", 1);
+        }
 		var data = new UserData
 		{
 			Username = username.Text,
@@ -164,7 +175,7 @@ public partial class StartUpPage : Control
         this.QueueFree();
     }
 
-    private async Task TryConnectToDatabase()
+	private async Task TryConnectToDatabase()
     {
         try
         {

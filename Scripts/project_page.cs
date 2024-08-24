@@ -173,10 +173,7 @@ public partial class project_page : Control
     {
         if (AccountManager.GetUser() != null)
         {
-            if (AccountManager.GetUser().Subscription == "Student" || AccountManager.GetUser().Subscription == "Teacher")
-            {
-                DataToSave.SaveFile();
-            }
+            DataToSave.SaveFile();
             DataToSave.ResetDatas();
         }
         /*if(mainPage != null)

@@ -36,7 +36,6 @@ public partial class main_page : Control
             signIn.Hide();
             signOut.Show();
             signOut.Text = user.Username;
-            //settings.Connect("pressed", new Callable(this, nameof(Options)));
         }
         else
         {
@@ -65,9 +64,10 @@ public partial class main_page : Control
     {
         options.Visible = false;
         AccountManager.SetUser(null);
-        userName.Text = "John Doe";
-        signIn.Text = "Sign-In";
-        /*signIn.Disconnect("pressed", new Callable(this, nameof(Options)));
-        signIn.Connect("pressed", new Callable(this, nameof(SignIn)));*/
+        if(userName != null && signIn != null)
+        {
+            userName.Text = "John Doe";
+            signIn.Text = "Sign-In";
+        }
     }
 }

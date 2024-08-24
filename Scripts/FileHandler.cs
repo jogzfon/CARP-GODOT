@@ -110,9 +110,9 @@ public partial class FileHandler : Node
             directToSystem.Visible = true;
             // Clear the list of recent files
             foreach (Node child in recentFileList.GetChildren())
-            {
-                child.QueueFree(); // Remove each child from the scene
-            }
+                {
+                    child.QueueFree(); // Remove each child from the scene
+                }
         }
     }
 
@@ -131,7 +131,6 @@ public partial class FileHandler : Node
     }
     private void OpenProject()
     {
-        DataToSave.ResetDatas();
         dialogue.FileMode = FileDialog.FileModeEnum.OpenFile;
         dialogue.PopupCentered();
     }

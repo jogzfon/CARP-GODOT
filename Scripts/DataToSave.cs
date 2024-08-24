@@ -40,8 +40,11 @@ public static class DataToSave
     {
         using var file = FileAccess.Open(filePath, FileAccess.ModeFlags.Write);
 
-        file.StoreString(AllData());
-        file.Close();
+        if (file != null)
+        {
+            file.StoreString(AllData());
+            file.Close();
+        }
         ResetDatas();
     }
     public static void OpenFile()

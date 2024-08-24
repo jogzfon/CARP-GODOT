@@ -47,9 +47,9 @@ public partial class SubscriptionHandler : Node
         // Connect the mouse_exited and mouse_entered signals for the buttons inside the panel
         //guestTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
         guestTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
-       // studentTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
+        // studentTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
         studentTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
-       // teacherTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
+        // teacherTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
         teacherTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
     }
 

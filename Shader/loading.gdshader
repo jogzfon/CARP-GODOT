@@ -15,11 +15,11 @@ void fragment() {
     vec2 uv = UV - 0.5;
     float r = length(uv);
     float angle = atan(uv.y, uv.x);
-    
+
     float spiral = 0.0;
     float direction = clockwise ? 1.0 : -1.0;
     float t = direction * TIME * speed;
-    
+
     if (spiral_type == 1 || spiral_type == 2) {
         spiral = fract((2.0 * r - (angle + PI) / TAU) * rays + t);
         spiral = spiral_type == 1 ? 1.0 - smoothstep(-0.1, 0.1, spiral - thickness) :
@@ -31,9 +31,9 @@ void fragment() {
     } else if (spiral_type == 5) {
         spiral = fract((2.0 * r - (angle + PI) / TAU) * rays + t);
     }
-    
+
     vec3 color = mix(primary_color, secondary_color, spiral);
     float alpha = spiral_type == 5 ? 1.0 : spiral;
-    
+
     COLOR = vec4(color, alpha * pow(1.0 - r * 2.0, fade * 4.0));
 }

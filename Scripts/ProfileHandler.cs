@@ -76,8 +76,7 @@ public partial class ProfileHandler : Node
 	{
         if (AccountManager.GetUser() != null)
         {
-            schoolBtn.Disabled = false;
-            accountProfile.Disabled = false;
+            changeProfileBtn.Disabled = false;
             if(AccountManager.GetUser().ProfileImage != "NONE")
             {
                 accountProfile.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
@@ -96,7 +95,6 @@ public partial class ProfileHandler : Node
     }
     private void DisableProfileAccess()
     {
-        accountProfile.Disabled = true;
         profileDialog.Visible = false;
         profilePanel.Visible = false;
         schoolBtn.Visible = false;
