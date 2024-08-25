@@ -22,7 +22,7 @@ public static class DataToSave
     public static List<int> breakpointList = new List<int>();
 
     //Trace Results
-    public static string traceText = "";
+    public static List<Results> traceText = new List<Results>();
 
     //View System
     public static int io = 0x00000000;
@@ -79,7 +79,7 @@ public static class DataToSave
             "---------- Break Points  ----------\n" +
             "BreakPointList: " + AllBreakPoints() + "\n\n\n" +
             "---------- Trace Results ----------\n" +
-            "TraceText: " + traceText + "\n\n\n" +
+            "TraceText: " + AllTraceResults() + "\n\n\n" +
             "---------- Registers     ----------\n" +
             "IO: " + io + "\n" +
             "AR: " + ar + "\n" +
@@ -110,6 +110,15 @@ public static class DataToSave
         }
         return allnum;
     }
+    private static string AllTraceResults()
+    {
+        string allnum = "";
+        foreach (Results s in traceText)
+        {
+            allnum += s + "\n";
+        }
+        return allnum;
+    }
     #endregion
 
     #region Distribute Values
@@ -117,7 +126,7 @@ public static class DataToSave
     {
         List<List<Tokens>> tokens = new List<List<Tokens>>();
 
-        string pattern = @"\b(Status:|RtlStatement:|DataMovement:|CurrentMemoryLocation:|InstructionCodes:|MemoryContents:|BreakPointList:|TraceText:|IO:|AR:|PC:|DR:|TR:|IR:|R:|AC:|Z:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
+        string pattern = @"\b(Status:|RtlStatement:|DataMovement:|DataMove:|CurrentMemoryLocation:|InstructionCodes:|MemoryContents:|BreakPointList:|TraceText:|IO:|AR:|PC:|DR:|TR:|IR:|R:|AC:|Z:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
 
         string[] lines = content.Split('\n');
 
@@ -128,14 +137,18 @@ public static class DataToSave
                 tokens.Add(TokenizeLines(line, pattern));
             }
         }
-       /* foreach (List<Tokens> token in tokens)
+
+        foreach (List<Tokens> token in tokens)
         {
-            foreach(Tokens tok in token)
+            foreach (Tokens tok in token)
             {
-                GD.Print("Type: "+ tok.type+ " Value: "+ tok.value);
+                if(tok.value != "0")
+                {
+                    GD.Print("Type: " + tok.type + " Value: " + tok.value);
+                }
             }
-            GD.Print(token.Count+" ENDLINE----------------\n\n");
-        }*/
+            GD.Print(token.Count + " ENDLINE----------------\n\n");
+        }
         foreach (List<Tokens> token in tokens)
         {
             if (token.Count > 0)
@@ -143,7 +156,6 @@ public static class DataToSave
                 SetValues(token);
             }
         }
-        //GD.Print(AllData());
     }
     private static List<Tokens> TokenizeLines(string line, string pattern)
     {
@@ -247,7 +259,16 @@ public static class DataToSave
                 {
                     for (int i = 2; i < tokens.Count; i++)
                     {
-                        traceText += tokens[i].value + " ";
+                        
+                    }
+                }
+                break;
+            case "DataMove":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++)
+                    {
+
                     }
                 }
                 break;
@@ -369,7 +390,7 @@ public static class DataToSave
         breakpointList = new List<int>();
 
         //Trace Results
-        traceText = "";
+        traceText = new List<Results>();
 
         //View System
         io = 0x00000000;

@@ -156,7 +156,7 @@ public partial class project_page : Control
         {
             DataToSave.memoryContents = Memory.contents;
             DataToSave.breakpointList = breakpointList;
-            DataToSave.traceText = traceResultBox.Text;
+            DataToSave.traceText = TraceResults.results;
 
             if (Input.IsActionPressed("Ctrl") && Input.IsActionPressed("S"))
             {
@@ -351,11 +351,6 @@ public partial class project_page : Control
         breakPointsPnl.Hide();
         traceResultsPnl.Show();
         viewSystem.Hide();
-
-        if(AccountManager.GetUser() != null)
-        {
-            traceResultBox.Text = DataToSave.traceText;
-        }
     }
     private void ViewResults()
     {
