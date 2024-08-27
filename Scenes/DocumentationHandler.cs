@@ -3,24 +3,20 @@ using System;
 
 public partial class DocumentationHandler : TextureButton
 {
-	[Export] TextureButton addDocumentationBtn;
-    [Export] PanelContainer documentationAdder;
+    [Export] private TextureButton addDocumentationBtn;
+    [Export] private Control documentationAdder;
 
     public override void _Ready()
     {
-        addDocumentationBtn.Connect("pressed", new Callable(this, nameof(OpenDocumentationTemplate)));
+        addDocumentationBtn.Pressed += OpenDocumentationTemplate;
     }
 
-    private void OpenDocumentationTemplate() {
-       if(documentationAdder != null)
+    private void OpenDocumentationTemplate()
+    {
+        if (documentationAdder != null)
         {
-            if(documentationAdder.Visible)
-            {
-                documentationAdder.Visible = false;
-            }else
-            {
-                documentationAdder.Visible = true;
-            }
+            GD.Print("Hi I got called");
+            documentationAdder.Visible = !documentationAdder.Visible;
         }
     }
 }

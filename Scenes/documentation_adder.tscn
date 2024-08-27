@@ -25,7 +25,7 @@ shader_parameter/blur2 = 0.01
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_q1ebe"]
 gradient = SubResource("Gradient_42r60")
 
-[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn")]
+[node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn")]
 custom_minimum_size = Vector2(1550, 960)
 offset_right = 40.0
 offset_bottom = 40.0
