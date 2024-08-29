@@ -17,6 +17,7 @@ public partial class DocumentationAdder : Control
 
     private void AddParagraphAndSentence()
     {
+        var marginContainer = new MarginContainer();
         var txtEdit = new TextEdit
         {
             CustomMinimumSize = new Vector2(0, 100), // Set an initial manageable height
@@ -25,10 +26,14 @@ public partial class DocumentationAdder : Control
         };
         txtEdit.SizeFlagsVertical = (int)Control.SizeFlags.ShrinkBegin; // Allow the height to shrink if needed
 
-        boxContainer.AddChild(txtEdit);
 
         // Adjust the height after adding the text
         txtEdit.ScrollFitContentHeight = true;
+
+        marginContainer.AddChild(txtEdit);
+        boxContainer.AddChild(marginContainer);
+        // Move the TextureRect to be the second-to-last child
+        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 2);
     }
 
     private void AddImage()
@@ -53,6 +58,9 @@ public partial class DocumentationAdder : Control
 
         // Add the MarginContainer to the VBoxContainer
         boxContainer.AddChild(marginContainer);
+
+        // Move the MarginContainer to be the second-to-last child
+        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 2);
     }
 
 }
