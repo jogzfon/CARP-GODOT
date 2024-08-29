@@ -1710,7 +1710,7 @@ stretch_mode = 0
 
 [node name="DocumentationAdder" parent="." instance=ExtResource("3_71ema")]
 visible = false
-z_index = 1
+z_index = 5
 layout_mode = 0
 offset_left = 358.0
 offset_top = 110.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8ly2phrialde"]
+[gd_scene load_steps=7 format=3 uid="uid://b8ly2phrialde"]
 
 [ext_resource type="Script" path="res://Scenes/DocumentationAdder.cs" id="1_io0xd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="1_qiyqe"]
+[ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Cross.png" id="2_2spkf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2va1r"]
 shader = ExtResource("1_qiyqe")
@@ -33,6 +34,7 @@ script = ExtResource("1_io0xd")
 boxContainer = NodePath("VBoxContainer")
 parSenBtn = NodePath("VBoxContainer/HBoxContainer/parSen_Btn")
 imageBtn = NodePath("VBoxContainer/HBoxContainer/image_Btn")
+_imageDefault = ExtResource("2_2spkf")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_2va1r")
@@ -40,6 +42,7 @@ layout_mode = 2
 texture = SubResource("GradientTexture1D_q1ebe")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 1
 custom_minimum_size = Vector2(1500, 910)
 layout_mode = 2
 size_flags_horizontal = 4

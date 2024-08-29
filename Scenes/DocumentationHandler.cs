@@ -15,7 +15,6 @@ public partial class DocumentationHandler : TextureButton
     {
         if (documentationAdder != null)
         {
-            GD.Print("Hi I got called");
             documentationAdder.Visible = !documentationAdder.Visible;
         }
     }
