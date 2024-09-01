@@ -33,7 +33,7 @@ public partial class DocumentationAdder : Control
         marginContainer.AddChild(txtEdit);
         boxContainer.AddChild(marginContainer);
         // Move the TextureRect to be the second-to-last child
-        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 2);
+        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 3);
     }
 
     private void AddImage()
@@ -60,7 +60,7 @@ public partial class DocumentationAdder : Control
         boxContainer.AddChild(marginContainer);
 
         // Move the MarginContainer to be the second-to-last child
-        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 2);
+        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 3);
     }
 
 }
