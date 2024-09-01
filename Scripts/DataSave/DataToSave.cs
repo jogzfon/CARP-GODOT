@@ -37,6 +37,8 @@ public static class DataToSave
 
     private static bool isInstructionCode = false;
 
+    private static int _currToken;
+
     public static void SaveFile()
     {
         using var file = FileAccess.Open(filePath, FileAccess.ModeFlags.Write);
@@ -119,6 +121,42 @@ public static class DataToSave
         }
         return allnum;
     }
+
+    private static void ParseTraceResults(List<Tokens> tokens)
+    {
+        string rtl = "";
+        string dataMove = "";
+        int ar_temp = 0, pc_temp = 0, dr_temp = 0, tr_temp = 0, ir_temp = 0, r_temp = 0, ac_temp = 0, z_temp = 0;
+
+        foreach (var token in tokens)
+        {
+            // Look for RTL statement
+            if (token.value.StartsWith("RTL:"))
+            {
+                rtl = token.value.Substring(4).Trim();
+            }
+
+            // Look for DataMove statement
+            if (token.value.StartsWith("DataMove:"))
+            {
+                dataMove = token.value.Substring(9).Trim();
+            }
+
+            // Parse register values
+            if (token.value.StartsWith("AR:")) ar_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+            if (token.value.StartsWith("PC:")) pc_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+            if (token.value.StartsWith("DR:")) dr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+            if (token.value.StartsWith("TR:")) tr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+            if (token.value.StartsWith("IR:")) ir_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+            if (token.value.StartsWith("R:")) r_temp = Convert.ToInt32(token.value.Substring(2).Trim().Replace(" ", ""), 2);
+            if (token.value.StartsWith("AC:")) ac_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+            if (token.value.StartsWith("Z:")) z_temp = Convert.ToInt32(token.value.Substring(2).Trim(),2);
+
+        }
+
+        Results result = new Results(rtl, dataMove, ar, pc, dr, tr, ir, r, ac, z);
+        traceText.Add(result);
+    }
     #endregion
 
     #region Distribute Values
@@ -134,26 +172,58 @@ public static class DataToSave
         {
             if (!line.Trim().StartsWith("-"))
             {
-                tokens.Add(TokenizeLines(line, pattern));
+                tokens.Add(TokenizeLines(line.Replace(",", ""), pattern));
             }
         }
 
-        foreach (List<Tokens> token in tokens)
+       /* foreach (List<Tokens> token in tokens)
         {
             foreach (Tokens tok in token)
             {
-                if(tok.value != "0")
+                if (tok.value != "0")
                 {
                     GD.Print("Type: " + tok.type + " Value: " + tok.value);
                 }
             }
             GD.Print(token.Count + " ENDLINE----------------\n\n");
-        }
-        foreach (List<Tokens> token in tokens)
+        }*/
+        /*foreach (List<Tokens> token in tokens)
         {
             if (token.Count > 0)
             {
                 SetValues(token);
+            }
+        }*/
+        for (_currToken = 0; _currToken < tokens.Count; _currToken++)
+        {
+            if (tokens[_currToken].Count > 0)
+            {
+                List<Tokens> token2 = tokens[_currToken];
+
+                if (token2[0].value != "TraceText")
+                {
+                    GD.Print("Tehe");
+                    SetValues(tokens[_currToken]);
+                }
+                else
+                {
+                    GD.Print("Found ya fool");
+                    do
+                    {
+                        foreach (Tokens tok in token2)
+                        {
+                            if (tok.value != "0")
+                            {
+                                GD.Print("Type: " + tok.type + " Value: " + tok.value);
+                            }
+                        }
+                        do
+                        {
+                            _currToken++;
+                            token2 = tokens[_currToken];
+                        } while (token2.Count <= 0);
+                    } while (token2[0].value != "IO");
+                }
             }
         }
     }
@@ -166,7 +236,7 @@ public static class DataToSave
         {
             string token = match.Value;
 
-            if (!string.IsNullOrEmpty(token))
+            if (!string.IsNullOrEmpty(token) ||token !=",")
             {
                 if (Regex.IsMatch(token, ":"))
                 {
@@ -255,13 +325,7 @@ public static class DataToSave
                 }
                 break;
             case "TraceText":
-                if (2 < tokens.Count)
-                {
-                    for (int i = 2; i < tokens.Count; i++)
-                    {
-                        
-                    }
-                }
+                ParseTraceResults(tokens.Skip(2).ToList());
                 break;
             case "DataMove":
                 if (2 < tokens.Count)

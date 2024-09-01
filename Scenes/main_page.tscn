@@ -436,6 +436,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="DocumentationAdder" parent="MainContent" instance=ExtResource("3_71ema")]
+visible = false
 z_index = 1
 offset_left = 358.0
 offset_top = 110.0
