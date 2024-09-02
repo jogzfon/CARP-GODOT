@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
 [ext_resource type="PackedScene" uid="uid://b15huxyjqmigj" path="res://Scenes/recent_file.tscn" id="6_nbcor"]
 [ext_resource type="Texture2D" uid="uid://cb3mgtogo7yoa" path="res://Sprites/Documentation/doc_add_Btn.png" id="6_vpwlf"]
-[ext_resource type="Script" path="res://Scenes/DocumentationHandler.cs" id="7_rql6r"]
+[ext_resource type="Script" path="res://Scripts/DocumentationHandler.cs" id="7_rql6r"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
 [ext_resource type="Shader" path="res://Shader/circleImage.gdshader" id="10_urm6c"]
 [ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]

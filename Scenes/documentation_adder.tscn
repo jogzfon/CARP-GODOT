@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b8ly2phrialde"]
 
-[ext_resource type="Script" path="res://Scenes/DocumentationAdder.cs" id="1_io0xd"]
+[ext_resource type="Script" path="res://Scripts/DocumentationAdder.cs" id="1_io0xd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="1_qiyqe"]
 [ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Cross.png" id="2_2spkf"]
 
