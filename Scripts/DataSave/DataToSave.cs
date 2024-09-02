@@ -122,40 +122,71 @@ public static class DataToSave
         return allnum;
     }
 
-    private static void ParseTraceResults(List<Tokens> tokens)
+    private static void ParseTraceResults(List<List<Tokens>> tokens)
     {
         string rtl = "";
         string dataMove = "";
         int ar_temp = 0, pc_temp = 0, dr_temp = 0, tr_temp = 0, ir_temp = 0, r_temp = 0, ac_temp = 0, z_temp = 0;
-
-        foreach (var token in tokens)
+        
+        for (int index = 0; index < tokens.Count; index++)
         {
-            // Look for RTL statement
-            if (token.value.StartsWith("RTL:"))
+            for (int i = 2; i < tokens[index].Count; i++)
             {
-                rtl = token.value.Substring(4).Trim();
+                if (tokens[index][0].value == "RTL")
+                {
+                    GD.Print("Got Called Here RTL");
+                    for (int j = 2; j < tokens[index].Count; j++)
+                    {
+                        rtl += tokens[index][j].value + " ";
+                    }
+                }
             }
 
-            // Look for DataMove statement
-            if (token.value.StartsWith("DataMove:"))
-            {
-                dataMove = token.value.Substring(9).Trim();
+            foreach (var token in tokens[index])
+            {           
+                // Look for RTL statement
+                if (token.value == "RTL")
+                {
+                    GD.Print("Got Called Here RTL");
+                }
             }
+            index++;
+            foreach (var token in tokens[index])
+            {
+                // Look for DataMove statement
+                if (token.value.StartsWith("DataMove:"))
+                {
+                    dataMove = token.value.Substring(9).Trim();
+                }
+            }
+            index++;
+            foreach (var token in tokens[index])
+            {
 
-            // Parse register values
-            if (token.value.StartsWith("AR:")) ar_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-            if (token.value.StartsWith("PC:")) pc_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-            if (token.value.StartsWith("DR:")) dr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-            if (token.value.StartsWith("TR:")) tr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-            if (token.value.StartsWith("IR:")) ir_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-            if (token.value.StartsWith("R:")) r_temp = Convert.ToInt32(token.value.Substring(2).Trim().Replace(" ", ""), 2);
-            if (token.value.StartsWith("AC:")) ac_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-            if (token.value.StartsWith("Z:")) z_temp = Convert.ToInt32(token.value.Substring(2).Trim(),2);
+                // Parse register values
+                if (token.value.StartsWith("AR:")) ar_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+                if (token.value.StartsWith("PC:")) pc_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+                if (token.value.StartsWith("DR:")) dr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+                if (token.value.StartsWith("TR:")) tr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+                if (token.value.StartsWith("IR:")) ir_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+                if (token.value.StartsWith("R:")) r_temp = Convert.ToInt32(token.value.Substring(2).Trim().Replace(" ", ""), 2);
+                if (token.value.StartsWith("AC:")) ac_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
+                if (token.value.StartsWith("Z:")) z_temp = Convert.ToInt32(token.value.Substring(2).Trim(), 2);
+            }
+            Results result = new Results(rtl, dataMove, ar, pc, dr, tr, ir, r, ac, z);
+            traceText.Add(result);
 
+            rtl = "";
+            dataMove = "";
+            ar_temp = 0;
+            pc_temp = 0;
+            dr_temp = 0;
+            tr_temp = 0;
+            ir_temp = 0;
+            r_temp = 0;
+            ac_temp = 0;
+            z_temp = 0;
         }
-
-        Results result = new Results(rtl, dataMove, ar, pc, dr, tr, ir, r, ac, z);
-        traceText.Add(result);
     }
     #endregion
 
@@ -176,17 +207,17 @@ public static class DataToSave
             }
         }
 
-       /* foreach (List<Tokens> token in tokens)
-        {
-            foreach (Tokens tok in token)
-            {
-                if (tok.value != "0")
-                {
-                    GD.Print("Type: " + tok.type + " Value: " + tok.value);
-                }
-            }
-            GD.Print(token.Count + " ENDLINE----------------\n\n");
-        }*/
+        /* foreach (List<Tokens> token in tokens)
+         {
+             foreach (Tokens tok in token)
+             {
+                 if (tok.value != "0")
+                 {
+                     GD.Print("Type: " + tok.type + " Value: " + tok.value);
+                 }
+             }
+             GD.Print(token.Count + " ENDLINE----------------\n\n");
+         }*/
         /*foreach (List<Tokens> token in tokens)
         {
             if (token.Count > 0)
@@ -194,6 +225,7 @@ public static class DataToSave
                 SetValues(token);
             }
         }*/
+        List<List<Tokens>> result_temp_tokens = new List<List<Tokens>>();
         for (_currToken = 0; _currToken < tokens.Count; _currToken++)
         {
             if (tokens[_currToken].Count > 0)
@@ -202,27 +234,32 @@ public static class DataToSave
 
                 if (token2[0].value != "TraceText")
                 {
-                    GD.Print("Tehe");
                     SetValues(tokens[_currToken]);
                 }
                 else
                 {
-                    GD.Print("Found ya fool");
                     do
                     {
-                        foreach (Tokens tok in token2)
+                       /* foreach (Tokens tok in token2)
                         {
                             if (tok.value != "0")
                             {
                                 GD.Print("Type: " + tok.type + " Value: " + tok.value);
                             }
-                        }
+                        }*/
+                        result_temp_tokens.Add(token2);
                         do
                         {
                             _currToken++;
                             token2 = tokens[_currToken];
                         } while (token2.Count <= 0);
                     } while (token2[0].value != "IO");
+                    ParseTraceResults(result_temp_tokens);
+
+                    foreach(Results r in traceText)
+                    {
+                        GD.Print(r);
+                    }
                 }
             }
         }
@@ -323,9 +360,6 @@ public static class DataToSave
                         breakpointList.Add(Int32.Parse(tokens[i].value));
                     }
                 }
-                break;
-            case "TraceText":
-                ParseTraceResults(tokens.Skip(2).ToList());
                 break;
             case "DataMove":
                 if (2 < tokens.Count)
