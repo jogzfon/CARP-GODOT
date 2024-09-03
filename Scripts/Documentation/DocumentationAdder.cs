@@ -10,6 +10,8 @@ public partial class DocumentationAdder : Control
     [Export] private Button imageBtn;
     [Export] private Button saveBtn;
 
+    [Export] private LineEdit doc_Title;
+
     [Export] private FileDialog _imageFileDialogue;
     [Export] private FileDialog _saveFileDialogue;
 
@@ -42,7 +44,7 @@ public partial class DocumentationAdder : Control
         marginContainer.AddChild(txtEdit);
         boxContainer.AddChild(marginContainer);
         // Move the TextureRect to be the second-to-last child
-        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 3);
+        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 2);
     }
 
     private void AddImage()
@@ -61,6 +63,7 @@ public partial class DocumentationAdder : Control
                 Texture = GD.Load<Texture2D>(_selectedImagePath),
                 ExpandMode = TextureRect.ExpandModeEnum.KeepSize,
                 SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter,
+                SizeFlagsVertical = Control.SizeFlags.ShrinkCenter
             };
 
             textureRect.CustomMinimumSize = new Vector2(100, 100);
@@ -72,7 +75,7 @@ public partial class DocumentationAdder : Control
             boxContainer.AddChild(marginContainer);
 
             // Move the MarginContainer to be the second-to-last child
-            boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 3);
+            boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 2);
         }
     }
     private void OpenImageFileDialog()
@@ -92,14 +95,62 @@ public partial class DocumentationAdder : Control
         AddImage();
     }
 
-    public static void SaveDocumentationFile(string path)
+    public void SaveDocumentationFile(string path)
     {
         using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
 
         if (file != null)
         {
-            //file.StoreString(Alldata); - Store here all the string to save
+            file.StoreString(GetAllDocumentationData()); //Save All Data to a file
             file.Close();
         }
+
+        //Reset Datas
+        while (boxContainer.GetChildCount() > 2)
+        {
+            Node child = boxContainer.GetChild(1);
+            boxContainer.RemoveChild(child);
+            child.QueueFree(); // Optionally free the node from memory
+        }
+        doc_Title.Text = "";
+
+        this.Visible = false;
+    }
+
+    public string GetAllDocumentationData()
+    {
+        string allData = "";
+
+        allData += "Title: " + doc_Title.Text +"\n\n";
+
+        int childCount = boxContainer.GetChildCount();
+        for (int i = 0; i < childCount; i++)
+        {
+            Node child = boxContainer.GetChild(i);
+
+            GD.Print(child.Name);
+
+            if (child.GetChild(0) is TextEdit textEdit)
+            {
+                // Append TextEdit data
+                allData += "Text: " + textEdit.Text + "\n";
+            }
+            else if (child.GetChild(0) is TextureRect textureRect)
+            {
+                // Convert the texture to Base64 and append
+                if (textureRect.Texture is Texture2D texture2D)
+                {
+                    string base64Image = Converter.TextureToBase64(texture2D);
+                    allData += "Image: " + base64Image + "\n";
+                }
+                else
+                {
+                    allData += "Image: [No Texture]\n";
+                }
+                GD.Print("Got Caught image");
+            }
+        }
+
+        return allData;
     }
 }
