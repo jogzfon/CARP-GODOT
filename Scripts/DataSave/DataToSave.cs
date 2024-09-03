@@ -127,7 +127,6 @@ public static class DataToSave
         string rtl = "";
         string dataMove = "";
         int ar_temp = 0, pc_temp = 0, dr_temp = 0, tr_temp = 0, ir_temp = 0, r_temp = 0, ac_temp = 0, z_temp = 0;
-        
         for (int index = 0; index < tokens.Count; index++)
         {
             if (tokens[index].Count > 0)
@@ -147,8 +146,65 @@ public static class DataToSave
                         dataMove += tokens[index][i].value + " ";
                     }
                 }
-                GD.Print("RTL: " + rtl);
+                index++;
+                for (int i = 0; i < tokens[index].Count; i++)
+                {
+                    switch (tokens[index][i].value)
+                    {
+                        case "AR":
+                            i+=2;
+                            string ar_txt = tokens[index][i].value + tokens[index][i + 1].value + tokens[index][i + 2].value + tokens[index][i + 3].value;
+                            ar_temp = Convert.ToInt32(ar_txt, 2);
+                            i += 3;
+                            break;
+                        case "PC":
+                            i+=2;
+                            string pc_txt = tokens[index][i].value + tokens[index][i + 1].value + tokens[index][i + 2].value + tokens[index][i + 3].value;
+                            pc_temp = Convert.ToInt32(pc_txt, 2);
+                            i += 3;
+                            break;
+                        case "DR":
+                            i+=2;
+                            string dr_txt = tokens[index][i].value + tokens[index][i + 1].value;
+                            dr_temp = Convert.ToInt32(dr_txt, 2);
+                            i++;
+                            break;
+                        case "TR":
+                            i+=2;
+                            string tr_txt = tokens[index][i].value + tokens[index][i + 1].value;
+                            tr_temp = Convert.ToInt32(tr_txt, 2);
+                            i++;
+                            break;
+                        case "IR":
+                            i+=2;
+                            string ir_txt = tokens[index][i].value + tokens[index][i + 1].value;
+                            ir_temp = Convert.ToInt32(ir_txt, 2);
+                            i++;
+                            break;
+                        case "R":
+                            i+=2;
+                            string r_txt = tokens[index][i].value + tokens[index][i + 1].value;
+                            r_temp = Convert.ToInt32(r_txt, 2);
+                            i++;
+                            break;
+                        case "AC":
+                            i+=2;
+                            string ac_txt = tokens[index][i].value + tokens[index][i + 1].value;
+                            ac_temp = Convert.ToInt32(ac_txt,2);
+                            i++;
+                            break;
+                        case "Z":
+                            i+=2;
+                            z_temp = Convert.ToInt32(tokens[index][i].value,2);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                /*GD.Print("RTL: " + rtl);
                 GD.Print("DataMove: " + dataMove);
+                GD.Print("AR: " + ar_temp + " PC: " + pc_temp + " DR: " + dr_temp + " TR: " + tr_temp + " IR: " + ir_temp + " R: "+ r_temp + " AC: "+ ac_temp + " Z: "+ z_temp);*/
+                traceText.Add(new Results(rtl, dataMove, ar_temp, pc_temp, dr_temp, tr_temp, ir_temp, r_temp, ac_temp, z_temp));
                 rtl = "";
                 dataMove = "";
                 ar_temp = 0;
@@ -159,42 +215,7 @@ public static class DataToSave
                 r_temp = 0;
                 ac_temp = 0;
                 z_temp = 0;
-
-                /*foreach (var token in tokens[index])
-                {
-                    // Look for RTL statement
-                    if (token.value == "RTL")
-                    {
-                        GD.Print("Got Called Here RTL");
-                    }
-                }*/
             }
-            index++;
-            /*foreach (var token in tokens[index])
-            {
-                // Look for DataMove statement
-                if (token.value.StartsWith("DataMove:"))
-                {
-                    dataMove = token.value.Substring(9).Trim();
-                }
-            }
-            index++;
-            foreach (var token in tokens[index])
-            {
-
-                // Parse register values
-                if (token.value.StartsWith("AR:")) ar_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-                if (token.value.StartsWith("PC:")) pc_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-                if (token.value.StartsWith("DR:")) dr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-                if (token.value.StartsWith("TR:")) tr_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-                if (token.value.StartsWith("IR:")) ir_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-                if (token.value.StartsWith("R:")) r_temp = Convert.ToInt32(token.value.Substring(2).Trim().Replace(" ", ""), 2);
-                if (token.value.StartsWith("AC:")) ac_temp = Convert.ToInt32(token.value.Substring(3).Trim().Replace(" ", ""), 2);
-                if (token.value.StartsWith("Z:")) z_temp = Convert.ToInt32(token.value.Substring(2).Trim(), 2);
-            }
-            Results result = new Results(rtl, dataMove, ar, pc, dr, tr, ir, r, ac, z);
-            traceText.Add(result);
-            */
         }
     }
     
@@ -372,15 +393,6 @@ public static class DataToSave
                     for (int i = 2; i < tokens.Count; i++)
                     {
                         breakpointList.Add(Int32.Parse(tokens[i].value));
-                    }
-                }
-                break;
-            case "DataMove":
-                if (2 < tokens.Count)
-                {
-                    for (int i = 2; i < tokens.Count; i++)
-                    {
-
                     }
                 }
                 break;

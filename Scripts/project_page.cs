@@ -68,6 +68,7 @@ public partial class project_page : Control
             aiPnl.Visible = false;
             Memory.contents = DataToSave.memoryContents;
             breakpointList = DataToSave.breakpointList;
+            TraceResults.results = DataToSave.traceText;
         }
         else
         {
@@ -162,8 +163,8 @@ public partial class project_page : Control
             {
                 if (AccountManager.GetUser() != null && (AccountManager.GetUser().Subscription == "Student" || AccountManager.GetUser().Subscription == "Teacher"))
                 {
-                    GD.Print("Printed");
                     DataToSave.SaveFile();
+                    notification.MessageBox("Data Saved", 0);
                 }
             }
         }
