@@ -81,7 +81,7 @@ public static class DataToSave
             "---------- Break Points  ----------\n" +
             "BreakPointList: " + AllBreakPoints() + "\n\n\n" +
             "---------- Trace Results ----------\n" +
-            "TraceText: " + AllTraceResults() + "\n\n\n" +
+            "TraceText: \n" + AllTraceResults() + "\n\n\n" +
             "---------- Registers     ----------\n" +
             "IO: " + io + "\n" +
             "AR: " + ar + "\n" +
@@ -254,6 +254,8 @@ public static class DataToSave
                             token2 = tokens[_currToken];
                         } while (token2.Count <= 0);
                     } while (token2[0].value != "IO");
+
+
                     ParseTraceResults(result_temp_tokens);
 
                     foreach(Results r in traceText)
