@@ -166,6 +166,19 @@ size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_e8jet")
 expand_mode = 2
 
+[node name="ColorRect2" type="ColorRect" parent="MainContent"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.0
+offset_top = 847.0
+offset_right = -17.9999
+offset_bottom = 349.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.996013, 0.352359)
+color = Color(0.291716, 0.299233, 0.321761, 1)
+
 [node name="ColorRect" type="ColorRect" parent="MainContent"]
 visible = false
 z_as_relative = false
@@ -181,20 +194,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 color = Color(0.117647, 0.121569, 0.133333, 1)
-
-[node name="ColorRect" type="ColorRect" parent="MainContent/ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 368.518
-offset_top = 851.827
-offset_right = -17.4818
-offset_bottom = 353.827
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.996013, 0.352359)
-color = Color(0.291716, 0.299233, 0.321761, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="MainContent"]
 anchors_preset = 9

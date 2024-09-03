@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ly2phrialde"]
+[gd_scene load_steps=6 format=3 uid="uid://b8ly2phrialde"]
 
 [ext_resource type="Script" path="res://Scripts/DocumentationAdder.cs" id="1_io0xd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="1_qiyqe"]
-[ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Cross.png" id="2_2spkf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2va1r"]
 shader = ExtResource("1_qiyqe")
@@ -26,7 +25,7 @@ shader_parameter/blur2 = 0.01
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_q1ebe"]
 gradient = SubResource("Gradient_42r60")
 
-[node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn")]
+[node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn", "saveBtn", "_imageFileDialogue")]
 custom_minimum_size = Vector2(1550, 960)
 offset_right = 40.0
 offset_bottom = 40.0
@@ -34,7 +33,8 @@ script = ExtResource("1_io0xd")
 boxContainer = NodePath("ScrollContainer/VBoxContainer")
 parSenBtn = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/parSen_Btn")
 imageBtn = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/image_Btn")
-_imageDefault = ExtResource("2_2spkf")
+saveBtn = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/save_Btn")
+_imageFileDialogue = NodePath("ImageFileDialog")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_2va1r")
@@ -81,7 +81,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Image"
 
-[node name="save" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="save_Btn" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Save"
+
+[node name="ImageFileDialog" type="FileDialog" parent="."]
+title = "Select an Image"
+position = Vector2i(400, 250)
+size = Vector2i(800, 500)
+ok_button_text = "Select"
+file_mode = 0
+filters = PackedStringArray("*.png", "*.jpg")

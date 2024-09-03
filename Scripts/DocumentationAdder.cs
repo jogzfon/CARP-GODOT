@@ -7,12 +7,17 @@ public partial class DocumentationAdder : Control
 
     [Export] private Button parSenBtn;
     [Export] private Button imageBtn;
+    [Export] private Button saveBtn;
 
-    [Export] private Texture2D _imageDefault;
+    [Export] private FileDialog _imageFileDialogue;
+
+    private string _selectedImagePath;
     public override void _Ready()
     {
         parSenBtn.Connect("pressed", new Callable(this, nameof(AddParagraphAndSentence)));
-        imageBtn.Connect("pressed", new Callable(this, nameof(AddImage)));
+        imageBtn.Connect("pressed", new Callable(this, nameof(OpenFileDialog)));
+
+        _imageFileDialogue.Connect("file_selected", new Callable(this, nameof(OnImageFileSelected)));
     }
 
     private void AddParagraphAndSentence()
@@ -38,29 +43,40 @@ public partial class DocumentationAdder : Control
 
     private void AddImage()
     {
-        // Create a MarginContainer to hold the TextureRect
-        var marginContainer = new MarginContainer();
-        marginContainer.AddThemeConstantOverride("margin_top", 10);
-        marginContainer.AddThemeConstantOverride("margin_bottom", 10);
-        marginContainer.AddThemeConstantOverride("margin_left", 10);
-        marginContainer.AddThemeConstantOverride("margin_right", 10);
-
-        // Create the TextureRect
-        var textureRect = new TextureRect
+        if (!string.IsNullOrEmpty(_selectedImagePath))
         {
-            Texture = _imageDefault,
-            ExpandMode = TextureRect.ExpandModeEnum.KeepSize,
-            SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter
-        };
+            // Create a MarginContainer to hold the TextureRect
+            var marginContainer = new MarginContainer();
+            marginContainer.AddThemeConstantOverride("margin_top", 10);
+            marginContainer.AddThemeConstantOverride("margin_bottom", 10);
+            marginContainer.AddThemeConstantOverride("margin_left", 10);
+            marginContainer.AddThemeConstantOverride("margin_right", 10);
+            // Create the TextureRect
+            var textureRect = new TextureRect
+            {
+                Texture = GD.Load<Texture2D>(_selectedImagePath),
+                ExpandMode = TextureRect.ExpandModeEnum.KeepSize,
+                SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter,
+            };
 
-        // Add the TextureRect to the MarginContainer
-        marginContainer.AddChild(textureRect);
+            // Add the TextureRect to the MarginContainer
+            marginContainer.AddChild(textureRect);
 
-        // Add the MarginContainer to the VBoxContainer
-        boxContainer.AddChild(marginContainer);
+            // Add the MarginContainer to the VBoxContainer
+            boxContainer.AddChild(marginContainer);
 
-        // Move the MarginContainer to be the second-to-last child
-        boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 3);
+            // Move the MarginContainer to be the second-to-last child
+            boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 3);
+        }
     }
-
+    private void OpenFileDialog()
+    {
+        // Open the file dialog for the user to select an image
+        _imageFileDialogue.PopupCentered();
+    }
+    private void OnImageFileSelected(string path)
+    {
+        _selectedImagePath = path;
+        AddImage();
+    }
 }
