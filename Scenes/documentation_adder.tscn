@@ -25,7 +25,7 @@ shader_parameter/blur2 = 0.01
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_q1ebe"]
 gradient = SubResource("Gradient_42r60")
 
-[node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn", "saveBtn", "_imageFileDialogue")]
+[node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn", "saveBtn", "_imageFileDialogue", "_saveFileDialogue")]
 custom_minimum_size = Vector2(1550, 960)
 offset_right = 40.0
 offset_bottom = 40.0
@@ -35,6 +35,7 @@ parSenBtn = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/parSen_Btn")
 imageBtn = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/image_Btn")
 saveBtn = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/save_Btn")
 _imageFileDialogue = NodePath("ImageFileDialog")
+_saveFileDialogue = NodePath("SaveFileDialog")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_2va1r")

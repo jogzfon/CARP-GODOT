@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Newtonsoft.Json.Linq;
 
 public partial class DocumentationAdder : Control
 {
@@ -10,14 +11,17 @@ public partial class DocumentationAdder : Control
     [Export] private Button saveBtn;
 
     [Export] private FileDialog _imageFileDialogue;
+    [Export] private FileDialog _saveFileDialogue;
 
     private string _selectedImagePath;
     public override void _Ready()
     {
         parSenBtn.Connect("pressed", new Callable(this, nameof(AddParagraphAndSentence)));
-        imageBtn.Connect("pressed", new Callable(this, nameof(OpenFileDialog)));
+        imageBtn.Connect("pressed", new Callable(this, nameof(OpenImageFileDialog)));
+        saveBtn.Connect("pressed", new Callable(this, nameof(OpenSaveFileDialog)));
 
         _imageFileDialogue.Connect("file_selected", new Callable(this, nameof(OnImageFileSelected)));
+        _saveFileDialogue.Connect("file_selected", new Callable(this, nameof(SaveDocumentationFile)));
     }
 
     private void AddParagraphAndSentence()
@@ -27,7 +31,7 @@ public partial class DocumentationAdder : Control
         {
             CustomMinimumSize = new Vector2(0, 100), // Set an initial manageable height
             AutowrapMode = TextServer.AutowrapMode.Word,
-            Text = "Type Here"
+            PlaceholderText = "Type Here"
         };
         txtEdit.SizeFlagsVertical = (int)Control.SizeFlags.ShrinkBegin; // Allow the height to shrink if needed
 
@@ -59,6 +63,8 @@ public partial class DocumentationAdder : Control
                 SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter,
             };
 
+            textureRect.CustomMinimumSize = new Vector2(100, 100);
+
             // Add the TextureRect to the MarginContainer
             marginContainer.AddChild(textureRect);
 
@@ -69,14 +75,31 @@ public partial class DocumentationAdder : Control
             boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 3);
         }
     }
-    private void OpenFileDialog()
+    private void OpenImageFileDialog()
     {
         // Open the file dialog for the user to select an image
         _imageFileDialogue.PopupCentered();
     }
+    private void OpenSaveFileDialog()
+    {
+        // Open the file dialog for the user to select an image
+        _saveFileDialogue.PopupCentered();
+    }
+
     private void OnImageFileSelected(string path)
     {
         _selectedImagePath = path;
         AddImage();
+    }
+
+    public static void SaveDocumentationFile(string path)
+    {
+        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
+
+        if (file != null)
+        {
+            //file.StoreString(Alldata); - Store here all the string to save
+            file.Close();
+        }
     }
 }
