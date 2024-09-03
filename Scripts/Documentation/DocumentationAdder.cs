@@ -15,6 +15,10 @@ public partial class DocumentationAdder : Control
     [Export] private FileDialog _imageFileDialogue;
     [Export] private FileDialog _saveFileDialogue;
 
+    [Export] private NotificationHandler _notificationHandler;
+
+    [Export] private DocumentationsList _documentationsList; 
+
     private string _selectedImagePath;
     public override void _Ready()
     {
@@ -114,6 +118,8 @@ public partial class DocumentationAdder : Control
         }
         doc_Title.Text = "";
 
+        _notificationHandler.MessageBox("Documentation Saved", 0);
+        _documentationsList.GetAllCarpdocFilesInDirectory();
         this.Visible = false;
     }
 
@@ -128,8 +134,6 @@ public partial class DocumentationAdder : Control
         {
             Node child = boxContainer.GetChild(i);
 
-            GD.Print(child.Name);
-
             if (child.GetChild(0) is TextEdit textEdit)
             {
                 // Append TextEdit data
@@ -143,11 +147,6 @@ public partial class DocumentationAdder : Control
                     string base64Image = Converter.TextureToBase64(texture2D);
                     allData += "Image: " + base64Image + "\n";
                 }
-                else
-                {
-                    allData += "Image: [No Texture]\n";
-                }
-                GD.Print("Got Caught image");
             }
         }
 

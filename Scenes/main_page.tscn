@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=58 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="4_6c80f"]
 [ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
+[ext_resource type="Script" path="res://Scripts/Documentation/DocumentationsList.cs" id="6_bgiiv"]
 [ext_resource type="PackedScene" uid="uid://b15huxyjqmigj" path="res://Scenes/recent_file.tscn" id="6_nbcor"]
 [ext_resource type="Texture2D" uid="uid://cb3mgtogo7yoa" path="res://Sprites/Documentation/doc_add_Btn.png" id="6_vpwlf"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationHandler.cs" id="7_rql6r"]
@@ -77,6 +78,23 @@ shader_parameter/ratio_width = 1.0
 shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pl3t6"]
+shader = ExtResource("34_pirgk")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_if5nb"]
 shader = ExtResource("10_urm6c")
@@ -246,6 +264,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("6_bgiiv")
 
 [node name="Wit" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
@@ -434,13 +453,15 @@ texture_normal = ExtResource("4_2bfqo")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DocumentationAdder" parent="MainContent" instance=ExtResource("3_71ema")]
+[node name="DocumentationAdder" parent="MainContent" node_paths=PackedStringArray("_notificationHandler", "_documentationsList") instance=ExtResource("3_71ema")]
 visible = false
 z_index = 1
 offset_left = 358.0
 offset_top = 110.0
 offset_right = 1908.0
 offset_bottom = 1070.0
+_notificationHandler = NodePath("../../NotificationHandler")
+_documentationsList = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList")
 
 [node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "subscriptionPanel", "notification")]
 script = ExtResource("12_dw1ay")
@@ -537,14 +558,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="ProfileHandler/ProfilePanel"]
+material = SubResource("ShaderMaterial_pl3t6")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -20.0
-offset_right = 6.0
-offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.290196, 0.298039, 0.321569, 1)
