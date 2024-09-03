@@ -145,12 +145,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_tloas")
-logInPage = ExtResource("2_fqqk8")
 signIn = NodePath("MainContent/Sign-In")
 signOut = NodePath("MainContent/SignOut")
 options = NodePath("MainContent/SignOut/Options")
 logout = NodePath("MainContent/SignOut/Options/Logout")
 settings = NodePath("MainContent/SignOut/Options/Settings")
+logInPage = ExtResource("2_fqqk8")
 
 [node name="MainContent" type="Node" parent="."]
 
@@ -662,6 +662,7 @@ size = Vector2i(780, 680)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
+root_subfolder = "Projects"
 filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]

@@ -90,6 +90,14 @@ text = "Save"
 title = "Select an Image"
 position = Vector2i(400, 250)
 size = Vector2i(800, 500)
-ok_button_text = "Select"
+ok_button_text = "Open"
 file_mode = 0
 filters = PackedStringArray("*.png", "*.jpg")
+
+[node name="SaveFileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+position = Vector2i(400, 250)
+size = Vector2i(800, 500)
+ok_button_text = "Save"
+root_subfolder = "Carp_Documentation"
+filters = PackedStringArray("*.carpdoc")

@@ -201,9 +201,6 @@ public static class DataToSave
                             break;
                     }
                 }
-                /*GD.Print("RTL: " + rtl);
-                GD.Print("DataMove: " + dataMove);
-                GD.Print("AR: " + ar_temp + " PC: " + pc_temp + " DR: " + dr_temp + " TR: " + tr_temp + " IR: " + ir_temp + " R: "+ r_temp + " AC: "+ ac_temp + " Z: "+ z_temp);*/
                 traceText.Add(new Results(rtl, dataMove, ar_temp, pc_temp, dr_temp, tr_temp, ir_temp, r_temp, ac_temp, z_temp));
                 rtl = "";
                 dataMove = "";
