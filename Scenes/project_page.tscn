@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=22 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="6_is7gs"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
+[ext_resource type="Script" path="res://Scripts/PreMade Code/InstructionCodeHandler.cs" id="9_ni21l"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://back.png" id="11_g1vms"]
 [ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Cross.png" id="13_ggbv5"]
 [ext_resource type="Script" path="res://Scripts/FileHandler/ExitController.cs" id="14_r5c7n"]
@@ -397,7 +398,7 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InstructionCode" type="TextEdit" parent="LeftContainer/ScrollContainer"]
+[node name="InstructionCode" type="TextEdit" parent="LeftContainer/ScrollContainer" node_paths=PackedStringArray("instructions")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -405,6 +406,8 @@ size_flags_stretch_ratio = 0.8
 theme_override_fonts/font = ExtResource("8_6x74r")
 theme_override_font_sizes/font_size = 20
 placeholder_text = "Input code here..."
+script = ExtResource("9_ni21l")
+instructions = NodePath(".")
 
 [node name="UnitType" type="Label" parent="LeftContainer"]
 visible = false
