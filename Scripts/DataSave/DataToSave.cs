@@ -130,28 +130,38 @@ public static class DataToSave
         
         for (int index = 0; index < tokens.Count; index++)
         {
-            for (int i = 2; i < tokens[index].Count; i++)
+            if (tokens[index].Count > 0)
             {
-                if (tokens[index][0].value == "RTL")
+                for (int i = 2; i < tokens[index].Count; i++)
                 {
-                    GD.Print("Got Called Here RTL");
-                    for (int j = 2; j < tokens[index].Count; j++)
+                    if (tokens[index][0].value == "RTL")
                     {
-                        rtl += tokens[index][j].value + " ";
+                        rtl += tokens[index][i].value + " ";
                     }
                 }
-            }
+                GD.Print("RTL: " + rtl);
+                rtl = "";
+                dataMove = "";
+                ar_temp = 0;
+                pc_temp = 0;
+                dr_temp = 0;
+                tr_temp = 0;
+                ir_temp = 0;
+                r_temp = 0;
+                ac_temp = 0;
+                z_temp = 0;
 
-            foreach (var token in tokens[index])
-            {           
-                // Look for RTL statement
-                if (token.value == "RTL")
+                /*foreach (var token in tokens[index])
                 {
-                    GD.Print("Got Called Here RTL");
-                }
+                    // Look for RTL statement
+                    if (token.value == "RTL")
+                    {
+                        GD.Print("Got Called Here RTL");
+                    }
+                }*/
             }
-            index++;
-            foreach (var token in tokens[index])
+            index+=2;
+            /*foreach (var token in tokens[index])
             {
                 // Look for DataMove statement
                 if (token.value.StartsWith("DataMove:"))
@@ -175,17 +185,7 @@ public static class DataToSave
             }
             Results result = new Results(rtl, dataMove, ar, pc, dr, tr, ir, r, ac, z);
             traceText.Add(result);
-
-            rtl = "";
-            dataMove = "";
-            ar_temp = 0;
-            pc_temp = 0;
-            dr_temp = 0;
-            tr_temp = 0;
-            ir_temp = 0;
-            r_temp = 0;
-            ac_temp = 0;
-            z_temp = 0;
+            */
         }
     }
     #endregion
@@ -238,6 +238,8 @@ public static class DataToSave
                 }
                 else
                 {
+                    _currToken++;
+                    token2 = tokens[_currToken];
                     do
                     {
                        /* foreach (Tokens tok in token2)
