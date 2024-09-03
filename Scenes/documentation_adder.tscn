@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8ly2phrialde"]
 
-[ext_resource type="Script" path="res://Scripts/DocumentationAdder.cs" id="1_io0xd"]
+[ext_resource type="Script" path="res://Scripts/Documentation/DocumentationAdder.cs" id="1_io0xd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="1_qiyqe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2va1r"]

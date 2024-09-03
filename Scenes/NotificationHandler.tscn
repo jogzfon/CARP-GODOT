@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjoi18xm4kdgo"]
 
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_jarin"]
-[ext_resource type="Script" path="res://Scripts/NotificationHandler.cs" id="1_t5tot"]
+[ext_resource type="Script" path="res://Scripts/Other/NotificationHandler.cs" id="1_t5tot"]
 [ext_resource type="Texture2D" uid="uid://bvhfcm8kjr7yf" path="res://Sprites/notification.png" id="2_25n1e"]
 [ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Cross.png" id="5_eyc7l"]
 

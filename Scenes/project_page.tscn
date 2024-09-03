@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://c18fyoobswur4"]
 
-[ext_resource type="Script" path="res://Scripts/project_page.cs" id="1_lst7x"]
+[ext_resource type="Script" path="res://Scripts/Pages/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
 [ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="2_d75fn"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="2_rnxid"]

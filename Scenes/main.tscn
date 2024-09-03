@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://b8fqwku1kjuqn"]
 
 [ext_resource type="PackedScene" uid="uid://dw860tmmffkxq" path="res://Scenes/system_menu.tscn" id="1_or0nw"]
-[ext_resource type="Script" path="res://Scripts/Animations.cs" id="1_rmn0d"]
-[ext_resource type="Script" path="res://Scripts/main.cs" id="1_uto1p"]
+[ext_resource type="Script" path="res://Scripts/Other/Animations.cs" id="1_rmn0d"]
+[ext_resource type="Script" path="res://Scripts/Pages/main.cs" id="1_uto1p"]
 [ext_resource type="Texture2D" uid="uid://cfpgn53pimfk7" path="res://icon.svg" id="3_taic5"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_ehxc6"]
 [ext_resource type="Texture2D" uid="uid://cng7yhck55pjj" path="res://Sprites/box.png" id="5_47uae"]

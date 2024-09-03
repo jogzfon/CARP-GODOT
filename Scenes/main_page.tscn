@@ -1,7 +1,7 @@
 [gd_scene load_steps=56 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
-[ext_resource type="Script" path="res://Scripts/main_page.cs" id="1_tloas"]
+[ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
 [ext_resource type="Texture2D" uid="uid://c4woa0garcmfn" path="res://Sprites/Rectangle 92.png" id="2_dsjfr"]
 [ext_resource type="PackedScene" uid="uid://whq7hnglcf2a" path="res://Scenes/logInPage.tscn" id="2_fqqk8"]
 [ext_resource type="PackedScene" uid="uid://b8ly2phrialde" path="res://Scenes/documentation_adder.tscn" id="3_71ema"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
 [ext_resource type="PackedScene" uid="uid://b15huxyjqmigj" path="res://Scenes/recent_file.tscn" id="6_nbcor"]
 [ext_resource type="Texture2D" uid="uid://cb3mgtogo7yoa" path="res://Sprites/Documentation/doc_add_Btn.png" id="6_vpwlf"]
-[ext_resource type="Script" path="res://Scripts/DocumentationHandler.cs" id="7_rql6r"]
+[ext_resource type="Script" path="res://Scripts/Documentation/DocumentationHandler.cs" id="7_rql6r"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
 [ext_resource type="Shader" path="res://Shader/circleImage.gdshader" id="10_urm6c"]
 [ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]
@@ -145,12 +145,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_tloas")
+logInPage = ExtResource("2_fqqk8")
 signIn = NodePath("MainContent/Sign-In")
 signOut = NodePath("MainContent/SignOut")
 options = NodePath("MainContent/SignOut/Options")
 logout = NodePath("MainContent/SignOut/Options/Logout")
 settings = NodePath("MainContent/SignOut/Options/Settings")
-logInPage = ExtResource("2_fqqk8")
 
 [node name="MainContent" type="Node" parent="."]
 

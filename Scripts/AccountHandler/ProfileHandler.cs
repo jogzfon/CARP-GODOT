@@ -55,8 +55,8 @@ public partial class ProfileHandler : Node
                 centerMargin.Visible = true;
                 schoolBtn.Connect("pressed", new Callable(this, nameof(SchoolPage)));
             }
-            accountProfile.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
-            changeProfileBtn.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
+            accountProfile.TextureNormal = Converter.Base64ToTexture(AccountManager.GetUser().ProfileImage);
+            changeProfileBtn.TextureNormal = Converter.Base64ToTexture(AccountManager.GetUser().ProfileImage);
         }
         else
         {
@@ -79,7 +79,7 @@ public partial class ProfileHandler : Node
             changeProfileBtn.Disabled = false;
             if(AccountManager.GetUser().ProfileImage != "NONE")
             {
-                accountProfile.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
+                accountProfile.TextureNormal = Converter.Base64ToTexture(AccountManager.GetUser().ProfileImage);
             }
             userName.Text = AccountManager.GetUser().Firstname +" "+ AccountManager.GetUser().Lastname;
         }
@@ -111,7 +111,7 @@ public partial class ProfileHandler : Node
             subscriptionPanel.Visible = false;
             if (AccountManager.GetUser().ProfileImage != "NONE")
             {
-                changeProfileBtn.TextureNormal = Base64ToTexture(AccountManager.GetUser().ProfileImage);
+                changeProfileBtn.TextureNormal = Converter.Base64ToTexture(AccountManager.GetUser().ProfileImage);
             }
         }
         else
@@ -144,7 +144,7 @@ public partial class ProfileHandler : Node
     private async void SaveProfile()
     {
         Texture2D textureToSave = changeProfileBtn.TextureNormal as Texture2D;
-        string profileImageBase64 = TextureToBase64(textureToSave);
+        string profileImageBase64 = Converter.TextureToBase64(textureToSave);
 
         var currentUser = AccountManager.GetUser();
         currentUser.ProfileImage = profileImageBase64;
@@ -155,22 +155,5 @@ public partial class ProfileHandler : Node
         notification.MessageBox(result.Username+" Profile Updated", 0);
 
         AccountManager.SetUser(result);
-    }
-    public string TextureToBase64(Texture2D texture)
-    {
-        Image img = texture.GetImage();
-        byte[] byteArray = img.SavePngToBuffer();
-        return Convert.ToBase64String(byteArray);
-    }
-
-    // Convert Base64 string back to Texture2D
-    public Texture2D Base64ToTexture(string base64String)
-    {
-        byte[] byteArray = Convert.FromBase64String(base64String);
-        Image img = new Image();
-        img.LoadPngFromBuffer(byteArray);
-
-        ImageTexture texture = ImageTexture.CreateFromImage(img);
-        return texture;
     }
 }
