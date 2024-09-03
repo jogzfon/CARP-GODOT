@@ -139,7 +139,16 @@ public static class DataToSave
                         rtl += tokens[index][i].value + " ";
                     }
                 }
+                index++;
+                for (int i = 2; i < tokens[index].Count; i++)
+                {
+                    if (tokens[index][0].value == "DataMove")
+                    {
+                        dataMove += tokens[index][i].value + " ";
+                    }
+                }
                 GD.Print("RTL: " + rtl);
+                GD.Print("DataMove: " + dataMove);
                 rtl = "";
                 dataMove = "";
                 ar_temp = 0;
@@ -160,7 +169,7 @@ public static class DataToSave
                     }
                 }*/
             }
-            index+=2;
+            index++;
             /*foreach (var token in tokens[index])
             {
                 // Look for DataMove statement
@@ -188,6 +197,7 @@ public static class DataToSave
             */
         }
     }
+    
     #endregion
 
     #region Distribute Values
