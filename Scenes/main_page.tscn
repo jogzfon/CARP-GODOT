@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=59 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://c4uvbuprkvnnd" path="res://Sprites/Subscription/School_Logo3.png" id="30_up4sm"]
 [ext_resource type="Texture2D" uid="uid://bog35ofpaqh01" path="res://Sprites/Subscription/School_Logo1.png" id="31_5pwgi"]
 [ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
+[ext_resource type="PackedScene" uid="uid://vykxrngj8yrh" path="res://Scenes/documentation_template.tscn" id="32_5gf2n"]
 [ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="34_pirgk"]
 
@@ -1499,6 +1500,10 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
+
+[node name="DocumentationTemplate" parent="FileHandler/DocumentationRect" instance=ExtResource("32_5gf2n")]
+visible = false
+layout_mode = 1
 
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
 script = ExtResource("16_metue")
