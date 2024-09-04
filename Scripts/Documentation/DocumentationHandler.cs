@@ -5,7 +5,6 @@ public partial class DocumentationHandler : TextureButton
 {
     [Export] private TextureButton addDocumentationBtn;
     [Export] private Control documentationAdder;
-
     public override void _Ready()
     {
         addDocumentationBtn.Pressed += OpenDocumentationTemplate;

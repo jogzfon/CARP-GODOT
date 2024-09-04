@@ -261,11 +261,13 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DocumentationsList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer"]
+[node name="DocumentationsList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer" node_paths=PackedStringArray("documentationBtnList", "documentationList")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("6_bgiiv")
+documentationBtnList = NodePath(".")
+documentationList = NodePath("../../../../FileHandler/DocumentationRect")
 
 [node name="Wit" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
