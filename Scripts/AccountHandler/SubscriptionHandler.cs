@@ -21,6 +21,8 @@ public partial class SubscriptionHandler : Node
 
     [Export] PackedScene logInPage;
 
+    [Export] private Control documentationAdder;
+
     [Export]
 	Texture2D freeTier;
     [Export]
@@ -100,6 +102,11 @@ public partial class SubscriptionHandler : Node
 
     private void OpenSubscription()
     {
+        if (documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
+
         if (AccountManager.GetUser() != null)
         {
             profilePanel.Visible = false;

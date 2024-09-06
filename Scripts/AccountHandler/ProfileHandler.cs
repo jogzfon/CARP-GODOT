@@ -30,6 +30,8 @@ public partial class ProfileHandler : Node
     [Export]
     ColorRect subscriptionPanel;
 
+    [Export] private Control documentationAdder; 
+
     [Export]
     private NotificationHandler notification;
 
@@ -105,6 +107,11 @@ public partial class ProfileHandler : Node
     }
     private void OpenProfilePage()
     {
+        if (documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
+
         if (AccountManager.GetUser() != null)
         {
             profilePanel.Visible = true;

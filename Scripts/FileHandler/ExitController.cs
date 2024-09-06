@@ -9,6 +9,8 @@ public partial class ExitController : Node
 	[Export] private Button yesbtn;
 	[Export] private Button nobtn;
 
+    [Export] private Control documentationAdder;
+
     [Export] private bool saveAvailable = true;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,6 +28,10 @@ public partial class ExitController : Node
 	}
 	private async void Exit()
 	{
+        if(documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
         if (AccountManager.GetUser() != null && saveAvailable && (AccountManager.GetUser().Subscription == "Student" || AccountManager.GetUser().Subscription == "Teacher"))
         {
             savePanel.Visible = true;

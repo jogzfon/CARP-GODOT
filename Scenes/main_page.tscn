@@ -154,7 +154,7 @@ shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
 
-[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "options", "logout", "settings")]
+[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "userName", "options", "logout", "settings")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,6 +166,7 @@ size_flags_vertical = 3
 script = ExtResource("1_tloas")
 signIn = NodePath("MainContent/Sign-In")
 signOut = NodePath("MainContent/SignOut")
+userName = NodePath("ProfileHandler/ProfilePanel/Name")
 options = NodePath("MainContent/SignOut/Options")
 logout = NodePath("MainContent/SignOut/Options/Logout")
 settings = NodePath("MainContent/SignOut/Options/Settings")
@@ -466,7 +467,7 @@ offset_bottom = 1070.0
 _notificationHandler = NodePath("../../NotificationHandler")
 _documentationsList = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList")
 
-[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "subscriptionPanel", "notification")]
+[node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "subscriptionPanel", "documentationAdder", "notification")]
 script = ExtResource("12_dw1ay")
 schoolBtn = NodePath("ManageFile/New Project3")
 centerMargin = NodePath("ManageFile/MarginContainer2")
@@ -479,6 +480,7 @@ defaultProfileTexture = ExtResource("4_2bfqo")
 saveProfileImage = NodePath("ProfilePanel/SaveBtn")
 userName = NodePath("ProfilePanel/Name")
 subscriptionPanel = NodePath("../SubscriptionHandler/SubscriptionRect")
+documentationAdder = NodePath("../MainContent/DocumentationAdder")
 notification = NodePath("../NotificationHandler")
 
 [node name="DirectToSystem" type="HBoxContainer" parent="ProfileHandler"]
@@ -645,7 +647,7 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.png", "*.jpg")
 
-[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "recentFileList", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
+[node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "recentFileList", "documentationAdder", "documentationRect", "witbtn", "witexit", "WIT", "htdwbtn", "htdwexit", "HDTW", "pexbtn", "pexexit", "PEX", "ncbtn", "ncexit", "NC", "adbtn", "adexit", "AD", "aapbtn", "aapexit", "AAP")]
 script = ExtResource("18_lnwlk")
 dialogue = NodePath("FileDialog")
 newProject = NodePath("../ProfileHandler/ManageFile/New Project")
@@ -656,6 +658,7 @@ manageFile = NodePath("../ProfileHandler/ManageFile")
 projectPage = ExtResource("11_5fqup")
 recentFile = ExtResource("6_nbcor")
 recentFileList = NodePath("../MainContent/VBoxContainer/ProjectContainer/ProjectList")
+documentationAdder = NodePath("DocumentationRect/DocumentationTemplate")
 documentationRect = NodePath("DocumentationRect")
 witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
 witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")
@@ -1507,12 +1510,13 @@ vertical_alignment = 1
 visible = false
 layout_mode = 1
 
-[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn", "documentationAdder")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
 savePanel = NodePath("SavePanel")
 yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
 nobtn = NodePath("SavePanel/HBoxContainer/No")
+documentationAdder = NodePath("../FileHandler/DocumentationRect/DocumentationTemplate")
 saveAvailable = false
 
 [node name="ExitButton" type="Button" parent="Exit"]
@@ -1579,7 +1583,7 @@ text = "NO"
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
 
-[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "subscriptionPanel", "profilePanel")]
+[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "subscriptionPanel", "profilePanel", "documentationAdder")]
 script = ExtResource("28_wwcii")
 subscriptionBtn = NodePath("SubscriptionBtn")
 guestTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/GuesTier")
@@ -1588,6 +1592,7 @@ teacherTierBtn = NodePath("SubscriptionRect/WhatIsThis/HBoxContainer/EducationTi
 subscriptionPanel = NodePath("SubscriptionRect")
 profilePanel = NodePath("../ProfileHandler/ProfilePanel")
 logInPage = ExtResource("2_fqqk8")
+documentationAdder = NodePath("../FileHandler/DocumentationRect/DocumentationTemplate")
 freeTier = ExtResource("32_mcsfd")
 guestTier = ExtResource("30_up4sm")
 studentTier = ExtResource("31_5pwgi")

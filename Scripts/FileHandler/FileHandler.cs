@@ -21,6 +21,9 @@ public partial class FileHandler : Node
     [Export] PackedScene recentFile;
     [Export] VBoxContainer recentFileList;
 
+    [Export] private Control documentationAdder;
+
+
     #region DocumentationBtn
     [Export]
     public ColorRect documentationRect;
@@ -125,12 +128,22 @@ public partial class FileHandler : Node
     #region FileHandler
     private void NewProject()
     {
+        if (documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
+
         DataToSave.ResetDatas();
         dialogue.FileMode = FileDialog.FileModeEnum.SaveFile;
         dialogue.PopupCentered();
     }
     private void OpenProject()
     {
+        if (documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
+
         dialogue.FileMode = FileDialog.FileModeEnum.OpenFile;
         dialogue.PopupCentered();
     }

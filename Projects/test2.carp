@@ -1,9 +1,94 @@
 ---------- Detail Info   ----------
-Status: Idle 
-RtlStatement: 
-DataMovement: 
+Status: Stopped 
+RtlStatement: Fetch 2Fetch 2 
+DataMovement: DR <- M, PC <- PC+1DR < - M PC < - PC + 1 
 CurrentMemoryLocation: 0
-InstructionCodes: 
+InstructionCodes: ;loop x times  x value in 100
+clac		         	                                    ;i=0
+mvac		                                           ;R=i
+                       	  		                           ;Loop:
+movr		                                           ;AC=i
+inac		                                               ;i++
+mvac		                                           ;i back to R
+ldac	100                             		         	;load x
+sub		                          	                    ;x-i
+jpnz	2	                          		                ;loop again if i<x
+end
+
+; set breakpoint at 9 (jpnz) to count the loops...
+
+;double a number.  i=i+i
+;i at 100
+
+ldac 100	                                  	  ;load i
+mvac		                                      ;copy to R
+add		                                          ;i+i
+stac 100                               		  ;store back to i
+end
+
+;example from textbook
+;Variables memory locations: total=100  i=101  n=102  
+;Label loop=7
+;Need to manually Edit Memory location 102 for n value.
+
+clac
+stac 100	                                           ;total=0
+stac 101	                                            ;i=0
+                                                          ;Loop:
+ldac 101	                                            ;i++
+inac		
+stac 101
+
+mvac		                                                ;i to R
+ldac 100	                                          ;total to AC
+add		                                                  ;total+i
+stac 100                                         	;total+=i
+
+ldac 102                                         	;n to AC
+sub		                                            ;n-i
+jpnz 7		                                        ;if n-i!=0 (i.e. i!=n) goto Loop
+		                                                ;else continue here
+end                                                  ;added to book's code.
+; loop x times x value in 100 
+clac ; i = 0 
+mvac ; R = i 
+; Loop : 
+movr ; AC = i 
+inac ; i + + 
+mvac ; i back to R 
+ldac 100 ; load x 
+sub ; x - i 
+jpnz 2 ; loop again if i < x 
+end 
+; set breakpoint at 9 ( jpnz ) to count the loops . . . 
+; double a number . i = i + i 
+; i at 100 
+ldac 100 ; load i 
+mvac ; copy to R 
+add ; i + i 
+stac 100 ; store back to i 
+end 
+; example from textbook 
+; Variables memory locations : total = 100 i = 101 n = 102 
+; Label loop = 7 
+; Need to manually Edit Memory location 102 for n value . 
+clac 
+stac 100 ; total = 0 
+stac 101 ; i = 0 
+; Loop : 
+ldac 101 ; i + + 
+inac 
+stac 101 
+mvac ; i to R 
+ldac 100 ; total to AC 
+add ; total + i 
+stac 100 ; total + = i 
+ldac 102 ; n to AC 
+sub ; n - i 
+jpnz 7 ; if n - i ! = 0 ( i . e . i ! = n ) goto Loop 
+; else continue here 
+end ; added to book's code . 
+
 
 
 ---------- Memory And IO ----------
@@ -21,8 +106,8 @@ TraceText:
 
 ---------- Registers     ----------
 IO: 0
-AR: 0
-PC: 0
+AR: 2
+PC: 3
 DR: 0
 TR: 0
 IR: 0
