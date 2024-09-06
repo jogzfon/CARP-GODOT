@@ -52,8 +52,6 @@ public partial class StartUpPage : Control
             }
         });
 
-        CheckInternetConnectionAndReconnect();
-
         createAccount.Visible = false;
         loginAccount.Visible = true;
 
@@ -71,6 +69,8 @@ public partial class StartUpPage : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+        CheckInternetConnectionAndReconnect();
+
         if (client == null)
         {
             client = new FireSharp.FirebaseClient(config);
