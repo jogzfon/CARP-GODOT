@@ -22,7 +22,6 @@ public partial class DocumentationsList : VBoxContainer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        
     }
 
     public void GetAllCarpdocFilesInDirectory()
@@ -44,8 +43,9 @@ public partial class DocumentationsList : VBoxContainer
             // Skip special entries "." and ".."
             if (!dir.CurrentIsDir() && fileName.EndsWith(".carpdoc"))
             {
-                // Process .carpdoc file
-                GD.Print("Carpdoc File: " + fileName);
+                var btn = new Button();
+                btn.Text = fileName;
+                documentationBtnList.AddChild(btn);
             }
 
             fileName = dir.GetNext(); // Get the next file

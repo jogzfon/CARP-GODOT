@@ -6,6 +6,8 @@ public partial class DocumentationAdder : Control
 {
     [Export] private VBoxContainer boxContainer;
 
+    [Export] private VBoxContainer _addedDocumentationList;
+
     [Export] private Button parSenBtn;
     [Export] private Button imageBtn;
     [Export] private Button saveBtn;

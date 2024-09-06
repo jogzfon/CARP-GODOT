@@ -6,8 +6,8 @@
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vad0u"]
 [ext_resource type="Texture2D" uid="uid://b44pnrtokcm2" path="res://Sprites/Paper Plane.png" id="4_3xanh"]
 [ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="4_qnl5w"]
-[ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://back.png" id="7_ps5gc"]
-[ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://load2.png" id="8_o48ei"]
+[ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="7_ps5gc"]
+[ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="8_o48ei"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="9_k114o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]

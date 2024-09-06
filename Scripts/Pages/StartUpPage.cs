@@ -43,14 +43,7 @@ public partial class StartUpPage : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        // Initialize the connection and start checking for reconnections
-        TryConnectToDatabase().ContinueWith(task =>
-        {
-            if (task.Exception != null)
-            {
-                GD.Print($"Initial connection failed: {task.Exception.Message}");
-            }
-        });
+        PrepareDatabase();
 
         createAccount.Visible = false;
         loginAccount.Visible = true;
@@ -65,12 +58,21 @@ public partial class StartUpPage : Control
 
         backBtn.Connect("pressed", new Callable(this, nameof(BackPressed)));
     }
-
+    public async void PrepareDatabase()
+    {
+        // Initialize the connection and start checking for reconnections
+        await TryConnectToDatabase().ContinueWith(async task =>
+        {
+            if (task.Exception != null)
+            {
+                GD.Print($"Initial connection failed: {task.Exception.Message}");
+                await CheckInternetConnectionAndReconnect();
+            }
+        });
+    }
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        CheckInternetConnectionAndReconnect();
-
         if (client == null)
         {
             client = new FireSharp.FirebaseClient(config);
