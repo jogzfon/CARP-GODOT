@@ -1,13 +1,25 @@
 ---------- Detail Info   ----------
-Status: Ended
-RtlStatement: END
-DataMovement: NONE
-CurrentMemoryLocation: 8
-InstructionCodes: LDAC 100 
-MVAC 
-ADD 
-STAC 100 
-END 
+Status: Stopped 
+RtlStatement: Fetch 3 
+DataMovement: IR < - DR AR < - PC 
+CurrentMemoryLocation: 0
+InstructionCodes: org 0 ; assembly start address 
+ldac 0 ; load AC with decimal value 0 
+clac ; set AC to 0 ( as per instruction set ) 
+mvac ; move AC data to register R for later use 
+ldac 1 ; load AC with decimal value 1 ( for adding to i ) 
+mvac ; move AC data to register R for later use 
+ldac 100 ; load AC with decimal value 100 ( i will be compared to this ) 
+mvac ; move AC data to register R for later use 
+; Loop : 
+movr ; AC = i 
+add ; i = i + 1 
+mvac ; store new value of i in register R 
+ldac 100 ; load AC with decimal value 100 
+sub ; AC = AC - R which now has the value of i 
+if ( AC ! = 0 ) ; compare AC to 0 using jpnz instruction 
+stac 101 ; if not equal to 0 take value of i ( stored in R ) and store in n variable 
+end 
 
 
 
@@ -37,99 +49,132 @@ RTL: LDAC 2   ,
 DataMove: TR < - DR DR < - M PC = PC + 1 , 
 AR: 0000 0000 0010 0010, PC: 0000 0000 0010 0011, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0010 0011, PC: 0000 0000 0010 0011, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 2  , 
-DataMove: DR <- M, PC <- PC+1, 
+DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0010 0011, PC: 0000 0000 0010 0100, DR: 0000 0001, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 3  , 
-DataMove: IR <- DR, AR <- PC, 
+DataMove: IR < - DR AR < - PC , 
 AR: 0000 0000 0010 0100, PC: 0000 0000 0010 0100, DR: 0000 0001, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: LDAC 1   , 
-DataMove: DR <- M, PC <- PC + 1, AR <- AR + 1, 
+DataMove: DR < - M PC < - PC + 1 AR < - AR + 1 , 
 AR: 0000 0000 0010 0101, PC: 0000 0000 0010 0101, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: LDAC 2   , 
-DataMove: TR <- DR, DR <- M, PC = PC + 1, 
+DataMove: TR < - DR DR < - M PC = PC + 1 , 
 AR: 0000 0000 0010 0101, PC: 0000 0000 0010 0110, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: LDAC 3   , 
-DataMove: AR <- DR | TR, 
+DataMove: AR < - DR | TR , 
 AR: 0000 0000 0110 0100, PC: 0000 0000 0010 0110, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: LDAC 4   , 
-DataMove: DR <- M  , 
+DataMove: DR < - M , 
 AR: 0000 0000 0110 0100, PC: 0000 0000 0010 0110, DR: 0000 0000, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: LDAC 5   , 
-DataMove: AC <- DR , 
+DataMove: AC < - DR , 
 AR: 0000 0000 0110 0100, PC: 0000 0000 0010 0110, DR: 0000 0000, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0010 0110, PC: 0000 0000 0010 0110, DR: 0000 0000, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 2  , 
-DataMove: DR <- M, PC <- PC+1, 
+DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0010 0110, PC: 0000 0000 0010 0111, DR: 0000 0011, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 3  , 
-DataMove: IR <- DR, AR <- PC, 
+DataMove: IR < - DR AR < - PC , 
 AR: 0000 0000 0010 0111, PC: 0000 0000 0010 0111, DR: 0000 0011, TR: 0110 0100, IR: 0000 0011, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: MVAC     , 
-DataMove: R <- AC  , 
+DataMove: R < - AC , 
 AR: 0000 0000 0010 0111, PC: 0000 0000 0010 0111, DR: 0000 0011, TR: 0110 0100, IR: 0000 0011, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0010 0111, PC: 0000 0000 0010 0111, DR: 0000 0011, TR: 0110 0100, IR: 0000 0011, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 2  , 
-DataMove: DR <- M, PC <- PC+1, 
+DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0010 0111, PC: 0000 0000 0010 1000, DR: 0000 1000, TR: 0110 0100, IR: 0000 0011, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 3  , 
-DataMove: IR <- DR, AR <- PC, 
+DataMove: IR < - DR AR < - PC , 
 AR: 0000 0000 0010 1000, PC: 0000 0000 0010 1000, DR: 0000 1000, TR: 0110 0100, IR: 0000 1000, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: ADD      , 
-DataMove: AC <- AC + R, 
+DataMove: AC < - AC + R , 
 AR: 0000 0000 0010 1000, PC: 0000 0000 0010 1000, DR: 0000 1000, TR: 0110 0100, IR: 0000 1000, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0010 1000, PC: 0000 0000 0010 1000, DR: 0000 1000, TR: 0110 0100, IR: 0000 1000, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 2  , 
-DataMove: DR <- M, PC <- PC+1, 
+DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0010 1000, PC: 0000 0000 0010 1001, DR: 0000 0010, TR: 0110 0100, IR: 0000 1000, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 3  , 
-DataMove: IR <- DR, AR <- PC, 
+DataMove: IR < - DR AR < - PC , 
 AR: 0000 0000 0010 1001, PC: 0000 0000 0010 1001, DR: 0000 0010, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: STAC 1   , 
-DataMove: DR <- M, PC <- PC + 1, AR <- AR + 1, 
+DataMove: DR < - M PC < - PC + 1 AR < - AR + 1 , 
 AR: 0000 0000 0010 1010, PC: 0000 0000 0010 1010, DR: 0110 0100, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: STAC 2   , 
-DataMove: TR <- DR, DR <- M, PC <- PC + 1, 
+DataMove: TR < - DR DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0010 1010, PC: 0000 0000 0010 1011, DR: 0110 0100, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: STAC 3   , 
-DataMove: AR <- DR | TR, 
+DataMove: AR < - DR | TR , 
 AR: 0000 0000 0110 0100, PC: 0000 0000 0010 1011, DR: 0110 0100, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: STAC 4   , 
-DataMove: DR <- AC , 
+DataMove: DR < - AC , 
 AR: 0000 0000 0110 0100, PC: 0000 0000 0010 1011, DR: 0000 0000, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: STAC 5   , 
-DataMove: M <- DR  , 
+DataMove: M < - DR , 
 AR: 0000 0000 0110 0100, PC: 0000 0000 0010 1011, DR: 0000 0000, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0010 1011, PC: 0000 0000 0010 1011, DR: 0000 0000, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 2  , 
-DataMove: DR <- M, PC <- PC+1, 
+DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0010 1011, PC: 0000 0000 0010 1100, DR: 1111 1111, TR: 0110 0100, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 3  , 
-DataMove: IR <- DR, AR <- PC, 
+DataMove: IR < - DR AR < - PC , 
 AR: 0000 0000 0010 1100, PC: 0000 0000 0010 1100, DR: 1111 1111, TR: 0110 0100, IR: 1111 1111, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: END      , 
 DataMove: NONE     , 
 AR: 0000 0000 0010 1100, PC: 0000 0000 0010 1100, DR: 1111 1111, TR: 0110 0100, IR: 1111 1111, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 1  , 
+DataMove: AR < - PC , 
+AR: 0000 0000 0010 1100, PC: 0000 0000 0010 1100, DR: 1111 1111, TR: 0110 0100, IR: 1111 1111, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 2  , 
+DataMove: DR < - M PC < - PC + 1 , 
+AR: 0000 0000 0010 1100, PC: 0000 0000 0010 1101, DR: 0000 0001, TR: 0110 0100, IR: 1111 1111, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 3  , 
+DataMove: IR < - DR AR < - PC , 
+AR: 0000 0000 0010 1101, PC: 0000 0000 0010 1101, DR: 0000 0001, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: LDAC 1   , 
+DataMove: DR < - M PC < - PC + 1 AR < - AR + 1 , 
+AR: 0000 0000 0010 1110, PC: 0000 0000 0010 1110, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: LDAC 2   , 
+DataMove: TR < - DR DR < - M PC = PC + 1 , 
+AR: 0000 0000 0010 1110, PC: 0000 0000 0010 1111, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: LDAC 3   , 
+DataMove: AR < - DR | TR , 
+AR: 0000 0000 0110 0100, PC: 0000 0000 0010 1111, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: LDAC 4   , 
+DataMove: DR < - M , 
+AR: 0000 0000 0110 0100, PC: 0000 0000 0010 1111, DR: 0000 0000, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: LDAC 5   , 
+DataMove: AC < - DR , 
+AR: 0000 0000 0110 0100, PC: 0000 0000 0010 1111, DR: 0000 0000, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 1  , 
+DataMove: AR < - PC , 
+AR: 0000 0000 0010 1111, PC: 0000 0000 0010 1111, DR: 0000 0000, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 2  , 
+DataMove: DR < - M PC < - PC + 1 , 
+AR: 0000 0000 0010 1111, PC: 0000 0000 0011 0000, DR: 0000 0011, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 3  , 
+DataMove: IR < - DR AR < - PC , 
+AR: 0000 0000 0011 0000, PC: 0000 0000 0011 0000, DR: 0000 0011, TR: 0110 0100, IR: 0000 0011, R: 0000 0000, AC: 0000 0000, Z: 1
 
 
 
 ---------- Registers     ----------
 IO: 0
-AR: 44
-PC: 44
-DR: 255
+AR: 48
+PC: 48
+DR: 3
 TR: 100
-IR: 255
+IR: 3
 R: 0
 AC: 0
 Z: 1

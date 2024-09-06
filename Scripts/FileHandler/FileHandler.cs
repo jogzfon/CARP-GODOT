@@ -234,6 +234,10 @@ public partial class FileHandler : Node
     }
     private void NcOpen()
     {
+        if (documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
         documentationRect.Visible = true;
         WIT.Visible = false;
         HDTW.Visible = false;
@@ -250,6 +254,10 @@ public partial class FileHandler : Node
     }
     private void AdOpen()
     {
+        if (documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
         documentationRect.Visible = true;
         WIT.Visible = false;
         HDTW.Visible = false;
@@ -266,6 +274,10 @@ public partial class FileHandler : Node
     }
     private void AapOpen()
     {
+        if (documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
         documentationRect.Visible = true;
         WIT.Visible = false;
         HDTW.Visible = false;

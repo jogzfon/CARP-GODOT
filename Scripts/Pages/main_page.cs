@@ -17,6 +17,9 @@ public partial class main_page : Control
     [Export] private Button settings;
 
     [Export] PackedScene logInPage;
+
+    [Export] private Control documentationAdder;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -46,6 +49,11 @@ public partial class main_page : Control
     }
     private void SignIn()
     {
+        if(documentationAdder != null)
+        {
+            documentationAdder.Visible = false;
+        }
+
         Node simultaneous = logInPage.Instantiate();
         GetTree().Root.AddChild(simultaneous);
     }

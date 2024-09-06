@@ -526,7 +526,6 @@ theme = ExtResource("2_d75fn")
 text = "NO"
 
 [node name="AISystem" parent="." instance=ExtResource("15_jp5cw")]
-visible = false
 layout_mode = 1
 
 [node name="NotificationHandler" parent="." instance=ExtResource("15_nhij1")]

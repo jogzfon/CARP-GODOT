@@ -235,24 +235,6 @@ public static class DataToSave
             }
         }
 
-        /* foreach (List<Tokens> token in tokens)
-         {
-             foreach (Tokens tok in token)
-             {
-                 if (tok.value != "0")
-                 {
-                     GD.Print("Type: " + tok.type + " Value: " + tok.value);
-                 }
-             }
-             GD.Print(token.Count + " ENDLINE----------------\n\n");
-         }*/
-        /*foreach (List<Tokens> token in tokens)
-        {
-            if (token.Count > 0)
-            {
-                SetValues(token);
-            }
-        }*/
         List<List<Tokens>> result_temp_tokens = new List<List<Tokens>>();
         for (_currToken = 0; _currToken < tokens.Count; _currToken++)
         {
@@ -270,13 +252,6 @@ public static class DataToSave
                     token2 = tokens[_currToken];
                     do
                     {
-                       /* foreach (Tokens tok in token2)
-                        {
-                            if (tok.value != "0")
-                            {
-                                GD.Print("Type: " + tok.type + " Value: " + tok.value);
-                            }
-                        }*/
                         result_temp_tokens.Add(token2);
                         do
                         {
@@ -287,11 +262,6 @@ public static class DataToSave
 
 
                     ParseTraceResults(result_temp_tokens);
-
-                    foreach(Results r in traceText)
-                    {
-                        GD.Print(r);
-                    }
                 }
             }
         }

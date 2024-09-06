@@ -224,9 +224,9 @@ layout_mode = 2
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 1
 offset_left = 435.0
-offset_top = 706.0
+offset_top = 694.0
 offset_right = 1274.0
-offset_bottom = 810.0
+offset_bottom = 798.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
 layout_mode = 2

@@ -154,7 +154,7 @@ shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
 
-[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "userName", "options", "logout", "settings")]
+[node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "userName", "options", "logout", "settings", "documentationAdder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,6 +171,7 @@ options = NodePath("MainContent/SignOut/Options")
 logout = NodePath("MainContent/SignOut/Options/Logout")
 settings = NodePath("MainContent/SignOut/Options/Settings")
 logInPage = ExtResource("2_fqqk8")
+documentationAdder = NodePath("MainContent/DocumentationAdder")
 
 [node name="MainContent" type="Node" parent="."]
 

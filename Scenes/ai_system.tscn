@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpt486otnrqkv"]
+[gd_scene load_steps=11 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/AI/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
@@ -7,11 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://b44pnrtokcm2" path="res://Sprites/Paper Plane.png" id="4_3xanh"]
 [ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="4_qnl5w"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://back.png" id="7_ps5gc"]
+[ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://load2.png" id="8_o48ei"]
+[ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="9_k114o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
 
-[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_backButton")]
+[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_backButton", "AI_system", "API_subscription", "_personalAPIBtn", "_subscribeAPIBtn", "_customAPI", "_subscribeAPI", "_optionContainer", "_customApiON", "_paymentConfirm")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,12 +21,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hxjp6")
-_chatContainer = NodePath("ScrollContainer/ChatContainer")
-_request = NodePath("RequestEdit")
-_sendRequestButton = NodePath("SendRequest")
-_backButton = NodePath("Back")
+_chatContainer = NodePath("AI/ScrollContainer/ChatContainer")
+_request = NodePath("AI/RequestEdit")
+_sendRequestButton = NodePath("AI/SendRequest")
+_backButton = NodePath("AI/Back")
+AI_system = NodePath("AI")
+API_subscription = NodePath("API")
+_personalAPIBtn = NodePath("API/APIOptionContainer/personalAPIBtn")
+_subscribeAPIBtn = NodePath("API/APIOptionContainer/subscribeAPIBtn")
+_customAPI = NodePath("API/PersonalAPIContainer")
+_subscribeAPI = NodePath("API/SubscibedAPIContainer")
+_optionContainer = NodePath("API/APIOptionContainer")
+_customApiON = NodePath("API/PersonalAPIContainer/APIConfirmBtn")
+_paymentConfirm = NodePath("API/SubscibedAPIContainer/takeMyMoneyBtn")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="AI" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="AI"]
 material = SubResource("ShaderMaterial_elcsl")
 layout_mode = 1
 anchors_preset = 15
@@ -35,7 +55,7 @@ grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="AI"]
 modulate = Color(1, 1, 1, 0.337255)
 self_modulate = Color(1, 1, 1, 0.678431)
 layout_mode = 0
@@ -45,7 +65,7 @@ offset_right = 1777.0
 offset_bottom = 1024.0
 texture = ExtResource("3_co66w")
 
-[node name="RequestEdit" type="TextEdit" parent="."]
+[node name="RequestEdit" type="TextEdit" parent="AI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -66,7 +86,7 @@ wrap_mode = 1
 scroll_smooth = true
 caret_blink = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="AI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,11 +100,11 @@ offset_bottom = 213.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ChatContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="ChatContainer" type="VBoxContainer" parent="AI/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="ScrollContainer/ChatContainer"]
+[node name="Label" type="Label" parent="AI/ScrollContainer/ChatContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.0
@@ -92,7 +112,7 @@ theme_override_fonts/font = ExtResource("3_vad0u")
 theme_override_font_sizes/font_size = 30
 text = "Hi Carp here! How may I serve you?"
 
-[node name="SendRequest" type="Button" parent="."]
+[node name="SendRequest" type="Button" parent="AI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -110,7 +130,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Back" type="TextureButton" parent="."]
+[node name="Back" type="TextureButton" parent="AI"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
@@ -119,3 +139,111 @@ offset_bottom = 140.0
 scale = Vector2(0.76, 0.44)
 texture_normal = ExtResource("7_ps5gc")
 stretch_mode = 0
+
+[node name="API" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="API"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_o48ei")
+expand_mode = 1
+
+[node name="APIOptionContainer" type="VBoxContainer" parent="API"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="personalAPIBtn" type="Button" parent="API/APIOptionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Use Personal API"
+
+[node name="subscribeAPIBtn" type="Button" parent="API/APIOptionContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Subscribe To Our API"
+
+[node name="PersonalAPIContainer" type="VBoxContainer" parent="API"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="API/PersonalAPIContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "OPEN AI API"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="API/PersonalAPIContainer"]
+layout_mode = 2
+placeholder_text = "Enter API Key Here"
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="API/PersonalAPIContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="APIConfirmBtn" type="Button" parent="API/PersonalAPIContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Confirm Key"
+
+[node name="SubscibedAPIContainer" type="VBoxContainer" parent="API"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="API/SubscibedAPIContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Please do the Caching sounds hehehe"
+
+[node name="takeMyMoneyBtn" type="Button" parent="API/SubscibedAPIContainer"]
+layout_mode = 2
+text = "Go ahead take my money!!!!"
+
+[node name="NotificationHandler" parent="." instance=ExtResource("9_k114o")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
