@@ -13,7 +13,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
 
-[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_backButton", "AI_system", "API_subscription", "_personalAPIBtn", "_subscribeAPIBtn", "_customAPI", "_subscribeAPI", "_optionContainer", "_customApiON", "_paymentConfirm")]
+[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_backButton", "_notificationHandler", "AI_system", "API_subscription", "_personalAPIBtn", "_subscribeAPIBtn", "_customAPI", "_subscribeAPI", "_optionContainer", "_customApiON", "_paymentConfirm", "_personal_api_key")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +25,7 @@ _chatContainer = NodePath("AI/ScrollContainer/ChatContainer")
 _request = NodePath("AI/RequestEdit")
 _sendRequestButton = NodePath("AI/SendRequest")
 _backButton = NodePath("AI/Back")
+_notificationHandler = NodePath("NotificationHandler")
 AI_system = NodePath("AI")
 API_subscription = NodePath("API")
 _personalAPIBtn = NodePath("API/APIOptionContainer/personalAPIBtn")
@@ -34,6 +35,7 @@ _subscribeAPI = NodePath("API/SubscibedAPIContainer")
 _optionContainer = NodePath("API/APIOptionContainer")
 _customApiON = NodePath("API/PersonalAPIContainer/APIConfirmBtn")
 _paymentConfirm = NodePath("API/SubscibedAPIContainer/takeMyMoneyBtn")
+_personal_api_key = NodePath("API/PersonalAPIContainer/LineEdit")
 
 [node name="AI" type="Control" parent="."]
 visible = false
