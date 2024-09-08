@@ -28,6 +28,8 @@ public partial class main_page : Control
         signOut.Connect("pressed", new Callable(this, nameof(Options)));
 
         logout.Connect("pressed", new Callable(this, nameof(Logout)));
+
+        AccountFileSaver.GetAccountFile();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

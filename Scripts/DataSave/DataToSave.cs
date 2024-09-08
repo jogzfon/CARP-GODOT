@@ -216,8 +216,6 @@ public static class DataToSave
         }
     }
     
-    #endregion
-
     #region Distribute Values
     private static void DistributeValues(string content)
     {
@@ -302,7 +300,7 @@ public static class DataToSave
                 {
                     for (int i = 2; i<tokens.Count; i++)
                     {
-                        status = tokens[2].value+" ";
+                        status = tokens[i].value+" ";
                     } 
                 }
                 break;
@@ -463,6 +461,8 @@ public static class DataToSave
        
     }
     #endregion
+    #endregion
+
 
     public static void ResetDatas()
     {

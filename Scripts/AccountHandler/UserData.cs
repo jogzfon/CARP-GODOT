@@ -14,4 +14,20 @@ public class UserData
     public string SubscriptionStart { get; set; }
     public string SubscriptionEnd { get; set; }
     public string ProfileImage { get; set; }
+
+    // ToString method to display user data
+    public override string ToString()
+    {
+        return $"Username: {Username}\n" +
+               $"Password: {new string('*', Password.Length)}\n" +  // Mask the password
+               $"Firstname: {Firstname}\n" +
+               $"Lastname: {Lastname}\n" +
+               $"Email: {Email}\n" +
+               $"Status: {Status}\n" +
+               $"Subscription: {Subscription}\n" +
+               $"Role: {Role}\n" +
+               $"Subscription Start: {SubscriptionStart}\n" +
+               $"Subscription End: {SubscriptionEnd}\n" +
+               $"Profile Image: {ProfileImage}\n";
+    }
 }

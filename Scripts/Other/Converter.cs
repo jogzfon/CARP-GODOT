@@ -21,7 +21,7 @@ public static class Converter
         return texture;
     }
 
-    static int BinaryStringToInt(string binaryString)
+    public static int BinaryStringToInt(string binaryString)
     {
         // Remove spaces
         string cleanedBinaryString = binaryString.Replace(" ", "");
