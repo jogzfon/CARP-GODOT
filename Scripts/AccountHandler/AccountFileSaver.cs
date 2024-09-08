@@ -10,12 +10,16 @@ public static class AccountFileSaver
     {
         // Create the account template string
         string accountTemplate =
-            "Firstname: " + user.Firstname + "\n" +
-            "Lastname: " + user.Lastname + "\n" +   // Fixed to show Lastname properly
             "Username: *********\n" +
             "Password: *********\n" +
+            "Firstname: " + user.Firstname + "\n" +
+            "Lastname: " + user.Lastname + "\n" +   // Fixed to show Lastname properly
+            "Email: ************\n"+
+            "Status: "+ user.Status +"\n" +
             "Subscription: " + user.Subscription + "\n" +
             "Role: " + user.Role + "\n" +
+            "SubscriptionStart: " + user.SubscriptionStart + "\n" +
+            "SubscriptionEnd: " + user.SubscriptionEnd + "\n" +
             "ProfileImage: " + user.ProfileImage + "\n";
 
         string directoryLoc = "AccountData";

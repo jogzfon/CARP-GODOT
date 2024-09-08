@@ -12,6 +12,7 @@ public partial class StartUpPage : Control
     #region Login and Create Details
     [Export] private LineEdit username;
     [Export] private LineEdit password;
+    [Export] private LineEdit confirm_password;
     [Export] private LineEdit firstname;
     [Export] private LineEdit lastname;
     [Export] private LineEdit email;
@@ -149,6 +150,11 @@ public partial class StartUpPage : Control
         {
             return;
         }
+        if(password.Text != confirm_password.Text)
+        {
+            notification.MessageBox("The confirmation password does not match the original password.\nPlease ensure both passwords are identical and try again.", 1);
+            return;
+        }
         if (!IsUsernameValid(username.Text))
         {
             return;
@@ -160,8 +166,8 @@ public partial class StartUpPage : Control
             Firstname = firstname.Text,
             Lastname = lastname.Text,
             Email = email.Text,
-            Status = "Endorsed",
-            Subscription = "NONE",
+            Status = "",
+            Subscription = "No Subscription",
             Role = rolePick.Selected.ToString(),
             SubscriptionStart = "",
             SubscriptionEnd = "",
@@ -171,10 +177,12 @@ public partial class StartUpPage : Control
 		if (data.Role.Equals("1"))
 		{
 			data.Role = "Teacher";
+            data.Status = "Endorsed";
 		}
 		else
 		{
             data.Role = "Student";
+            data.Status = "Accepted";
         }
 
 		FirebaseResponse getresponse = await client.GetAsync("Users/" + GetNode<LineEdit>("CreateAccount/cusername").Text);

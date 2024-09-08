@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="11_ojvee"]
 [ext_resource type="Texture2D" uid="uid://cswoyeiu3o407" path="res://Sprites/Logob.png" id="12_iol47"]
 
-[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "firstname", "lastname", "email", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "notification", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
+[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "confirm_password", "firstname", "lastname", "email", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "notification", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +26,7 @@ size_flags_vertical = 4
 script = ExtResource("1_rodxs")
 username = NodePath("CreateAccount/cusername")
 password = NodePath("CreateAccount/cpassword")
+confirm_password = NodePath("CreateAccount/cpassword2")
 firstname = NodePath("CreateAccount/HBoxContainer/firstname")
 lastname = NodePath("CreateAccount/HBoxContainer/lastname")
 email = NodePath("CreateAccount/email")
@@ -53,6 +54,7 @@ texture = ExtResource("3_1jpyr")
 expand_mode = 1
 
 [node name="LoginAccount" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -105,7 +107,6 @@ theme_override_font_sizes/font_size = 24
 text = "Register"
 
 [node name="CreateAccount" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -188,6 +189,13 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_jfoit")
 placeholder_text = "Password"
+secret = true
+
+[node name="cpassword2" type="LineEdit" parent="CreateAccount"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_jfoit")
+placeholder_text = "Confirmation Password"
 secret = true
 
 [node name="Label2" type="Label" parent="CreateAccount"]
