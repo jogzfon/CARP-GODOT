@@ -20,4 +20,15 @@ public static class Converter
         ImageTexture texture = ImageTexture.CreateFromImage(img);
         return texture;
     }
+
+    static int BinaryStringToInt(string binaryString)
+    {
+        // Remove spaces
+        string cleanedBinaryString = binaryString.Replace(" ", "");
+
+        // Convert binary string to integer
+        int result = Convert.ToInt32(cleanedBinaryString, 2);
+
+        return result;
+    }
 }

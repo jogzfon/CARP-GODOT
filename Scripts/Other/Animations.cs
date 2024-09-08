@@ -266,14 +266,14 @@ public partial class Animations : Node
             if (AccountManager.GetUser() != null)
             {
                 DataToSave.currentMemoryLocation = i.ToString();
-                DataToSave.ar = BinaryStringToInt(AR_txt.Text);
-                DataToSave.pc = BinaryStringToInt(PC_txt.Text);
-                DataToSave.dr = BinaryStringToInt(DR_txt.Text);
-                DataToSave.tr = BinaryStringToInt(TR_txt.Text);
-                DataToSave.ir = BinaryStringToInt(IR_txt.Text);
-                DataToSave.r = BinaryStringToInt(R_txt.Text);
-                DataToSave.ac = BinaryStringToInt(AC_txt.Text);
-                DataToSave.z = BinaryStringToInt(Z_txt.Text);
+                DataToSave.ar = Converter.BinaryStringToInt(AR_txt.Text);
+                DataToSave.pc = Converter.BinaryStringToInt(PC_txt.Text);
+                DataToSave.dr = Converter.BinaryStringToInt(DR_txt.Text);
+                DataToSave.tr = Converter.BinaryStringToInt(TR_txt.Text);
+                DataToSave.ir = Converter.BinaryStringToInt(IR_txt.Text);
+                DataToSave.r = Converter.BinaryStringToInt(R_txt.Text);
+                DataToSave.ac = Converter.BinaryStringToInt(AC_txt.Text);
+                DataToSave.z = Converter.BinaryStringToInt(Z_txt.Text);
             }
             foreach(int brake in breakpoints){
                 if (i == brake)
@@ -297,19 +297,19 @@ public partial class Animations : Node
         {
             animationRunning = true;
 
-            if (BinaryStringToInt(ioB.Text) > 0)
+            if (Converter.BinaryStringToInt(ioB.Text) > 0)
             {
-                IOint = BinaryStringToInt(ioB.Text);
+                IOint = Converter.BinaryStringToInt(ioB.Text);
             }
 
-            ar_bit = BinaryStringToInt(AR_txt.Text);
-            pc_bit = BinaryStringToInt(PC_txt.Text);
-            dr_bit = BinaryStringToInt(DR_txt.Text);
-            tr_bit = BinaryStringToInt(TR_txt.Text);
-            ir_bit = BinaryStringToInt(IR_txt.Text);
-            r_bit = BinaryStringToInt(R_txt.Text);
-            ac_bit = BinaryStringToInt(AC_txt.Text);
-            z_bit = BinaryStringToInt(Z_txt.Text);
+            ar_bit = Converter.BinaryStringToInt(AR_txt.Text);
+            pc_bit = Converter.BinaryStringToInt(PC_txt.Text);
+            dr_bit = Converter.BinaryStringToInt(DR_txt.Text);
+            tr_bit = Converter.BinaryStringToInt(TR_txt.Text);
+            ir_bit = Converter.BinaryStringToInt(IR_txt.Text);
+            r_bit = Converter.BinaryStringToInt(R_txt.Text);
+            ac_bit = Converter.BinaryStringToInt(AC_txt.Text);
+            z_bit = Converter.BinaryStringToInt(Z_txt.Text);
 
             for (i = memoryStartLocation; i < memorycode.Length; i++)
             {
@@ -487,14 +487,14 @@ public partial class Animations : Node
             breaks = false;
             animationRunning = true;
 
-            ar_bit = BinaryStringToInt(AR_txt.Text);
-            pc_bit = BinaryStringToInt(PC_txt.Text);
-            dr_bit = BinaryStringToInt(DR_txt.Text);
-            tr_bit = BinaryStringToInt(TR_txt.Text);
-            ir_bit = BinaryStringToInt(IR_txt.Text);
-            r_bit = BinaryStringToInt(R_txt.Text);
-            ac_bit = BinaryStringToInt(AC_txt.Text);
-            z_bit = BinaryStringToInt(Z_txt.Text);
+            ar_bit = Converter.BinaryStringToInt(AR_txt.Text);
+            pc_bit = Converter.BinaryStringToInt(PC_txt.Text);
+            dr_bit = Converter.BinaryStringToInt(DR_txt.Text);
+            tr_bit = Converter.BinaryStringToInt(TR_txt.Text);
+            ir_bit = Converter.BinaryStringToInt(IR_txt.Text);
+            r_bit = Converter.BinaryStringToInt(R_txt.Text);
+            ac_bit = Converter.BinaryStringToInt(AC_txt.Text);
+            z_bit = Converter.BinaryStringToInt(Z_txt.Text);
 
 
             for (i = i+1; i < memorycode.Length; i++)
@@ -1316,7 +1316,7 @@ public partial class Animations : Node
         if ((pos1 | pos2) >= 65535)
         {
             ioB.Text = SpaceInserter(dr_bit, "dr");
-            IOint = BinaryStringToInt(ioB.Text);
+            IOint = Converter.BinaryStringToInt(ioB.Text);
             if (sysmenu.animationOn)
             {
                 await Task.WhenAll(CPUToD());
@@ -2548,17 +2548,6 @@ public partial class Animations : Node
                 break;
             }
         }
-    }
-
-    static int BinaryStringToInt(string binaryString)
-    {
-        // Remove spaces
-        string cleanedBinaryString = binaryString.Replace(" ", "");
-
-        // Convert binary string to integer
-        int result = Convert.ToInt32(cleanedBinaryString, 2);
-
-        return result;
     }
     #endregion
 }
