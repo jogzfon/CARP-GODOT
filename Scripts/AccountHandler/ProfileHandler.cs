@@ -162,5 +162,6 @@ public partial class ProfileHandler : Node
         notification.MessageBox(result.Username+" Profile Updated", 0);
 
         AccountManager.SetUser(result);
+        AccountFileSaver.SaveAccount(result);
     }
 }

@@ -16,7 +16,7 @@ public static class AccountFileSaver
         // Create the account template string
         string accountTemplate =
             "Username: " +user.Username+ "\n" +
-            "Password: *********\n" +
+            "Password: " +user.Password+ "\n" +
             "Firstname: " + user.Firstname + "\n" +
             "Lastname: " + user.Lastname + "\n" +   // Fixed to show Lastname properly
             "Email: " + user.Email + "\n"+
