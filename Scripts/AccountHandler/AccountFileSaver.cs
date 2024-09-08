@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Reflection.Metadata;
 
 public static class AccountFileSaver
 {
@@ -27,6 +28,8 @@ public static class AccountFileSaver
             "SubscriptionEnd: " + user.SubscriptionEnd + "\n" +
             "ProfileImage: " + user.ProfileImage + "\n";
 
+        byte[] encryptedData = InfoSecure.EncryptData(accountTemplate);
+
         DirAccess dir = DirAccess.Open(directoryLoc);
         if (dir == null)
         {
@@ -35,8 +38,8 @@ public static class AccountFileSaver
 
             using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Write);
 
-            file.StoreString(accountTemplate);
-            GD.PrintErr("Failed to open directory: " + directoryLoc);
+            //file.StoreString(accountTemplate);
+            file.StoreBuffer(encryptedData);
             file.Close();
             return;
         }
@@ -46,7 +49,8 @@ public static class AccountFileSaver
 
             using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Write);
 
-            file.StoreString(accountTemplate);
+            //file.StoreString(accountTemplate);
+            file.StoreBuffer(encryptedData);
             file.Close();
         }
         catch (Exception ex)
@@ -54,6 +58,7 @@ public static class AccountFileSaver
             GD.PrintErr($"Failed to save account data: {ex.Message}");
         }
     }
+
     public static void DeleteAccountFile() {
         string filePath = Path.Combine(directoryLoc, fileName);
 
@@ -85,10 +90,16 @@ public static class AccountFileSaver
             try
             {
                 using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Read);
-                string content = file.GetAsText();
+                //string content = file.GetAsText();
+                byte[] encryptedData = file.GetBuffer((int)file.GetLength());
                 file.Close();
+
+                // Decrypt the data using the password
+                string decryptedContent = InfoSecure.DecryptData(encryptedData);
+
                 UserData user = new UserData();
-                DistributeAccountValues(content, user);
+                //DistributeAccountValues(content, user);
+                DistributeAccountValues(decryptedContent, user);
                 //GD.Print(user);
                 AccountManager.SetUser(user);
             }
