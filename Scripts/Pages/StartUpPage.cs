@@ -139,7 +139,10 @@ public partial class StartUpPage : Control
         {
             return;
         }
-
+        if (!IsUsernameValid(username.Text))
+        {
+            return;
+        }
         var data = new UserData
         {
             Username = username.Text,
@@ -185,10 +188,42 @@ public partial class StartUpPage : Control
 			loginAccount.Visible = true;
 
             notification.MessageBox("Account Created Successfully \n Welcome " + result.Username, 0);
+
+            username.Text = string.Empty;
+            password.Text = string.Empty;
+            firstname.Text = string.Empty;
+            lastname.Text = string.Empty;
+            email.Text = string.Empty;
             AccountManager.SetUser(result);
         }
 	}
+    private bool IsUsernameValid(string username)
+    {
+        bool isValid = true;
 
+        // Check for minimum length of 3 characters
+        if (username.Length < 5)
+        {
+            notification.MessageBox("Username must be at least 5 characters long.",1);
+            isValid = false;
+        }
+
+        // Check for allowed characters (alphanumeric and underscores only)
+        if (!Regex.IsMatch(username, @"^[a-zA-Z0-9_]+$"))
+        {
+            notification.MessageBox("Username can only contain letters, numbers, and underscores.",1);
+            isValid = false;
+        }
+
+        // Check for spaces (should not contain spaces)
+        if (username.Contains(" "))
+        {
+            notification.MessageBox("Username cannot contain spaces.",1);
+            isValid = false;
+        }
+
+        return isValid;
+    }
     private bool PasswordStrengthChecker(string password)
     {
         bool isStrong = true;
