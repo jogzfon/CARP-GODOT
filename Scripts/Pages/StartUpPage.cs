@@ -103,6 +103,16 @@ public partial class StartUpPage : Control
 
             if (userObj != null)
             {
+                if(userObj.Status == "Endorsed")
+                {
+                    notification.MessageBox("Account waiting for approval...", 0);
+                    return;
+                }else if(userObj.Status == "Declined")
+                {
+                    notification.MessageBox("Account request has been declined.\n Please contact the admin for more info.", 1);
+                    return;
+                }
+
                 if (password.Equals(userObj.Password))
                 {
                     AccountManager.SetUser(userObj);
@@ -150,7 +160,7 @@ public partial class StartUpPage : Control
             Firstname = firstname.Text,
             Lastname = lastname.Text,
             Email = email.Text,
-            Status = "Endorse",
+            Status = "Endorsed",
             Subscription = "NONE",
             Role = rolePick.Selected.ToString(),
             SubscriptionStart = "",

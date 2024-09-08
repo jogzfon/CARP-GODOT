@@ -20,14 +20,13 @@ grow_vertical = 2
 script = ExtResource("1_t5tot")
 notificationWindow = NodePath("NotificationWindow")
 closeNotification = NodePath("NotificationWindow/Exit")
-message = NodePath("NotificationWindow/ScrollContainer/Message")
+message = NodePath("NotificationWindow/TextureRect/ScrollContainer/Message")
 
 [node name="NotificationWindow" type="Window" parent="."]
 transparent_bg = true
 initial_position = 1
 size = Vector2i(1080, 400)
 visible = false
-unresizable = true
 borderless = true
 always_on_top = true
 popup_window = true
@@ -40,14 +39,15 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_25n1e")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="NotificationWindow"]
+[node name="ScrollContainer" type="ScrollContainer" parent="NotificationWindow/TextureRect"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Message" type="Label" parent="NotificationWindow/ScrollContainer"]
+[node name="Message" type="Label" parent="NotificationWindow/TextureRect/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
