@@ -6,6 +6,8 @@ using System.Text;
 
 public static class AccountFileSaver
 {
+    static string directoryLoc = "AccountData";
+    static string fileName = "accountData.carpacc";
     public static void SaveAccount(UserData user)
     {
         // Create the account template string
@@ -22,8 +24,6 @@ public static class AccountFileSaver
             "SubscriptionEnd: " + user.SubscriptionEnd + "\n" +
             "ProfileImage: " + user.ProfileImage + "\n";
 
-        string directoryLoc = "AccountData";
-        string fileName = "accountData.carpacc";
         DirAccess dir = DirAccess.Open(directoryLoc);
         if (dir == null)
         {
@@ -49,6 +49,26 @@ public static class AccountFileSaver
         catch (Exception ex)
         {
             GD.PrintErr($"Failed to save account data: {ex.Message}");
+        }
+    }
+    public static void DeleteAccountFile() {
+        string filePath = Path.Combine(directoryLoc, fileName);
+
+        if (Godot.FileAccess.FileExists(filePath))
+        {
+            try
+            {
+                DirAccess.RemoveAbsolute(filePath);
+                GD.Print($"Account file '{fileName}' successfully deleted.");
+            }
+            catch (Exception ex)
+            {
+                GD.PrintErr($"Failed to delete account file: {ex.Message}");
+            }
+        }
+        else
+        {
+            GD.PrintErr($"Account file '{fileName}' not found.");
         }
     }
 }

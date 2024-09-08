@@ -77,5 +77,7 @@ public partial class main_page : Control
             userName.Text = "John Doe";
             signIn.Text = "Sign-In";
         }
+
+        AccountFileSaver.DeleteAccountFile();
     }
 }

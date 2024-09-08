@@ -102,7 +102,7 @@ public partial class FileHandler : Node
         {
             documentationRect.Visible = false;
         }
-        if (AccountManager.GetUser() != null)
+        if (AccountManager.GetUser() != null && ((AccountManager.GetRole() == "Teacher")||(AccountManager.GetRole()=="Student" && AccountManager.GetSubscription() == "Subscribed")))
         {
             manageFile.Visible = true;
             directToSystem.Visible = false;

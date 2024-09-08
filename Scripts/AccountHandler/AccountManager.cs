@@ -18,4 +18,8 @@ public static class AccountManager
     {
         return user.Role;
     }
+    public static String GetSubscription()
+    {
+        return user.Subscription;
+    }
 }

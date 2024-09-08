@@ -493,10 +493,10 @@ anchor_left = 0.594
 anchor_top = 0.612
 anchor_right = 0.594
 anchor_bottom = 0.612
-offset_left = -226.48
-offset_top = -66.96
-offset_right = 225.52
-offset_bottom = 66.04
+offset_left = -223.48
+offset_top = -80.96
+offset_right = 4.52002
+offset_bottom = 52.04
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -508,7 +508,6 @@ icon = ExtResource("4_rgqy0")
 flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
-expand_icon = true
 
 [node name="ManageFile" type="HBoxContainer" parent="ProfileHandler"]
 visible = false
