@@ -89,7 +89,7 @@ layout_mode = 2
 text = "Save"
 
 [node name="ImageFileDialog" type="FileDialog" parent="."]
-title = "Select an Image"
+title = "Open a File"
 position = Vector2i(400, 250)
 size = Vector2i(800, 500)
 ok_button_text = "Open"

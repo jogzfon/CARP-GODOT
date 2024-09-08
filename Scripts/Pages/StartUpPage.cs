@@ -104,6 +104,9 @@ public partial class StartUpPage : Control
                 if (password.Equals(userObj.Password))
                 {
                     AccountManager.SetUser(userObj);
+                    //AccountFileSaver
+                    AccountFileSaver.SaveAccount(userObj);
+
                     this.QueueFree();
                 }
                 else
