@@ -60,7 +60,7 @@ public partial class SubscriptionHandler : Node
 	{
         if (AccountManager.GetUser() != null)
         {
-            if(AccountManager.GetUser().Subscription == "Student")
+            if(AccountManager.GetUser().Role == "Student")
             {
                 subscriptionBtn.TextureNormal = studentTier;
                 studentTierBtn.Modulate = new Color("5d5d5d");
@@ -71,7 +71,7 @@ public partial class SubscriptionHandler : Node
                 teacherTierBtn.Disabled = false;
                 guestTierBtn.Disabled = false;
             }
-            else if(AccountManager.GetUser().Subscription == "Teacher")
+            else if(AccountManager.GetUser().Role == "Teacher")
             {
                 subscriptionBtn.TextureNormal = teacherTier;
                 teacherTierBtn.Modulate = new Color("5d5d5d");

@@ -32,7 +32,7 @@ public partial class ExitController : Node
         {
             documentationAdder.Visible = false;
         }
-        if (AccountManager.GetUser() != null && saveAvailable && (AccountManager.GetUser().Subscription == "Student" || AccountManager.GetUser().Subscription == "Teacher"))
+        if (AccountManager.GetUser() != null && saveAvailable && (AccountManager.GetUser().Role == "Student" || AccountManager.GetUser().Role == "Teacher"))
         {
             savePanel.Visible = true;
 		}

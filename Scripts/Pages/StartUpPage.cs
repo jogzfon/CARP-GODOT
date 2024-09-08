@@ -5,6 +5,7 @@ using Godot;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 public partial class StartUpPage : Control
 {
@@ -13,6 +14,7 @@ public partial class StartUpPage : Control
     [Export] private LineEdit password;
     [Export] private LineEdit firstname;
     [Export] private LineEdit lastname;
+    [Export] private LineEdit email;
 
     [Export] private OptionButton rolePick;
 
@@ -125,16 +127,32 @@ public partial class StartUpPage : Control
         if(client == null)
         {
             notification.MessageBox("You are offline, try logging in after turning back online.", 1);
+            return;
         }
-		var data = new UserData
-		{
-			Username = username.Text,
-			Password = password.Text,
-			Firstname = firstname.Text,
-			Lastname = lastname.Text,
-			Subscription = "NONE",
-			Role = rolePick.Selected.ToString(),
-			ProfileImage = "NONE"
+        string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        if(!Regex.IsMatch(email.Text, emailPattern))
+        {
+            notification.MessageBox("Invalid email format!", 1);
+            return;
+        }
+        if (!PasswordStrengthChecker(password.Text))
+        {
+            return;
+        }
+
+        var data = new UserData
+        {
+            Username = username.Text,
+            Password = password.Text,
+            Firstname = firstname.Text,
+            Lastname = lastname.Text,
+            Email = email.Text,
+            Status = "Endorse",
+            Subscription = "NONE",
+            Role = rolePick.Selected.ToString(),
+            SubscriptionStart = "",
+            SubscriptionEnd = "",
+            ProfileImage = "NONE"
         };
 
 		if (data.Role.Equals("1"))
@@ -151,11 +169,13 @@ public partial class StartUpPage : Control
 		if (userObj != null)
 		{
             notification.MessageBox("User already exists...", 1);
+            return;
         }
 		else if (data.Password.Length < 6)
 		{
             notification.MessageBox("Password must be 6 characters or more...", 1);
-		}
+            return;
+        }
 		else
 		{
 			SetResponse response = await client.SetAsync("Users/" + GetNode<LineEdit>("CreateAccount/cusername").Text, data);
@@ -168,7 +188,50 @@ public partial class StartUpPage : Control
             AccountManager.SetUser(result);
         }
 	}
-	private void CancelPressed()
+
+    private bool PasswordStrengthChecker(string password)
+    {
+        bool isStrong = true;
+
+        // Check for minimum length of 8 characters
+        if (password.Length < 8)
+        {
+            notification.MessageBox("Password must be at least 8 characters long.", 1);
+            isStrong = false;
+        }
+
+        // Check for at least one lowercase letter
+        if (!Regex.IsMatch(password, @"[a-z]"))
+        {
+            notification.MessageBox("Password must contain at least one lowercase letter.",1);
+            isStrong = false;
+        }
+
+        // Check for at least one uppercase letter
+        if (!Regex.IsMatch(password, @"[A-Z]"))
+        {
+            notification.MessageBox("Password must contain at least one uppercase letter.", 1);
+            isStrong = false;
+        }
+
+        // Check for at least one digit
+        if (!Regex.IsMatch(password, @"\d"))
+        {
+            notification.MessageBox("Password must contain at least one digit.",1);
+            isStrong = false;
+        }
+
+        // Check for at least one special character
+        if (!Regex.IsMatch(password, @"[@$!%*?&]"))
+        {
+            notification.MessageBox("Password must contain at least one special character (@$!%*?&).", 1);
+            isStrong = false;
+        }
+
+        return isStrong;
+    }
+
+    private void CancelPressed()
 	{
         loginAccount.Visible = true;
 

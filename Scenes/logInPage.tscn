@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="11_ojvee"]
 [ext_resource type="Texture2D" uid="uid://cswoyeiu3o407" path="res://Sprites/Logob.png" id="12_iol47"]
 
-[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "firstname", "lastname", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "notification", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
+[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "firstname", "lastname", "email", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "notification", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +28,7 @@ username = NodePath("CreateAccount/cusername")
 password = NodePath("CreateAccount/cpassword")
 firstname = NodePath("CreateAccount/HBoxContainer/firstname")
 lastname = NodePath("CreateAccount/HBoxContainer/lastname")
+email = NodePath("CreateAccount/email")
 rolePick = NodePath("CreateAccount/RolePick")
 loginUsername = NodePath("LoginAccount/username")
 logInPassword = NodePath("LoginAccount/password")
@@ -150,6 +151,17 @@ caret_blink = true
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
+[node name="email" type="LineEdit" parent="CreateAccount"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_jfoit")
+placeholder_text = "Email"
+caret_blink = true
+
+[node name="MarginContainer6" type="MarginContainer" parent="CreateAccount"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
 [node name="cusername" type="LineEdit" parent="CreateAccount"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -167,6 +179,18 @@ size_flags_vertical = 3
 theme = ExtResource("3_jfoit")
 placeholder_text = "Password"
 secret = true
+
+[node name="Label2" type="Label" parent="CreateAccount"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.597176, 0.597176, 0.597176, 1)
+theme_override_fonts/font = ExtResource("3_hbf6b")
+theme_override_font_sizes/font_size = 12
+text = "- At least 8 characters.
+- At least one uppercase letter.
+- At least one lowercase letter.
+- At least one number.
+- At least one special character."
+vertical_alignment = 1
 
 [node name="MarginContainer4" type="MarginContainer" parent="CreateAccount"]
 custom_minimum_size = Vector2(0, 20)

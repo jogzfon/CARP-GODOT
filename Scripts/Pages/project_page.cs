@@ -161,7 +161,7 @@ public partial class project_page : Control
 
             if (Input.IsActionPressed("Ctrl") && Input.IsActionPressed("S"))
             {
-                if (AccountManager.GetUser() != null && (AccountManager.GetUser().Subscription == "Student" || AccountManager.GetUser().Subscription == "Teacher"))
+                if (AccountManager.GetUser() != null && (AccountManager.GetUser().Role == "Student" || AccountManager.GetUser().Role == "Teacher"))
                 {
                     DataToSave.SaveFile();
                     notification.MessageBox("Data Saved", 0);
