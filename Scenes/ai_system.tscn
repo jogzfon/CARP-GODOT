@@ -13,7 +13,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
 
-[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_backButton", "_notificationHandler", "AI_system", "API_subscription", "_personalAPIBtn", "_subscribeAPIBtn", "_customAPI", "_subscribeAPI", "_optionContainer", "_customApiON", "_paymentConfirm", "_personal_api_key")]
+[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_aibackButton", "_apibackButton", "_notificationHandler", "AI_system", "API_subscription", "_personalAPIBtn", "_subscribeAPIBtn", "_customAPI", "_subscribeAPI", "_optionContainer", "_customApiON", "_paymentConfirm", "_personal_api_key")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +24,8 @@ script = ExtResource("1_hxjp6")
 _chatContainer = NodePath("AI/ScrollContainer/ChatContainer")
 _request = NodePath("AI/RequestEdit")
 _sendRequestButton = NodePath("AI/SendRequest")
-_backButton = NodePath("AI/Back")
+_aibackButton = NodePath("AI/AIBack")
+_apibackButton = NodePath("API/APIBack")
 _notificationHandler = NodePath("NotificationHandler")
 AI_system = NodePath("AI")
 API_subscription = NodePath("API")
@@ -132,7 +133,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Back" type="TextureButton" parent="AI"]
+[node name="AIBack" type="TextureButton" parent="AI"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
@@ -242,6 +243,15 @@ text = "Please do the Caching sounds hehehe"
 [node name="takeMyMoneyBtn" type="Button" parent="API/SubscibedAPIContainer"]
 layout_mode = 2
 text = "Go ahead take my money!!!!"
+
+[node name="APIBack" type="TextureButton" parent="API"]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 90.0
+offset_bottom = 140.0
+scale = Vector2(0.76, 0.44)
+texture_normal = ExtResource("7_ps5gc")
+stretch_mode = 0
 
 [node name="NotificationHandler" parent="." instance=ExtResource("9_k114o")]
 layout_mode = 1

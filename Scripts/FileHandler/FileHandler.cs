@@ -102,7 +102,8 @@ public partial class FileHandler : Node
         {
             documentationRect.Visible = false;
         }
-        if (AccountManager.GetUser() != null && ((AccountManager.GetRole() == "Teacher")||(AccountManager.GetRole()=="Student" && AccountManager.GetSubscription() == "Subscribed")))
+            
+        if (AccountManager.GetUser() != null && (AccountManager.GetRole().Contains("Teacher") || AccountManager.GetSubscription().Contains("Subscribed")))
         {
             manageFile.Visible = true;
             directToSystem.Visible = false;
@@ -113,9 +114,9 @@ public partial class FileHandler : Node
             directToSystem.Visible = true;
             // Clear the list of recent files
             foreach (Node child in recentFileList.GetChildren())
-                {
-                    child.QueueFree(); // Remove each child from the scene
-                }
+            {
+                child.QueueFree(); // Remove each child from the scene
+            }
         }
     }
 

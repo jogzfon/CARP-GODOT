@@ -67,7 +67,7 @@ public static class AccountFileSaver
             try
             {
                 DirAccess.RemoveAbsolute(filePath);
-                GD.Print($"Account file '{fileName}' successfully deleted.");
+                //GD.Print($"Account file '{fileName}' successfully deleted.");
             }
             catch (Exception ex)
             {
