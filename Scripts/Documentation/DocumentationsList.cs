@@ -1,5 +1,9 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 public partial class DocumentationsList : VBoxContainer
 {
@@ -11,19 +15,37 @@ public partial class DocumentationsList : VBoxContainer
 
 
     private string directoryPath = "Carp_Documentation";
-    [Export] private VBoxContainer documentationBtnList;
-    [Export] private ColorRect documentationList;
+    [Export] private VBoxContainer _documentationBtnList;
+    [Export] private Control _documentationList;
+    [Export] private PackedScene _documentationTemplate;
+
+    private bool _isText = false;
+    private string _text;
+    private int i;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-	{
+    {
         GetAllCarpdocFilesInDirectory();
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
+    {
     }
-
+    public void RefreshAllDocumentFilesInCarp()
+    {
+        foreach (Node child in _documentationBtnList.GetChildren())
+        {
+            // Example of processing each child, replace with actual logic
+            child.QueueFree();
+        }
+        foreach (Node child in _documentationList.GetChildren())
+        {
+            // Example of processing each child, replace with actual logic
+            child.QueueFree();
+        }
+        GetAllCarpdocFilesInDirectory();
+    }
     public void GetAllCarpdocFilesInDirectory()
     {
         // Open the directory
@@ -31,6 +53,7 @@ public partial class DocumentationsList : VBoxContainer
         if (dir == null)
         {
             GD.PrintErr("Failed to open directory: " + directoryPath);
+            DirAccess.MakeDirAbsolute(directoryPath);
             return;
         }
 
@@ -43,9 +66,14 @@ public partial class DocumentationsList : VBoxContainer
             // Skip special entries "." and ".."
             if (!dir.CurrentIsDir() && fileName.EndsWith(".carpdoc"))
             {
-                var btn = new Button();
-                btn.Text = fileName;
-                documentationBtnList.AddChild(btn);
+                string filePath = Path.Combine(dir.GetCurrentDir(), fileName);
+                using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Read);
+                string content = file.GetAsText();
+
+                DocumentationTemplate doc_template = (DocumentationTemplate)_documentationTemplate.Instantiate();
+                DistributeDocumentationValues(content, doc_template);
+
+                _documentationList.AddChild(doc_template);
             }
 
             fileName = dir.GetNext(); // Get the next file
@@ -53,5 +81,158 @@ public partial class DocumentationsList : VBoxContainer
 
         dir.ListDirEnd(); // Finish listing the directory contents
     }
+    private void DistributeDocumentationValues(string content, DocumentationTemplate doc_template)
+    {
+        List<List<Tokens>> tokens = new List<List<Tokens>>();
 
+        string pattern = @"\b(Title:|Text:|Image:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
+
+        string[] lines = content.Split('\n');
+
+        foreach (string line in lines)
+        {
+            if (!line.Trim().StartsWith("-"))
+            {
+                tokens.Add(TokenizeDocumentationLines(line.Replace(",", ""), pattern));
+            }
+        }
+
+        for (i = 0; i < tokens.Count; i++)
+        {
+            /*if (_isText)
+            {
+                List<Tokens> tokens2 = tokens[i];
+                for (int j = 0; j < tokens2.Count; j++)
+                {
+                    _text += tokens2[j].value + " ";
+                }
+                if (i + 1 > tokens.Count)
+                {
+                    doc_template.AddText(_text);
+                    _isText = false;
+                    _text = "";
+                }
+                else
+                {
+                    tokens2 = tokens[i + 1];
+                    if (tokens2.Count > 0 && (tokens2[0].value == "Image" || tokens2[0].value == "Title" || tokens2[0].value == "Text"))
+                    {
+                        doc_template.AddText(_text);
+                        _isText = false;
+                        _text = "";
+                    }
+                    else
+                    {
+                        _text += "\n";
+                    }
+                }
+            }
+            else */if (tokens[i].Count > 0)
+            {
+                SetDocumentationValues(tokens[i], doc_template, tokens);
+            }
+        }
+    }
+    private List<Tokens> TokenizeDocumentationLines(string line, string pattern)
+    {
+        List<Tokens> tokens = new List<Tokens>();
+        MatchCollection matches = Regex.Matches(line, pattern);
+
+        foreach (Match match in matches)
+        {
+            string token = match.Value;
+
+            if (Regex.IsMatch(token, ":"))
+            {
+                tokens.Add(new Tokens(TokenType.COLON, token));
+            }
+            else if (Regex.IsMatch(token, @"\b(Title|Text|Image)\b"))
+            {
+                tokens.Add(new Tokens(TokenType.LABEL, token));
+            }
+            else
+            {
+                tokens.Add(new Tokens(TokenType.VALUE, token));
+            }
+        }
+        return tokens;
+    }
+
+    private void SetDocumentationValues(List<Tokens> tokens, DocumentationTemplate doc_template, List<List<Tokens>> orig_tokens)
+    {
+        switch (tokens[0].value)
+        {
+            case "Title":
+                if (2 < tokens.Count)
+                {
+                    var btn = new Button();
+                    for (int i = 2; i < tokens.Count; i++)
+                    {
+                        btn.Text += tokens[i].value + " ";
+                    }
+                    doc_template.DocumentationBtn(btn);
+                    doc_template.AddTitle(btn.Text);
+                    _documentationBtnList.AddChild(btn);
+                }
+                break;
+            case "Text":
+                _text = "";
+                int currentIndex = i; // Save the current index to track tokens
+                int j = 0;
+                do
+                {
+                    for (j = 2; j < tokens.Count; j++) // Start from the third token
+                    {
+                        if (tokens[j].type == TokenType.VALUE)
+                        {
+                            _text += tokens[j].value + " ";
+                        }
+                    }
+                    GD.Print("Repeated");
+                    // Move to the next set of tokens to handle multi-line or subsequent `VALUE` tokens
+                    currentIndex++;
+                    if (currentIndex < orig_tokens.Count)
+                    {
+                        var nextTokens = orig_tokens[currentIndex];
+                        if (nextTokens.Count > 0 && nextTokens[0].type != TokenType.LABEL)
+                        {
+                            // Continue collecting `VALUE` tokens if no `LABEL` token is encountered
+                            j = 0;
+                            tokens = nextTokens;
+                            _text += "\n"; // Preserve line breaks between lines of text
+                        }
+                        else if(nextTokens.Count >= 0)
+                        {
+                            _text += "\n";
+                             // Exit the loop when encountering a new `LABEL`
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                } while (tokens != null);
+                doc_template.AddText(_text.Trim()); // Trim the final text to avoid extra spaces
+                break;
+            case "Image":
+                if (2 < tokens.Count)
+                {
+                    string img = "";
+                    for (int i = 2; i < tokens.Count; i++)
+                    {
+                        img += tokens[i].value;
+                    }
+                    doc_template.AddImage(img);
+                }
+                break;
+            default:
+                GD.PrintErr(tokens[0].type +": " + tokens[0].value + " does not exist!");
+                break;
+        }
+    }
 }

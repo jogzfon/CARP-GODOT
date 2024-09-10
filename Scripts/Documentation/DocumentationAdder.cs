@@ -6,8 +6,6 @@ public partial class DocumentationAdder : Control
 {
     [Export] private VBoxContainer boxContainer;
 
-    [Export] private VBoxContainer _addedDocumentationList;
-
     [Export] private Button parSenBtn;
     [Export] private Button imageBtn;
     [Export] private Button saveBtn;
@@ -24,6 +22,7 @@ public partial class DocumentationAdder : Control
     private string _selectedImagePath;
     public override void _Ready()
     {
+        this.Visible = false;
         parSenBtn.Connect("pressed", new Callable(this, nameof(AddParagraphAndSentence)));
         imageBtn.Connect("pressed", new Callable(this, nameof(OpenImageFileDialog)));
         saveBtn.Connect("pressed", new Callable(this, nameof(OpenSaveFileDialog)));
@@ -121,7 +120,7 @@ public partial class DocumentationAdder : Control
         doc_Title.Text = "";
 
         _notificationHandler.MessageBox("Documentation Saved", 0);
-        _documentationsList.GetAllCarpdocFilesInDirectory();
+        _documentationsList.RefreshAllDocumentFilesInCarp();
         this.Visible = false;
     }
 
