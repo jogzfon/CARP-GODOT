@@ -171,7 +171,8 @@ public partial class StartUpPage : Control
             Role = rolePick.Selected.ToString(),
             SubscriptionStart = "",
             SubscriptionEnd = "",
-            ProfileImage = "NONE"
+            ProfileImage = "NONE",
+            ProofOfPayment = "NONE"
         };
 
 		if (data.Role.Equals("1"))
@@ -247,9 +248,9 @@ public partial class StartUpPage : Control
         bool isStrong = true;
 
         // Check for minimum length of 8 characters
-        if (password.Length < 8)
+        if (password.Length < 6)
         {
-            notification.MessageBox("Password must be at least 8 characters long.", 1);
+            notification.MessageBox("Password must be at least 6 characters long.", 1);
             isStrong = false;
         }
 

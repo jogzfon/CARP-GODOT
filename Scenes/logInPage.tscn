@@ -54,6 +54,7 @@ texture = ExtResource("3_1jpyr")
 expand_mode = 1
 
 [node name="LoginAccount" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -106,7 +107,6 @@ theme_override_font_sizes/font_size = 24
 text = "Register"
 
 [node name="CreateAccount" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -203,7 +203,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.597176, 0.597176, 0.597176, 1)
 theme_override_fonts/font = ExtResource("3_hbf6b")
 theme_override_font_sizes/font_size = 15
-text = "- At least 8 characters.
+text = "- At least 6 characters.
 - At least one uppercase letter.
 - At least one lowercase letter.
 - At least one number.

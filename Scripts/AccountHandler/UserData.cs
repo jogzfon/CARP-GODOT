@@ -14,7 +14,7 @@ public class UserData
     public string SubscriptionStart { get; set; }
     public string SubscriptionEnd { get; set; }
     public string ProfileImage { get; set; }
-
+    public string ProofOfPayment { get; set; }
     // ToString method to display user data
     public override string ToString()
     {
@@ -27,7 +27,6 @@ public class UserData
                $"Subscription: {Subscription}\n" +
                $"Role: {Role}\n" +
                $"Subscription Start: {SubscriptionStart}\n" +
-               $"Subscription End: {SubscriptionEnd}\n" +
-               $"Profile Image: {ProfileImage}\n";
+               $"Subscription End: {SubscriptionEnd}";
     }
 }
