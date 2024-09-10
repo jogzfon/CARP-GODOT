@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpt486otnrqkv"]
+[gd_scene load_steps=12 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/AI/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="7_ps5gc"]
 [ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="8_o48ei"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="9_k114o"]
+[ext_resource type="Texture2D" uid="uid://1sgdp34u0q28" path="res://AppLogo.png" id="9_lf06y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
@@ -35,7 +36,7 @@ _customAPI = NodePath("API/PersonalAPIContainer")
 _subscribeAPI = NodePath("API/SubscibedAPIContainer")
 _optionContainer = NodePath("API/APIOptionContainer")
 _customApiON = NodePath("API/PersonalAPIContainer/APIConfirmBtn")
-_paymentConfirm = NodePath("API/SubscibedAPIContainer/takeMyMoneyBtn")
+_paymentConfirm = NodePath("API/SubscibedAPIContainer/confirmBtn")
 _personal_api_key = NodePath("API/PersonalAPIContainer/LineEdit")
 
 [node name="AI" type="Control" parent="."]
@@ -238,13 +239,32 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="API/SubscibedAPIContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Please do the Caching sounds hehehe"
+theme_override_font_sizes/font_size = 30
+text = "----------- TO BE ADDED -----------"
+horizontal_alignment = 1
 
-[node name="takeMyMoneyBtn" type="Button" parent="API/SubscibedAPIContainer"]
+[node name="QR Code" type="TextureRect" parent="API/SubscibedAPIContainer"]
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
-text = "Go ahead take my money!!!!"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_lf06y")
+expand_mode = 1
+
+[node name="paymentConfirmationBtn" type="Button" parent="API/SubscibedAPIContainer"]
+layout_mode = 2
+text = "Payment Confirmation Photo"
+
+[node name="MarginContainer" type="MarginContainer" parent="API/SubscibedAPIContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="confirmBtn" type="Button" parent="API/SubscibedAPIContainer"]
+layout_mode = 2
+text = "CONFIRM"
 
 [node name="APIBack" type="TextureButton" parent="API"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 90.0

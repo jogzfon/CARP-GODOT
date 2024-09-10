@@ -13,6 +13,15 @@ public partial class SubscriptionHandler : Node
     [Export]
     TextureButton teacherTierBtn;
 
+    [Export] private Button _subscription_panel_Btn;
+
+    [Export] private PanelContainer _subscription_types_panel;
+    [Export] private VBoxContainer _payment_panel;
+
+    [Export] private Button _payment_confirm_Btn;
+
+    [Export] private TextureButton _backBtn;
+
     [Export]
     ColorRect subscriptionPanel;
 
@@ -22,6 +31,8 @@ public partial class SubscriptionHandler : Node
     [Export] PackedScene logInPage;
 
     [Export] private Control documentationAdder;
+
+    [Export] private NotificationHandler _notificationHandler;
 
     [Export]
 	Texture2D freeTier;
@@ -37,12 +48,21 @@ public partial class SubscriptionHandler : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-		subscriptionBtn.TextureNormal = freeTier;
+        _subscription_types_panel.Visible = true;
+        _payment_panel.Visible = false;
+
+        _subscription_panel_Btn.Visible = false;
+
+        subscriptionBtn.TextureNormal = freeTier;
         subscriptionPanel.Visible = false;
 
         subscriptionBtn.Connect("pressed", new Callable(this, nameof(OpenSubscription)));
 
-        // Connect the mouse_exited signal to close the subscription panel when the mouse leaves it
+        _subscription_panel_Btn.Connect("pressed", new Callable(this, nameof(OpenPaymentPanel)));
+        _payment_confirm_Btn.Connect("pressed", new Callable(this, nameof(ConfirmPayment)));
+        _backBtn.Connect("pressed", new Callable(this, nameof(OnBackPressed)));
+
+        /*// Connect the mouse_exited signal to close the subscription panel when the mouse leaves it
         subscriptionPanel.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
         subscriptionPanel.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
 
@@ -52,7 +72,7 @@ public partial class SubscriptionHandler : Node
         // studentTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
         studentTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
         // teacherTierBtn.Connect("mouse_exited", new Callable(this, nameof(OnMouseExitedPanel)));
-        teacherTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));
+        teacherTierBtn.Connect("mouse_entered", new Callable(this, nameof(OnMouseEnteredPanel)));*/
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,6 +86,15 @@ public partial class SubscriptionHandler : Node
                 studentTierBtn.Modulate = new Color("5d5d5d");
                 teacherTierBtn.Modulate = new Color("ffffff");
                 guestTierBtn.Modulate = new Color("ffffff");
+
+                if (!AccountManager.GetSubscription().Contains("Subscribed"))
+                {
+                    _subscription_panel_Btn.Visible = true;
+                }
+                else
+                {
+                    _subscription_panel_Btn.Visible = false;
+                }
 
                 studentTierBtn.Disabled = true;
                 teacherTierBtn.Disabled = false;
@@ -121,7 +150,7 @@ public partial class SubscriptionHandler : Node
             GetTree().Root.AddChild(simultaneous);
         }
     }
-    private void OnMouseEnteredPanel()
+   /* private void OnMouseEnteredPanel()
     {
         isMouseOverPanel = true;
     }
@@ -140,4 +169,40 @@ public partial class SubscriptionHandler : Node
             subscriptionPanel.Visible = false;
         }
     }
+*/
+    private void ConfirmPayment()
+    {
+        _subscription_types_panel.Visible = true;
+        _payment_panel.Visible = false;
+        if (SubscriptionRequestHandler.RequestSubscription())
+        {
+            _notificationHandler.MessageBox("Request sent successfully.\nThank you for the patronage.\n Please wait for a while...", 0);
+            OnBackPressed();
+            OnBackPressed();
+        }
+        else
+        {
+            _notificationHandler.MessageBox("Please connect to the internet.\n Thank you", 0);
+        }
+    }
+
+    private void OpenPaymentPanel()
+    {
+        _subscription_types_panel.Visible = false;
+        _payment_panel.Visible = true;
+    }
+
+    private void OnBackPressed()
+    {
+        if (_payment_panel.Visible == true)
+        {
+            _subscription_types_panel.Visible = true;
+            _payment_panel.Visible = false;
+        }
+        else
+        {
+            subscriptionPanel.Visible = false;
+        }
+    }
+
 }
