@@ -1775,7 +1775,6 @@ text = "👌Basic simulations
 autowrap_mode = 2
 
 [node name="SubscriptionBtn" type="TextureButton" parent="SubscriptionHandler"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_t46w3")
 offset_left = 1778.0
