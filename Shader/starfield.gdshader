@@ -31,7 +31,7 @@ vec3 palette (float t){
  vec3 b = color2;
  vec3 c = color3;
  vec3 d = color4;
- 
+
  return a + b * cos (6.28318*(c*t+d) );
 }
 
@@ -58,13 +58,13 @@ float Star (vec2 uv, float size, float baseRotation) {
     uv *= Rot(baseRotation);
     float rays = 0.;
     rays += (max(0.,1.-abs(pow(abs(uv.x),1.8)*uv.y*30000.))) ;
-    
+
     // rotate 45 deg
     uv *= Rot(3.14159/4.);
     rays += (max(0.,1.-abs(uv.x*uv.y* 3000.))) * .7 ;
     m*= smoothstep(1.,0.2,d);
     m+= rays* smoothstep(1.,0.2,d/(size));;
-    
+
     return m;
 }
 
@@ -90,16 +90,16 @@ vec3 StarLayer(vec2 uv) {
 
 vec4 Bloom (vec2 Coord, in sampler2D Tex, in float MipBias, vec2 iChanRes){
 	vec2 TexelSize = MipBias/iChanRes.xy;
-    
+
     vec4  Color = texture(Tex, Coord, MipBias);
-    Color += texture(Tex, Coord + vec2(TexelSize.x,0.0), MipBias);    	
-    Color += texture(Tex, Coord + vec2(-TexelSize.x,0.0), MipBias);    	
-    Color += texture(Tex, Coord + vec2(0.0,TexelSize.y), MipBias);    	
-    Color += texture(Tex, Coord + vec2(0.0,-TexelSize.y), MipBias);    	
-    Color += texture(Tex, Coord + vec2(TexelSize.x,TexelSize.y), MipBias);    	
-    Color += texture(Tex, Coord + vec2(-TexelSize.x,TexelSize.y), MipBias);    	
-    Color += texture(Tex, Coord + vec2(TexelSize.x,-TexelSize.y), MipBias);    	
-    Color += texture(Tex, Coord + vec2(-TexelSize.x,-TexelSize.y), MipBias);    
+    Color += texture(Tex, Coord + vec2(TexelSize.x,0.0), MipBias);
+    Color += texture(Tex, Coord + vec2(-TexelSize.x,0.0), MipBias);
+    Color += texture(Tex, Coord + vec2(0.0,TexelSize.y), MipBias);
+    Color += texture(Tex, Coord + vec2(0.0,-TexelSize.y), MipBias);
+    Color += texture(Tex, Coord + vec2(TexelSize.x,TexelSize.y), MipBias);
+    Color += texture(Tex, Coord + vec2(-TexelSize.x,TexelSize.y), MipBias);
+    Color += texture(Tex, Coord + vec2(TexelSize.x,-TexelSize.y), MipBias);
+    Color += texture(Tex, Coord + vec2(-TexelSize.x,-TexelSize.y), MipBias);
 
     return Color/9.0;
 
@@ -113,11 +113,11 @@ void fragment()
 {
     vec2 uv = UV;
     float t = iTime *0.02;
-    
+
     vec2 M = 4.*UV;
      uv += M*.4;
     vec3 col = vec3(0);
-    
+
     for(float i=0.; i<1.; i+= 1./NUM_LAYERS){
         float depth = fract (i + t * speed);
         float scale = mix(1. * zoom,1.,depth);

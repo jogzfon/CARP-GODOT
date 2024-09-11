@@ -1623,6 +1623,7 @@ studentTier = ExtResource("31_5pwgi")
 teacherTier = ExtResource("32_5ac3u")
 
 [node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
+visible = false
 material = SubResource("ShaderMaterial_2wfjx")
 anchors_preset = 15
 anchor_right = 1.0
@@ -1637,6 +1638,7 @@ scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
 [node name="APIBack" type="TextureButton" parent="SubscriptionHandler/SubscriptionRect"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 90.0
