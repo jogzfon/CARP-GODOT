@@ -20,8 +20,7 @@ public partial class DocumentationsList : VBoxContainer
     [Export] private PackedScene _documentationTemplate;
 
     private bool _isText = false;
-    private string _text;
-    private int i;
+    private string _text = String.Empty;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -97,7 +96,7 @@ public partial class DocumentationsList : VBoxContainer
             }
         }
 
-        for (i = 0; i < tokens.Count; i++)
+        for (int i = 0; i < tokens.Count; i++)
         {
             /*if (_isText)
             {
@@ -129,7 +128,12 @@ public partial class DocumentationsList : VBoxContainer
             }
             else */if (tokens[i].Count > 0)
             {
-                SetDocumentationValues(tokens[i], doc_template, tokens);
+                SetDocumentationValues(tokens[i], doc_template);
+                if (_text.Length > 0)
+                {
+                    doc_template.AddText(_text);
+                    _text = "";
+                }
             }
         }
     }
@@ -158,7 +162,40 @@ public partial class DocumentationsList : VBoxContainer
         return tokens;
     }
 
-    private void SetDocumentationValues(List<Tokens> tokens, DocumentationTemplate doc_template, List<List<Tokens>> orig_tokens)
+    private void SetDocumentationValues(List<Tokens> tokens, DocumentationTemplate doc_template)
+    {
+        switch (tokens[0].type)
+        {
+            case TokenType.LABEL:
+                /* if(_text.Length > 0)
+                 {
+                     doc_template.AddText(_text);
+                     _text = ""; 
+                 }
+                 SetLabelValues(tokens,doc_template);*/
+                for(int i = 0; i < tokens.Count; i++)
+                {
+                    GD.Print("Label" + tokens[i].value);
+                }
+                break;
+            case TokenType.VALUE:
+                for (int i = 0; i < tokens.Count; i++)
+                {
+                    GD.Print("Value" + tokens[i].value);
+                }
+                /*for (int i = 0; i < tokens.Count; i++)
+                {
+                    _text += tokens[0].value + " ";
+                }
+                _text += "\n";*/
+                break;
+            default:
+                GD.PrintErr(tokens[0].type + ": " + tokens[0].value + " does not exist!");
+                break;
+        }
+    }
+
+    private void SetLabelValues(List<Tokens> tokens, DocumentationTemplate doc_template)
     {
         switch (tokens[0].value)
         {
@@ -175,50 +212,6 @@ public partial class DocumentationsList : VBoxContainer
                     _documentationBtnList.AddChild(btn);
                 }
                 break;
-            case "Text":
-                _text = "";
-                int currentIndex = i; // Save the current index to track tokens
-                int j = 0;
-                do
-                {
-                    for (j = 2; j < tokens.Count; j++) // Start from the third token
-                    {
-                        if (tokens[j].type == TokenType.VALUE)
-                        {
-                            _text += tokens[j].value + " ";
-                        }
-                    }
-                    GD.Print("Repeated");
-                    // Move to the next set of tokens to handle multi-line or subsequent `VALUE` tokens
-                    currentIndex++;
-                    if (currentIndex < orig_tokens.Count)
-                    {
-                        var nextTokens = orig_tokens[currentIndex];
-                        if (nextTokens.Count > 0 && nextTokens[0].type != TokenType.LABEL)
-                        {
-                            // Continue collecting `VALUE` tokens if no `LABEL` token is encountered
-                            j = 0;
-                            tokens = nextTokens;
-                            _text += "\n"; // Preserve line breaks between lines of text
-                        }
-                        else if(nextTokens.Count >= 0)
-                        {
-                            _text += "\n";
-                             // Exit the loop when encountering a new `LABEL`
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-
-                } while (tokens != null);
-                doc_template.AddText(_text.Trim()); // Trim the final text to avoid extra spaces
-                break;
             case "Image":
                 if (2 < tokens.Count)
                 {
@@ -230,8 +223,15 @@ public partial class DocumentationsList : VBoxContainer
                     doc_template.AddImage(img);
                 }
                 break;
-            default:
-                GD.PrintErr(tokens[0].type +": " + tokens[0].value + " does not exist!");
+            case "Text":
+                if (2 < tokens.Count)
+                {
+                    for (int i = 2; i < tokens.Count; i++) // Start from the third token
+                    {
+                        _text += tokens[i].value + " ";
+                    }
+                }
+                _text += "\n";
                 break;
         }
     }
