@@ -81,7 +81,44 @@ public static class aiMessageDoc
             "NOT: ~AC -> AC"+
             "I/O port is at ffffh or 65535";
 
-    public static string format = 
+    public static string format =
+            "Necessary data movement at the beginning before the scan of each instruction:" +
+            "Fetch 1: PC -> AR" +
+            "Fetch 2: M -> DR, PC+1 -> PC" +
+            "Fetch 3: DR -> IR, PC -> AR" +
+            "--START OF SCAN INSTRUCTION--" +
+            "For LDAC Instruction:" +
+            "LDAC 1: M -> DR, PC+1 -> PC, AR+1 -> AR" +
+            "LDAC 2: DR -> TR, M -> DR, PC+1 -> PC" +
+            "LDAC 3: DR | TR -> AR" +
+            "LDAC 4: M -> DR" +
+            "LDAC 5: DR -> AC" +
+            "For STAC Instruction:" +
+            "STAC 1: M -> DR, PC+1 -> PC, AR+1 -> AR" +
+            "STAC 2: DR -> TR, M -> DR, PC+1 -> PC" +
+            "STAC 3: DR | TR -> AR" +
+            "STAC 4: AC -> DR" +
+            "STAC 5: DR -> M" +
+            "For Other Instructions:" +
+            "MVAC: AC -> R" +
+            "MOVR: R -> AC" +
+            "JUMP: jump to memory location" +
+            "JMPZ: if Z = 1 jump to memory location" +
+            "JPNZ: if Z = 0 jump to memory location" +
+            "NOP: No Operation" +
+            "END: End Animation" +
+            "ADD:  AC + R -> AC" +
+            "SUB: AC - R -> AC" +
+            "INAC: AC + 1 -> AC" +
+            "CLAC: 0 -> AC, 1 -> Z" +
+            "AND: AC & R -> AC" +
+            "OR: AC | R -> AC" +
+            "XOR: AC ^ R -> AC" +
+            "NOT: ~AC -> AC" +
+            "I/O port is at ffffh or 65535" +
+            "Numeric constants in source statements default to decimal unless specified otherwise. " +
+            "Supported number formats include binary (e.g., 11000101B), decimal (e.g., 364 or 7534D), octal (e.g., 77O), and hexadecimal (e.g., 84H). " +
+            "The assembler supports directives like ORG <address> to set the start address, DB <number> to store 1-byte constants, DW <number> to store 2-byte constants, and labels for jumps (e.g., JMP MyLabel)" +
             "Result should be based on these example Results:" +
             "double a number.  i=i+i " +
             "i at 100 " +
@@ -100,10 +137,10 @@ public static class aiMessageDoc
             ";Then:\r\n" +
             "clac\t\t                               ;0\r\n" +
             "jump 17\t                              ;jump over else part to Endif:\r\n" +
-            ";Else:\r\n" +
+            "                                       ;Else:\r\n" +
             "clac\r\n" +
             "inac\t\t                               ;1\r\n " +
-            ";Endif:\r\n" +
+            "                                       ;Endif:\r\n" +
             "stac 65535\r\n" +
             "end" +
             "example from online Help"+
@@ -139,7 +176,7 @@ public static class aiMessageDoc
             "Generated program: " +
             "clac\t\t                               ;i=0\r\n" +
             "mvac\t\t                               ;R=i\r\n" +
-            ";Loop:\r\n" +
+            "                                       ;Loop:\r\n" +
             "movr\t\t                               ;AC=i\r\n" +
             "inac\t\t                               ;i++\r\n" +
             "mvac\t\t                               ;i back to R\r\n" +

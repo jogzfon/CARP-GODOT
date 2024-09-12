@@ -19,10 +19,10 @@ const float warpSpeed = 0.2 * overallSpeed;
 const float warpFrequency = 0.5;
 const float warpAmplitude = 1.0;
 const float offsetFrequency = 0.5;
-const float offsetSpeed = 1.33 * overallSpeed;
+const float offsetSpeed = 0.5 * overallSpeed;
 const float minOffsetSpread = 0.6;
 const float maxOffsetSpread = 2.0;
-const int linesPerGroup = 16;
+const int linesPerGroup = 2;
 
 const vec4[] bgColors = {
     vec4(lineColor * 0.5),

@@ -1,11 +1,11 @@
 shader_type canvas_item;
 
-const float overallSpeed = 0.1;
-const float gridSmoothWidth = 0.02;
-const float axisWidth = 0.2;
+const float overallSpeed = 0.2;
+const float gridSmoothWidth = 0.015;
+const float axisWidth = 0.05;
 const float majorLineWidth = 0.025;
 const float minorLineWidth = 0.0125;
-const float majorLineFrequency = 1.0;
+const float majorLineFrequency = 5.0;
 const float minorLineFrequency = 1.0;
 const vec4 gridColor = vec4(0.5);
 const float scale = 5.0;
@@ -15,14 +15,14 @@ const float maxLineWidth = 0.5;
 const float lineSpeed = 1.0 * overallSpeed;
 const float lineAmplitude = 1.0;
 const float lineFrequency = 0.2;
-const float warpSpeed = 0.5 * overallSpeed;
-const float warpFrequency = 0.2;
-const float warpAmplitude = 3.0;
+const float warpSpeed = 0.2 * overallSpeed;
+const float warpFrequency = 0.5;
+const float warpAmplitude = 1.0;
 const float offsetFrequency = 0.5;
-const float offsetSpeed = 2.0 * overallSpeed;
-const float minOffsetSpread = 0.2;
-const float maxOffsetSpread = 5.0;
-const int linesPerGroup = 3;
+const float offsetSpeed = 0.5 * overallSpeed;
+const float minOffsetSpread = 0.6;
+const float maxOffsetSpread = 2.0;
+const int linesPerGroup = 2;
 
 const vec4[] bgColors = {
     vec4(lineColor * 0.5),

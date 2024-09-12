@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=62 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -37,7 +37,7 @@
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="27_41f47"]
 [ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Sprites/Cross.png" id="28_hdvbl"]
 [ext_resource type="Texture2D" uid="uid://vvu0807gwg2x" path="res://Sprites/Subscription/Rectangle 92.png" id="28_o5xks"]
-[ext_resource type="Script" path="res://Scripts/AccountHandler/SubscriptionHandler.cs" id="28_wwcii"]
+[ext_resource type="Script" path="res://Scripts/Subscription/SubscriptionHandler.cs" id="28_wwcii"]
 [ext_resource type="Texture2D" uid="uid://c4uvbuprkvnnd" path="res://Sprites/Subscription/School_Logo3.png" id="30_up4sm"]
 [ext_resource type="Texture2D" uid="uid://bog35ofpaqh01" path="res://Sprites/Subscription/School_Logo1.png" id="31_5pwgi"]
 [ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
@@ -45,7 +45,8 @@
 [ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="34_pirgk"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="41_pe2uf"]
-[ext_resource type="Texture2D" uid="uid://1sgdp34u0q28" path="res://AppLogo.png" id="45_0somt"]
+[ext_resource type="Texture2D" uid="uid://day1e2bnip2dc" path="res://Sprites/QRCode_Payment.jpg" id="46_d88yh"]
+[ext_resource type="Script" path="res://Scripts/Subscription/PaymentConfirmation.cs" id="47_xxocy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
 shader = ExtResource("3_fhf3p")
@@ -1529,12 +1530,13 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
-[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn", "documentationAdder")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
 savePanel = NodePath("SavePanel")
 yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
 nobtn = NodePath("SavePanel/HBoxContainer/No")
+documentationAdder = NodePath("../MainContent/DocumentationAdder")
 saveAvailable = false
 
 [node name="ExitButton" type="Button" parent="Exit"]
@@ -1601,7 +1603,7 @@ text = "NO"
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
 
-[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "_subscription_panel_Btn", "_subscription_types_panel", "_payment_panel", "_payment_confirm_Btn", "_backBtn", "subscriptionPanel", "profilePanel", "documentationAdder", "_notificationHandler")]
+[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "_subscription_panel_Btn", "_subscription_types_panel", "_payment_panel", "_paymentConfirmation", "_payment_confirm_Btn", "_backBtn", "subscriptionPanel", "profilePanel", "documentationAdder", "_notificationHandler")]
 script = ExtResource("28_wwcii")
 subscriptionBtn = NodePath("SubscriptionBtn")
 guestTierBtn = NodePath("SubscriptionRect/SubscriptionTypePanel/HBoxContainer/GuesTier")
@@ -1610,6 +1612,7 @@ teacherTierBtn = NodePath("SubscriptionRect/SubscriptionTypePanel/HBoxContainer/
 _subscription_panel_Btn = NodePath("SubscriptionRect/SubscriptionTypePanel/HBoxContainer/StudentTier/subscriptionBtn")
 _subscription_types_panel = NodePath("SubscriptionRect/SubscriptionTypePanel")
 _payment_panel = NodePath("SubscriptionRect/PaymentPanel")
+_paymentConfirmation = NodePath("../PaymentConfirmation")
 _payment_confirm_Btn = NodePath("SubscriptionRect/PaymentPanel/confirmBtn")
 _backBtn = NodePath("SubscriptionRect/APIBack")
 subscriptionPanel = NodePath("SubscriptionRect")
@@ -1830,7 +1833,7 @@ custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("45_0somt")
+texture = ExtResource("46_d88yh")
 expand_mode = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
@@ -1860,3 +1863,19 @@ offset_bottom = 83.0
 texture_normal = ExtResource("32_mcsfd")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="PaymentConfirmation" type="Node" parent="." node_paths=PackedStringArray("_payment_receiptBtn", "_receipt_dialog", "_notification")]
+script = ExtResource("47_xxocy")
+_payment_receiptBtn = NodePath("../SubscriptionHandler/SubscriptionRect/PaymentPanel/paymentConfirmationBtn")
+_receipt_dialog = NodePath("../ReceiptDialog")
+_notification = NodePath("../NotificationHandler")
+
+[node name="ReceiptDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 1
+size = Vector2i(800, 600)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg")

@@ -187,9 +187,6 @@ public partial class Assembler
         }
         else
         {
-            // If no errors exist, assemble program
-
-            // Places valid code in memory and temporary variables
 
             for (int lineIndex = 1; lineIndex <= code.SourceLineLength(); lineIndex++)
             {
