@@ -20,9 +20,18 @@ public partial class DocumentationAdder : Control
     [Export] private DocumentationsList _documentationsList; 
 
     private string _selectedImagePath;
+
+    private string directoryLoc = "Carp_Documentation";
     public override void _Ready()
     {
+        DirAccess dir = DirAccess.Open(directoryLoc);
+        if (dir == null)
+        {
+            dir.MakeDir(directoryLoc);
+        }
+
         this.Visible = false;
+
         parSenBtn.Connect("pressed", new Callable(this, nameof(AddParagraphAndSentence)));
         imageBtn.Connect("pressed", new Callable(this, nameof(OpenImageFileDialog)));
         saveBtn.Connect("pressed", new Callable(this, nameof(OpenSaveFileDialog)));
@@ -107,6 +116,7 @@ public partial class DocumentationAdder : Control
     private void OpenSaveFileDialog()
     {
         // Open the file dialog for the user to select an image
+        _saveFileDialogue.CurrentDir = directoryLoc;
         _saveFileDialogue.PopupCentered();
     }
 

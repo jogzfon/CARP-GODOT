@@ -6,6 +6,7 @@ public partial class DocumentationManager : Node
 	[Export] private TextureButton _documentationAdderBtn;
     [Export] private Control _documentationList;
     [Export] private VBoxContainer _documentationBtnList;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -21,8 +22,7 @@ public partial class DocumentationManager : Node
 				_documentationAdderBtn.Visible = true;
 				_documentationList.Visible = true;
 				_documentationBtnList.Visible = true;
-
-
+				
             }
 			else
 			{
