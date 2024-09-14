@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=63 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -47,6 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="41_pe2uf"]
 [ext_resource type="Texture2D" uid="uid://day1e2bnip2dc" path="res://Sprites/QRCode_Payment.jpg" id="46_d88yh"]
 [ext_resource type="Script" path="res://Scripts/Subscription/PaymentConfirmation.cs" id="47_xxocy"]
+[ext_resource type="Script" path="res://Scripts/Documentation/DocumentationManager.cs" id="48_kvvd6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
 shader = ExtResource("3_fhf3p")
@@ -282,14 +283,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DocumentationsList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer" node_paths=PackedStringArray("_documentationBtnList", "_documentationList")]
+[node name="DocumentationsList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("6_bgiiv")
-_documentationBtnList = NodePath("AddedDocumentationList")
-_documentationList = NodePath("../../../../Documentation")
-_documentationTemplate = ExtResource("32_5gf2n")
 
 [node name="Wit" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
 layout_mode = 2
@@ -322,8 +319,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembling a program"
 
-[node name="AddedDocumentationList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="AddedDocumentationList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList" node_paths=PackedStringArray("_documentationBtnList", "_documentationList")]
 layout_mode = 2
+script = ExtResource("6_bgiiv")
+_documentationBtnList = NodePath(".")
+_documentationList = NodePath("../../../../../Documentation")
+_documentationTemplate = ExtResource("32_5gf2n")
 
 [node name="AddBtn" type="TextureButton" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList" node_paths=PackedStringArray("addDocumentationBtn", "documentationAdder")]
 custom_minimum_size = Vector2(0, 60)
@@ -490,7 +491,7 @@ offset_top = 106.0
 offset_right = -11.0
 offset_bottom = -14.0
 _notificationHandler = NodePath("../../NotificationHandler")
-_documentationsList = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList")
+_documentationsList = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/AddedDocumentationList")
 
 [node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "subscriptionPanel", "documentationAdder", "notification")]
 script = ExtResource("12_dw1ay")
@@ -1879,3 +1880,9 @@ ok_button_text = "Open"
 file_mode = 0
 access = 2
 filters = PackedStringArray("*.png", "*.jpg")
+
+[node name="DocumentationManager" type="Node" parent="." node_paths=PackedStringArray("_documentationAdderBtn", "_documentationList", "_documentationBtnList")]
+script = ExtResource("48_kvvd6")
+_documentationAdderBtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddBtn")
+_documentationList = NodePath("../Documentation")
+_documentationBtnList = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddedDocumentationList")

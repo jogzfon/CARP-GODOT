@@ -3,28 +3,44 @@ Status: Stopped
 RtlStatement: Fetch 3 
 DataMovement: IR < - DR AR < - PC 
 CurrentMemoryLocation: 0
-InstructionCodes: org 0 ; assembly start address 
-db 3 ; define first number ( e . g . 3 ) 
-db 4 ; define second number ( e . g . 4 ) 
-org 10 ; set the start for the multiplication logic 
-clac ; clear the AC ( result = 0 ) 
-mvac ; move AC ( = 0 ) to R ( initialize counter ) 
-ldac 0 ; load first number to AC 
-mvac ; move AC to R ( hold first number ) 
-ldac 1 ; load second number to AC 
-mvac ; move AC to R again ( hold count of additions ) 
-clac ; clear AC to use for result accumulation 
-; Loop for multiplying first number by second ( using repeated addition ) 
-Loop : mvac ; move the current count into AC 
-ldac 1 ; load second number from memory into AC 
-jpnz EndLoop ; if the second number is 0 exit loop 
-add ; add the first number ( R ) to ACC ( result ) 
-stac 2 ; store current result in memory location 2 
-inac ; decrement the count in AC 
-jump Loop ; repeat the loop 
-EndLoop : stac 65535 ; send result to I / O port ( for output ) 
-end ; stop execution 
+InstructionCodes: org 0                               ; Assembly start address
+db 0                                ; Initial Fibonacci value
+db 1                                ; Initial Fibonacci value
 
+clac                                ; Set AC to 0 (F(0))
+mvac                                ; Move AC to R (R now holds F(0))
+stac 0                              ; Store F(0) at memory location 0
+
+ldac 1                              ; Load AC with F(1)
+stac 1                              ; Store F(1) at memory location 1
+
+clac                                ; Set AC to 0 (counter i)
+mvac                                ; Move AC to R (R now holds i)
+
+loop: mvac                            ; Move current F(i) to AC
+    ldac 0                          ; Load F(i-2)
+    add                             ; F(i) = F(i-1) + F(i-2)
+    stac 2                          ; Store F(i) in memory location 2
+
+    ; Prepare for next iteration
+    ldac 1                          ; Load F(i-1) (which is initially stored at M[1])
+    stac 0                          ; Store F(i-1) to F(i-2)
+    ldac 2                          ; Load F(i) (which is now at M[2])
+    stac 1                          ; Store F(i) as F(i-1) for next iteration
+    
+    ; Increment counter and check if we repeat
+    incre:                          ; Increment function (can use INAC)
+    clac                            ; Clear AC
+    mvac                            ; Move R to AC
+    inac                            ; i++
+
+    ldac 10                         ; Load AC with limit for Fibonacci (e.g., 10)
+    sub                             ; Check i < 10
+    jpnz loop                       ; Jump to loop if i < 10
+
+end:
+    stac ffffh                      ; Send final result to I/O Port
+    end                             ; Stop the program
 
 
 ---------- Memory And IO ----------

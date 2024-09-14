@@ -64,7 +64,6 @@ _personal_api_key = NodePath("API/PersonalAPIContainer/LineEdit")
 _loading_result = NodePath("AI/Loading")
 
 [node name="AI" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,6 +185,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_2rjxw")
 
 [node name="API" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -263,6 +263,7 @@ size_flags_vertical = 3
 text = "Confirm Key"
 
 [node name="SubscibedAPIContainer" type="VBoxContainer" parent="API"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

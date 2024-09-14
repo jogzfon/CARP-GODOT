@@ -7,13 +7,6 @@ using static System.Net.Mime.MediaTypeNames;
 
 public partial class DocumentationsList : VBoxContainer
 {
-    /* -- TO DO --
-       1. Make a tokenizer to convert text to tokens
-       2. Make a label template, TextureRect template, and Button template for the convert to documentation in here
-       3. Improve more of this and analyze the structure more
-     */
-
-
     private string directoryPath = "Carp_Documentation";
     [Export] private VBoxContainer _documentationBtnList;
     [Export] private Control _documentationList;
@@ -24,13 +17,30 @@ public partial class DocumentationsList : VBoxContainer
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        /*// Create a new Timer instance or add it via the editor and get a reference to it.
+        Timer timer = new Timer();
+
+        // Set the timer's wait time (in seconds).
+        timer.WaitTime = 5.0f; // 5 seconds
+
+        // Enable the timer to automatically restart after timing out.
+        timer.OneShot = false; // Keeps it repeating
+
+        // Add the timer as a child of the current node.
+        AddChild(timer);
+
+        // Connect the timeout signal to a method.
+        timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+
+        // Start the timer.
+        timer.Start();*/
         GetAllCarpdocFilesInDirectory();
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    /*private void OnTimerTimeout()
     {
-    }
+        RefreshAllDocumentFilesInCarp();
+    }*/
+
     public void RefreshAllDocumentFilesInCarp()
     {
         foreach (Node child in _documentationBtnList.GetChildren())
@@ -84,7 +94,7 @@ public partial class DocumentationsList : VBoxContainer
     {
         List<List<Tokens>> tokens = new List<List<Tokens>>();
 
-        string pattern = @"\b(Title:|Text:|Image:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
+        string pattern = @"\b(Title:|Text:|Image:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S|\s+|\n|\r\n";
 
         string[] lines = content.Split('\n');
 
@@ -98,43 +108,15 @@ public partial class DocumentationsList : VBoxContainer
 
         for (int i = 0; i < tokens.Count; i++)
         {
-            /*if (_isText)
-            {
-                List<Tokens> tokens2 = tokens[i];
-                for (int j = 0; j < tokens2.Count; j++)
-                {
-                    _text += tokens2[j].value + " ";
-                }
-                if (i + 1 > tokens.Count)
-                {
-                    doc_template.AddText(_text);
-                    _isText = false;
-                    _text = "";
-                }
-                else
-                {
-                    tokens2 = tokens[i + 1];
-                    if (tokens2.Count > 0 && (tokens2[0].value == "Image" || tokens2[0].value == "Title" || tokens2[0].value == "Text"))
-                    {
-                        doc_template.AddText(_text);
-                        _isText = false;
-                        _text = "";
-                    }
-                    else
-                    {
-                        _text += "\n";
-                    }
-                }
-            }
-            else */if (tokens[i].Count > 0)
+            if (tokens[i].Count > 0)
             {
                 SetDocumentationValues(tokens[i], doc_template);
-                if (_text.Length > 0)
-                {
-                    doc_template.AddText(_text);
-                    _text = "";
-                }
             }
+        }
+        if (_text.Length > 0)
+        {
+            doc_template.AddText(_text);
+            _text = "";
         }
     }
     private List<Tokens> TokenizeDocumentationLines(string line, string pattern)
@@ -167,27 +149,19 @@ public partial class DocumentationsList : VBoxContainer
         switch (tokens[0].type)
         {
             case TokenType.LABEL:
-                /* if(_text.Length > 0)
-                 {
-                     doc_template.AddText(_text);
-                     _text = ""; 
-                 }
-                 SetLabelValues(tokens,doc_template);*/
-                for(int i = 0; i < tokens.Count; i++)
+                if (_text.Length > 0)
                 {
-                    GD.Print("Label" + tokens[i].value);
+                    doc_template.AddText(_text);
+                    _text = "";
                 }
+                SetLabelValues(tokens, doc_template);
                 break;
             case TokenType.VALUE:
                 for (int i = 0; i < tokens.Count; i++)
                 {
-                    GD.Print("Value" + tokens[i].value);
+                    _text += tokens[i].value;
                 }
-                /*for (int i = 0; i < tokens.Count; i++)
-                {
-                    _text += tokens[0].value + " ";
-                }
-                _text += "\n";*/
+                _text += "\n";
                 break;
             default:
                 GD.PrintErr(tokens[0].type + ": " + tokens[0].value + " does not exist!");
@@ -205,7 +179,7 @@ public partial class DocumentationsList : VBoxContainer
                     var btn = new Button();
                     for (int i = 2; i < tokens.Count; i++)
                     {
-                        btn.Text += tokens[i].value + " ";
+                        btn.Text += tokens[i].value;
                     }
                     doc_template.DocumentationBtn(btn);
                     doc_template.AddTitle(btn.Text);
@@ -228,7 +202,7 @@ public partial class DocumentationsList : VBoxContainer
                 {
                     for (int i = 2; i < tokens.Count; i++) // Start from the third token
                     {
-                        _text += tokens[i].value + " ";
+                        _text += tokens[i].value;
                     }
                 }
                 _text += "\n";
