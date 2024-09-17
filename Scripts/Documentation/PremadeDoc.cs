@@ -25,6 +25,8 @@ public partial class PremadeDoc : Node
         txtEdit.SizeFlagsVertical = (int)Control.SizeFlags.ShrinkBegin; // Allow the height to shrink if needed
         txtEdit.SizeFlagsHorizontal = SizeFlags.ExpandFill;
 
+        txtEdit.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+
         var font = ResourceLoader.Load<Font>("res://Fonts/Inter-Bold.ttf");
 
         // Set bold font
@@ -49,6 +51,8 @@ public partial class PremadeDoc : Node
         };
         txtEdit.SizeFlagsVertical = (int)Control.SizeFlags.ShrinkBegin; // Allow the height to shrink if needed
         txtEdit.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+
+        txtEdit.WrapMode = TextEdit.LineWrappingMode.Boundary;
         // Adjust the height after adding the text
         txtEdit.ScrollFitContentHeight = true;
 

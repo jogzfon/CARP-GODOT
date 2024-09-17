@@ -9,7 +9,7 @@ public partial class DocumentationsList : VBoxContainer
 {
     private string directoryPath = "Carp_Documentation";
     [Export] private VBoxContainer _documentationBtnList;
-    [Export] private Control _documentationList;
+    [Export] private Node _documentationList;
     [Export] private PackedScene _documentationTemplate;
 
     private bool _isText = false;

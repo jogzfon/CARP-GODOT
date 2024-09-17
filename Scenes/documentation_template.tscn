@@ -1,25 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://vykxrngj8yrh"]
+[gd_scene load_steps=3 format=3 uid="uid://vykxrngj8yrh"]
 
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="1_aljrx"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationTemplate.cs" id="1_b7wgm"]
-[ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="2_bm7k0"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w681j"]
-shader = ExtResource("2_bm7k0")
-shader_parameter/stars_on = true
-shader_parameter/timeScaleFactor = 0.04
-shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
-shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
-shader_parameter/brightness = 1.0
-shader_parameter/clouds_resolution = 3.0
-shader_parameter/clouds_intesity = 0.0
-shader_parameter/waveyness = 0.5
-shader_parameter/fragmentation = 7.0
-shader_parameter/distortion = 0.5
-shader_parameter/clouds_alpha = 0.5
-shader_parameter/movement = 1.0
-shader_parameter/blur = 1.4
-shader_parameter/blur2 = 0.01
 
 [node name="DocumentationTemplate" type="Control" node_paths=PackedStringArray("_contentContainer", "_docContainer", "_exitBtn")]
 z_index = 5
@@ -42,16 +24,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="DocumentationRect" type="ColorRect" parent="Control"]
-material = SubResource("ShaderMaterial_w681j")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.117647, 0.121569, 0.133333, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
