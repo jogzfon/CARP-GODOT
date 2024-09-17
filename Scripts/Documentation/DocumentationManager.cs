@@ -10,10 +10,13 @@ public partial class DocumentationManager : Node
     [Export] private VBoxContainer _premade_documentationBtnList;
     [Export] private VBoxContainer _documentationBtnList;
 
+    [Export] private DocumentationAbler _docAbler;
+
     [Export] private PackedScene _premadeDocumentationTemplate;
 
     private List<PremadeDoc> _premadeDocs = new List<PremadeDoc>();
 
+    #region Premade Docs
     [ExportCategory("Premade Document 1 : What is this?")]
     [Export] private Godot.Collections.Array<string> pd_sentences1 = new Godot.Collections.Array<string>();
     [Export] private Godot.Collections.Array<Texture2D> pd_images1 = new Godot.Collections.Array<Texture2D>();
@@ -30,9 +33,11 @@ public partial class DocumentationManager : Node
     [Export] private Godot.Collections.Array<string> pd_sentences5 = new Godot.Collections.Array<string>();
     [Export] private Godot.Collections.Array<Texture2D> pd_images5 = new Godot.Collections.Array<Texture2D>();
 
+    #endregion
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+        #region Premade Docs
         PremadeStrings1();
         PremadeStrings2();
         PremadeStrings3();
@@ -47,10 +52,11 @@ public partial class DocumentationManager : Node
 
 
         DistributePremadeDocumentations();
+        #endregion
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
 	{
 		if (AccountManager.GetUser() != null)
 		{
@@ -388,8 +394,6 @@ Example:
         pd_sentences5.Add(assembly4);
     }
 
-    #endregion
-
     private void DistributePremadeDocumentations()
     {
         foreach (PremadeDoc premadeDoc in _premadeDocs)
@@ -418,14 +422,17 @@ Example:
     {
         var premadeDocTemplate = (PremadeDocTemplate)_premadeDocumentationTemplate.Instantiate();
 
+        premadeDocTemplate.SetDocumentationAbler(_docAbler);
         premadeDocTemplate.AddDocumentBtn(btn);
 
         for (int i = 0; i < premadeDoc.elements.Count; i++)
         {
             premadeDocTemplate.AddContent(premadeDoc.elements[i]);
         }
-        
+
+        _docAbler.AddPremadeDocTemplate(premadeDocTemplate);
+
         _documentationList.AddChild(premadeDocTemplate);
     }
-
+    #endregion
 }

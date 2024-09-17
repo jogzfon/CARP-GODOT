@@ -27,6 +27,9 @@ public partial class ProfileHandler : Node
     [Export]
     Label userName;
 
+    [ExportCategory("Documentation Disabler")]
+    [Export] private DocumentationAbler _documentationAbler;
+
     [Export]
     ColorRect subscriptionPanel;
 
@@ -107,6 +110,7 @@ public partial class ProfileHandler : Node
     }
     private void OpenProfilePage()
     {
+        _documentationAbler.HideAllDocument();
         if (documentationAdder != null)
         {
             documentationAdder.Visible = false;

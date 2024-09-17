@@ -20,6 +20,9 @@ public partial class main_page : Control
 
     [Export] private Control documentationAdder;
 
+    [ExportCategory("Documentation Disabler")]
+    [Export] private DocumentationAbler _documentationAbler;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -51,7 +54,8 @@ public partial class main_page : Control
     }
     private void SignIn()
     {
-        if(documentationAdder != null)
+        _documentationAbler.HideAllDocument();
+        if (documentationAdder != null)
         {
             documentationAdder.Visible = false;
         }
@@ -61,6 +65,7 @@ public partial class main_page : Control
     }
     private void Options()
     {
+        _documentationAbler.HideAllDocument();
         if (options.Visible)
         {
             options.Visible = false;
@@ -72,6 +77,7 @@ public partial class main_page : Control
     }
     private void Logout()
     {
+        _documentationAbler.HideAllDocument();
         options.Visible = false;
         AccountManager.SetUser(null);
         if(userName != null && signIn != null)

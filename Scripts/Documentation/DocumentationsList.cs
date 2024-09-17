@@ -12,6 +12,8 @@ public partial class DocumentationsList : VBoxContainer
     [Export] private Node _documentationList;
     [Export] private PackedScene _documentationTemplate;
 
+    [Export] private DocumentationAbler _docAbler;
+
     private bool _isText = false;
     private string _text = String.Empty;
     // Called when the node enters the scene tree for the first time.
@@ -81,6 +83,9 @@ public partial class DocumentationsList : VBoxContainer
 
                 DocumentationTemplate doc_template = (DocumentationTemplate)_documentationTemplate.Instantiate();
                 DistributeDocumentationValues(content, doc_template);
+
+                doc_template.SetDocumentationAbler(_docAbler);
+                _docAbler.AddDocTemplate(doc_template);
 
                 _documentationList.AddChild(doc_template);
             }

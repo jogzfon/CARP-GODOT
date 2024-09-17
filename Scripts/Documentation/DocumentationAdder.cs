@@ -9,7 +9,7 @@ public partial class DocumentationAdder : Control
     [Export] private Button parSenBtn;
     [Export] private Button imageBtn;
     [Export] private Button saveBtn;
-    [Export] private TextureButton backBtn;
+    [Export] private Button backBtn;
 
     [Export] private Control docAdderPanel;
 

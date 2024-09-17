@@ -7,8 +7,10 @@ public partial class DocumentationTemplate : Node
     [Export] private TextureRect _docRect;
 	[Export] private VBoxContainer _contentContainer;
 	[Export] private Button _exitBtn;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+
+    private DocumentationAbler _documentationAbler;
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
         _docContainer.Visible = false;
         _docRect.Visible = false;
@@ -24,18 +26,31 @@ public partial class DocumentationTemplate : Node
 	{
         btn.Connect("pressed", new Callable(this, nameof(DocContentDisplayer)));
     }
-	public void DocContentDisplayer()
+
+    public void SetDocumentationAbler(DocumentationAbler _docAbler)
+    {
+        this._documentationAbler = _docAbler;
+    }
+
+    public void DocContentDisplayer()
 	{
 		if(_docContainer.Visible == true)
 		{
-			_docContainer.Visible = false;
+            _documentationAbler.HideAllDocument();
+            _docContainer.Visible = false;
             _docRect.Visible = false;
         }
 		else
 		{
-			_docContainer.Visible = true;
+            _documentationAbler.HideAllDocument();
+            _docContainer.Visible = true;
             _docRect.Visible = true;
         }
+    }
+    public void DocContentCloser()
+    {
+        _docContainer.Visible = false;
+        _docRect.Visible = false;
     }
     public void AddTitle(string content)
     {

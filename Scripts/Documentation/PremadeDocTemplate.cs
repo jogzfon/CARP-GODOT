@@ -8,6 +8,8 @@ public partial class PremadeDocTemplate : Node
     [Export] private TextureRect _contentTexture;
     [Export] private Button _exitBtn;
 
+    private DocumentationAbler _documentationAbler;
+
     public override void _Ready()
     {
         _contentTexture.Visible = false;
@@ -29,6 +31,11 @@ public partial class PremadeDocTemplate : Node
     public void AddDocumentBtn(Button btn)
 	{
         btn.Connect("pressed", new Callable(this, nameof(OpenOrCloseDocument)));
+    }
+
+    public void SetDocumentationAbler(DocumentationAbler _docAbler)
+    {
+        this._documentationAbler = _docAbler;
     }
 
     public void AddContent(Node node)
@@ -53,17 +60,24 @@ public partial class PremadeDocTemplate : Node
     }
 	public void OpenOrCloseDocument()
 	{
-		if(_contentScrollbar.Visible == true)
+        if (_contentScrollbar.Visible == true)
 		{
-			_contentScrollbar.Visible = false;
+            _documentationAbler.HideAllDocument();
+            _contentScrollbar.Visible = false;
             _contentTexture.Visible = false;
 
         }
 		else
 		{
-			_contentScrollbar.Visible = true;
+            _documentationAbler.HideAllDocument();
+            _contentScrollbar.Visible = true;
             _contentTexture.Visible = true;
 
         }
 	}
+    public void CloseDocument()
+    {
+        _contentScrollbar.Visible = false;
+        _contentTexture.Visible = false;
+    }
 }

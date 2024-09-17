@@ -46,6 +46,9 @@ public partial class SubscriptionHandler : Node
 
     private bool isMouseOverPanel = false;
 
+    [ExportCategory("Documentation Disabler")]
+    [Export] private DocumentationAbler _documentationAbler;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -132,6 +135,7 @@ public partial class SubscriptionHandler : Node
 
     private void OpenSubscription()
     {
+        _documentationAbler.HideAllDocument();
         if (documentationAdder != null)
         {
             documentationAdder.Visible = false;
