@@ -1,17 +1,18 @@
 using Godot;
 using System;
 
-public partial class DocumentationTemplate : Control
+public partial class DocumentationTemplate : Node
 {
+	[Export] private VBoxContainer _docContainer;
+    [Export] private TextureRect _docRect;
 	[Export] private VBoxContainer _contentContainer;
-	[Export] private Control _docContainer;
 	[Export] private Button _exitBtn;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
         _docContainer.Visible = false;
+        _docRect.Visible = false;
         _exitBtn.Connect("pressed", new Callable(this, nameof(DocContentDisplayer)));
-        this.ZIndex = 1;
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,11 +29,12 @@ public partial class DocumentationTemplate : Control
 		if(_docContainer.Visible == true)
 		{
 			_docContainer.Visible = false;
-
+            _docRect.Visible = false;
         }
 		else
 		{
 			_docContainer.Visible = true;
+            _docRect.Visible = true;
         }
     }
     public void AddTitle(string content)
@@ -48,7 +50,9 @@ public partial class DocumentationTemplate : Control
         };
 
         txtEdit.SizeFlagsVertical = (int)Control.SizeFlags.ShrinkBegin; // Allow the height to shrink if needed
-        txtEdit.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+        txtEdit.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+
+        txtEdit.AutowrapMode = TextServer.AutowrapMode.WordSmart;
 
         var font = ResourceLoader.Load<Font>("res://Fonts/Inter-Bold.ttf");
 
@@ -72,7 +76,9 @@ public partial class DocumentationTemplate : Control
             Text = content  
         };
         txtEdit.SizeFlagsVertical = (int)Control.SizeFlags.ShrinkBegin; // Allow the height to shrink if needed
-        txtEdit.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+        txtEdit.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+
+        txtEdit.WrapMode = TextEdit.LineWrappingMode.Boundary;
 
         // Adjust the height after adding the text
         txtEdit.ScrollFitContentHeight = true;

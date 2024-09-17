@@ -1,28 +1,85 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmwimuoit033v"]
+[gd_scene load_steps=7 format=3 uid="uid://dmwimuoit033v"]
 
 [ext_resource type="Script" path="res://Scripts/Documentation/PremadeDocTemplate.cs" id="1_1lgrf"]
+[ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="2_ey8ru"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="3_pwvwm"]
 
-[node name="PremadeDoc_template" type="Node" node_paths=PackedStringArray("_contentHolder", "_contentScrollbar")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhguu"]
+shader = ExtResource("2_ey8ru")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+
+[sub_resource type="Gradient" id="Gradient_2r6y7"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k31ki"]
+gradient = SubResource("Gradient_2r6y7")
+
+[node name="PremadeDoc_template" type="Node" node_paths=PackedStringArray("_contentHolder", "_contentScrollbar", "_contentTexture", "_exitBtn")]
 script = ExtResource("1_1lgrf")
-_contentHolder = NodePath("ScrollContainer/VBoxContainer")
-_contentScrollbar = NodePath("ScrollContainer")
+_contentHolder = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer")
+_contentScrollbar = NodePath("VBoxContainer")
+_contentTexture = NodePath("TextureRect")
+_exitBtn = NodePath("VBoxContainer/Exit")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_vhguu")
+offset_left = 357.0
+offset_top = 120.0
+offset_right = 1907.0
+offset_bottom = 1070.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture1D_k31ki")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(1500, 900)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1520.0
-offset_top = -937.0
-offset_right = -20.0
-offset_bottom = -37.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 380.0
+offset_top = 140.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_pwvwm")
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1500, 900)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2

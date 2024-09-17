@@ -4,10 +4,13 @@ using System;
 public partial class PremadeDocTemplate : Node
 {
 	[Export] private VBoxContainer _contentHolder;
-    [Export] private ScrollContainer _contentScrollbar;
+    [Export] private VBoxContainer _contentScrollbar;
+    [Export] private TextureRect _contentTexture;
+    [Export] private Button _exitBtn;
 
     public override void _Ready()
     {
+        _contentTexture.Visible = false;
         // Ensure _contentHolder and _contentScrollbar are initialized
         if (_contentHolder == null)
         {
@@ -19,6 +22,8 @@ public partial class PremadeDocTemplate : Node
             GD.PrintErr("_contentScrollbar is not assigned in the editor.");
         }
         _contentScrollbar.Visible = false;
+
+        _exitBtn.Connect("pressed", new Callable(this, nameof(OpenOrCloseDocument)));
     }
 
     public void AddDocumentBtn(Button btn)
@@ -51,10 +56,14 @@ public partial class PremadeDocTemplate : Node
 		if(_contentScrollbar.Visible == true)
 		{
 			_contentScrollbar.Visible = false;
-		}
+            _contentTexture.Visible = false;
+
+        }
 		else
 		{
 			_contentScrollbar.Visible = true;
-		}
+            _contentTexture.Visible = true;
+
+        }
 	}
 }

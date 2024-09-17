@@ -58,10 +58,19 @@ public partial class DocumentationAdder : Control
             PlaceholderText = "Type Here"
         };
         txtEdit.SizeFlagsVertical = (int)Control.SizeFlags.ShrinkBegin; // Allow the height to shrink if needed
+        txtEdit.SizeFlagsHorizontal = SizeFlags.ExpandFill;
 
+        txtEdit.WrapMode = TextEdit.LineWrappingMode.Boundary;
+        txtEdit.AutowrapMode = TextServer.AutowrapMode.WordSmart;
 
         // Adjust the height after adding the text
         txtEdit.ScrollFitContentHeight = true;
+
+        var font = ResourceLoader.Load<Font>("res://Fonts/Inter-Regular.ttf");
+
+        // Set bold font
+        txtEdit.AddThemeFontSizeOverride("font_size", 20);
+        txtEdit.AddThemeFontOverride("font", font);
 
         marginContainer.AddChild(txtEdit);
         boxContainer.AddChild(marginContainer);

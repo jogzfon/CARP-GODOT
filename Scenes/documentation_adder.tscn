@@ -62,10 +62,6 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/HBoxContainer"]
-custom_minimum_size = Vector2(29.5, 0)
-layout_mode = 2
-
 [node name="Back" type="TextureButton" parent="ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -98,6 +94,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Title Here"
 alignment = 1
+max_length = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
