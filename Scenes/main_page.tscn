@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=64 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -48,6 +48,7 @@
 [ext_resource type="Texture2D" uid="uid://day1e2bnip2dc" path="res://Sprites/QRCode_Payment.jpg" id="46_d88yh"]
 [ext_resource type="Script" path="res://Scripts/Subscription/PaymentConfirmation.cs" id="47_xxocy"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationManager.cs" id="48_kvvd6"]
+[ext_resource type="PackedScene" uid="uid://dmwimuoit033v" path="res://Scenes/premade_doc_template.tscn" id="49_lyvmv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
 shader = ExtResource("3_fhf3p")
@@ -235,14 +236,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.168627, 0.176471, 0.188235, 1)
 
-[node name="Documentation" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 361.0
-offset_top = 110.0
-offset_right = 1907.0
-offset_bottom = 1061.0
-
 [node name="MainContent" type="Node" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainContent"]
@@ -288,32 +281,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Wit" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="PremadeDocBtnList" type="VBoxContainer" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Wit" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "What is this?"
 
-[node name="Hdtw" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Hdtw" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "How does this work?"
 
-[node name="Pex" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Pex" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Program Example"
 
-[node name="Nc" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Nc" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Numeric Constants"
 
-[node name="Ad" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Ad" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
 text = "Assembler Directives"
 
-[node name="Aap" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList"]
+[node name="Aap" type="Button" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList"]
 visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("12_e728k")
@@ -323,7 +325,7 @@ text = "Assembling a program"
 layout_mode = 2
 script = ExtResource("6_bgiiv")
 _documentationBtnList = NodePath(".")
-_documentationList = NodePath("../../../../../Documentation")
+_documentationList = NodePath("../../../../../FileHandler/Documentation")
 _documentationTemplate = ExtResource("32_5gf2n")
 
 [node name="AddBtn" type="TextureButton" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList" node_paths=PackedStringArray("addDocumentationBtn", "documentationAdder")]
@@ -685,22 +687,22 @@ recentFile = ExtResource("6_nbcor")
 recentFileList = NodePath("../MainContent/VBoxContainer/ProjectContainer/ProjectList")
 documentationAdder = NodePath("../MainContent/DocumentationAdder")
 documentationRect = NodePath("DocumentationRect")
-witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Wit")
+witbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList/Wit")
 witexit = NodePath("DocumentationRect/WhatIsThis/VBoxContainer/Exit")
 WIT = NodePath("DocumentationRect/WhatIsThis")
-htdwbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Hdtw")
+htdwbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList/Hdtw")
 htdwexit = NodePath("DocumentationRect/HowDoesThisWork/VBoxContainer/Exit")
 HDTW = NodePath("DocumentationRect/HowDoesThisWork")
-pexbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Pex")
+pexbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList/Pex")
 pexexit = NodePath("DocumentationRect/ProgramExample/VBoxContainer/Exit")
 PEX = NodePath("DocumentationRect/ProgramExample")
-ncbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Nc")
+ncbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList/Nc")
 ncexit = NodePath("DocumentationRect/NumericConstants/VBoxContainer/Exit")
 NC = NodePath("DocumentationRect/NumericConstants")
-adbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Ad")
+adbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList/Ad")
 adexit = NodePath("DocumentationRect/AssemblerDirectives/VBoxContainer/Exit")
 AD = NodePath("DocumentationRect/AssemblerDirectives")
-aapbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/Aap")
+aapbtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList/Aap")
 aapexit = NodePath("DocumentationRect/AssemblingAProgram/VBoxContainer/Exit")
 AAP = NodePath("DocumentationRect/AssemblingAProgram")
 
@@ -715,7 +717,6 @@ root_subfolder = "Projects"
 filters = PackedStringArray("*.carp")
 
 [node name="DocumentationRect" type="ColorRect" parent="FileHandler"]
-visible = false
 material = SubResource("ShaderMaterial_xwly2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -790,9 +791,7 @@ Students first enter an assembly language program, which is assembled by the sim
 
 The Relatively Simple Computer System simulator is an instructional aid for teaching computer system design.  It allows the user to simulate the flow of data within a computer consisting of the Relatively Simple CPU, memory, and a memory-mapped I/O port, as it fetches, decodes, and executes instructions.  It uses animation to illustrate the flow of data between components.
 
-The Relatively Simple CPU can access 64K bytes of memory, each byte being 8 bits wide. The CPU does this by outputting a 16-bit address on its output pins A[15..0] and reading in the 8-bit value from memory on its inputs D[7..0].  This CPU has two programmer-accessible registers: an 8-bit accumulator labeled AC, and an 8-bit general purpose register R.  It also has a 1-bit zero flag, Z. It has sixteen instructions in its instruction set, as shown below.
-
-"
+The Relatively Simple CPU can access 64K bytes of memory, each byte being 8 bits wide. The CPU does this by outputting a 16-bit address on its output pins A[15..0] and reading in the 8-bit value from memory on its inputs D[7..0].  This CPU has two programmer-accessible registers: an 8-bit accumulator labeled AC, and an 8-bit general purpose register R.  It also has a 1-bit zero flag, Z. It has sixteen instructions in its instruction set, as shown below."
 autowrap_mode = 3
 clip_text = true
 
@@ -1531,6 +1530,14 @@ theme_override_fonts/font = ExtResource("12_e728k")
 theme_override_font_sizes/font_size = 40
 vertical_alignment = 1
 
+[node name="Documentation" type="Control" parent="FileHandler"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 361.0
+offset_top = 110.0
+offset_right = 1907.0
+offset_bottom = 1061.0
+
 [node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn", "documentationAdder")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
@@ -1845,6 +1852,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Payment Confirmation Photo"
+expand_icon = true
 
 [node name="MarginContainer" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
 custom_minimum_size = Vector2(0, 30)
@@ -1881,8 +1889,16 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.png", "*.jpg")
 
-[node name="DocumentationManager" type="Node" parent="." node_paths=PackedStringArray("_documentationAdderBtn", "_documentationList", "_documentationBtnList")]
+[node name="DocumentationManager" type="Node" parent="." node_paths=PackedStringArray("_documentationAdderBtn", "_documentationList", "_premade_documentationBtnList", "_documentationBtnList")]
 script = ExtResource("48_kvvd6")
 _documentationAdderBtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddBtn")
-_documentationList = NodePath("../Documentation")
+_documentationList = NodePath("../FileHandler/Documentation")
+_premade_documentationBtnList = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList")
 _documentationBtnList = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddedDocumentationList")
+_premadeDocumentationTemplate = ExtResource("49_lyvmv")
+pd_sentences1 = ["What Is This?", "The Relatively Simple CPU Simulator is an instructional aid for students studying Computer Organization And Architecture, typically at the junior or senior level. It simulates the Relatively Simple CPU based on John D. Carpinelli's Relatively Simple Computer System Simulator. Students first enter an assembly language program, which is assembled by the simulator. After correcting any syntax errors, the user simulates the fetch, decode, and execute cycles for each instruction in the program. The user may simulate the execution of the program by clock cycle, by instruction, using breakpoints, or as a single, continuous execution.The Relatively Simple Computer System simulator is an instructional aid for teaching computer system design.  It allows the user to simulate the flow of data within a computer consisting of the Relatively Simple CPU, memory, and a memory-mapped I/O port, as it fetches, decodes, and executes instructions.  It uses animation to illustrate the flow of data between components.The Relatively Simple CPU can access 64K bytes of memory, each byte being 8 bits wide. The CPU does this by outputting a 16-bit address on its output pins A[15..0] and reading in the 8-bit value from memory on its inputs D[7..0].  This CPU has two programmer-accessible registers: an 8-bit accumulator labeled AC, and an 8-bit general purpose register R.  It also has a 1-bit zero flag, Z. It has sixteen instructions in its instruction set, as shown below."]
+pd_images1 = [ExtResource("19_f2wtp")]
+pd_sentences2 = ["How Does This Work?"]
+pd_sentences3 = ["Program Examples"]
+pd_sentences4 = ["Numeric Constants"]
+pd_sentences5 = ["Assembler Directives"]

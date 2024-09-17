@@ -9,6 +9,9 @@ public partial class DocumentationAdder : Control
     [Export] private Button parSenBtn;
     [Export] private Button imageBtn;
     [Export] private Button saveBtn;
+    [Export] private TextureButton backBtn;
+
+    [Export] private Control docAdderPanel;
 
     [Export] private LineEdit doc_Title;
 
@@ -35,9 +38,14 @@ public partial class DocumentationAdder : Control
         parSenBtn.Connect("pressed", new Callable(this, nameof(AddParagraphAndSentence)));
         imageBtn.Connect("pressed", new Callable(this, nameof(OpenImageFileDialog)));
         saveBtn.Connect("pressed", new Callable(this, nameof(OpenSaveFileDialog)));
+        backBtn.Connect("pressed", new Callable(this, nameof(BackPressed)));
 
         _imageFileDialogue.Connect("file_selected", new Callable(this, nameof(OnImageFileSelected)));
         _saveFileDialogue.Connect("file_selected", new Callable(this, nameof(SaveDocumentationFile)));
+    }
+    private void BackPressed()
+    {
+        docAdderPanel.Visible = false;
     }
 
     private void AddParagraphAndSentence()

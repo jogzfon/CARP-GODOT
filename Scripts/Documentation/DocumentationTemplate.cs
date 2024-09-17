@@ -4,7 +4,7 @@ using System;
 public partial class DocumentationTemplate : Control
 {
 	[Export] private VBoxContainer _contentContainer;
-	[Export] private Container _docContainer;
+	[Export] private Control _docContainer;
 	[Export] private Button _exitBtn;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

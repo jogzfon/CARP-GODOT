@@ -30,12 +30,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b7wgm")
-_contentContainer = NodePath("Container/VBoxContainer/ScrollContainer/HBoxContainer/TextAndImageList")
-_docContainer = NodePath("Container")
-_exitBtn = NodePath("Container/VBoxContainer/Exit")
+_contentContainer = NodePath("Control/VBoxContainer/ScrollContainer/HBoxContainer/TextAndImageList")
+_docContainer = NodePath("Control")
+_exitBtn = NodePath("Control/VBoxContainer/Exit")
 
-[node name="Container" type="PanelContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
+[node name="Control" type="Control" parent="."]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,15 +43,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DocumentationRect" type="ColorRect" parent="Container"]
+[node name="DocumentationRect" type="ColorRect" parent="Control"]
 material = SubResource("ShaderMaterial_w681j")
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Exit" type="Button" parent="Container/VBoxContainer"]
+[node name="Exit" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -59,23 +69,23 @@ theme_override_fonts/font = ExtResource("1_aljrx")
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Container/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="Container/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer/ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="TextAndImageList" type="VBoxContainer" parent="Container/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="TextAndImageList" type="VBoxContainer" parent="Control/VBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/ScrollContainer/HBoxContainer"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2

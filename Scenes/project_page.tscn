@@ -407,6 +407,7 @@ script = ExtResource("9_ni21l")
 instructions = NodePath(".")
 
 [node name="UnitType" type="Label" parent="LeftContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_tcw3m")
 theme_override_font_sizes/font_size = 25
@@ -414,6 +415,7 @@ text = "Control Unit Type"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LeftContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MicroProgrammed" type="CheckButton" parent="LeftContainer/HBoxContainer"]
