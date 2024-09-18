@@ -37,7 +37,7 @@ public partial class DocumentationManager : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        #region Premade Docs
+        //Load Premade Docs
         PremadeStrings1();
         PremadeStrings2();
         PremadeStrings3();
@@ -52,7 +52,6 @@ public partial class DocumentationManager : Node
 
 
         DistributePremadeDocumentations();
-        #endregion
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

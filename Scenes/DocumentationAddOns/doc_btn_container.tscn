@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch2tuesmvb3cb"]
+
+[ext_resource type="Script" path="res://Scripts/Documentation/DocBtnContainer.cs" id="1_eriu7"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="2_mf0t3"]
+
+[node name="DocBtnContainer" type="HBoxContainer" node_paths=PackedStringArray("_docBtn", "_trashBtn")]
+custom_minimum_size = Vector2(0, 45)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_eriu7")
+_docBtn = NodePath("Button")
+_trashBtn = NodePath("Exit")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Exit" type="Button" parent="."]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_mf0t3")
+theme_override_font_sizes/font_size = 20
+text = "X"

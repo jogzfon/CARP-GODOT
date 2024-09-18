@@ -11,8 +11,10 @@ public partial class DocumentationsList : VBoxContainer
     [Export] private VBoxContainer _documentationBtnList;
     [Export] private Node _documentationList;
     [Export] private PackedScene _documentationTemplate;
+    [Export] private PackedScene _docBtnContainer;
 
     [Export] private DocumentationAbler _docAbler;
+
 
     private bool _isText = false;
     private string _text = String.Empty;
@@ -46,11 +48,6 @@ public partial class DocumentationsList : VBoxContainer
     public void RefreshAllDocumentFilesInCarp()
     {
         foreach (Node child in _documentationBtnList.GetChildren())
-        {
-            // Example of processing each child, replace with actual logic
-            child.QueueFree();
-        }
-        foreach (Node child in _documentationList.GetChildren())
         {
             // Example of processing each child, replace with actual logic
             child.QueueFree();
@@ -181,14 +178,18 @@ public partial class DocumentationsList : VBoxContainer
             case "Title":
                 if (2 < tokens.Count)
                 {
-                    var btn = new Button();
+                    DocBtnContainer btnDocContainer = (DocBtnContainer)_docBtnContainer.Instantiate();
+                    var btn = btnDocContainer.GetButton();
                     for (int i = 2; i < tokens.Count; i++)
                     {
                         btn.Text += tokens[i].value;
                     }
                     doc_template.DocumentationBtn(btn);
                     doc_template.AddTitle(btn.Text);
-                    _documentationBtnList.AddChild(btn);
+
+                    btnDocContainer.SetTemplate(doc_template);
+                    btnDocContainer.SetAbler(_docAbler);
+                    _documentationBtnList.AddChild(btnDocContainer);
                 }
                 break;
             case "Image":

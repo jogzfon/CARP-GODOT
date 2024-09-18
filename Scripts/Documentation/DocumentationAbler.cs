@@ -18,11 +18,24 @@ public partial class DocumentationAbler : Node
         }
         foreach(var documentationTemplate in _documentationTemplateList)
         {
-            documentationTemplate.DocContentCloser();
+            if (documentationTemplate != null) {
+                documentationTemplate.DocContentCloser();
+            }
+            else
+            {
+                GD.Print("Null or Disposed");
+            }
         }
         foreach(var premadeDocTemplateList in  _premadeDocTemplateList)
         {
-            premadeDocTemplateList.CloseDocument();
+            if (premadeDocTemplateList != null)
+            {
+                premadeDocTemplateList.CloseDocument();
+            }
+            else
+            {
+                GD.Print("Null or Disposed");
+            }
         }
     }
     public void AddDocTemplate(DocumentationTemplate template)
@@ -33,5 +46,12 @@ public partial class DocumentationAbler : Node
     {
         _premadeDocTemplateList.Add(template);
     }
-
+    public void RemoveDocTemplate(DocumentationTemplate template)
+    {
+        _documentationTemplateList.Remove(template);
+    }
+    public void RemoveAllTemplates()
+    {
+        _documentationTemplateList.Clear();
+    }
 }

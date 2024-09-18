@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=70 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -10,10 +10,14 @@
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="4_6c80f"]
 [ext_resource type="Texture2D" uid="uid://dvpi7q3t45o1l" path="res://Sprites/Group 20.png" id="4_rgqy0"]
 [ext_resource type="Texture2D" uid="uid://dljo4uk4igdgy" path="res://Sprites/Group 22.png" id="5_2n6so"]
+[ext_resource type="Texture2D" uid="uid://dw6qcthapl1th" path="res://Sprites/Refresh.png" id="6_6jsfp"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationsList.cs" id="6_bgiiv"]
 [ext_resource type="PackedScene" uid="uid://b15huxyjqmigj" path="res://Scenes/recent_file.tscn" id="6_nbcor"]
 [ext_resource type="Texture2D" uid="uid://cb3mgtogo7yoa" path="res://Sprites/Documentation/doc_add_Btn.png" id="6_vpwlf"]
+[ext_resource type="Script" path="res://Scripts/Documentation/DocumentationRefresher.cs" id="6_xdxq4"]
+[ext_resource type="Shader" path="res://Shader/loading.gdshader" id="7_drrbi"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationHandler.cs" id="7_rql6r"]
+[ext_resource type="PackedScene" uid="uid://ch2tuesmvb3cb" path="res://Scenes/DocumentationAddOns/doc_btn_container.tscn" id="8_v0mou"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
 [ext_resource type="Shader" path="res://Shader/circleImage.gdshader" id="10_urm6c"]
 [ext_resource type="PackedScene" uid="uid://c18fyoobswur4" path="res://Scenes/project_page.tscn" id="11_5fqup"]
@@ -63,6 +67,21 @@ gradient = SubResource("Gradient_yhngh")
 [sub_resource type="LabelSettings" id="LabelSettings_qri6r"]
 font = ExtResource("13_0fq7n")
 font_size = 25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2v73o"]
+shader = ExtResource("7_drrbi")
+shader_parameter/spiral_type = 1
+shader_parameter/primary_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/secondary_color = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/rays = 6.0
+shader_parameter/speed = 1.0
+shader_parameter/fade = 0.5
+shader_parameter/thickness = 0.5
+shader_parameter/clockwise = true
+shader_parameter/tiers = 4.0
+shader_parameter/stretch = 6.28
+shader_parameter/glow_intensity = 1.0
+shader_parameter/pulse_speed = 1.0
 
 [sub_resource type="Theme" id="Theme_s6t6r"]
 
@@ -250,10 +269,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="MainContent/VBoxContainer"]
+[node name="DocumentationRefresher" type="HBoxContainer" parent="MainContent/VBoxContainer" node_paths=PackedStringArray("_refresher", "_documents", "_abler")]
 layout_mode = 2
+script = ExtResource("6_xdxq4")
+_refresher = NodePath("refresher")
+_documents = NodePath("../DocumentationContainer/DocumentationsList/AddedDocumentationList")
+_shader = SubResource("ShaderMaterial_2v73o")
+_abler = NodePath("../../../DocumentationAbler")
+
+[node name="Label2" type="Label" parent="MainContent/VBoxContainer/DocumentationRefresher"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_0fq7n")
+theme_override_font_sizes/font_size = 30
 text = "DOCUMENTATION"
 label_settings = SubResource("LabelSettings_qri6r")
+
+[node name="refresher" type="Button" parent="MainContent/VBoxContainer/DocumentationRefresher"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+icon = ExtResource("6_6jsfp")
+expand_icon = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContent/VBoxContainer"]
 layout_mode = 2
@@ -277,6 +313,7 @@ script = ExtResource("6_bgiiv")
 _documentationBtnList = NodePath(".")
 _documentationList = NodePath("../../../../../DocumentationManager")
 _documentationTemplate = ExtResource("32_5gf2n")
+_docBtnContainer = ExtResource("8_v0mou")
 _docAbler = NodePath("../../../../../DocumentationAbler")
 
 [node name="AddBtn" type="TextureButton" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList" node_paths=PackedStringArray("addDocumentationBtn", "documentationAdder", "_documentationAbler", "newProj", "openProj")]
