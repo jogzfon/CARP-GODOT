@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8ly2phrialde"]
+[gd_scene load_steps=10 format=3 uid="uid://b8ly2phrialde"]
 
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationAdder.cs" id="1_io0xd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="1_qiyqe"]
+[ext_resource type="PackedScene" uid="uid://cof64wvd4ljlb" path="res://Scenes/DocumentationAddOns/doc_adder_text_template.tscn" id="2_nbuwe"]
+[ext_resource type="PackedScene" uid="uid://bc8vv1jgyy5as" path="res://Scenes/DocumentationAddOns/doc_adder_texture_template.tscn" id="3_hida0"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="3_rvkj6"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_8rj6d"]
 
@@ -47,6 +49,8 @@ docAdderPanel = NodePath(".")
 doc_Title = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2/DocumentationTitle")
 _imageFileDialogue = NodePath("ImageFileDialog")
 _saveFileDialogue = NodePath("SaveFileDialog")
+_textTemplate = ExtResource("2_nbuwe")
+_imgTemplate = ExtResource("3_hida0")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_2va1r")

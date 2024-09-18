@@ -20,7 +20,11 @@ public partial class DocumentationAdder : Control
 
     [Export] private NotificationHandler _notificationHandler;
 
-    [Export] private DocumentationsList _documentationsList; 
+    [Export] private DocumentationsList _documentationsList;
+
+    [ExportCategory("Adder Templates")]
+    [Export] private PackedScene _textTemplate;
+    [Export] private PackedScene _imgTemplate;
 
     private string _selectedImagePath;
 
@@ -51,7 +55,9 @@ public partial class DocumentationAdder : Control
     private void AddParagraphAndSentence()
     {
         var marginContainer = new MarginContainer();
-        var txtEdit = new TextEdit
+
+        var textDocTemplate = (DocAdderTextTemplate)_textTemplate.Instantiate();
+        /*var txtEdit = new TextEdit
         {
             CustomMinimumSize = new Vector2(0, 100), // Set an initial manageable height
             AutowrapMode = TextServer.AutowrapMode.Word,
@@ -70,9 +76,10 @@ public partial class DocumentationAdder : Control
 
         // Set bold font
         txtEdit.AddThemeFontSizeOverride("font_size", 20);
-        txtEdit.AddThemeFontOverride("font", font);
+        txtEdit.AddThemeFontOverride("font", font);*/
 
-        marginContainer.AddChild(txtEdit);
+        //marginContainer.AddChild(txtEdit);
+        marginContainer.AddChild(textDocTemplate);
         boxContainer.AddChild(marginContainer);
         // Move the TextureRect to be the second-to-last child
         boxContainer.MoveChild(marginContainer, boxContainer.GetChildCount() - 2);
@@ -88,7 +95,10 @@ public partial class DocumentationAdder : Control
             marginContainer.AddThemeConstantOverride("margin_bottom", 10);
             marginContainer.AddThemeConstantOverride("margin_left", 10);
             marginContainer.AddThemeConstantOverride("margin_right", 10);
-            // Create the TextureRect
+
+            var rectDocTemplate = (DocAdderTextureTemplate)_imgTemplate.Instantiate();
+            rectDocTemplate.SetImage(GD.Load<Texture2D>(_selectedImagePath));
+            /*// Create the TextureRect
             var textureRect = new TextureRect
             {
                 Texture = GD.Load<Texture2D>(_selectedImagePath)
@@ -113,10 +123,10 @@ public partial class DocumentationAdder : Control
 
                 // Apply the scaling factor to both dimensions to preserve aspect ratio
                 textureRect.CustomMinimumSize = new Vector2(textureSize.X * scaleFactor, textureSize.Y * scaleFactor);
-            }
-
+            }*/
+            
             // Add the TextureRect to the MarginContainer
-            marginContainer.AddChild(textureRect);
+            marginContainer.AddChild(rectDocTemplate);
 
             // Add the MarginContainer to the VBoxContainer
             boxContainer.AddChild(marginContainer);
@@ -178,15 +188,15 @@ public partial class DocumentationAdder : Control
         {
             Node child = boxContainer.GetChild(i);
 
-            if (child.GetChild(0) is TextEdit textEdit)
+            if (child.GetChild(0) is DocAdderTextTemplate textEdit)
             {
                 // Append TextEdit data
-                allData += "Text: " + textEdit.Text + "\n";
+                allData += "Text: " + textEdit.GetText() + "\n";
             }
-            else if (child.GetChild(0) is TextureRect textureRect)
+            else if (child.GetChild(0) is DocAdderTextureTemplate textureRect)
             {
                 // Convert the texture to Base64 and append
-                if (textureRect.Texture is Texture2D texture2D)
+                if (textureRect.GetTexture() is Texture2D texture2D)
                 {
                     string base64Image = Converter.TextureToBase64(texture2D);
                     allData += "Image: " + base64Image + "\n";

@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cof64wvd4ljlb"]
+
+[ext_resource type="Script" path="res://Scripts/Documentation/DocAdderTextTemplate.cs" id="1_45qha"]
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="1_hg570"]
+
+[node name="docAdderTextTemplate" type="HBoxContainer" node_paths=PackedStringArray("_trashBtn", "_text")]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_45qha")
+_trashBtn = NodePath("Exit")
+_text = NodePath("TextEdit")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="Exit" type="Button" parent="."]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_hg570")
+theme_override_font_sizes/font_size = 20
+text = "X"

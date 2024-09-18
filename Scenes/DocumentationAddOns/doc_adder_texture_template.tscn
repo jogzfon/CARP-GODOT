@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc8vv1jgyy5as"]
+
+[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="1_127u5"]
+[ext_resource type="Script" path="res://Scripts/Documentation/DocAdderTextureTemplate.cs" id="1_ip2ng"]
+
+[node name="docAdderTextureTemplate" type="HBoxContainer" node_paths=PackedStringArray("_trashBtn", "_rect")]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+alignment = 1
+script = ExtResource("1_ip2ng")
+_trashBtn = NodePath("Exit")
+_rect = NodePath("TextureRect")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Exit" type="Button" parent="."]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_127u5")
+theme_override_font_sizes/font_size = 20
+text = "X"

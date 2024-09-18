@@ -102,10 +102,7 @@ public partial class DocumentationsList : VBoxContainer
 
         foreach (string line in lines)
         {
-            if (!line.Trim().StartsWith("-"))
-            {
-                tokens.Add(TokenizeDocumentationLines(line.Replace(",", ""), pattern));
-            }
+            tokens.Add(TokenizeDocumentationLines(line.Replace(",", ""), pattern));
         }
 
         for (int i = 0; i < tokens.Count; i++)
