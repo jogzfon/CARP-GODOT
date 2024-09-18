@@ -40,4 +40,9 @@ public partial class PaymentConfirmation : Node
     {
         return _receipt;
     }
+    public void ResetReceipt()
+    {
+        _payment_receiptBtn.Icon = null;
+        _receipt = null;
+    }
 }

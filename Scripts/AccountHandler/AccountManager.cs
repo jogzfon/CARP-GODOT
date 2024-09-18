@@ -22,4 +22,8 @@ public static class AccountManager
     {
         return user.Subscription;
     }
+    public static void SetSubscription(string sub)
+    {
+       user.Subscription = sub;
+    }
 }

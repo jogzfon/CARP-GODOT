@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="11_ojvee"]
 [ext_resource type="Texture2D" uid="uid://cswoyeiu3o407" path="res://Sprites/Logob.png" id="12_iol47"]
 
-[node name="Intro" type="Control" node_paths=PackedStringArray("username", "password", "confirm_password", "firstname", "lastname", "email", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "notification", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
+[node name="LogInPage" type="Control" node_paths=PackedStringArray("username", "password", "confirm_password", "firstname", "lastname", "email", "rolePick", "loginUsername", "logInPassword", "createAccount", "loginAccount", "notification", "registerBtn", "loginBtn", "createBtn", "cancelBtn", "backBtn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

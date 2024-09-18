@@ -143,6 +143,14 @@ public partial class SubscriptionHandler : Node
 
         if (AccountManager.GetUser() != null)
         {
+            if (AccountManager.GetUser().Subscription.Contains("Endorsed"))
+            {
+                _subscription_panel_Btn.Visible = false;
+            }
+            else
+            {
+                _subscription_panel_Btn.Visible = true;
+            }
             profilePanel.Visible = false;
             if (subscriptionPanel.Visible)
                 subscriptionPanel.Visible = false;
@@ -177,14 +185,14 @@ public partial class SubscriptionHandler : Node
 */
     private void ConfirmPayment()
     {
-        _subscription_types_panel.Visible = true;
-        _payment_panel.Visible = false;
-
         if(_paymentConfirmation.GetReceipt() == null)
         {
             _notificationHandler.MessageBox("Please place the payment confirmation photo.\n Thank you", 0);
             return;
         }
+
+        _subscription_types_panel.Visible = true;
+        _payment_panel.Visible = false;
 
         if (SubscriptionRequestHandler.RequestSubscription(_paymentConfirmation.GetReceipt()))
         {
@@ -208,6 +216,7 @@ public partial class SubscriptionHandler : Node
     {
         if (_payment_panel.Visible == true)
         {
+            _paymentConfirmation.ResetReceipt();
             _subscription_types_panel.Visible = true;
             _payment_panel.Visible = false;
         }
@@ -217,4 +226,11 @@ public partial class SubscriptionHandler : Node
         }
     }
 
+    public void CloseSubscription()
+    {
+        _paymentConfirmation.ResetReceipt();
+        _subscription_types_panel.Visible = true;
+        _payment_panel.Visible = false;
+        subscriptionPanel.Visible = false;
+    }
 }

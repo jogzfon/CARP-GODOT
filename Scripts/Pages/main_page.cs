@@ -23,6 +23,9 @@ public partial class main_page : Control
     [ExportCategory("Documentation Disabler")]
     [Export] private DocumentationAbler _documentationAbler;
 
+    [ExportCategory("Profile Things")]
+    [Export] private SubscriptionHandler _subscriptionHandler;
+    [Export] private ProfileHandler _profileHandler;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -77,6 +80,8 @@ public partial class main_page : Control
     }
     private void Logout()
     {
+        _profileHandler.CloseProfile();
+        _subscriptionHandler.CloseSubscription();
         _documentationAbler.HideAllDocument();
         options.Visible = false;
         AccountManager.SetUser(null);

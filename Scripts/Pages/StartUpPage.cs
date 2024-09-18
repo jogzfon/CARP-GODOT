@@ -119,7 +119,6 @@ public partial class StartUpPage : Control
                     AccountManager.SetUser(userObj);
                     //AccountFileSaver
                     AccountFileSaver.SaveAccount(userObj);
-
                     this.QueueFree();
                 }
                 else
@@ -213,7 +212,6 @@ public partial class StartUpPage : Control
             firstname.Text = string.Empty;
             lastname.Text = string.Empty;
             email.Text = string.Empty;
-            AccountManager.SetUser(result);
         }
 	}
     private bool IsUsernameValid(string username)

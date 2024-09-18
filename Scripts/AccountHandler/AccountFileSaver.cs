@@ -34,6 +34,8 @@ public static class AccountFileSaver
         if (dir == null)
         {
             dir.MakeDir(directoryLoc);
+            dir = DirAccess.Open(directoryLoc);
+
             string filePath = Path.Combine(dir.GetCurrentDir(), fileName);
 
             using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Write);

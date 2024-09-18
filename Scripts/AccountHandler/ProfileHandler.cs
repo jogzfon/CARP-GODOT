@@ -168,4 +168,9 @@ public partial class ProfileHandler : Node
         AccountManager.SetUser(result);
         AccountFileSaver.SaveAccount(result);
     }
+
+    public void CloseProfile()
+    {
+        profilePanel.Visible = false;
+    }
 }
