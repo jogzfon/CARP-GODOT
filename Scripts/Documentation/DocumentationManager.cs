@@ -59,11 +59,14 @@ public partial class DocumentationManager : Node
 	{
 		if (AccountManager.GetUser() != null)
 		{
-			if(AccountManager.GetRole().Contains("Teacher") || AccountManager.GetUser().Subscription == "Subscribed")
+			if(AccountManager.GetRole().Contains("Teacher"))
 			{
 				_documentationAdderBtn.Visible = true;
 				_documentationBtnList.Visible = true;
 				
+            }else if (AccountManager.GetUser().Subscription == "Subscribed")
+            {
+                _documentationBtnList.Visible = true;
             }
 			else
 			{

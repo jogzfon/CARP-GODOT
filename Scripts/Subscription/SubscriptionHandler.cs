@@ -84,9 +84,9 @@ public partial class SubscriptionHandler : Node
 	{
         if (AccountManager.GetUser() != null)
         {
-            _subscription_panel_Btn.Visible = true;
             if (AccountManager.GetUser().Role == "Student")
             {
+                _subscription_panel_Btn.Visible = true;
                 subscriptionBtn.TextureNormal = studentTier;
                 studentTierBtn.Modulate = new Color("5d5d5d");
                 teacherTierBtn.Modulate = new Color("ffffff");
@@ -201,6 +201,7 @@ public partial class SubscriptionHandler : Node
 
         if (SubscriptionRequestHandler.RequestSubscription(_paymentConfirmation.GetReceipt()))
         {
+            _paymentConfirmation.ResetReceipt();
             _notificationHandler.MessageBox("Request sent successfully.\nThank you for the patronage.\n Please wait for a while...", 0);
             OnBackPressed();
             OnBackPressed();

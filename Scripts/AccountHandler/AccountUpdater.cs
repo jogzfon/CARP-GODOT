@@ -37,6 +37,7 @@ public partial class AccountUpdater : Node
             if (userObj != null)
             {
                 AccountManager.SetUser(userObj);
+                AccountFileSaver.SaveAccount(userObj);
                 //GD.Print("Account update triggered at: " + DateTime.Now);
             }
         }

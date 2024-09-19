@@ -9,12 +9,6 @@ using Microsoft.VisualBasic;
 
 public static class SubscriptionRequestHandler
 {
-	/*private static IFirebaseConfig config = new FirebaseConfig
-    {
-        AuthSecret = "W5nGKOER85yiOo7BZqptL2nKmWNRcng0Mclftbg5",
-        BasePath = "https://carp-70436-default-rtdb.asia-southeast1.firebasedatabase.app/",
-    };*/
-
     private static IFirebaseClient client;
     private static bool TryConnectToDatabase()
     {
