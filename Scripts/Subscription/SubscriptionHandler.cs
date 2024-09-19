@@ -84,21 +84,15 @@ public partial class SubscriptionHandler : Node
 	{
         if (AccountManager.GetUser() != null)
         {
-            if(AccountManager.GetUser().Role == "Student")
+            _subscription_panel_Btn.Visible = true;
+            if (AccountManager.GetUser().Role == "Student")
             {
                 subscriptionBtn.TextureNormal = studentTier;
                 studentTierBtn.Modulate = new Color("5d5d5d");
                 teacherTierBtn.Modulate = new Color("ffffff");
                 guestTierBtn.Modulate = new Color("ffffff");
 
-                if (AccountManager.GetSubscription().Contains("Subscribed") || AccountManager.GetSubscription().Contains("Endorsed"))
-                {
-                    _subscription_panel_Btn.Visible = false;
-                }
-                else
-                {
-                    _subscription_panel_Btn.Visible = true;
-                }
+                SubscriptionPaymentButtonEdit();
 
                 studentTierBtn.Disabled = true;
                 teacherTierBtn.Disabled = false;
@@ -129,10 +123,28 @@ public partial class SubscriptionHandler : Node
         }
         else
         {
+            _subscription_panel_Btn.Visible = false;
             subscriptionBtn.TextureNormal = freeTier;
         }
     }
-
+    private void SubscriptionPaymentButtonEdit()
+    {
+        if (AccountManager.GetSubscription().Contains("Subscribed") || AccountManager.GetSubscription().Contains("Endorsed"))
+        {
+            if (AccountManager.GetSubscription().Contains("Subscribed"))
+            {
+                _subscription_panel_Btn.Text = "Subscribed";
+            }else if (AccountManager.GetSubscription().Contains("Endorsed"))
+            {
+                _subscription_panel_Btn.Text = "Payment sent...";
+            }
+            _subscription_panel_Btn.Disabled = true;
+        }
+        else
+        {
+            _subscription_panel_Btn.Disabled = false;
+        }
+    }
     private void OpenSubscription()
     {
         _documentationAbler.HideAllDocument();
