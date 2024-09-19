@@ -129,12 +129,12 @@ public partial class SubscriptionHandler : Node
     }
     private void SubscriptionPaymentButtonEdit()
     {
-        if (AccountManager.GetSubscription().Contains("Subscribed") || AccountManager.GetSubscription().Contains("Endorsed"))
+        if (AccountManager.GetUser().Subscription == "Subscribed" || AccountManager.GetUser().Subscription == "Endorsed")
         {
-            if (AccountManager.GetSubscription().Contains("Subscribed"))
+            if (AccountManager.GetUser().Subscription == "Subscribed")
             {
                 _subscription_panel_Btn.Text = "Subscribed";
-            }else if (AccountManager.GetSubscription().Contains("Endorsed"))
+            }else if (AccountManager.GetUser().Subscription == "Endorsed")
             {
                 _subscription_panel_Btn.Text = "Payment sent...";
             }
@@ -142,6 +142,7 @@ public partial class SubscriptionHandler : Node
         }
         else
         {
+            _subscription_panel_Btn.Text = "Subscribe";
             _subscription_panel_Btn.Disabled = false;
         }
     }

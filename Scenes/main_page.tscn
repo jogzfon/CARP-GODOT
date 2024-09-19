@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=71 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -55,6 +55,7 @@
 [ext_resource type="PackedScene" uid="uid://dmwimuoit033v" path="res://Scenes/premade_doc_template.tscn" id="49_lyvmv"]
 [ext_resource type="Texture2D" uid="uid://lq48xxcpcq8x" path="res://Sprites/Documentation/Nav.png" id="50_m04nu"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationAbler.cs" id="51_8cw85"]
+[ext_resource type="Script" path="res://Scripts/AccountHandler/AccountUpdater.cs" id="56_5q7h3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
 shader = ExtResource("3_fhf3p")
@@ -1061,3 +1062,6 @@ pd_images2 = [ExtResource("21_dmdda"), ExtResource("23_b17yx"), ExtResource("22_
 pd_sentences3 = ["Program Examples"]
 pd_sentences4 = ["Numeric Constants"]
 pd_sentences5 = ["Assembler Directives"]
+
+[node name="AccountUpdater" type="Node" parent="."]
+script = ExtResource("56_5q7h3")

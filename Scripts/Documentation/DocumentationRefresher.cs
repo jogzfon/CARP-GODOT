@@ -21,7 +21,7 @@ public partial class DocumentationRefresher : HBoxContainer
 	{
         if (AccountManager.GetUser() != null)
         {
-            if (AccountManager.GetRole().Contains("Teacher") || AccountManager.GetSubscription().Contains("Subscribed"))
+            if (AccountManager.GetRole().Contains("Teacher") || AccountManager.GetUser().Subscription == "Subscribed")
             {
                 _refresher.Visible = true;
 

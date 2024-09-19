@@ -1,3 +1,5 @@
+using FireSharp.Interfaces;
+using FireSharp.Response;
 using Godot;
 using System;
 
@@ -5,7 +7,7 @@ public partial class AccountUpdater : Node
 {
     // Timer to handle account updates
     private Timer updateTimer;
-
+    private IFirebaseClient client;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -21,10 +23,24 @@ public partial class AccountUpdater : Node
     }
 
     // This method will be called every time the timer times out
-    private void OnUpdateTimeout()
+    private async void OnUpdateTimeout()
     {
+        if(client == null)
+        {
+            client = Connector.ConnectToClient();
+        }
+        if(AccountManager.GetUser() != null)
+        {
+            FirebaseResponse response = await client.GetAsync("Users/" + AccountManager.GetUser().Username);
+            UserData userObj = response.ResultAs<UserData>();
+
+            if (userObj != null)
+            {
+                AccountManager.SetUser(userObj);
+                //GD.Print("Account update triggered at: " + DateTime.Now);
+            }
+        }
         // Call your account update logic here
-        GD.Print("Account update triggered at: " + DateTime.Now);
         // Add your account update code here
     }
 }

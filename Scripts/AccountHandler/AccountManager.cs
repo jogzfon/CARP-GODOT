@@ -18,10 +18,6 @@ public static class AccountManager
     {
         return user.Role;
     }
-    public static String GetSubscription()
-    {
-        return user.Subscription;
-    }
     public static void SetSubscription(string sub)
     {
        user.Subscription = sub;

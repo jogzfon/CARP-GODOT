@@ -36,12 +36,6 @@ public partial class StartUpPage : Control
     [Export] private TextureButton backBtn;
     #endregion
 
-/*    IFirebaseConfig config = new FirebaseConfig
-	{
-		AuthSecret = "sl5J6RLP0fMsh6OJNNj978xIelPyaSCuwr6hOf8R",
-		BasePath = "https://carp-70436-default-rtdb.asia-southeast1.firebasedatabase.app/",
-	};*/
-
 	IFirebaseClient client;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
