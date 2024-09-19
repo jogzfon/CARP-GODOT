@@ -36,18 +36,16 @@ public partial class StartUpPage : Control
     [Export] private TextureButton backBtn;
     #endregion
 
-    IFirebaseConfig config = new FirebaseConfig
+/*    IFirebaseConfig config = new FirebaseConfig
 	{
 		AuthSecret = "sl5J6RLP0fMsh6OJNNj978xIelPyaSCuwr6hOf8R",
 		BasePath = "https://carp-70436-default-rtdb.asia-southeast1.firebasedatabase.app/",
-	};
+	};*/
 
 	IFirebaseClient client;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        PrepareDatabase();
-
         createAccount.Visible = false;
         loginAccount.Visible = true;
 
@@ -61,24 +59,13 @@ public partial class StartUpPage : Control
 
         backBtn.Connect("pressed", new Callable(this, nameof(BackPressed)));
     }
-    public async void PrepareDatabase()
-    {
-        // Initialize the connection and start checking for reconnections
-        await TryConnectToDatabase().ContinueWith(async task =>
-        {
-            if (task.Exception != null)
-            {
-                GD.Print($"Initial connection failed: {task.Exception.Message}");
-                await CheckInternetConnectionAndReconnect();
-            }
-        });
-    }
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
         if (client == null)
         {
-            client = new FireSharp.FirebaseClient(config);
+            //client = new FireSharp.FirebaseClient(config);
+            client = Connector.ConnectToClient();
         }
     }
 	
@@ -293,33 +280,6 @@ public partial class StartUpPage : Control
 	private void BackPressed()
 	{
         this.QueueFree();
-    }
-
-	private async Task TryConnectToDatabase()
-    {
-        try
-        {
-            client = new FireSharp.FirebaseClient(config);
-        }
-        catch (Exception ex)
-        {
-            GD.Print($"Connection failed: {ex.Message}");
-            notification.MessageBox("You are offline, try logging in after turning back online.", 1);
-            client = null;
-        }
-    }
-
-    private async Task CheckInternetConnectionAndReconnect()
-    {
-        while (true)
-        {
-            if (client == null)
-            {
-                await TryConnectToDatabase();
-            }
-
-            await Task.Delay(10000); // Check every 10 seconds
-        }
     }
 }
 

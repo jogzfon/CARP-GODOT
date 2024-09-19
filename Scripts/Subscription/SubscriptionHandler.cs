@@ -91,7 +91,7 @@ public partial class SubscriptionHandler : Node
                 teacherTierBtn.Modulate = new Color("ffffff");
                 guestTierBtn.Modulate = new Color("ffffff");
 
-                if (AccountManager.GetSubscription().Contains("Subscribed"))
+                if (AccountManager.GetSubscription().Contains("Subscribed") || AccountManager.GetSubscription().Contains("Endorsed"))
                 {
                     _subscription_panel_Btn.Visible = false;
                 }
@@ -143,14 +143,6 @@ public partial class SubscriptionHandler : Node
 
         if (AccountManager.GetUser() != null)
         {
-            if (AccountManager.GetUser().Subscription.Contains("Endorsed"))
-            {
-                _subscription_panel_Btn.Visible = false;
-            }
-            else
-            {
-                _subscription_panel_Btn.Visible = true;
-            }
             profilePanel.Visible = false;
             if (subscriptionPanel.Visible)
                 subscriptionPanel.Visible = false;
