@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=24 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/Pages/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" path="res://Scripts/FileHandler/ExitController.cs" id="14_r5c7n"]
 [ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="15_nhij1"]
+[ext_resource type="Script" path="res://Scripts/Other/PresetCodeHandler.cs" id="18_h1qas"]
+[ext_resource type="Texture2D" uid="uid://dy3etmq5s7r5j" path="res://Sprites/Rectangle 90.png" id="19_30ukb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgeug"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
@@ -414,11 +416,11 @@ theme_override_font_sizes/font_size = 25
 text = "Control Unit Type"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LeftContainer"]
+[node name="UnitType2" type="HBoxContainer" parent="LeftContainer"]
 visible = false
 layout_mode = 2
 
-[node name="MicroProgrammed" type="CheckButton" parent="LeftContainer/HBoxContainer"]
+[node name="MicroProgrammed" type="CheckButton" parent="LeftContainer/UnitType2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_jdv15")
@@ -426,12 +428,24 @@ theme_override_font_sizes/font_size = 20
 button_pressed = true
 text = "Microprogrammed"
 
-[node name="Hardwired" type="CheckButton" parent="LeftContainer/HBoxContainer"]
+[node name="Hardwired" type="CheckButton" parent="LeftContainer/UnitType2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_jdv15")
 theme_override_font_sizes/font_size = 20
 text = "Hardwired"
+
+[node name="UnitType3" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/UnitType3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PresetCodeBtn" type="Button" parent="LeftContainer/UnitType3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save as Preset Code"
 
 [node name="Assemble" type="Button" parent="LeftContainer"]
 layout_mode = 2
@@ -545,3 +559,75 @@ offset_bottom = -408.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
+
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_savePresetBtn", "_presetTextureRect")]
+script = ExtResource("18_h1qas")
+_assembledCode = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
+_savePresetBtn = NodePath("../LeftContainer/UnitType3/PresetCodeBtn")
+_presetTextureRect = NodePath("PresetRect")
+
+[node name="PresetRect" type="TextureRect" parent="Node"]
+visible = false
+custom_minimum_size = Vector2(1000, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_30ukb")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Node/PresetRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.5
+offset_top = -99.0
+offset_right = 158.5
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_rnxid")
+theme_override_font_sizes/font_size = 30
+text = "Enter Preset Keyword"
+
+[node name="LineEdit" type="LineEdit" parent="Node/PresetRect"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -30.0
+offset_right = 250.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+max_length = 30
+
+[node name="Button" type="Button" parent="Node/PresetRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 80.0
+offset_right = 150.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SAVE PRESET INSTRUCTIONS"
