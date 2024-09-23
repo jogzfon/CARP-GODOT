@@ -6,17 +6,17 @@ using System.Text;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Reflection.Metadata;
-
-public static class AIFileSaver
+public static class PresetCodeFileSaver
 {
-    static string directoryLoc = "AccountData";
-    static string fileName = "aiData.data";
-    public static void SaveAIAPI(string apiKey)
+    static string directoryLoc = "PresetCodeData";
+    static string fileName = "presetCodeData.data";
+
+    static PremadeCodeList presetCodeList;
+    public static void SavePresetCode(string keyword, string instructions)
     {
         // Create the account template string
-        string keyAPITemplate = "API_Key: " + apiKey + "\n";
-
-        byte[] encryptedData = InfoSecure.EncryptData(keyAPITemplate);
+        string presetCodeTemplate = "Keyword: " + keyword + "\n" + 
+            "Instructions: " + instructions;
 
         DirAccess dir = DirAccess.Open(directoryLoc);
         if (dir == null)
@@ -27,7 +27,7 @@ public static class AIFileSaver
             using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Write);
 
             //file.StoreString(accountTemplate);
-            file.StoreBuffer(encryptedData);
+            file.StoreString(presetCodeTemplate);
             file.Close();
             return;
         }
@@ -38,7 +38,7 @@ public static class AIFileSaver
             using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Write);
 
             //file.StoreString(accountTemplate);
-            file.StoreBuffer(encryptedData);
+            file.StoreString(presetCodeTemplate);
             file.Close();
         }
         catch (Exception ex)
@@ -46,7 +46,7 @@ public static class AIFileSaver
             GD.PrintErr($"Failed to save account data: {ex.Message}");
         }
     }
-    public static string GetAIAPIFile()
+    public static void GetPresetCodeFile()
     {
 
         string filePath = Path.Combine(directoryLoc, fileName);
@@ -57,28 +57,23 @@ public static class AIFileSaver
             {
                 using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Read);
                 //string content = file.GetAsText();
-                byte[] encryptedData = file.GetBuffer((int)file.GetLength());
+                string text = file.GetAsText();
                 file.Close();
 
-                // Decrypt the data using the password
-                string decryptedContent = InfoSecure.DecryptData(encryptedData);
-
                 //DistributeAccountValues(content, user);
-                decryptedContent = DistributeAPIValue(decryptedContent);
+                DistributePresetCodeValue(text);
                 //GD.Print(user);
-                return decryptedContent;
             }
             catch (Exception ex)
             {
                 GD.PrintErr($"Failed to delete account file: {ex.Message}");
             }
         }
-        return null;
     }
-    public static string DistributeAPIValue(string content)
+    public static void DistributePresetCodeValue(string content)
     {
         List<List<Tokens>> tokens = new List<List<Tokens>>();
-        string pattern = @"\b(API_Key:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
+        string pattern = @"\b(Keyword:|Instructions:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
 
         string[] lines = content.Split('\n');
 
@@ -89,15 +84,12 @@ public static class AIFileSaver
                 tokens.Add(TokenizeAccountLines(line.Replace(",", ""), pattern));
             }
         }
-        for (int i = 0; i < tokens.Count; i++)
+        for (int i = 0; i < tokens.Count; i+=2)
         {
-            if (tokens[i].Count > 0)
-            {
-                content += SetAPIValues(tokens[i]);
-            }
+            var keyword = SetPresetCodeValues(tokens[i]);
+            var value = SetPresetCodeValues(tokens[i+1]);
+            presetCodeList.AddSetOfCodes(keyword, value);
         }
-
-        return content;
     }
     private static List<Tokens> TokenizeAccountLines(string line, string pattern)
     {
@@ -114,7 +106,7 @@ public static class AIFileSaver
                 {
                     tokens.Add(new Tokens(TokenType.COLON, token));
                 }
-                else if (Regex.IsMatch(token, @"\b(API_Key)\b"))
+                else if (Regex.IsMatch(token, @"\b(Keyword|Instructions)\b"))
                 {
                     tokens.Add(new Tokens(TokenType.LABEL, token));
                 }
@@ -126,19 +118,30 @@ public static class AIFileSaver
         }
         return tokens;
     }
-    private static string SetAPIValues(List<Tokens> tokens)
+    private static string SetPresetCodeValues(List<Tokens> tokens)
     {
         switch (tokens[0].value)
         {
-            case "API_Key":
+            case "Keyword":
                 if (2 < tokens.Count)
                 {
-                    string api_key = "";
+                    string preset_keyword = "";
                     for (int i = 2; i < tokens.Count; i++)
                     {
-                        api_key += tokens[i].value;
+                        preset_keyword += tokens[i].value;
                     }
-                    return api_key;
+                    return preset_keyword;
+                }
+                break;
+            case "Instructions":
+                if (2 < tokens.Count)
+                {
+                    string preset_instructions = "";
+                    for (int i = 2; i < tokens.Count; i++)
+                    {
+                        preset_instructions += tokens[i].value;
+                    }
+                    return preset_instructions;
                 }
                 break;
             default:
@@ -146,5 +149,10 @@ public static class AIFileSaver
                 break;
         }
         return null;
+    }
+
+    public static void SetPresetCodeList(PremadeCodeList presetCodes)
+    {
+        presetCodeList = presetCodes;
     }
 }
