@@ -4,7 +4,7 @@ using System.Numerics;
 
 public class PremadeCodeList
 {
-	public  List<PremadeCode> premadeCodes = new List<PremadeCode>();
+	public List<PremadeCode> premadeCodes = new List<PremadeCode>();
 
     public void InitializePremadeCodes()
     {
@@ -24,5 +24,33 @@ public class PremadeCodeList
         ";loop x times  x value in 100\r\nclac\t\t         \t                                    ;i=0\r\nmvac\t\t                                           ;R=i\r\n                       \t  \t\t                           ;Loop:\r\nmovr\t\t                                           ;AC=i\r\ninac\t\t                                               ;i++\r\nmvac\t\t                                           ;i back to R\r\nldac\t100                             \t\t         \t;load x\r\nsub\t\t                          \t                    ;x-i\r\njpnz\t2\t                          \t\t                ;loop again if i<x\r\nend\r\n\r\n; set breakpoint at 9 (jpnz) to count the loops..."));
         premadeCodes.Add(new PremadeCode("EX8",
         ";busy-wait poll of I/O port until nonzero\r\nclac\r\nmvac\t\t                                        ;R=0\r\n          \t\t                                        ;Loop:\r\nldac\t 65535\t\r\nsub\t\t                                            ;I/O port value - 0\r\njmpz 2\t                                        ;jump to Loop if I/O port value is 0\r\n\r\nldac 65535\t\t                                ;assume it hasn't changed...\r\nstac 100\t\t                                    ;put it to \"regular\" memory\r\nend"));
+    }
+    public (string message, int errNum) AddSetOfCodes(string keyword, string instructions)
+    {
+        if (KeyWordExists(keyword))
+        {
+            return ("Keyword '{keyword}' already exists.", 1);
+        }
+        try
+        {
+            premadeCodes.Add(new PremadeCode(keyword, instructions));
+            return ("Preset Code Added Successfully.", 0);
+        }
+        catch (Exception e)
+        {
+            return ($"Error adding code: {e.Message}", 2);
+        }
+    }
+
+    private bool KeyWordExists(string keyword)
+    {
+        foreach (var code in premadeCodes)
+        {
+            if (code.KeyWord.Equals(keyword, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

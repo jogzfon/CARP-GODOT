@@ -49,7 +49,7 @@ fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.5, 0.5)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("hardwired", "microprogrammed", "memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,6 +57,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lst7x")
+hardwired = NodePath("LeftContainer/UnitType2/Hardwired")
+microprogrammed = NodePath("LeftContainer/UnitType2/MicroProgrammed")
 memoryPnl = NodePath("VBoxContainer/PanelContainer/MemoryAndIO")
 breakPointsPnl = NodePath("VBoxContainer/PanelContainer/Breakpoints")
 traceResultsPnl = NodePath("VBoxContainer/PanelContainer/TraceResult")
@@ -560,11 +562,15 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_savePresetBtn", "_presetTextureRect")]
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_instructionCodeHandler", "_notificationHandler")]
 script = ExtResource("18_h1qas")
 _assembledCode = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
+_codeKeyword = NodePath("PresetRect/keyword")
 _savePresetBtn = NodePath("../LeftContainer/UnitType3/PresetCodeBtn")
+_finalizeSavePresetBtn = NodePath("PresetRect/finalizeSaveBtn")
 _presetTextureRect = NodePath("PresetRect")
+_instructionCodeHandler = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
+_notificationHandler = NodePath("../NotificationHandler")
 
 [node name="PresetRect" type="TextureRect" parent="Node"]
 visible = false
@@ -600,7 +606,7 @@ theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Enter Preset Keyword"
 
-[node name="LineEdit" type="LineEdit" parent="Node/PresetRect"]
+[node name="keyword" type="LineEdit" parent="Node/PresetRect"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -617,7 +623,7 @@ grow_vertical = 2
 alignment = 1
 max_length = 30
 
-[node name="Button" type="Button" parent="Node/PresetRect"]
+[node name="finalizeSaveBtn" type="Button" parent="Node/PresetRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

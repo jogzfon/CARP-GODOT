@@ -25,4 +25,9 @@ public partial class InstructionCodeHandler : TextEdit
             }
         }
     }
+
+    public PremadeCodeList GetPrecodes()
+    {
+        return precodes;
+    }
 }

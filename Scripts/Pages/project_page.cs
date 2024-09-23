@@ -6,8 +6,8 @@ using System.Text.RegularExpressions;
 
 public partial class project_page : Control
 {
-    CheckButton hardwired;
-    CheckButton microprogrammed;
+    [Export] private CheckButton hardwired;
+    [Export] private CheckButton microprogrammed;
 
     [Export] private Panel memoryPnl;
     [Export] private Panel breakPointsPnl;
@@ -133,9 +133,7 @@ public partial class project_page : Control
         memoryLocation = GetNode<LineEdit>("LeftContainer/MemoryLocation");
 
         //Optional
-        hardwired = GetNode<CheckButton>("LeftContainer/HBoxContainer/Hardwired");
         hardwired.Connect("toggled", new Callable(this, nameof(HardWired)));
-        microprogrammed = GetNode<CheckButton>("LeftContainer/HBoxContainer/MicroProgrammed");
         microprogrammed.Connect("toggled", new Callable(this, nameof(MicroProgrammed)));
 
         microprogrammed.ButtonPressed = true;
