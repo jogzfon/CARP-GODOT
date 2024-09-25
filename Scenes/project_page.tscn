@@ -437,14 +437,14 @@ theme_override_fonts/font = ExtResource("4_jdv15")
 theme_override_font_sizes/font_size = 20
 text = "Hardwired"
 
-[node name="UnitType3" type="HBoxContainer" parent="LeftContainer"]
+[node name="SaveAsPreset" type="HBoxContainer" parent="LeftContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/UnitType3"]
+[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/SaveAsPreset"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PresetCodeBtn" type="Button" parent="LeftContainer/UnitType3"]
+[node name="PresetCodeBtn" type="Button" parent="LeftContainer/SaveAsPreset"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save as Preset Code"
@@ -562,13 +562,14 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_instructionCodeHandler", "_notificationHandler")]
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_presetBtnContainer", "_instructionCodeHandler", "_notificationHandler")]
 script = ExtResource("18_h1qas")
 _assembledCode = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
 _codeKeyword = NodePath("PresetRect/keyword")
-_savePresetBtn = NodePath("../LeftContainer/UnitType3/PresetCodeBtn")
+_savePresetBtn = NodePath("../LeftContainer/SaveAsPreset/PresetCodeBtn")
 _finalizeSavePresetBtn = NodePath("PresetRect/finalizeSaveBtn")
 _presetTextureRect = NodePath("PresetRect")
+_presetBtnContainer = NodePath("../LeftContainer/SaveAsPreset")
 _instructionCodeHandler = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
 _notificationHandler = NodePath("../NotificationHandler")
 

@@ -8,6 +8,7 @@ public partial class PresetCodeHandler : Node
     [Export] private Button _savePresetBtn;
     [Export] private Button _finalizeSavePresetBtn;
     [Export] private TextureRect _presetTextureRect;
+	[Export] private HBoxContainer _presetBtnContainer;
 
 	[Export] private InstructionCodeHandler _instructionCodeHandler;
     [Export] private NotificationHandler _notificationHandler;
@@ -19,6 +20,7 @@ public partial class PresetCodeHandler : Node
 		_presetTextureRect.Visible = false;
         _savePresetBtn.Connect("pressed", new Callable(this, nameof(OpenKeywordInput)));
         _finalizeSavePresetBtn.Connect("pressed", new Callable(this, nameof(SaveInstructionsAsPreset)));
+		_presetBtnContainer.Visible = false;
 
         _premadeCodeList = _instructionCodeHandler.GetPrecodes();
     }
@@ -26,6 +28,17 @@ public partial class PresetCodeHandler : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (AccountManager.GetUser != null)
+		{
+			if(AccountManager.GetUser() != null && AccountManager.GetUser().Role == "Teacher")
+			{
+				_presetBtnContainer.Visible = true;
+			}
+		}
+		else
+		{
+            _presetBtnContainer.Visible = false;
+        }
 	}
 	private void OpenKeywordInput()
 	{
