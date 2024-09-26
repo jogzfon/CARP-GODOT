@@ -34,6 +34,7 @@ public class PremadeCodeList
         try
         {
             premadeCodes.Add(new PremadeCode(keyword, instructions));
+            PresetCodeFileSaver.SavePresetCode(keyword, instructions); // Save the preset as script
             return ("Preset Code Added Successfully.", 0);
         }
         catch (Exception e)

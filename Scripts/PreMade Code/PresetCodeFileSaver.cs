@@ -48,27 +48,35 @@ public static class PresetCodeFileSaver
     }
     public static void GetPresetCodeFile()
     {
-
-        string filePath = Path.Combine(directoryLoc, fileName);
-
-        if (Godot.FileAccess.FileExists(filePath))
+        // Open the directory
+        DirAccess dir = DirAccess.Open(directoryLoc);
+        if (dir == null)
         {
-            try
-            {
-                using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Read);
-                //string content = file.GetAsText();
-                string text = file.GetAsText();
-                file.Close();
-
-                //DistributeAccountValues(content, user);
-                DistributePresetCodeValue(text);
-                //GD.Print(user);
-            }
-            catch (Exception ex)
-            {
-                GD.PrintErr($"Failed to delete account file: {ex.Message}");
-            }
+            GD.PrintErr("Failed to open directory: " + directoryLoc);
+            DirAccess.MakeDirAbsolute(directoryLoc);
+            return;
         }
+
+        // Iterate through the directory contents
+        dir.ListDirBegin(); // Start listing the directory contents
+
+        string fileName = dir.GetNext();
+        while (fileName != "")
+        {
+            // Skip special entries "." and ".."
+            if (!dir.CurrentIsDir() && fileName.EndsWith(".data"))
+            {
+                string filePath = Path.Combine(dir.GetCurrentDir(), fileName);
+                using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Read);
+                string content = file.GetAsText();
+
+                DistributePresetCodeValue(content);
+            }
+
+            fileName = dir.GetNext(); // Get the next file
+        }
+
+        dir.ListDirEnd(); // Finish listing the directory contents
     }
     public static void DistributePresetCodeValue(string content)
     {
@@ -79,10 +87,7 @@ public static class PresetCodeFileSaver
 
         foreach (string line in lines)
         {
-            if (!line.Trim().StartsWith("-"))
-            {
-                tokens.Add(TokenizeAccountLines(line.Replace(",", ""), pattern));
-            }
+            tokens.Add(TokenizeAccountLines(line.Replace(",", ""), pattern));
         }
         for (int i = 0; i < tokens.Count; i+=2)
         {
