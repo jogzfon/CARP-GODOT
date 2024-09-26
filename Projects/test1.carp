@@ -8,28 +8,24 @@ MVAC
 ADD 
 STAC 100 
 END 
-
-;busy-wait poll of I/O port until nonzero
-clac
-mvac		                                        ;R=0
-          		                                        ;Loop:
-ldac	 65535	
-sub		                                            ;I/O port value - 0
-jmpz 2	                                        ;jump to Loop if I/O port value is 0
-
-ldac 65535		                                ;assume it hasn't changed...
-stac 100		                                    ;put it to "regular" memory
-end
-
-;add two numbers.  x+y   Show overflow.
-;x at 100, y at 101, sum at 102
-
-ldac 100	                           		      ;load x
-mvac		                                      ;copy to R
-ldac 101                           		      ;load y
-add		                               	         ;x+y
-stac 102                            		    ;store to sum
-end
+; busy - wait poll of I / O port until nonzero 
+clac 
+mvac ; R = 0 
+; Loop : 
+ldac 65535 
+sub ; I / O port value - 0 
+jmpz 2 ; jump to Loop if I / O port value is 0 
+ldac 65535 ; assume it hasn't changed . . . 
+stac 100 ; put it to "regular" memory 
+end 
+; add two numbers . x + y Show overflow . 
+; x at 100 y at 101 sum at 102 
+ldac 100 ; load x 
+mvac ; copy to R 
+ldac 101 ; load y 
+add ; x + y 
+stac 102 ; store to sum 
+end 
 
 
 

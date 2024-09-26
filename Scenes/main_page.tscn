@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=73 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -56,6 +56,8 @@
 [ext_resource type="Texture2D" uid="uid://lq48xxcpcq8x" path="res://Sprites/Documentation/Nav.png" id="50_m04nu"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationAbler.cs" id="51_8cw85"]
 [ext_resource type="Script" path="res://Scripts/AccountHandler/AccountUpdater.cs" id="56_5q7h3"]
+[ext_resource type="Script" path="res://Scripts/Settings/Settings.cs" id="57_ysgjy"]
+[ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="58_vo425"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
 shader = ExtResource("3_fhf3p")
@@ -351,7 +353,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="SignOut" type="Button" parent="MainContent"]
-visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -1065,3 +1066,24 @@ pd_sentences5 = ["Assembler Directives"]
 
 [node name="AccountUpdater" type="Node" parent="."]
 script = ExtResource("56_5q7h3")
+
+[node name="Settings" type="Node" parent="."]
+script = ExtResource("57_ysgjy")
+
+[node name="Panel" type="Panel" parent="Settings"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Settings/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("58_vo425")
+expand_mode = 1

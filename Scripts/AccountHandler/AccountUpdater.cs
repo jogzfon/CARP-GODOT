@@ -1,3 +1,4 @@
+using FireSharp.Exceptions;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using Godot;
@@ -25,21 +26,27 @@ public partial class AccountUpdater : Node
     // This method will be called every time the timer times out
     private async void OnUpdateTimeout()
     {
-        if(client == null)
+        try
         {
-            client = Connector.ConnectToClient();
-        }
-        if(AccountManager.GetUser() != null)
-        {
-            FirebaseResponse response = await client.GetAsync("Users/" + AccountManager.GetUser().Username);
-            UserData userObj = response.ResultAs<UserData>();
-
-            if (userObj != null)
+            if(client == null)
             {
-                AccountManager.SetUser(userObj);
-                AccountFileSaver.SaveAccount(userObj);
-                //GD.Print("Account update triggered at: " + DateTime.Now);
+                client = Connector.ConnectToClient();
             }
+            if(AccountManager.GetUser() != null)
+            {
+                FirebaseResponse response = await client.GetAsync("Users/" + AccountManager.GetUser().Username);
+                UserData userObj = response.ResultAs<UserData>();
+
+                if (userObj != null)
+                {
+                    AccountManager.SetUser(userObj);
+                    AccountFileSaver.SaveAccount(userObj);
+                    //GD.Print("Account update triggered at: " + DateTime.Now);
+                }
+            }
+        }catch(FirebaseException ex)
+        {
+            GD.Print(ex);
         }
         // Call your account update logic here
         // Add your account update code here
