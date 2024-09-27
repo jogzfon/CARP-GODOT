@@ -23,17 +23,19 @@ public partial class PresetCodeHandler : Node
 		_presetBtnContainer.Visible = false;
 
         _premadeCodeList = _instructionCodeHandler.GetPrecodes();
+
+        if (AccountManager.GetUser() != null && AccountManager.GetUser().Role == "Teacher")
+        {
+			PresetCodeFileSaver.GetPresetCodeFile();
+        }
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (AccountManager.GetUser != null)
+		if(AccountManager.GetUser() != null && AccountManager.GetUser().Role == "Teacher")
 		{
-			if(AccountManager.GetUser() != null && AccountManager.GetUser().Role == "Teacher")
-			{
-				_presetBtnContainer.Visible = true;
-			}
+			_presetBtnContainer.Visible = true;
 		}
 		else
 		{
@@ -53,7 +55,7 @@ public partial class PresetCodeHandler : Node
 	}
     private void SaveInstructionsAsPreset()
     {
-		var isOk = _premadeCodeList.AddSetOfCodes(_codeKeyword.Text, _assembledCode.Text); 
+		var isOk = _premadeCodeList.AddSetOfCodes(_codeKeyword.GetText(), _assembledCode.GetText()); 
 		if(isOk.errNum > 0)
 		{
 			_notificationHandler.MessageBox(isOk.message, 1);

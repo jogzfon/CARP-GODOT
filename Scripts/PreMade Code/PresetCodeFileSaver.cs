@@ -9,9 +9,9 @@ using System.Reflection.Metadata;
 public static class PresetCodeFileSaver
 {
     static string directoryLoc = "PresetCodeData";
-    static string fileName = "presetCodeData.data";
 
     static PremadeCodeList presetCodeList;
+
     public static void SavePresetCode(string keyword, string instructions)
     {
         // Create the account template string
@@ -22,7 +22,7 @@ public static class PresetCodeFileSaver
         if (dir == null)
         {
             dir.MakeDir(directoryLoc);
-            string filePath = Path.Combine(dir.GetCurrentDir(), fileName);
+            string filePath = Path.Combine(dir.GetCurrentDir(), keyword + ".data");
 
             using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Write);
 
@@ -33,7 +33,7 @@ public static class PresetCodeFileSaver
         }
         try
         {
-            string filePath = Path.Combine(dir.GetCurrentDir(), fileName);
+            string filePath = Path.Combine(dir.GetCurrentDir(), keyword + ".data");
 
             using var file = Godot.FileAccess.Open(filePath, Godot.FileAccess.ModeFlags.Write);
 
@@ -89,12 +89,23 @@ public static class PresetCodeFileSaver
         {
             tokens.Add(TokenizeAccountLines(line.Replace(",", ""), pattern));
         }
-        for (int i = 0; i < tokens.Count; i+=2)
+        /*string keyword = String.Empty;
+        string value = String.Empty;
+        for (int i = 0; i < tokens.Count; i++)
         {
-            var keyword = SetPresetCodeValues(tokens[i]);
-            var value = SetPresetCodeValues(tokens[i+1]);
-            presetCodeList.AddSetOfCodes(keyword, value);
+            var temp = SetPresetCodeValues(tokens[i]);
+
+            if(temp.type == "Keyword")
+            {
+                keyword += temp.content;
+            }
+            else
+            {
+                keyword += temp.content;
+            }
         }
+        presetCodeList.AddSetOfCodes(keyword, value);
+        GD.Print("Keyword: " + keyword + "\n" + value);*/
     }
     private static List<Tokens> TokenizeAccountLines(string line, string pattern)
     {
@@ -123,14 +134,14 @@ public static class PresetCodeFileSaver
         }
         return tokens;
     }
-    private static string SetPresetCodeValues(List<Tokens> tokens)
+    private static void SetPresetCodeValues(List<Tokens> tokens)
     {
+        /*string content = "";
         switch (tokens[0].value)
         {
             case "Keyword":
                 if (2 < tokens.Count)
                 {
-                    string preset_keyword = "";
                     for (int i = 2; i < tokens.Count; i++)
                     {
                         preset_keyword += tokens[i].value;
@@ -141,7 +152,6 @@ public static class PresetCodeFileSaver
             case "Instructions":
                 if (2 < tokens.Count)
                 {
-                    string preset_instructions = "";
                     for (int i = 2; i < tokens.Count; i++)
                     {
                         preset_instructions += tokens[i].value;
@@ -150,10 +160,14 @@ public static class PresetCodeFileSaver
                 }
                 break;
             default:
-                GD.PrintErr("Label " + tokens[0].value + " does not exist!");
+                    string preset_instructions = "";
+                    for (int i = 0; i < tokens.Count; i++)
+                    {
+                        preset_instructions += tokens[i].value;
+                    }
                 break;
         }
-        return null;
+        return null;*/
     }
 
     public static void SetPresetCodeList(PremadeCodeList presetCodes)

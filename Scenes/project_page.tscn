@@ -562,7 +562,7 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_presetBtnContainer", "_instructionCodeHandler", "_notificationHandler")]
+[node name="PresetCodeManager" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_presetBtnContainer", "_instructionCodeHandler", "_notificationHandler")]
 script = ExtResource("18_h1qas")
 _assembledCode = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
 _codeKeyword = NodePath("PresetRect/keyword")
@@ -573,7 +573,7 @@ _presetBtnContainer = NodePath("../LeftContainer/SaveAsPreset")
 _instructionCodeHandler = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
 _notificationHandler = NodePath("../NotificationHandler")
 
-[node name="PresetRect" type="TextureRect" parent="Node"]
+[node name="PresetRect" type="TextureRect" parent="PresetCodeManager"]
 visible = false
 custom_minimum_size = Vector2(1000, 500)
 anchors_preset = 8
@@ -590,7 +590,7 @@ grow_vertical = 2
 texture = ExtResource("19_30ukb")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="Node/PresetRect"]
+[node name="Label" type="Label" parent="PresetCodeManager/PresetRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -607,7 +607,7 @@ theme_override_fonts/font = ExtResource("2_rnxid")
 theme_override_font_sizes/font_size = 30
 text = "Enter Preset Keyword"
 
-[node name="keyword" type="LineEdit" parent="Node/PresetRect"]
+[node name="keyword" type="LineEdit" parent="PresetCodeManager/PresetRect"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -624,7 +624,7 @@ grow_vertical = 2
 alignment = 1
 max_length = 30
 
-[node name="finalizeSaveBtn" type="Button" parent="Node/PresetRect"]
+[node name="finalizeSaveBtn" type="Button" parent="PresetCodeManager/PresetRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

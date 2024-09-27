@@ -10,6 +10,7 @@ public partial class InstructionCodeHandler : TextEdit
     public override void _Ready()
     {
         precodes.InitializePremadeCodes();
+        PresetCodeFileSaver.SetPresetCodeList(precodes);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
