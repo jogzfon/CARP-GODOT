@@ -1,0 +1,11 @@
+Keyword: test101
+Instructions: ;Test 101
+LDAC 100
+MVAC
+ADD
+STAC 100
+END
+
+
+
+

@@ -81,31 +81,36 @@ public static class PresetCodeFileSaver
     public static void DistributePresetCodeValue(string content)
     {
         List<List<Tokens>> tokens = new List<List<Tokens>>();
-        string pattern = @"\b(Keyword:|Instructions:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S";
+        string pattern = @"\b(Keyword:|Instructions:)\b|""[^""]*""|'[^']*'|\b[\w']+\b|\S|\s+|\n|\r\n";
 
         string[] lines = content.Split('\n');
 
         foreach (string line in lines)
         {
-            tokens.Add(TokenizeAccountLines(line.Replace(",", ""), pattern));
+            tokens.Add(TokenizeAccountLines(line, pattern));
         }
-        /*string keyword = String.Empty;
+        string keyword = String.Empty;
         string value = String.Empty;
+
         for (int i = 0; i < tokens.Count; i++)
         {
             var temp = SetPresetCodeValues(tokens[i]);
 
-            if(temp.type == "Keyword")
+            if (temp.type.Equals("Keyword"))
             {
                 keyword += temp.content;
+            }
+            else if(temp.type.Equals("Instructions"))
+            {
+                value += temp.content;
             }
             else
             {
-                keyword += temp.content;
+                value += "\n";
             }
         }
         presetCodeList.AddSetOfCodes(keyword, value);
-        GD.Print("Keyword: " + keyword + "\n" + value);*/
+        //GD.Print("Keyword: " + keyword + "\nInstructions: " + value);
     }
     private static List<Tokens> TokenizeAccountLines(string line, string pattern)
     {
@@ -134,40 +139,44 @@ public static class PresetCodeFileSaver
         }
         return tokens;
     }
-    private static void SetPresetCodeValues(List<Tokens> tokens)
+    private static (string type, string content) SetPresetCodeValues(List<Tokens> tokens)
     {
-        /*string content = "";
+        string content = "";
+        if (tokens.Count == 0)
+        {
+            return ("Instructions", "\n");
+        }
+
         switch (tokens[0].value)
         {
             case "Keyword":
-                if (2 < tokens.Count)
+                if (3 < tokens.Count)
                 {
-                    for (int i = 2; i < tokens.Count; i++)
+                    for (int i = 3; i < tokens.Count; i++)
                     {
-                        preset_keyword += tokens[i].value;
+                        content += tokens[i].value;
                     }
-                    return preset_keyword;
+                    return ("Keyword", content);
                 }
                 break;
             case "Instructions":
-                if (2 < tokens.Count)
+                if (3 < tokens.Count)
                 {
-                    for (int i = 2; i < tokens.Count; i++)
+                    for (int i = 3; i < tokens.Count; i++)
                     {
-                        preset_instructions += tokens[i].value;
+                        content += tokens[i].value;
                     }
-                    return preset_instructions;
+                    return ("Instructions", content + "\n");
                 }
                 break;
             default:
-                    string preset_instructions = "";
-                    for (int i = 0; i < tokens.Count; i++)
-                    {
-                        preset_instructions += tokens[i].value;
-                    }
-                break;
+                for (int i = 0; i < tokens.Count; i++)
+                {
+                    content += tokens[i].value;
+                }
+                return ("Instructions", content + "\n");
         }
-        return null;*/
+        return ("Instructions", "\n");
     }
 
     public static void SetPresetCodeList(PremadeCodeList presetCodes)

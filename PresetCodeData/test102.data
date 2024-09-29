@@ -1,0 +1,14 @@
+Keyword: test102
+Instructions: ;Test 102
+MVAC
+ADD
+STAC 100
+STAC 101
+ADD
+STAC 102
+END
+
+
+
+
+

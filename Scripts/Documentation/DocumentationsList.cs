@@ -102,7 +102,7 @@ public partial class DocumentationsList : VBoxContainer
 
         foreach (string line in lines)
         {
-            tokens.Add(TokenizeDocumentationLines(line.Replace(",", ""), pattern));
+            tokens.Add(TokenizeDocumentationLines(/*line.Replace(",", "")*/line, pattern));
         }
 
         for (int i = 0; i < tokens.Count; i++)
