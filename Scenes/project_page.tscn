@@ -410,6 +410,18 @@ placeholder_text = "Input code here..."
 script = ExtResource("9_ni21l")
 instructions = NodePath(".")
 
+[node name="SaveAsPreset" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/SaveAsPreset"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PresetCodeBtn" type="Button" parent="LeftContainer/SaveAsPreset"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save as Preset Code"
+
 [node name="UnitType" type="Label" parent="LeftContainer"]
 visible = false
 layout_mode = 2
@@ -436,18 +448,6 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_jdv15")
 theme_override_font_sizes/font_size = 20
 text = "Hardwired"
-
-[node name="SaveAsPreset" type="HBoxContainer" parent="LeftContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/SaveAsPreset"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PresetCodeBtn" type="Button" parent="LeftContainer/SaveAsPreset"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Save as Preset Code"
 
 [node name="Assemble" type="Button" parent="LeftContainer"]
 layout_mode = 2

@@ -3,16 +3,15 @@ Status: Ended
 RtlStatement: END 
 DataMovement: NONE 
 CurrentMemoryLocation: 0
-InstructionCodes: ;Test 101
-LDAC 100
-MVAC
-ADD
-STAC 100
-END
+InstructionCodes: ;add two numbers.  x+y   Show overflow.
+;x at 100, y at 101, sum at 102
 
-
-
-
+ldac 100	                           		      ;load x
+mvac		                                      ;copy to R
+ldac 101                           		      ;load y
+add		                               	         ;x+y
+stac 102                            		    ;store to sum
+end
 
 
 

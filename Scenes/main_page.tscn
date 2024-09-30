@@ -967,6 +967,7 @@ theme_override_font_sizes/font_size = 25
 text = "👌File System
 👌Documentation System
 👌Code Shortcuts
+👌PresetCode System
 👌AI-generated Text"
 autowrap_mode = 2
 
