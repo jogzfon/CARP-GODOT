@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=75 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -165,6 +165,15 @@ shader_parameter/ratio_width = 1.0
 shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
+
+[sub_resource type="Gradient" id="Gradient_5ucx1"]
+offsets = PackedFloat32Array(0.608333, 0.652778, 0.702778)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4bkhm"]
+gradient = SubResource("Gradient_5ucx1")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
 
 [node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "userName", "options", "logout", "settings", "documentationAdder", "_documentationAbler", "_subscriptionHandler", "_profileHandler")]
 layout_mode = 3
@@ -1088,3 +1097,30 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("58_vo425")
 expand_mode = 1
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_left = -73.0
+offset_top = 753.0
+offset_right = 427.0
+offset_bottom = 945.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = SubResource("GradientTexture2D_4bkhm")

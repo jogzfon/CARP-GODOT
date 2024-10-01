@@ -172,6 +172,7 @@ public partial class project_page : Control
     {
         if (AccountManager.GetUser() != null)
         {
+            DataToSave.status = "Idle";
             DataToSave.SaveFile();
             DataToSave.ResetDatas();
         }

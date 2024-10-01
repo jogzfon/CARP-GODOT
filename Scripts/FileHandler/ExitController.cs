@@ -44,6 +44,7 @@ public partial class ExitController : Node
 	}
     private async void Save()
     {
+        DataToSave.status = "Idle";
         DataToSave.SaveFile();
         DataToSave.ResetDatas();
         await WaitTime();
