@@ -1,16 +1,20 @@
 ---------- Detail Info   ----------
 Status: Idle
-RtlStatement: LDAC 3
-DataMovement: AR <- DR | TR
-CurrentMemoryLocation: 1
-InstructionCodes: ; add two numbers . x + y Show overflow . 
-; x at 100 y at 101 sum at 102 
-ldac 100 ; load x 
-mvac ; copy to R 
-ldac 101 ; load y 
-add ; x + y 
-stac 102 ; store to sum 
-end 
+RtlStatement: LDAC 3 
+DataMovement: AR < - DR | TR 
+CurrentMemoryLocation: 0
+InstructionCodes: ; example from online Help 
+org 0 ; assembly start address 
+db 2 ; defines a byte of decimal value 2 
+db 4 ; defines a byte of decimal value 4 
+org 10 ; assembly start address 
+ldac 0 ; load AC with data at location 0 
+mvac ; move AC data to register R 
+ldac 1 ; load AC with data at location 1 
+add ; store the sum of AC R in AC 
+stac 2 ; store AC at location 2 
+stac ffffh ; send AC to I / O Port 
+end ; stop 
 
 
 
@@ -37,25 +41,25 @@ RTL: LDAC 1   ,
 DataMove: DR < - M PC < - PC + 1 AR < - AR + 1 , 
 AR: 0000 0000 0000 0010, PC: 0000 0000 0000 0010, DR: 0110 0100, TR: 0000 0000, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0000 0010, PC: 0000 0000 0000 0010, DR: 0110 0100, TR: 0000 0000, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0000 0010, PC: 0000 0000 0000 0010, DR: 0110 0100, TR: 0000 0000, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: Fetch 2  , 
-DataMove: DR <- M, PC <- PC+1, 
+DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0000 0010, PC: 0000 0000 0000 0011, DR: 0000 0001, TR: 0000 0000, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: Fetch 3  , 
-DataMove: IR <- DR, AR <- PC, 
+DataMove: IR < - DR AR < - PC , 
 AR: 0000 0000 0000 0011, PC: 0000 0000 0000 0011, DR: 0000 0001, TR: 0000 0000, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: LDAC 1   , 
-DataMove: DR <- M, PC <- PC + 1, AR <- AR + 1, 
+DataMove: DR < - M PC < - PC + 1 AR < - AR + 1 , 
 AR: 0000 0000 0000 0100, PC: 0000 0000 0000 0100, DR: 0110 0100, TR: 0000 0000, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: LDAC 2   , 
-DataMove: TR <- DR, DR <- M, PC = PC + 1, 
+DataMove: TR < - DR DR < - M PC = PC + 1 , 
 AR: 0000 0000 0000 0100, PC: 0000 0000 0000 0101, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: LDAC 3   , 
-DataMove: AR <- DR | TR, 
+DataMove: AR < - DR | TR , 
 AR: 0000 0000 0110 0100, PC: 0000 0000 0000 0101, DR: 0110 0100, TR: 0110 0100, IR: 0000 0001, R: 0000 0000, AC: 0000 0000, Z: 0
 
 
