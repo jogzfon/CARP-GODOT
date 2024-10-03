@@ -6,9 +6,6 @@ using System.Text.RegularExpressions;
 
 public partial class project_page : Control
 {
-    [Export] private CheckButton hardwired;
-    [Export] private CheckButton microprogrammed;
-
     [Export] private Panel memoryPnl;
     [Export] private Panel breakPointsPnl;
     [Export] private Panel traceResultsPnl;
@@ -131,13 +128,6 @@ public partial class project_page : Control
         //Inputs
         instructionCodes = GetNode<TextEdit>("LeftContainer/ScrollContainer/InstructionCode");
         memoryLocation = GetNode<LineEdit>("LeftContainer/MemoryLocation");
-
-        //Optional
-        hardwired.Connect("toggled", new Callable(this, nameof(HardWired)));
-        microprogrammed.Connect("toggled", new Callable(this, nameof(MicroProgrammed)));
-
-        microprogrammed.ButtonPressed = true;
-        hardwired.ButtonPressed = false;
         #endregion
         #region Panels
         memoryPnl.Show();
@@ -219,14 +209,6 @@ public partial class project_page : Control
     private void GoToAI()
     {
         aiPnl.Visible = true;
-    }
-    private void HardWired()
-    {
-        microprogrammed.ButtonPressed = false;
-    }
-    private void MicroProgrammed()
-    {
-        hardwired.ButtonPressed = false;
     }
     #endregion
 

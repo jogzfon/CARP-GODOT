@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=25 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/Pages/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
 [ext_resource type="Script" path="res://Scripts/PreMade Code/InstructionCodeHandler.cs" id="9_ni21l"]
+[ext_resource type="Script" path="res://Scripts/Other/UnitType.cs" id="11_0eaj6"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="11_g1vms"]
 [ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Sprites/Cross.png" id="13_ggbv5"]
 [ext_resource type="Script" path="res://Scripts/FileHandler/ExitController.cs" id="14_r5c7n"]
@@ -49,7 +50,7 @@ fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.5, 0.5)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("hardwired", "microprogrammed", "memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,8 +58,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lst7x")
-hardwired = NodePath("LeftContainer/UnitType2/Hardwired")
-microprogrammed = NodePath("LeftContainer/UnitType2/MicroProgrammed")
 memoryPnl = NodePath("VBoxContainer/PanelContainer/MemoryAndIO")
 breakPointsPnl = NodePath("VBoxContainer/PanelContainer/Breakpoints")
 traceResultsPnl = NodePath("VBoxContainer/PanelContainer/TraceResult")
@@ -422,16 +421,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Save as Preset Code"
 
-[node name="UnitType" type="Label" parent="LeftContainer"]
-visible = false
+[node name="UnitType" type="Label" parent="LeftContainer" node_paths=PackedStringArray("_microprogrammed", "_hardwired")]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_tcw3m")
 theme_override_font_sizes/font_size = 25
 text = "Control Unit Type"
 horizontal_alignment = 1
+script = ExtResource("11_0eaj6")
+_microprogrammed = NodePath("../UnitType2/MicroProgrammed")
+_hardwired = NodePath("../UnitType2/Hardwired")
 
 [node name="UnitType2" type="HBoxContainer" parent="LeftContainer"]
-visible = false
 layout_mode = 2
 
 [node name="MicroProgrammed" type="CheckButton" parent="LeftContainer/UnitType2"]
