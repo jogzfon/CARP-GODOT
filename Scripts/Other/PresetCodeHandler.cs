@@ -1,28 +1,38 @@
 using Godot;
 using System;
-
+using System.Threading.Tasks;
 public partial class PresetCodeHandler : Node
 {
 	[Export] private TextEdit _assembledCode;
     [Export] private LineEdit _codeKeyword;
+
+    [Export] private Button _exitBtn;
     [Export] private Button _savePresetBtn;
     [Export] private Button _finalizeSavePresetBtn;
+
     [Export] private TextureRect _presetTextureRect;
 	[Export] private HBoxContainer _presetBtnContainer;
 
 	[Export] private InstructionCodeHandler _instructionCodeHandler;
     [Export] private NotificationHandler _notificationHandler;
 
+	[Export] private TextureRect _loading;
+
     private PremadeCodeList _premadeCodeList;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_presetTextureRect.Visible = false;
+
+        _exitBtn.Connect("pressed", new Callable(this, nameof(ExitPresetPanel)));
+
         _savePresetBtn.Connect("pressed", new Callable(this, nameof(OpenKeywordInput)));
         _finalizeSavePresetBtn.Connect("pressed", new Callable(this, nameof(SaveInstructionsAsPreset)));
 		_presetBtnContainer.Visible = false;
 
         _premadeCodeList = _instructionCodeHandler.GetPrecodes();
+
+        _loading.Visible = false;
 
         if (AccountManager.GetUser() != null && AccountManager.GetUser().Role == "Teacher")
         {
@@ -53,19 +63,37 @@ public partial class PresetCodeHandler : Node
 			_presetTextureRect.Visible = false;
 		}
 	}
-    private void SaveInstructionsAsPreset()
+    private async void SaveInstructionsAsPreset()
     {
-		var isOk = _premadeCodeList.AddSetOfCodes(_codeKeyword.GetText(), _assembledCode.GetText()); 
+		await SavePresetCode();
+
+        var isOk = _premadeCodeList.AddSetOfCodes(_codeKeyword.GetText(), _assembledCode.GetText()); 
 		if(isOk.errNum > 0)
 		{
 			_notificationHandler.MessageBox(isOk.message, 1);
-			return;
+
+            _loading.Visible = false;
+
+            return;
 		}
 		else
 		{
             _notificationHandler.MessageBox(isOk.message, 0);
         }
         _codeKeyword.Clear();
+
+        _loading.Visible = false;
+
+        _presetTextureRect.Visible = false;
+    }
+
+	private void ExitPresetPanel()
+	{
 		_presetTextureRect.Visible = false;
+    }
+	private async Task SavePresetCode()
+	{
+        _loading.Visible = true;
+        await Task.Delay(2000);
     }
 }

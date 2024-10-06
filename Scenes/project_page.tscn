@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=32 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/Pages/project_page.cs" id="1_lst7x"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_tcw3m"]
@@ -20,6 +20,39 @@
 [ext_resource type="Script" path="res://Scripts/Other/PresetCodeHandler.cs" id="18_h1qas"]
 [ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="18_ms3uc"]
 [ext_resource type="Texture2D" uid="uid://dy3etmq5s7r5j" path="res://Sprites/Rectangle 90.png" id="19_30ukb"]
+[ext_resource type="PackedScene" uid="uid://jtq8firoonfc" path="res://Scenes/Others/loading.tscn" id="21_gw1lt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wil1c"]
+shader = ExtResource("18_ms3uc")
+shader_parameter/color_start = Color(0.2, 0.6, 1, 1)
+shader_parameter/color_end = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/rotation_speed = 1.0
+shader_parameter/dot_size = 0.05
+shader_parameter/num_dots = 9
+shader_parameter/radius = 0.25
+shader_parameter/fade_speed = -3.0
+shader_parameter/glow_intensity = 1.0
+
+[sub_resource type="Gradient" id="Gradient_dhcwc"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_frkal"]
+gradient = SubResource("Gradient_dhcwc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k78pm"]
+shader = ExtResource("18_ms3uc")
+shader_parameter/color_start = Color(0.2, 0.6, 1, 1)
+shader_parameter/color_end = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/rotation_speed = 1.0
+shader_parameter/dot_size = 0.05
+shader_parameter/num_dots = 9
+shader_parameter/radius = 0.25
+shader_parameter/fade_speed = -3.0
+shader_parameter/glow_intensity = 1.0
+
+[sub_resource type="Gradient" id="Gradient_lmsen"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ohklu"]
+gradient = SubResource("Gradient_lmsen")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kgeug"]
 bg_color = Color(0.388235, 0.388235, 0.396078, 1)
@@ -46,7 +79,7 @@ fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.5, 0.5)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back")]
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back", "_loading", "_memoryLoad", "_traceLoad")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,7 +96,10 @@ notification = NodePath("NotificationHandler")
 toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
 assemble = NodePath("LeftContainer/Assemble")
 toAI = NodePath("VBoxContainer/HBoxContainer/AIBtn")
-back = NodePath("Back")
+back = NodePath("HBoxContainer/Back")
+_loading = NodePath("HBoxContainer/Loading")
+_memoryLoad = NodePath("VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/ScrollContainer/Loading")
+_traceLoad = NodePath("VBoxContainer/PanelContainer/TraceResult/VBoxContainer/ScrollContainer/Loading")
 metadata/_edit_horizontal_guides_ = [-53.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -76,6 +112,29 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 280.0
+offset_bottom = 100.0
+
+[node name="Back" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("11_g1vms")
+stretch_mode = 0
+
+[node name="Loading" type="TextureRect" parent="HBoxContainer"]
+visible = false
+material = SubResource("ShaderMaterial_wil1c")
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_frkal")
+expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -172,7 +231,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_6x74r")
 theme_override_font_sizes/font_size = 25
-editable = false
+
+[node name="Loading" type="TextureRect" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/ScrollContainer"]
+visible = false
+material = SubResource("ShaderMaterial_k78pm")
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = SubResource("GradientTexture2D_ohklu")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer"]
 layout_mode = 2
@@ -285,6 +352,15 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_6x74r")
 editable = false
 
+[node name="Loading" type="TextureRect" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer/ScrollContainer"]
+visible = false
+material = SubResource("ShaderMaterial_k78pm")
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = SubResource("GradientTexture2D_ohklu")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/TraceResult/VBoxContainer"]
 layout_mode = 2
 
@@ -390,6 +466,18 @@ text = "0"
 placeholder_text = "Enter Memory Location"
 alignment = 1
 
+[node name="SaveAsPreset" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/SaveAsPreset"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PresetCodeBtn" type="Button" parent="LeftContainer/SaveAsPreset"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save as Preset Code"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="LeftContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -405,22 +493,10 @@ placeholder_text = "Input code here..."
 script = ExtResource("9_ni21l")
 instructions = NodePath(".")
 
-[node name="SaveAsPreset" type="HBoxContainer" parent="LeftContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/SaveAsPreset"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PresetCodeBtn" type="Button" parent="LeftContainer/SaveAsPreset"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Save as Preset Code"
-
 [node name="UnitType" type="Label" parent="LeftContainer" node_paths=PackedStringArray("_microprogrammed", "_hardwired")]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_tcw3m")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 15
 text = "Control Unit Type"
 horizontal_alignment = 1
 script = ExtResource("11_0eaj6")
@@ -454,22 +530,13 @@ text = "ASSEMBLE"
 icon_alignment = 1
 expand_icon = true
 
-[node name="Back" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 90.0
-offset_bottom = 140.0
-scale = Vector2(0.76447, 0.438668)
-texture_normal = ExtResource("11_g1vms")
-stretch_mode = 0
-
-[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn")]
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn", "_load")]
 script = ExtResource("14_r5c7n")
 exitbtn = NodePath("ExitButton")
 savePanel = NodePath("SavePanel")
 yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
 nobtn = NodePath("SavePanel/HBoxContainer/No")
+_load = NodePath("SavePanel/Loading")
 
 [node name="ExitButton" type="Button" parent="Exit"]
 anchors_preset = 1
@@ -504,12 +571,26 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -95.0
-offset_top = 86.0
+offset_top = 90.0
 offset_right = 97.0
-offset_bottom = 109.0
+offset_bottom = 113.0
 grow_horizontal = 2
 theme = ExtResource("2_d75fn")
 text = "Do you want to save file?"
+
+[node name="Loading" parent="Exit/SavePanel" instance=ExtResource("21_gw1lt")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -23.0
+offset_right = 32.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
 layout_mode = 1
@@ -517,9 +598,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -155.0
-offset_top = 147.0
+offset_top = 190.0
 offset_right = 145.0
-offset_bottom = 187.0
+offset_bottom = 230.0
 grow_horizontal = 2
 
 [node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]
@@ -558,16 +639,18 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
 
-[node name="PresetCodeManager" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_presetBtnContainer", "_instructionCodeHandler", "_notificationHandler")]
+[node name="PresetCodeManager" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_exitBtn", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_presetBtnContainer", "_instructionCodeHandler", "_notificationHandler", "_loading")]
 script = ExtResource("18_h1qas")
 _assembledCode = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
 _codeKeyword = NodePath("PresetRect/keyword")
+_exitBtn = NodePath("PresetRect/ExitButton")
 _savePresetBtn = NodePath("../LeftContainer/SaveAsPreset/PresetCodeBtn")
 _finalizeSavePresetBtn = NodePath("PresetRect/finalizeSaveBtn")
 _presetTextureRect = NodePath("PresetRect")
 _presetBtnContainer = NodePath("../LeftContainer/SaveAsPreset")
 _instructionCodeHandler = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
 _notificationHandler = NodePath("../NotificationHandler")
+_loading = NodePath("PresetRect/Loading")
 
 [node name="PresetRect" type="TextureRect" parent="PresetCodeManager"]
 visible = false
@@ -634,3 +717,30 @@ offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "SAVE PRESET INSTRUCTIONS"
+
+[node name="Loading" parent="PresetCodeManager/PresetRect" instance=ExtResource("21_gw1lt")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 185.0
+offset_top = -108.0
+offset_right = 249.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExitButton" type="Button" parent="PresetCodeManager/PresetRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -34.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = 41.0
+grow_horizontal = 0
+icon = ExtResource("13_ggbv5")
+expand_icon = true

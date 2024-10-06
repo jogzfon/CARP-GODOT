@@ -33,6 +33,10 @@ public class PremadeCodeList
         }
         try
         {
+            if(instructions == null || instructions == String.Empty) {
+                return ("No instructions found.", 1);
+            }
+
             premadeCodes.Add(new PremadeCode(keyword, instructions));
             PresetCodeFileSaver.SavePresetCode(keyword, instructions); // Save the preset as script
             return ("Preset Code Added Successfully.", 0);

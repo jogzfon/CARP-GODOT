@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=74 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -15,8 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://b15huxyjqmigj" path="res://Scenes/recent_file.tscn" id="6_nbcor"]
 [ext_resource type="Texture2D" uid="uid://cb3mgtogo7yoa" path="res://Sprites/Documentation/doc_add_Btn.png" id="6_vpwlf"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationRefresher.cs" id="6_xdxq4"]
-[ext_resource type="Shader" path="res://Shader/loading.gdshader" id="7_drrbi"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationHandler.cs" id="7_rql6r"]
+[ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="7_u1fwk"]
 [ext_resource type="PackedScene" uid="uid://ch2tuesmvb3cb" path="res://Scenes/DocumentationAddOns/doc_btn_container.tscn" id="8_v0mou"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="10_8xef3"]
 [ext_resource type="Shader" path="res://Shader/circleImage.gdshader" id="10_urm6c"]
@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://vvu0807gwg2x" path="res://Sprites/Subscription/Rectangle 92.png" id="28_o5xks"]
 [ext_resource type="Texture2D" uid="uid://c4uvbuprkvnnd" path="res://Sprites/Subscription/School_Logo3.png" id="30_up4sm"]
 [ext_resource type="Texture2D" uid="uid://bog35ofpaqh01" path="res://Sprites/Subscription/School_Logo1.png" id="31_5pwgi"]
+[ext_resource type="PackedScene" uid="uid://jtq8firoonfc" path="res://Scenes/Others/loading.tscn" id="31_we5ck"]
 [ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
 [ext_resource type="PackedScene" uid="uid://vykxrngj8yrh" path="res://Scenes/documentation_template.tscn" id="32_5gf2n"]
 [ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
@@ -72,19 +73,15 @@ font = ExtResource("13_0fq7n")
 font_size = 25
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2v73o"]
-shader = ExtResource("7_drrbi")
-shader_parameter/spiral_type = 1
-shader_parameter/primary_color = Color(0.2, 0.6, 1, 1)
-shader_parameter/secondary_color = Color(0.8, 0.2, 0.8, 1)
-shader_parameter/rays = 6.0
-shader_parameter/speed = 1.0
-shader_parameter/fade = 0.5
-shader_parameter/thickness = 0.5
-shader_parameter/clockwise = true
-shader_parameter/tiers = 4.0
-shader_parameter/stretch = 6.28
+shader = ExtResource("7_u1fwk")
+shader_parameter/color_start = Color(0.2, 0.6, 1, 1)
+shader_parameter/color_end = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/rotation_speed = 1.0
+shader_parameter/dot_size = 0.05
+shader_parameter/num_dots = 9
+shader_parameter/radius = 0.25
+shader_parameter/fade_speed = -3.0
 shader_parameter/glow_intensity = 1.0
-shader_parameter/pulse_speed = 1.0
 
 [sub_resource type="Theme" id="Theme_s6t6r"]
 
@@ -695,7 +692,7 @@ access = 2
 root_subfolder = "Projects"
 filters = PackedStringArray("*.carp")
 
-[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn", "documentationAdder")]
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn", "documentationAdder", "_load")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
 savePanel = NodePath("SavePanel")
@@ -703,6 +700,7 @@ yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
 nobtn = NodePath("SavePanel/HBoxContainer/No")
 documentationAdder = NodePath("../MainContent/DocumentationAdder")
 saveAvailable = false
+_load = NodePath("SavePanel/Loading")
 
 [node name="ExitButton" type="Button" parent="Exit"]
 anchors_preset = 1
@@ -737,12 +735,26 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -26.0
-offset_top = 84.0
-offset_right = 14.0
-offset_bottom = 107.0
+offset_left = -102.0
+offset_top = 90.0
+offset_right = 90.0
+offset_bottom = 113.0
 grow_horizontal = 2
 text = "Do you want to save file?"
+
+[node name="Loading" parent="Exit/SavePanel" instance=ExtResource("31_we5ck")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -23.0
+offset_right = 32.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
 layout_mode = 1
@@ -750,9 +762,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -155.0
-offset_top = 147.0
+offset_top = 190.0
 offset_right = 145.0
-offset_bottom = 187.0
+offset_bottom = 230.0
 grow_horizontal = 2
 
 [node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]

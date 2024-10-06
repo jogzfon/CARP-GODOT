@@ -32,6 +32,7 @@ script = ExtResource("1_3ovip")
 messageBox = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

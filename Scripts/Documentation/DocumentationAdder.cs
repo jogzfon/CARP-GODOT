@@ -207,6 +207,11 @@ public partial class DocumentationAdder : Control
         _loadingParent.AddChild(loadingInstance); // Add the loading screen to its parent
         loading = loadingInstance; // Store reference to the loading instance for future removal
 
+        parSenBtn.Disabled = true;
+        imageBtn.Disabled = true;
+        saveBtn.Disabled = true;
+        backBtn.Disabled = true;
+
         await Task.Delay(2000); // Adjust the delay as needed for better UX
     }
 
@@ -217,6 +222,11 @@ public partial class DocumentationAdder : Control
         {
             loading.QueueFree(); // Remove the loading indicator from the scene
         }
+
+        parSenBtn.Disabled = false;
+        imageBtn.Disabled = false;
+        saveBtn.Disabled = false;
+        backBtn.Disabled = false;
     }
     public string GetAllDocumentationData()
     {

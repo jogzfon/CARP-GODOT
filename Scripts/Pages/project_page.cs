@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 public partial class project_page : Control
 {
     [Export] private Panel memoryPnl;
+
     [Export] private Panel breakPointsPnl;
     [Export] private Panel traceResultsPnl;
     [Export] private Control aiPnl;
@@ -40,6 +42,11 @@ public partial class project_page : Control
     [Export] private Button toAI;
 
     [Export] private TextureButton back;
+
+    [ExportCategory("Loading Screens")]
+    [Export] private TextureRect _loading;
+    [Export] private TextureRect _memoryLoad;
+    [Export] private TextureRect _traceLoad;
     #endregion
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -136,6 +143,11 @@ public partial class project_page : Control
         viewSystem.Hide();
         #endregion
 
+        #region Loading
+        _loading.Visible = false;
+        _memoryLoad.Visible = false;
+        _traceLoad.Visible = false;
+        #endregion
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -157,21 +169,34 @@ public partial class project_page : Control
             }
         }
 	}
- 
-    public void BackToProject()
+
+    #region Back
+    public async void BackToProject()
     {
         if (AccountManager.GetUser() != null)
         {
+            await LoadSave();
+
             DataToSave.status = "Idle";
             DataToSave.SaveFile();
             DataToSave.ResetDatas();
+
+            _loading.Visible = false;
         }
         /*if(mainPage != null)
         {
             GetTree().ChangeSceneToPacked(mainPage);
         }*/
+
         this.QueueFree();
     }
+
+    private async Task LoadSave()
+    {
+        _loading.Visible = true;
+        await Task.Delay(1500);
+    }
+    #endregion
     #region LeftButtons
     private void Assemble()
     {
@@ -220,28 +245,58 @@ public partial class project_page : Control
         traceResultsPnl.Hide();
         viewSystem.Hide();
     }
-    private void ViewMemory()
+    private async void ViewMemory()
     {
+        memoryBox.Visible = false;
+        await LoadMemory();
+
         memoryBox.Text = "";
         Memory.UpdateMemoryTextBox(memoryBox, isHex);
+
+        _memoryLoad.Visible = false;
+        memoryBox.Visible = true;
     }
-    private void ClearMemory()
+    private async void ClearMemory()
     {
+        memoryBox.Visible = false;
+        await LoadMemory();
+
         Memory.Clear();
         memoryBox.Text = "";
         Memory.UpdateMemoryTextBox(memoryBox, isHex);
+
+        _memoryLoad.Visible = false;
+        memoryBox.Visible = true;
     }
-    private void ConvertToHex()
+    private async void ConvertToHex()
     {
+        memoryBox.Visible = false;
+        await LoadMemory();
+
         isHex = true;
         memoryBox.Text = "";
         Memory.UpdateMemoryTextBox(memoryBox, isHex);
+
+        _memoryLoad.Visible = false;
+        memoryBox.Visible = true;
     }
-    private void ConvertToBinary()
+    private async void ConvertToBinary()
     {
+        memoryBox.Visible = false;
+        await LoadMemory();
+
         isHex = false;
         memoryBox.Text = "";
         Memory.UpdateMemoryTextBox(memoryBox, isHex);
+
+        _memoryLoad.Visible = false;
+        memoryBox.Visible = true;
+    }
+
+    private async Task LoadMemory()
+    {
+        _memoryLoad.Visible = true;
+        await Task.Delay(1000);
     }
     #endregion Memory
 
@@ -334,16 +389,34 @@ public partial class project_page : Control
         traceResultsPnl.Show();
         viewSystem.Hide();
     }
-    private void ViewResults()
+    private async void ViewResults()
     {
+        traceResultBox.Visible = false;
+        await LoadTrace();
+
         traceResultBox.Clear();
         TraceResults.UpdateTraceResults(traceResultBox);
         traceResultBox.Text += "\n";
+
+        _traceLoad.Visible = false;
+        traceResultBox.Visible = true;
     }
-    private void ClearResults()
+    private async void ClearResults()
     {
+        traceResultBox.Visible = false;
+        await LoadTrace();
+
         traceResultBox.Clear();
         TraceResults.RemoveAllStatements();
+
+        _traceLoad.Visible = false;
+        traceResultBox.Visible = true;
+    }
+
+    private async Task LoadTrace()
+    {
+        _traceLoad.Visible = true;
+        await Task.Delay(500);
     }
     #endregion
 

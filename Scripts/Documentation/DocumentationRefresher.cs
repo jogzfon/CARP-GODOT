@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class DocumentationRefresher : HBoxContainer
 {
@@ -36,12 +37,18 @@ public partial class DocumentationRefresher : HBoxContainer
             _refresher.Visible = false;
         }
     }
-    public void RefreshDocs()
+    public async void RefreshDocs()
     {
+        await RefreshIt();
+
         _abler.RemoveAllTemplates();
 
-        _refresher.Material = _shader;
         _documents.RefreshAllDocumentFilesInCarp();
         _refresher.Material = null;
+    }
+    private async Task RefreshIt()
+    {
+        _refresher.Material = _shader;
+        await Task.Delay(1000);
     }
 }

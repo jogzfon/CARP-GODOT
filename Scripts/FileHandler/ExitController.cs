@@ -12,9 +12,13 @@ public partial class ExitController : Node
     [Export] private Control documentationAdder;
 
     [Export] private bool saveAvailable = true;
+
+    [Export] private TextureRect _load;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+        _load.Visible = false;
+
         savePanel.Visible = false;
         exitbtn.Connect("pressed", new Callable(this, nameof(Exit)));
         yesbtn.Connect("pressed", new Callable(this, nameof(Save)));
@@ -44,10 +48,14 @@ public partial class ExitController : Node
 	}
     private async void Save()
     {
+        await LoadSave();
+
         DataToSave.status = "Idle";
         DataToSave.SaveFile();
         DataToSave.ResetDatas();
-        await WaitTime();
+
+        _load.Visible = false;
+
         GetTree().Quit();
     }
     private void NotSave()
@@ -57,5 +65,12 @@ public partial class ExitController : Node
     private async Task WaitTime()
     {
         await Task.Delay(1000);
+    }
+
+    private async Task LoadSave()
+    {
+        _load.Visible = true;
+
+        await Task.Delay(1500);
     }
 }
