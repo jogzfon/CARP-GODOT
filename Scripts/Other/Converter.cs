@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public static class Converter
 {
@@ -31,4 +32,15 @@ public static class Converter
 
         return result;
     }
+
+    public static Task<string> TextureToBase64Async(Texture2D texture)
+    {
+        return Task.Run(() => TextureToBase64(texture));
+    }
+
+    public static Task<Texture2D> Base64ToTextureAsync(string base64String)
+    {
+        return Task.Run(() => Base64ToTexture(base64String));
+    }
+
 }
