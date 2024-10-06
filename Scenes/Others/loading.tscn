@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://jtq8firoonfc"]
+[gd_scene load_steps=7 format=3 uid="uid://jtq8firoonfc"]
 
 [ext_resource type="Script" path="res://Scripts/Other/LoadingManager.cs" id="1_3ovip"]
 [ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="1_wlcv8"]
+[ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="3_xdcrk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5g4e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvbup"]
 shader = ExtResource("1_wlcv8")
 shader_parameter/color_start = Color(0.2, 0.6, 1, 1)
 shader_parameter/color_end = Color(0.8, 0.2, 0.8, 1)
@@ -14,49 +15,34 @@ shader_parameter/radius = 0.25
 shader_parameter/fade_speed = -3.0
 shader_parameter/glow_intensity = 1.0
 
-[sub_resource type="Gradient" id="Gradient_namka"]
+[sub_resource type="Gradient" id="Gradient_0436e"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_od3dt"]
-gradient = SubResource("Gradient_namka")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6ax3y"]
+gradient = SubResource("Gradient_0436e")
 
-[node name="Loading" type="Control" node_paths=PackedStringArray("loadingImg", "messageBox")]
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -76.0
-offset_right = 75.0
-offset_bottom = 74.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Loading" type="TextureRect" node_paths=PackedStringArray("messageBox")]
+material = SubResource("ShaderMaterial_qvbup")
+custom_minimum_size = Vector2(50, 50)
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("GradientTexture2D_6ax3y")
 script = ExtResource("1_3ovip")
-message = "Saving"
-loadingImg = NodePath("TextureRect")
-messageBox = NodePath("TextureRect/Label")
+messageBox = NodePath("Label")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_r5g4e")
+[node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
+anchor_bottom = 1.0
+offset_left = -55.5
+offset_right = 55.5
 offset_bottom = 32.0
 grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_od3dt")
-
-[node name="Label" type="Label" parent="TextureRect"]
-layout_mode = 0
-offset_top = 70.0
-offset_right = 73.0
-offset_bottom = 93.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_xdcrk")
+theme_override_font_sizes/font_size = 25
 text = "LOADING"

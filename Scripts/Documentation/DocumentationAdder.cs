@@ -13,8 +13,6 @@ public partial class DocumentationAdder : Control
     [Export] private Button saveBtn;
     [Export] private Button backBtn;
 
-    [Export] private TextureRect loading;
-
     [Export] private Control docAdderPanel;
 
     [Export] private LineEdit doc_Title;
@@ -33,9 +31,14 @@ public partial class DocumentationAdder : Control
     private string _selectedImagePath;
 
     private string directoryLoc = "Carp_Documentation";
+
+    [ExportCategory("Loading")]
+    [Export] private PackedScene _loading;
+    [Export] private Node _loadingParent;
+    Node loading;
+    String _filepath;
     public override void _Ready()
     {
-        loading.Visible = false;
         DirAccess dir = DirAccess.Open(directoryLoc);
         if (dir == null)
         {
@@ -50,7 +53,8 @@ public partial class DocumentationAdder : Control
         backBtn.Connect("pressed", new Callable(this, nameof(BackPressed)));
 
         _imageFileDialogue.Connect("file_selected", new Callable(this, nameof(OnImageFileSelected)));
-        _saveFileDialogue.Connect("file_selected", new Callable(this, nameof(SaveDocumentationFile)));
+        _saveFileDialogue.Connect("file_selected", new Callable(this, nameof(SaveDocumentationFilePath)));
+        _saveFileDialogue.Connect("confirmed", new Callable(this, nameof(SaveDocumentationFile)));
     }
     private void BackPressed()
     {
@@ -158,28 +162,61 @@ public partial class DocumentationAdder : Control
         AddImage();
     }
 
-    public void SaveDocumentationFile(string path)
+    public void SaveDocumentationFilePath(string path)
     {
-        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-
-        if (file != null)
-        {
-            file.StoreString(GetAllDocumentationData()); //Save All Data to a file
-            file.Close();
-        }
-
-        //Reset Datas
-        while (boxContainer.GetChildCount() > 2)
-        {
-            Node child = boxContainer.GetChild(1);
-            boxContainer.RemoveChild(child);
-            child.QueueFree(); // Optionally free the node from memory
-        }
-        doc_Title.Text = "";
-
-        _notificationHandler.MessageBox("Documentation Saved", 0);
-        _documentationsList.RefreshAllDocumentFilesInCarp();
+        _filepath = path;
+    }
+    private async void SaveDocumentationFile()
+    {
+        await ShowLoading();
+        SaveDoc();
+        HideLoading();
         this.Visible = false;
+    }
+    private void SaveDoc()
+    {
+        if(_filepath != null )
+        {
+            using var file = FileAccess.Open(_filepath, FileAccess.ModeFlags.Write);
+
+            if (file != null)
+            {
+                file.StoreString(GetAllDocumentationData()); //Save All Data to a file
+                file.Close();
+            }
+
+            //Reset Datas
+            while (boxContainer.GetChildCount() > 2)
+            {
+                Node child = boxContainer.GetChild(1);
+                boxContainer.RemoveChild(child);
+                child.QueueFree(); // Optionally free the node from memory
+            }
+            doc_Title.Text = "";
+            
+            _notificationHandler.MessageBox("Documentation Saved", 0);
+            _documentationsList.RefreshAllDocumentFilesInCarp();
+        }
+
+    }
+
+    private async Task ShowLoading()
+    {
+        // Instantiate and display the loading screen
+        var loadingInstance = (LoadingManager)_loading.Instantiate();
+        _loadingParent.AddChild(loadingInstance); // Add the loading screen to its parent
+        loading = loadingInstance; // Store reference to the loading instance for future removal
+
+        await Task.Delay(2000); // Adjust the delay as needed for better UX
+    }
+
+    private void HideLoading()
+    {
+        // Safely remove the loading screen
+        if (loading != null && loading.IsInsideTree())
+        {
+            loading.QueueFree(); // Remove the loading indicator from the scene
+        }
     }
     public string GetAllDocumentationData()
     {

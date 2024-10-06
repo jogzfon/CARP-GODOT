@@ -30,7 +30,7 @@ shader_parameter/blur2 = 0.01
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_q1ebe"]
 gradient = SubResource("Gradient_42r60")
 
-[node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn", "saveBtn", "backBtn", "docAdderPanel", "doc_Title", "_imageFileDialogue", "_saveFileDialogue")]
+[node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn", "saveBtn", "backBtn", "docAdderPanel", "doc_Title", "_imageFileDialogue", "_saveFileDialogue", "_loadingParent")]
 custom_minimum_size = Vector2(1550, 960)
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,6 +52,8 @@ _imageFileDialogue = NodePath("ImageFileDialog")
 _saveFileDialogue = NodePath("SaveFileDialog")
 _textTemplate = ExtResource("2_nbuwe")
 _imgTemplate = ExtResource("3_hida0")
+_loading = ExtResource("7_8bn32")
+_loadingParent = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_2va1r")
@@ -144,6 +146,3 @@ ok_button_text = "Save"
 access = 2
 root_subfolder = "Carp_Documentation"
 filters = PackedStringArray("*.carpdoc")
-
-[node name="Loading" parent="." instance=ExtResource("7_8bn32")]
-layout_mode = 2
