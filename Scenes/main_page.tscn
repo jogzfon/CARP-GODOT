@@ -184,7 +184,7 @@ logout = NodePath("MainContent/SignOut/Options/Logout")
 settings = NodePath("MainContent/SignOut/Options/Settings")
 logInPage = ExtResource("2_fqqk8")
 documentationAdder = NodePath("MainContent/DocumentationAdder")
-_documentationAbler = NodePath("DocumentationAbler")
+_documentationAbler = NodePath("Others/DocumentationAbler")
 _subscriptionHandler = NodePath("SubscriptionHandler")
 _profileHandler = NodePath("ProfileHandler")
 
@@ -280,7 +280,7 @@ script = ExtResource("6_xdxq4")
 _refresher = NodePath("refresher")
 _documents = NodePath("../DocumentationContainer/DocumentationsList/AddedDocumentationList")
 _shader = SubResource("ShaderMaterial_2v73o")
-_abler = NodePath("../../../DocumentationAbler")
+_abler = NodePath("../../../Others/DocumentationAbler")
 
 [node name="Label2" type="Label" parent="MainContent/VBoxContainer/DocumentationRefresher"]
 layout_mode = 2
@@ -316,10 +316,10 @@ size_flags_vertical = 3
 layout_mode = 2
 script = ExtResource("6_bgiiv")
 _documentationBtnList = NodePath(".")
-_documentationList = NodePath("../../../../../DocumentationManager")
+_documentationList = NodePath("../../../../../Others/DocumentationManager")
 _documentationTemplate = ExtResource("32_5gf2n")
 _docBtnContainer = ExtResource("8_v0mou")
-_docAbler = NodePath("../../../../../DocumentationAbler")
+_docAbler = NodePath("../../../../../Others/DocumentationAbler")
 
 [node name="AddBtn" type="TextureButton" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList" node_paths=PackedStringArray("addDocumentationBtn", "documentationAdder", "_documentationAbler", "newProj", "openProj")]
 custom_minimum_size = Vector2(0, 60)
@@ -330,11 +330,12 @@ stretch_mode = 0
 script = ExtResource("7_rql6r")
 addDocumentationBtn = NodePath(".")
 documentationAdder = NodePath("../../../../DocumentationAdder")
-_documentationAbler = NodePath("../../../../../DocumentationAbler")
+_documentationAbler = NodePath("../../../../../Others/DocumentationAbler")
 newProj = NodePath("../../../../../ProfileHandler/ManageFile/New Project")
 openProj = NodePath("../../../../../ProfileHandler/ManageFile/Open Project")
 
 [node name="Sign-In" type="Button" parent="MainContent"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -353,6 +354,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="SignOut" type="Button" parent="MainContent"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -502,7 +504,7 @@ changeProfileBtn = NodePath("ProfilePanel/ProfileBtn")
 defaultProfileTexture = ExtResource("4_2bfqo")
 saveProfileImage = NodePath("ProfilePanel/SaveBtn")
 userName = NodePath("ProfilePanel/Name")
-_documentationAbler = NodePath("../DocumentationAbler")
+_documentationAbler = NodePath("../Others/DocumentationAbler")
 subscriptionPanel = NodePath("../SubscriptionHandler/SubscriptionRect")
 documentationAdder = NodePath("../MainContent/DocumentationAdder")
 notification = NodePath("../NotificationHandler")
@@ -787,7 +789,7 @@ freeTier = ExtResource("32_mcsfd")
 guestTier = ExtResource("30_up4sm")
 studentTier = ExtResource("31_5pwgi")
 teacherTier = ExtResource("32_5ac3u")
-_documentationAbler = NodePath("../DocumentationAbler")
+_documentationAbler = NodePath("../Others/DocumentationAbler")
 
 [node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
 visible = false
@@ -1045,29 +1047,6 @@ ok_button_text = "Open"
 file_mode = 0
 filters = PackedStringArray("*.png", "*.jpg")
 
-[node name="DocumentationAbler" type="Node" parent="." node_paths=PackedStringArray("_documentationAdder")]
-script = ExtResource("51_8cw85")
-_documentationAdder = NodePath("../MainContent/DocumentationAdder")
-
-[node name="DocumentationManager" type="Node" parent="." node_paths=PackedStringArray("_documentationAdderBtn", "_documentationList", "_premade_documentationBtnList", "_documentationBtnList", "_docAbler")]
-script = ExtResource("48_kvvd6")
-_documentationAdderBtn = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddBtn")
-_documentationList = NodePath(".")
-_premade_documentationBtnList = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList")
-_documentationBtnList = NodePath("../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddedDocumentationList")
-_docAbler = NodePath("../DocumentationAbler")
-_premadeDocumentationTemplate = ExtResource("49_lyvmv")
-pd_sentences1 = ["What Is This?"]
-pd_images1 = [ExtResource("19_f2wtp")]
-pd_sentences2 = ["How Does This Work?"]
-pd_images2 = [ExtResource("21_dmdda"), ExtResource("23_b17yx"), ExtResource("22_t4v1g"), ExtResource("50_m04nu"), ExtResource("20_t3kpw"), ExtResource("25_7m7ga"), ExtResource("24_rhk4k")]
-pd_sentences3 = ["Program Examples"]
-pd_sentences4 = ["Numeric Constants"]
-pd_sentences5 = ["Assembler Directives"]
-
-[node name="AccountUpdater" type="Node" parent="."]
-script = ExtResource("56_5q7h3")
-
 [node name="Settings" type="Node" parent="."]
 script = ExtResource("57_ysgjy")
 
@@ -1088,3 +1067,28 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("58_vo425")
 expand_mode = 1
+
+[node name="Others" type="Node" parent="."]
+
+[node name="DocumentationAbler" type="Node" parent="Others" node_paths=PackedStringArray("_documentationAdder")]
+script = ExtResource("51_8cw85")
+_documentationAdder = NodePath("../../MainContent/DocumentationAdder")
+
+[node name="DocumentationManager" type="Node" parent="Others" node_paths=PackedStringArray("_documentationAdderBtn", "_documentationList", "_premade_documentationBtnList", "_documentationBtnList", "_docAbler")]
+script = ExtResource("48_kvvd6")
+_documentationAdderBtn = NodePath("../../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddBtn")
+_documentationList = NodePath(".")
+_premade_documentationBtnList = NodePath("../../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/PremadeDocBtnList")
+_documentationBtnList = NodePath("../../MainContent/VBoxContainer/DocumentationContainer/DocumentationsList/AddedDocumentationList")
+_docAbler = NodePath("../DocumentationAbler")
+_premadeDocumentationTemplate = ExtResource("49_lyvmv")
+pd_sentences1 = ["What Is This?"]
+pd_images1 = [ExtResource("19_f2wtp")]
+pd_sentences2 = ["How Does This Work?"]
+pd_images2 = [ExtResource("21_dmdda"), ExtResource("23_b17yx"), ExtResource("22_t4v1g"), ExtResource("50_m04nu"), ExtResource("20_t3kpw"), ExtResource("25_7m7ga"), ExtResource("24_rhk4k")]
+pd_sentences3 = ["Program Examples"]
+pd_sentences4 = ["Numeric Constants"]
+pd_sentences5 = ["Assembler Directives"]
+
+[node name="AccountUpdater" type="Node" parent="Others"]
+script = ExtResource("56_5q7h3")

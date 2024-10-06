@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using Newtonsoft.Json.Linq;
+using Aspose.Pdf;
+using System.Threading.Tasks;
 
 public partial class DocumentationAdder : Control
 {
@@ -10,6 +12,8 @@ public partial class DocumentationAdder : Control
     [Export] private Button imageBtn;
     [Export] private Button saveBtn;
     [Export] private Button backBtn;
+
+    [Export] private TextureRect loading;
 
     [Export] private Control docAdderPanel;
 
@@ -31,6 +35,7 @@ public partial class DocumentationAdder : Control
     private string directoryLoc = "Carp_Documentation";
     public override void _Ready()
     {
+        loading.Visible = false;
         DirAccess dir = DirAccess.Open(directoryLoc);
         if (dir == null)
         {
@@ -176,7 +181,6 @@ public partial class DocumentationAdder : Control
         _documentationsList.RefreshAllDocumentFilesInCarp();
         this.Visible = false;
     }
-
     public string GetAllDocumentationData()
     {
         string allData = "";

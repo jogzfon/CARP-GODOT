@@ -45,7 +45,7 @@ void fragment() {
     // Alpha with a stronger fade effect
     float alpha = spiral_type == 5 ? 1.0 : spiral;
     float distance_fade = pow(1.0 - r * 2.0, fade * 4.0);
-    
+
     // Final color output
     COLOR = vec4(color + glow, alpha * distance_fade);
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8ly2phrialde"]
+[gd_scene load_steps=11 format=3 uid="uid://b8ly2phrialde"]
 
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationAdder.cs" id="1_io0xd"]
 [ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="1_qiyqe"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bc8vv1jgyy5as" path="res://Scenes/DocumentationAddOns/doc_adder_texture_template.tscn" id="3_hida0"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="3_rvkj6"]
 [ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_8rj6d"]
+[ext_resource type="PackedScene" uid="uid://jtq8firoonfc" path="res://Scenes/Others/loading.tscn" id="7_8bn32"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2va1r"]
 shader = ExtResource("1_qiyqe")
@@ -137,9 +138,12 @@ filters = PackedStringArray("*.png", "*.jpg")
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
-position = Vector2i(400, 250)
+position = Vector2i(349, 36)
 size = Vector2i(800, 500)
 ok_button_text = "Save"
 access = 2
 root_subfolder = "Carp_Documentation"
 filters = PackedStringArray("*.carpdoc")
+
+[node name="Loading" parent="." instance=ExtResource("7_8bn32")]
+layout_mode = 2

@@ -1,5 +1,5 @@
 ---------- Detail Info   ----------
-Status: Stopped 
+Status: Idle
 RtlStatement: LDAC 2 
 DataMovement: TR < - DR DR < - M PC = PC + 1 
 CurrentMemoryLocation: 0

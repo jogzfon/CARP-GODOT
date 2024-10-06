@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b44pnrtokcm2" path="res://Sprites/Paper Plane.png" id="4_3xanh"]
 [ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="4_qnl5w"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="7_ps5gc"]
+[ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="8_edaj7"]
 [ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="8_o48ei"]
-[ext_resource type="Shader" path="res://Shader/loading.gdshader" id="8_s76od"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="9_k114o"]
 [ext_resource type="Texture2D" uid="uid://day1e2bnip2dc" path="res://Sprites/QRCode_Payment.jpg" id="10_va4oh"]
 [ext_resource type="Script" path="res://Scripts/Subscription/PaymentConfirmation.cs" id="13_62j6m"]
@@ -16,20 +16,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3tx4t"]
-shader = ExtResource("8_s76od")
-shader_parameter/spiral_type = 1
-shader_parameter/primary_color = Color(0.2, 0.6, 1, 1)
-shader_parameter/secondary_color = Color(0.8, 0.2, 0.8, 1)
-shader_parameter/rays = 6.0
-shader_parameter/speed = 1.0
-shader_parameter/fade = 0.5
-shader_parameter/thickness = 0.2
-shader_parameter/clockwise = true
-shader_parameter/tiers = 4.0
-shader_parameter/stretch = 6.28
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnea5"]
+shader = ExtResource("8_edaj7")
+shader_parameter/color_start = Color(0.2, 0.6, 1, 1)
+shader_parameter/color_end = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/rotation_speed = 1.0
+shader_parameter/dot_size = 0.05
+shader_parameter/num_dots = 9
+shader_parameter/radius = 0.25
+shader_parameter/fade_speed = -3.0
 shader_parameter/glow_intensity = 1.0
-shader_parameter/pulse_speed = 1.0
 
 [sub_resource type="Gradient" id="Gradient_4xv4h"]
 
@@ -169,7 +165,7 @@ stretch_mode = 0
 
 [node name="Loading" type="TextureRect" parent="AI"]
 visible = false
-material = SubResource("ShaderMaterial_3tx4t")
+material = SubResource("ShaderMaterial_xnea5")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
