@@ -61,9 +61,20 @@ public partial class StartUpPage : Control
             //client = new FireSharp.FirebaseClient(config);
             client = Connector.ConnectToClient();
         }
+        if (Input.IsPhysicalKeyPressed(Key.Enter))
+        {
+            if (createAccount.Visible)
+            {
+                RegisterPressed();
+            }
+            else
+            {
+                LogInPressed();
+            }
+        }
     }
-	
-	private void RegisterPressed()
+
+    private void RegisterPressed()
 	{
         loginAccount.Visible = false;
 

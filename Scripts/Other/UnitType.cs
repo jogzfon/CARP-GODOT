@@ -21,6 +21,16 @@ public partial class UnitType : Label
     // Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+        if(AnimationManager.isPlaying == false)
+        {
+            _microprogrammed.Disabled = false;
+            _hardwired.Disabled = false;
+        }
+        else
+        {
+            _microprogrammed.Disabled = true;
+            _hardwired.Disabled = true;
+        }
 	}
     public void HardwiredUnit()
     {

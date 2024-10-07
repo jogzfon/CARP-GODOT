@@ -239,11 +239,15 @@ public partial class Animations : Node
         {
             if (cpuStatus.Text != "Running")
             {
+                AnimationManager.isPlaying = false;
+
                 sysmenu.hexBtn.Disabled = false;
                 sysmenu.binaryBtn.Disabled = false;
             }
             else
             {
+                AnimationManager.isPlaying = true;
+
                 sysmenu.isHex = false;
                 sysmenu.hexBtn.Disabled = true;
                 sysmenu.binaryBtn.Disabled = true;
@@ -337,12 +341,10 @@ public partial class Animations : Node
                 switch (memorycode[i])
                 {
                     case opcodeNOP:
-                        Debug.Print("NOP encountered");
                         await NOP();
                         await StepCycle();
                         break;
                     case opcodeLDAC:
-                        Debug.Print("LDAC encountered");
                         i++;
                         await LDAC1();
                         await ClockPulse();
@@ -375,7 +377,6 @@ public partial class Animations : Node
                         await LDAC5();
                         break;
                     case opcodeSTAC:
-                        Debug.Print("STAC encountered");
                         i++;
                         await STAC1();
                         await ClockPulse();
@@ -408,62 +409,48 @@ public partial class Animations : Node
                         await STAC5();
                         break;
                     case opcodeMVAC:
-                        Debug.Print("MVAC encountered");
                         await MVAC();
                         break;
                     case opcodeMOVR:
-                        Debug.Print("MOVR encountered");
                         await MOVR();
                         break;
                     case opcodeJUMP:
-                        Debug.Print("JUMP encountered");
                         i++;
                         await JUMP();
                         break;
                     case opcodeJMPZ:
-                        Debug.Print("JMPZ encountered");
                         i++;
                         await JMPZ();
                         break;
                     case opcodeJPNZ:
-                        Debug.Print("JPNZ encountered");
                         i++;
                         await JPNZ();
                         break;
                     case opcodeADD:
-                        Debug.Print("ADD encountered");
                         await ADD();
                         break;
                     case opcodeSUB:
-                        Debug.Print("SUB encountered");
                         await SUB();
                         break;
                     case opcodeINAC:
-                        Debug.Print("INAC encountered");
                         await INAC();
                         break;
                     case opcodeCLAC:
-                        Debug.Print("CLAC encountered");
                         await CLAC();
                         break;
                     case opcodeAND:
-                        Debug.Print("AND encountered");
                         await AND();
                         break;
                     case opcodeOR:
-                        Debug.Print("OR encountered");
                         await OR();
                         break;
                     case opcodeXOR:
-                        Debug.Print("XOR encountered");
                         await XOR();
                         break;
                     case opcodeNOT:
-                        Debug.Print("NOT encountered");
                         await NOT();
                         break;
                     case opcodeEND:
-                        Debug.Print("END encountered");
                         animationRunning = false;
                         await END();
                         return;
@@ -2112,20 +2099,41 @@ public partial class Animations : Node
     {
         while (character.Position != destination)
         {   
-            if(destination == dIn.Position)
+            if(AnimationManager.unitType == UnitTypes.Microprogrammed)
             {
-                character.Position = character.Position.MoveToward(destination, (float)((moveSpeed * 5) * GetProcessDeltaTime()));
-                await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
-            }
-            else if(destination == mIn.Position )
-            {
-                character.Position = character.Position.MoveToward(destination, (float)((moveSpeed*2.7) * GetProcessDeltaTime()));
-                await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                if(destination == dIn.Position)
+                {
+                    character.Position = character.Position.MoveToward(destination, (float)((moveSpeed * 5) * GetProcessDeltaTime()));
+                    await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                }
+                else if(destination == mIn.Position )
+                {
+                    character.Position = character.Position.MoveToward(destination, (float)((moveSpeed*2.7) * GetProcessDeltaTime()));
+                    await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                }
+                else
+                {
+                    character.Position = character.Position.MoveToward(destination, (float)(moveSpeed * GetProcessDeltaTime()));
+                    await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                }
             }
             else
             {
-                character.Position = character.Position.MoveToward(destination, (float)(moveSpeed * GetProcessDeltaTime()));
-                await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                if (destination == dIn.Position)
+                {
+                    character.Position = character.Position.MoveToward(destination, (float)((moveSpeed * 10) * GetProcessDeltaTime()));
+                    await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                }
+                else if (destination == mIn.Position)
+                {
+                    character.Position = character.Position.MoveToward(destination, (float)((moveSpeed * 5.4) * GetProcessDeltaTime()));
+                    await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                }
+                else
+                {
+                    character.Position = character.Position.MoveToward(destination, (float)((moveSpeed * 2) * GetProcessDeltaTime()));
+                    await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+                }
             }
         }
         character.QueueFree();

@@ -173,7 +173,8 @@ public partial class project_page : Control
     #region Back
     public async void BackToProject()
     {
-        if (AccountManager.GetUser() != null)
+        UserData user = AccountManager.GetUser();
+        if (user != null && (user.Role.Equals("Teacher") || user.Subscription.Equals("Subscribed")))
         {
             await LoadSave();
 
@@ -201,6 +202,11 @@ public partial class project_page : Control
     private void Assemble()
     {
         string text = instructionCodes.Text;
+
+        if(text.Length <= 0 || text == String.Empty || text == null) {
+            notification.MessageBox("Please input instruction codes to assemble.", 0);
+            return;
+        }
 
         if (int.TryParse(memoryLocation.Text, out int location))
         {
