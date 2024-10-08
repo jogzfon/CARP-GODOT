@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using Paymongo.Sharp;
 using Paymongo.Sharp.Checkouts.Entities;
 using Paymongo.Sharp.Core.Entities;
@@ -24,7 +25,7 @@ public partial class PaymongoPayment : Node
 	{
 	}
 
-    private async void OnPayLink(object sender)
+    private async void OnPayLink()
     {
         var secretKey = "sk_test_Gf1MgmxD7g2c96jTG7vvByk1";
         var client = new PaymongoClient(secretKey);
@@ -58,9 +59,9 @@ public partial class PaymongoPayment : Node
         }
 
         var linkResult = await client.Links.CreateLinkAsync(link);
-        var paymentWindow = new PaymentWindow(linkResult.CheckoutUrl);
+        /*var paymentWindow = new PaymentWindow(linkResult.CheckoutUrl);
 
-        paymentWindow.Show();
+        paymentWindow.Show();*/
 
         while (true)
         {
@@ -78,9 +79,9 @@ public partial class PaymongoPayment : Node
                 continue;
             }
 
-            StatusBlock.Text = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
+            var status = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
 
-            paymentWindow.Close();
+            /*paymentWindow.Close();*/
 
             break;
         }
