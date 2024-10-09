@@ -136,6 +136,21 @@ layout_mode = 2
 texture = SubResource("GradientTexture2D_frkal")
 expand_mode = 1
 
+[node name="Label" type="Label" parent="HBoxContainer/Loading"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -11.5
+offset_right = 74.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Saving..."
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 590.0

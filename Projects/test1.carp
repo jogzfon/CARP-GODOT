@@ -1,7 +1,7 @@
 ---------- Detail Info   ----------
 Status: Idle
-RtlStatement: 
-DataMovement: 
+RtlStatement: Fetch 3 
+DataMovement: IR < - DR AR < - PC 
 CurrentMemoryLocation: 0
 InstructionCodes: ; example from textbook 
 ; Variables memory locations : total = 100 i = 101 n = 102 
@@ -36,16 +36,52 @@ BreakPointList:
 
 ---------- Trace Results ----------
 TraceText: 
+RTL: Fetch 1  , 
+DataMove: AR < - PC , 
+AR: 0000 0000 0000 0000, PC: 0000 0000 0000 0000, DR: 0000 0000, TR: 0000 0000, IR: 0000 0000, R: 0000 0000, AC: 0000 0000, Z: 0
+RTL: Fetch 1  , 
+DataMove: AR < - PC , 
+AR: 0000 0000 0000 0000, PC: 0000 0000 0000 0000, DR: 0000 0000, TR: 0000 0000, IR: 0000 0000, R: 0000 0000, AC: 0000 0000, Z: 0
+RTL: Fetch 2  , 
+DataMove: DR < - M PC < - PC + 1 , 
+AR: 0000 0000 0000 0000, PC: 0000 0000 0000 0001, DR: 0000 1011, TR: 0000 0000, IR: 0000 0000, R: 0000 0000, AC: 0000 0000, Z: 0
+RTL: Fetch 3  , 
+DataMove: IR < - DR AR < - PC , 
+AR: 0000 0000 0000 0001, PC: 0000 0000 0000 0001, DR: 0000 1011, TR: 0000 0000, IR: 0000 1011, R: 0000 0000, AC: 0000 0000, Z: 0
+RTL: CLAC     , 
+DataMove: AC < - 0 Z < - 1 , 
+AR: 0000 0000 0000 0001, PC: 0000 0000 0000 0001, DR: 0000 1011, TR: 0000 0000, IR: 0000 1011, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 1  , 
+DataMove: AR < - PC , 
+AR: 0000 0000 0000 0001, PC: 0000 0000 0000 0001, DR: 0000 1011, TR: 0000 0000, IR: 0000 1011, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 2  , 
+DataMove: DR < - M PC < - PC + 1 , 
+AR: 0000 0000 0000 0001, PC: 0000 0000 0000 0010, DR: 0000 0010, TR: 0000 0000, IR: 0000 1011, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 3  , 
+DataMove: IR < - DR AR < - PC , 
+AR: 0000 0000 0000 0010, PC: 0000 0000 0000 0010, DR: 0000 0010, TR: 0000 0000, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: STAC 1   , 
+DataMove: DR < - M PC < - PC + 1 AR < - AR + 1 , 
+AR: 0000 0000 0000 0011, PC: 0000 0000 0000 0011, DR: 0110 0100, TR: 0000 0000, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 1  , 
+DataMove: AR < - PC , 
+AR: 0000 0000 0000 0011, PC: 0000 0000 0000 0011, DR: 0110 0100, TR: 0000 0000, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 1  , 
+DataMove: AR < - PC , 
+AR: 0000 0000 0000 0011, PC: 0000 0000 0000 0011, DR: 0110 0100, TR: 0000 0000, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
+RTL: Fetch 2  , 
+DataMove: DR < - M PC < - PC + 1 , 
+AR: 0000 0000 0000 0011, PC: 0000 0000 0000 0100, DR: 0000 1011, TR: 0000 0000, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 
 
 
 ---------- Registers     ----------
 IO: 0
-AR: 0
-PC: 0
-DR: 0
+AR: 3
+PC: 4
+DR: 11
 TR: 0
-IR: 0
+IR: 2
 R: 0
 AC: 0
-Z: 0
+Z: 1

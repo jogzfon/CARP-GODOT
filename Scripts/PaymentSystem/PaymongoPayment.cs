@@ -87,25 +87,10 @@ public partial class PaymongoPayment : Node
         }
 
     }
-/*
-    private async void OnPayCheckout(object sender, RoutedEventArgs e)
+
+    private async void OnPayCheckout()
     {
-        var isDouble = decimal.TryParse(AmountTextBox.Text, out decimal doubleAmount);
-
-        if (!isDouble)
-        {
-            return;
-        }
-
-        if (doubleAmount < 100)
-        {
-            return;
-        }
-
-        AmountTextBox.Text = string.Empty;
-        StatusBlock.Text = string.Empty;
-
-        var secretKey = Env.GetString("SECRET_KEY");
+        var secretKey = "SECRET_KEY";
         var client = new PaymongoClient(secretKey);
 
         Checkout checkout = new Checkout()
@@ -123,7 +108,7 @@ public partial class PaymongoPayment : Node
                         },
                         Quantity = 1,
                         Currency = Currency.Php,
-                        Amount = doubleAmount
+                        Amount = 100// doubleAmount  - amount of money in doubles
                     }
                 },
             PaymentMethodTypes = new[]
@@ -139,9 +124,9 @@ public partial class PaymongoPayment : Node
         };
 
         Checkout checkoutResult = await client.Checkouts.CreateCheckoutAsync(checkout);
-        var paymentWindow = new PaymentWindow(checkoutResult.CheckoutUrl);
+        /*var paymentWindow = new PaymentWindow(checkoutResult.CheckoutUrl);
 
-        paymentWindow.Show();
+        paymentWindow.Show();*/
 
         while (true)
         {
@@ -159,39 +144,24 @@ public partial class PaymongoPayment : Node
                 continue;
             }
 
-            StatusBlock.Text = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
+           /* StatusBlock.Text = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
 
-            paymentWindow.Close();
+            paymentWindow.Close();*/
 
             break;
         }
 
     }
 
-    private async void OnPayGcash(object sender, RoutedEventArgs e)
+    private async void OnPayGcash()
     {
-        var isDouble = decimal.TryParse(AmountTextBox.Text, out decimal doubleAmount);
-
-        if (!isDouble)
-        {
-            return;
-        }
-
-        if (doubleAmount < 100)
-        {
-            return;
-        }
-
-        AmountTextBox.Text = string.Empty;
-        StatusBlock.Text = string.Empty;
-
-        var secretKey = Env.GetString("SECRET_KEY");
+        var secretKey = "SECRET_KEY";
         var client = new PaymongoClient(secretKey);
 
         // Arrange
         Source source = new Source
         {
-            Amount = doubleAmount,
+            Amount = 0,//doubleAmount - amount of money in doubles,
             Description = "New Gcash Payment",
             Billing = new Billing
             {
@@ -219,9 +189,9 @@ public partial class PaymongoPayment : Node
 
         // Act
         var sourceResult = await client.Sources.CreateSourceAsync(source);
-        var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
+        /*var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
 
-        paymentWindow.Show();
+        paymentWindow.Show();*/
 
         while (true)
         {
@@ -232,16 +202,16 @@ public partial class PaymongoPayment : Node
                 continue;
             }
 
-            StatusBlock.Text = $"Chargeable on GCash by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
+            /*StatusBlock.Text = $"Chargeable on GCash by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
 
-            paymentWindow.Close();
+            paymentWindow.Close();*/
 
             break;
         }
 
     }
 
-    private async void OnPayGrabPay(object sender, RoutedEventArgs e)
+    /*private async void OnPayGrabPay(object sender, RoutedEventArgs e)
     {
         var isDouble = decimal.TryParse(AmountTextBox.Text, out decimal doubleAmount);
 
