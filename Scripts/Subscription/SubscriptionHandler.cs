@@ -15,11 +15,11 @@ public partial class SubscriptionHandler : Node
 
     [Export] private Button _subscription_panel_Btn;
 
-    [Export] private PanelContainer _subscription_types_panel;
-    [Export] private VBoxContainer _payment_panel;
+    //[Export] private PanelContainer _subscription_types_panel;
+    //[Export] private VBoxContainer _payment_panel;
 
-    [Export] private PaymentConfirmation _paymentConfirmation;
-    [Export] private Button _payment_confirm_Btn;
+    //[Export] private PaymentConfirmation _paymentConfirmation;
+    //[Export] private Button _payment_confirm_Btn;
 
     [Export] private TextureButton _backBtn;
 
@@ -52,8 +52,8 @@ public partial class SubscriptionHandler : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        _subscription_types_panel.Visible = true;
-        _payment_panel.Visible = false;
+        //_subscription_types_panel.Visible = true;
+        //_payment_panel.Visible = false;
 
         _subscription_panel_Btn.Visible = false;
 
@@ -62,8 +62,8 @@ public partial class SubscriptionHandler : Node
 
         subscriptionBtn.Connect("pressed", new Callable(this, nameof(OpenSubscription)));
 
-        _subscription_panel_Btn.Connect("pressed", new Callable(this, nameof(OpenPaymentPanel)));
-        _payment_confirm_Btn.Connect("pressed", new Callable(this, nameof(ConfirmPayment)));
+        //_subscription_panel_Btn.Connect("pressed", new Callable(this, nameof(OpenPaymentPanel)));
+        //_payment_confirm_Btn.Connect("pressed", new Callable(this, nameof(ConfirmPayment)));
         _backBtn.Connect("pressed", new Callable(this, nameof(OnBackPressed)));
 
         /*// Connect the mouse_exited signal to close the subscription panel when the mouse leaves it
@@ -188,7 +188,7 @@ public partial class SubscriptionHandler : Node
         }
     }
 */
-    private void ConfirmPayment()
+    /*private void ConfirmPayment()
     {
         if(_paymentConfirmation.GetReceipt() == null)
         {
@@ -197,7 +197,7 @@ public partial class SubscriptionHandler : Node
         }
 
         _subscription_types_panel.Visible = true;
-        _payment_panel.Visible = false;
+        //_payment_panel.Visible = false;
 
         if (SubscriptionRequestHandler.RequestSubscription(_paymentConfirmation.GetReceipt()))
         {
@@ -210,33 +210,33 @@ public partial class SubscriptionHandler : Node
         {
             _notificationHandler.MessageBox("Please connect to the internet.\n Thank you", 0);
         }
-    }
+    }*/
 
-    private void OpenPaymentPanel()
+    /*private void OpenPaymentPanel()
     {
         _subscription_types_panel.Visible = false;
-        _payment_panel.Visible = true;
-    }
+        //_payment_panel.Visible = true;
+    }*/
 
     private void OnBackPressed()
     {
-        if (_payment_panel.Visible == true)
+        /*if (_payment_panel.Visible == true)
         {
             _paymentConfirmation.ResetReceipt();
             _subscription_types_panel.Visible = true;
             _payment_panel.Visible = false;
         }
         else
-        {
+        {*/
             subscriptionPanel.Visible = false;
-        }
+        /*}*/
     }
 
     public void CloseSubscription()
     {
-        _paymentConfirmation.ResetReceipt();
-        _subscription_types_panel.Visible = true;
-        _payment_panel.Visible = false;
+        //_paymentConfirmation.ResetReceipt();
+        //_subscription_types_panel.Visible = true;
+        //_payment_panel.Visible = false;
         subscriptionPanel.Visible = false;
     }
 }

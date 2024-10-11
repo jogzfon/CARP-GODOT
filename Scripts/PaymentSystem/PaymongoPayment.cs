@@ -13,11 +13,15 @@ public partial class PaymongoPayment : Node
 {
     PaymongoClient client;
 
+    [Export] private Button _paymentBtn;
+
     [Export] private NotificationHandler _notificationHandler;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         client = new PaymongoClient(secretKey: "sk_test_Gf1MgmxD7g2c96jTG7vvByk1");
+
+        _paymentBtn.Connect("pressed", new Callable(this, nameof(OnPayLink)));
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,6 +60,8 @@ public partial class PaymongoPayment : Node
         }
 
         var linkResult = await client.Links.CreateLinkAsync(link);
+
+        OS.ShellOpen(linkResult.CheckoutUrl);
         /*var paymentWindow = new PaymentWindow(linkResult.CheckoutUrl);
 
         paymentWindow.Show();*/
@@ -78,6 +84,7 @@ public partial class PaymongoPayment : Node
 
             var status = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
 
+            GD.Print(status);
             /*paymentWindow.Close();*/
 
             break;

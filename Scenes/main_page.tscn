@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=75 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -59,6 +59,7 @@
 [ext_resource type="Script" path="res://Scripts/AccountHandler/AccountUpdater.cs" id="56_5q7h3"]
 [ext_resource type="Script" path="res://Scripts/Settings/Settings.cs" id="57_ysgjy"]
 [ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="58_vo425"]
+[ext_resource type="Script" path="res://Scripts/PaymentSystem/PaymongoPayment.cs" id="60_7jqtu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
 shader = ExtResource("3_fhf3p")
@@ -780,17 +781,13 @@ text = "NO"
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
 
-[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "_subscription_panel_Btn", "_subscription_types_panel", "_payment_panel", "_paymentConfirmation", "_payment_confirm_Btn", "_backBtn", "subscriptionPanel", "profilePanel", "documentationAdder", "_notificationHandler", "_documentationAbler")]
+[node name="SubscriptionHandler" type="Node" parent="." node_paths=PackedStringArray("subscriptionBtn", "guestTierBtn", "studentTierBtn", "teacherTierBtn", "_subscription_panel_Btn", "_backBtn", "subscriptionPanel", "profilePanel", "documentationAdder", "_notificationHandler", "_documentationAbler")]
 script = ExtResource("32_ooytf")
 subscriptionBtn = NodePath("SubscriptionBtn")
 guestTierBtn = NodePath("SubscriptionRect/SubscriptionTypePanel/HBoxContainer/GuesTier")
 studentTierBtn = NodePath("SubscriptionRect/SubscriptionTypePanel/HBoxContainer/StudentTier")
 teacherTierBtn = NodePath("SubscriptionRect/SubscriptionTypePanel/HBoxContainer/EducationTier")
 _subscription_panel_Btn = NodePath("SubscriptionRect/SubscriptionTypePanel/HBoxContainer/StudentTier/subscriptionBtn")
-_subscription_types_panel = NodePath("SubscriptionRect/SubscriptionTypePanel")
-_payment_panel = NodePath("SubscriptionRect/PaymentPanel")
-_paymentConfirmation = NodePath("../PaymentConfirmation")
-_payment_confirm_Btn = NodePath("SubscriptionRect/PaymentPanel/confirmBtn")
 _backBtn = NodePath("SubscriptionRect/APIBack")
 subscriptionPanel = NodePath("SubscriptionRect")
 profilePanel = NodePath("../ProfileHandler/ProfilePanel")
@@ -804,7 +801,6 @@ teacherTier = ExtResource("32_5ac3u")
 _documentationAbler = NodePath("../Others/DocumentationAbler")
 
 [node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
-visible = false
 material = SubResource("ShaderMaterial_2wfjx")
 anchors_preset = 15
 anchor_right = 1.0
@@ -1104,3 +1100,8 @@ pd_sentences5 = ["Assembler Directives"]
 
 [node name="AccountUpdater" type="Node" parent="Others"]
 script = ExtResource("56_5q7h3")
+
+[node name="PaymongoPay" type="Node" parent="Others" node_paths=PackedStringArray("_paymentBtn", "_notificationHandler")]
+script = ExtResource("60_7jqtu")
+_paymentBtn = NodePath("../../SubscriptionHandler/SubscriptionRect/SubscriptionTypePanel/HBoxContainer/StudentTier/subscriptionBtn")
+_notificationHandler = NodePath("../../NotificationHandler")

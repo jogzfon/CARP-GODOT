@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bpt486otnrqkv"]
+[gd_scene load_steps=18 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/AI/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="9_k114o"]
 [ext_resource type="Texture2D" uid="uid://day1e2bnip2dc" path="res://Sprites/QRCode_Payment.jpg" id="10_va4oh"]
 [ext_resource type="Script" path="res://Scripts/Subscription/PaymentConfirmation.cs" id="13_62j6m"]
+[ext_resource type="Script" path="res://Scripts/PaymentSystem/PaymongoPayment.cs" id="13_kmqa0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
 shader = ExtResource("2_cu0w3")
@@ -32,7 +33,7 @@ shader_parameter/glow_intensity = 1.0
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2rjxw"]
 gradient = SubResource("Gradient_4xv4h")
 
-[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_aibackButton", "_apibackButton", "_notificationHandler", "AI_system", "API_subscription", "_personalAPIBtn", "_subscribeAPIBtn", "_customAPI", "_subscribeAPI", "_optionContainer", "_customApiON", "_paymentConfirmation", "_paymentConfirm", "_personal_api_key", "_loading_result")]
+[node name="AISystem" type="Control" node_paths=PackedStringArray("_chatContainer", "_request", "_sendRequestButton", "_aibackButton", "_apibackButton", "_notificationHandler", "AI_system", "API_subscription", "_personalAPIBtn", "_customAPI", "_optionContainer", "_customApiON", "_personal_api_key", "_loading_result")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,13 +50,9 @@ _notificationHandler = NodePath("NotificationHandler")
 AI_system = NodePath("AI")
 API_subscription = NodePath("API")
 _personalAPIBtn = NodePath("API/APIOptionContainer/personalAPIBtn")
-_subscribeAPIBtn = NodePath("API/APIOptionContainer/subscribeAPIBtn")
 _customAPI = NodePath("API/PersonalAPIContainer")
-_subscribeAPI = NodePath("API/SubscibedAPIContainer")
 _optionContainer = NodePath("API/APIOptionContainer")
 _customApiON = NodePath("API/PersonalAPIContainer/APIConfirmBtn")
-_paymentConfirmation = NodePath("PaymentConfirmation")
-_paymentConfirm = NodePath("API/SubscibedAPIContainer/confirmBtn")
 _personal_api_key = NodePath("API/PersonalAPIContainer/LineEdit")
 _loading_result = NodePath("AI/Loading")
 
@@ -181,7 +178,6 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_2rjxw")
 
 [node name="API" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -330,3 +326,8 @@ script = ExtResource("13_62j6m")
 _payment_receiptBtn = NodePath("../API/SubscibedAPIContainer/paymentConfirmationBtn")
 _receipt_dialog = NodePath("../ReceiptDialog")
 _notification = NodePath("../NotificationHandler")
+
+[node name="PaymongoPay" type="Node" parent="." node_paths=PackedStringArray("_paymentBtn", "_notificationHandler")]
+script = ExtResource("13_kmqa0")
+_paymentBtn = NodePath("../API/APIOptionContainer/subscribeAPIBtn")
+_notificationHandler = NodePath("../NotificationHandler")
