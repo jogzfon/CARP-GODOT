@@ -27,9 +27,6 @@ public partial class PaymongoPayment : Node
 
     private async void OnPayLink()
     {
-        var secretKey = "sk_test_Gf1MgmxD7g2c96jTG7vvByk1";
-        var client = new PaymongoClient(secretKey);
-
         Link link;
 
         var userAcc = AccountManager.GetUser();
@@ -90,9 +87,6 @@ public partial class PaymongoPayment : Node
 
     private async void OnPayCheckout()
     {
-        var secretKey = "SECRET_KEY";
-        var client = new PaymongoClient(secretKey);
-
         Checkout checkout = new Checkout()
         {
             Description = "Test Checkout",
@@ -155,9 +149,6 @@ public partial class PaymongoPayment : Node
 
     private async void OnPayGcash()
     {
-        var secretKey = "SECRET_KEY";
-        var client = new PaymongoClient(secretKey);
-
         // Arrange
         Source source = new Source
         {
@@ -213,9 +204,6 @@ public partial class PaymongoPayment : Node
 
     private async void OnPayGrabPay()
     {
-        var secretKey = "SECRET_KEY";
-        var client = new PaymongoClient(secretKey);
-
         // Arrange
         Source source = new Source
         {
