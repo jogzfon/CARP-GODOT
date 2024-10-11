@@ -211,30 +211,15 @@ public partial class PaymongoPayment : Node
 
     }
 
-    /*private async void OnPayGrabPay(object sender, RoutedEventArgs e)
+    private async void OnPayGrabPay()
     {
-        var isDouble = decimal.TryParse(AmountTextBox.Text, out decimal doubleAmount);
-
-        if (!isDouble)
-        {
-            return;
-        }
-
-        if (doubleAmount < 100)
-        {
-            return;
-        }
-
-        AmountTextBox.Text = string.Empty;
-        StatusBlock.Text = string.Empty;
-
-        var secretKey = Env.GetString("SECRET_KEY");
+        var secretKey = "SECRET_KEY";
         var client = new PaymongoClient(secretKey);
 
         // Arrange
         Source source = new Source
         {
-            Amount = doubleAmount.ToIntAmount(),
+            Amount = 0, //Add here the money amount
             Description = "New GrabPay Payment",
             Billing = new Billing
             {
@@ -262,9 +247,9 @@ public partial class PaymongoPayment : Node
 
         // Act
         var sourceResult = await client.Sources.CreateSourceAsync(source);
-        var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
+        /*var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
 
-        paymentWindow.Show();
+        paymentWindow.Show();*/
 
         while (true)
         {
@@ -275,12 +260,12 @@ public partial class PaymongoPayment : Node
                 continue;
             }
 
-            StatusBlock.Text = $"Chargeable on GrabPay by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
+           /* StatusBlock.Text = $"Chargeable on GrabPay by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
 
-            paymentWindow.Close();
+            paymentWindow.Close();*/
 
             break;
         }
 
-    }*/
+    }
 }
