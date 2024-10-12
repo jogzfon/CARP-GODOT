@@ -84,6 +84,9 @@ public partial class PaymongoPayment : Node
 
             var status = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
 
+            Connector.ConnectToClient();
+            Connector.UpdateSubscription();
+
             GD.Print(status);
             /*paymentWindow.Close();*/
 

@@ -22,4 +22,26 @@ public static class Connector
         }
         return client;
     }
+
+    public async static void UpdateSubscription()
+    {
+        try
+        {
+            FirebaseResponse updateResponse = await client.UpdateAsync("Users/" + AccountManager.GetUser().Username, new { Subscription = "Subscribed", SubscriptionStart = DateTime.Now.ToString(), SubscriptionEnd = DateTime.Now.AddDays(30).ToString() });
+
+            if (updateResponse.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                GD.Print("Request accepted successfully.");
+                // Update the local user object to reflect the new status
+            }
+            else
+            {
+                GD.Print("Failed to accept request.");
+            }
+        }
+        catch (Exception ex)
+        {
+            GD.Print($"Error updating Firebase: {ex.Message}");
+        }
+    }
 }

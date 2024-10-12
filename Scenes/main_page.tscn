@@ -801,6 +801,7 @@ teacherTier = ExtResource("32_5ac3u")
 _documentationAbler = NodePath("../Others/DocumentationAbler")
 
 [node name="SubscriptionRect" type="ColorRect" parent="SubscriptionHandler"]
+visible = false
 material = SubResource("ShaderMaterial_2wfjx")
 anchors_preset = 15
 anchor_right = 1.0
