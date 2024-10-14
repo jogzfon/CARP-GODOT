@@ -9,6 +9,9 @@ public partial class DocumentationHandler : TextureButton
     [ExportCategory("Documentation Disabler")]
     [Export] private DocumentationAbler _documentationAbler;
 
+    [Export] private ColorRect _subscription;
+    [Export] private Control _profile;
+
     [ExportCategory("File System Buttons")]
     [Export] private Button newProj;
     [Export] private Button openProj;
@@ -33,6 +36,9 @@ public partial class DocumentationHandler : TextureButton
 
     private void OpenDocumentationTemplate()
     {
+        _subscription.Visible = false;
+        _profile.Visible = false;
+
         _documentationAbler.HideAllDocument();
         if (documentationAdder != null)
         {

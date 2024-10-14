@@ -319,7 +319,7 @@ _documentationTemplate = ExtResource("32_5gf2n")
 _docBtnContainer = ExtResource("8_v0mou")
 _docAbler = NodePath("../../../../../Others/DocumentationAbler")
 
-[node name="AddBtn" type="TextureButton" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList" node_paths=PackedStringArray("addDocumentationBtn", "documentationAdder", "_documentationAbler", "newProj", "openProj")]
+[node name="AddBtn" type="TextureButton" parent="MainContent/VBoxContainer/DocumentationContainer/DocumentationsList" node_paths=PackedStringArray("addDocumentationBtn", "documentationAdder", "_documentationAbler", "_subscription", "_profile", "newProj", "openProj")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 texture_normal = ExtResource("6_vpwlf")
@@ -329,6 +329,8 @@ script = ExtResource("7_rql6r")
 addDocumentationBtn = NodePath(".")
 documentationAdder = NodePath("../../../../DocumentationAdder")
 _documentationAbler = NodePath("../../../../../Others/DocumentationAbler")
+_subscription = NodePath("../../../../../SubscriptionHandler/SubscriptionRect")
+_profile = NodePath("../../../../../ProfileHandler/ProfilePanel")
 newProj = NodePath("../../../../../ProfileHandler/ManageFile/New Project")
 openProj = NodePath("../../../../../ProfileHandler/ManageFile/Open Project")
 
