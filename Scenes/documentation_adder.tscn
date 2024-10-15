@@ -1,36 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8ly2phrialde"]
+[gd_scene load_steps=13 format=3 uid="uid://b8ly2phrialde"]
 
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationAdder.cs" id="1_io0xd"]
-[ext_resource type="Shader" path="res://Shader/nebula.gdshader" id="1_qiyqe"]
 [ext_resource type="PackedScene" uid="uid://cof64wvd4ljlb" path="res://Scenes/DocumentationAddOns/doc_adder_text_template.tscn" id="2_nbuwe"]
 [ext_resource type="PackedScene" uid="uid://bc8vv1jgyy5as" path="res://Scenes/DocumentationAddOns/doc_adder_texture_template.tscn" id="3_hida0"]
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="3_rvkj6"]
-[ext_resource type="FontFile" uid="uid://b0vfyi1dio7gg" path="res://Fonts/Inter-Bold.ttf" id="4_8rj6d"]
+[ext_resource type="Shader" path="res://Shader/corner.gdshader" id="5_7rvaj"]
 [ext_resource type="PackedScene" uid="uid://jtq8firoonfc" path="res://Scenes/Others/loading.tscn" id="7_8bn32"]
+[ext_resource type="Texture2D" uid="uid://c7hdp3gdl2ns5" path="res://Icons/Close_small.png" id="7_pnvlm"]
+[ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="8_fiybd"]
+[ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="9_1x3sp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2va1r"]
-shader = ExtResource("1_qiyqe")
-shader_parameter/stars_on = true
-shader_parameter/timeScaleFactor = 0.04
-shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
-shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
-shader_parameter/brightness = 1.0
-shader_parameter/clouds_resolution = 3.0
-shader_parameter/clouds_intesity = 0.0
-shader_parameter/waveyness = 0.5
-shader_parameter/fragmentation = 7.0
-shader_parameter/distortion = 0.5
-shader_parameter/clouds_alpha = 0.5
-shader_parameter/movement = 1.0
-shader_parameter/blur = 1.4
-shader_parameter/blur2 = 0.01
+shader = ExtResource("5_7rvaj")
+shader_parameter/corner_scale = 0.316
 
-[sub_resource type="Gradient" id="Gradient_42r60"]
+[sub_resource type="Gradient" id="Gradient_ye3yo"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_q1ebe"]
-gradient = SubResource("Gradient_42r60")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o5165"]
+gradient = SubResource("Gradient_ye3yo")
 
 [node name="DocumentationAdder" type="PanelContainer" node_paths=PackedStringArray("boxContainer", "parSenBtn", "imageBtn", "saveBtn", "backBtn", "docAdderPanel", "doc_Title", "_imageFileDialogue", "_saveFileDialogue", "_loadingParent")]
+top_level = true
+clip_contents = true
 custom_minimum_size = Vector2(1550, 960)
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,7 +30,8 @@ offset_left = 370.0
 offset_top = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
+size_flags_vertical = 3
 script = ExtResource("1_io0xd")
 boxContainer = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer")
 parSenBtn = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/parSen_Btn")
@@ -55,16 +47,21 @@ _imgTemplate = ExtResource("3_hida0")
 _loading = ExtResource("7_8bn32")
 _loadingParent = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+color = Color(0.154876, 0.154876, 0.154876, 1)
+
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_2va1r")
 layout_mode = 2
-texture = SubResource("GradientTexture1D_q1ebe")
+texture = SubResource("GradientTexture1D_o5165")
+expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(1500, 900)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -72,29 +69,34 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_rvkj6")
 theme_override_font_sizes/font_size = 20
-text = "X"
+icon = ExtResource("7_pnvlm")
+flat = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1500, 900)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 6
+size_flags_vertical = 3
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
 z_index = 1
+clip_contents = true
 custom_minimum_size = Vector2(1350, 910)
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 6
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -104,30 +106,46 @@ text = "Documentation File Title: "
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("4_8rj6d")
-theme_override_font_sizes/font_size = 25
-placeholder_text = "Title Here"
-alignment = 1
+theme = ExtResource("9_1x3sp")
+theme_override_fonts/font = ExtResource("8_fiybd")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Add Title Here"
 max_length = 50
+clear_button_enabled = true
+flat = true
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 12
 
 [node name="parSen_Btn" type="Button" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Paragraph / Sentence"
+theme = ExtResource("9_1x3sp")
+text = "   Add Paragraph / Sentence    "
 
 [node name="image_Btn" type="Button" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Image"
+theme = ExtResource("9_1x3sp")
+text = "     Add Image     "
 
 [node name="save_Btn" type="Button" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme = ExtResource("9_1x3sp")
 text = "Save"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 13
+size_flags_stretch_ratio = 2.94
 
 [node name="ImageFileDialog" type="FileDialog" parent="."]
 title = "Open a File"

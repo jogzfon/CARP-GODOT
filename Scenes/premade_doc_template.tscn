@@ -26,11 +26,12 @@ shader_parameter/blur2 = 0.01
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_k31ki"]
 gradient = SubResource("Gradient_2r6y7")
 
-[node name="PremadeDoc_template" type="Node" node_paths=PackedStringArray("_contentHolder", "_contentScrollbar", "_contentTexture", "_exitBtn")]
+[node name="PremadeDoc_template" type="Node" node_paths=PackedStringArray("_contentHolder", "_contentScrollbar", "_contentTexture", "_backgroundTexture", "_exitBtn")]
 script = ExtResource("1_1lgrf")
 _contentHolder = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer")
 _contentScrollbar = NodePath("VBoxContainer")
 _contentTexture = NodePath("TextureRect")
+_backgroundTexture = NodePath("ColorRect")
 _exitBtn = NodePath("VBoxContainer/Exit")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -43,6 +44,13 @@ offset_bottom = 1070.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource("GradientTexture1D_k31ki")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 357.0
+offset_top = 120.0
+offset_right = 1907.0
+offset_bottom = 1070.0
+color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(1500, 900)

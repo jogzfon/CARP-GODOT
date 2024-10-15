@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjoi18xm4kdgo"]
+[gd_scene load_steps=6 format=3 uid="uid://cjoi18xm4kdgo"]
 
-[ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="1_jarin"]
 [ext_resource type="Script" path="res://Scripts/Other/NotificationHandler.cs" id="1_t5tot"]
-[ext_resource type="Texture2D" uid="uid://bvhfcm8kjr7yf" path="res://Sprites/notification.png" id="2_25n1e"]
-[ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Sprites/Cross.png" id="5_eyc7l"]
+[ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="2_atag7"]
+[ext_resource type="Texture2D" uid="uid://dem0yjr1fv5yq" path="res://Icons/Multiply.png" id="3_m1h2p"]
+
+[sub_resource type="Gradient" id="Gradient_e3vdp"]
+offsets = PackedFloat32Array(0, 0.96875)
+colors = PackedColorArray(0.196078, 0.196078, 0.196078, 1, 0.194349, 0.194349, 0.194349, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rfwpc"]
+gradient = SubResource("Gradient_e3vdp")
 
 [node name="NotificationHandler" type="Control" node_paths=PackedStringArray("notificationWindow", "closeNotification", "message")]
 visible = false
@@ -37,7 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_25n1e")
+texture = SubResource("GradientTexture1D_rfwpc")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="NotificationWindow/TextureRect"]
 layout_mode = 1
@@ -51,7 +57,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("1_jarin")
+theme_override_fonts/font = ExtResource("2_atag7")
 theme_override_font_sizes/font_size = 30
 text = "MESSAGE"
 horizontal_alignment = 1
@@ -67,6 +73,6 @@ offset_top = 20.0
 offset_right = -20.0
 offset_bottom = 70.0
 grow_horizontal = 0
-icon = ExtResource("5_eyc7l")
+icon = ExtResource("3_m1h2p")
 flat = true
 expand_icon = true

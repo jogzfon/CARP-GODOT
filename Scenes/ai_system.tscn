@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bpt486otnrqkv"]
+[gd_scene load_steps=20 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/AI/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
@@ -6,7 +6,9 @@
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="3_vad0u"]
 [ext_resource type="Texture2D" uid="uid://b44pnrtokcm2" path="res://Sprites/Paper Plane.png" id="4_3xanh"]
 [ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="4_qnl5w"]
+[ext_resource type="FontFile" uid="uid://cwsvamme2gxwj" path="res://Fonts/Inter-Black.ttf" id="6_aueqr"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="7_ps5gc"]
+[ext_resource type="FontFile" uid="uid://b4kpxuqfcr50w" path="res://Fonts/Inter-Light.ttf" id="7_x254o"]
 [ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="8_edaj7"]
 [ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="8_o48ei"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="9_k114o"]
@@ -75,6 +77,15 @@ grow_vertical = 2
 scale = Vector2(0.998594, 0.994333)
 color = Color(0.117647, 0.121569, 0.133333, 1)
 
+[node name="ColorRect2" type="ColorRect" parent="AI"]
+modulate = Color(0, 0, 0, 0.498039)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TextureRect" type="TextureRect" parent="AI"]
 modulate = Color(1, 1, 1, 0.337255)
 self_modulate = Color(1, 1, 1, 0.678431)
@@ -101,7 +112,7 @@ grow_vertical = 2
 theme = ExtResource("4_qnl5w")
 theme_override_fonts/font = ExtResource("3_vad0u")
 theme_override_font_sizes/font_size = 25
-placeholder_text = "Input Command here..."
+placeholder_text = "  Input Command here..."
 wrap_mode = 1
 scroll_smooth = true
 caret_blink = true
@@ -128,9 +139,15 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_vad0u")
+theme_override_fonts/font = ExtResource("6_aueqr")
 theme_override_font_sizes/font_size = 30
-text = "Hi Carp here! How may I serve you?"
+text = "Hi, how can CARP AI assist you today?"
+
+[node name="Label2" type="Label" parent="AI/ScrollContainer/ChatContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_x254o")
+text = "If you have questions about the RSCPU System Architecture or need help with programming tasks related to it, feel free to ask!"
 
 [node name="SendRequest" type="Button" parent="AI"]
 layout_mode = 1
@@ -169,10 +186,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_2rjxw")

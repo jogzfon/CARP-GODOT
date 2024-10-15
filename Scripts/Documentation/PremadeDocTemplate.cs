@@ -6,12 +6,14 @@ public partial class PremadeDocTemplate : Node
 	[Export] private VBoxContainer _contentHolder;
     [Export] private VBoxContainer _contentScrollbar;
     [Export] private TextureRect _contentTexture;
+    [Export] private ColorRect _backgroundTexture;
     [Export] private Button _exitBtn;
 
     private DocumentationAbler _documentationAbler;
 
     public override void _Ready()
     {
+        _backgroundTexture.Visible = false;
         _contentTexture.Visible = false;
         // Ensure _contentHolder and _contentScrollbar are initialized
         if (_contentHolder == null)
@@ -65,6 +67,7 @@ public partial class PremadeDocTemplate : Node
             _documentationAbler.HideAllDocument();
             _contentScrollbar.Visible = false;
             _contentTexture.Visible = false;
+            _backgroundTexture.Visible = false;
 
         }
 		else
@@ -72,6 +75,7 @@ public partial class PremadeDocTemplate : Node
             _documentationAbler.HideAllDocument();
             _contentScrollbar.Visible = true;
             _contentTexture.Visible = true;
+            _backgroundTexture.Visible = true;
 
         }
 	}
@@ -79,5 +83,6 @@ public partial class PremadeDocTemplate : Node
     {
         _contentScrollbar.Visible = false;
         _contentTexture.Visible = false;
+        _backgroundTexture.Visible = false;
     }
 }
