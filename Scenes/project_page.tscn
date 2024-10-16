@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=34 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/Pages/project_page.cs" id="1_lst7x"]
 [ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="2_d75fn"]
@@ -9,19 +9,16 @@
 [ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="6_is7gs"]
 [ext_resource type="FontFile" uid="uid://8bnfajcjqbay" path="res://Fonts/Inter-SemiBold.ttf" id="7_52ft5"]
 [ext_resource type="FontFile" uid="uid://cpac4l60iusp7" path="res://Fonts/Inter-Regular.ttf" id="8_6x74r"]
-[ext_resource type="Script" path="res://Scripts/PreMade Code/InstructionCodeHandler.cs" id="9_ni21l"]
 [ext_resource type="FontFile" uid="uid://cf2p3oue3dn2n" path="res://Fonts/Inter-Medium.ttf" id="10_pfba3"]
 [ext_resource type="Script" path="res://Scripts/Other/UnitType.cs" id="11_0eaj6"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="11_g1vms"]
-[ext_resource type="Texture2D" uid="uid://mnx0cd3yo8at" path="res://Sprites/Cross.png" id="13_ggbv5"]
 [ext_resource type="Script" path="res://Scripts/FileHandler/ExitController.cs" id="14_r5c7n"]
 [ext_resource type="PackedScene" uid="uid://bpt486otnrqkv" path="res://Scenes/ai_system.tscn" id="15_jp5cw"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="15_nhij1"]
 [ext_resource type="Texture2D" uid="uid://3vtbwidr05rs" path="res://Icons/Close.png" id="17_t017d"]
-[ext_resource type="Script" path="res://Scripts/Other/PresetCodeHandler.cs" id="18_h1qas"]
 [ext_resource type="Shader" path="res://Shader/corner.gdshader" id="18_kvxyw"]
 [ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="18_ms3uc"]
-[ext_resource type="Texture2D" uid="uid://dy3etmq5s7r5j" path="res://Sprites/Rectangle 90.png" id="19_30ukb"]
+[ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="20_hpasb"]
 [ext_resource type="PackedScene" uid="uid://jtq8firoonfc" path="res://Scenes/Others/loading.tscn" id="21_gw1lt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wil1c"]
@@ -85,7 +82,16 @@ fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.5, 0.5)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back", "_loading", "_memoryLoad", "_traceLoad")]
+[sub_resource type="Gradient" id="Gradient_hcnba"]
+offsets = PackedFloat32Array(0, 0.954861, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.435294, 0, 0, 0, 0.964706, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8tq5y"]
+gradient = SubResource("Gradient_hcnba")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back", "_status", "_loading", "_memoryLoad", "_traceLoad")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,6 +109,7 @@ toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
 assemble = NodePath("LeftContainer/Assemble")
 toAI = NodePath("VBoxContainer/HBoxContainer/AIBtn")
 back = NodePath("HBoxContainer/Back")
+_status = NodePath("LeftContainer/HBoxContainer2/Status")
 _loading = NodePath("HBoxContainer/Loading")
 _memoryLoad = NodePath("VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/ScrollContainer/Loading")
 _traceLoad = NodePath("VBoxContainer/PanelContainer/TraceResult/VBoxContainer/ScrollContainer/Loading")
@@ -499,25 +506,11 @@ text = "0"
 placeholder_text = "Enter Memory Location"
 alignment = 1
 
-[node name="SaveAsPreset" type="HBoxContainer" parent="LeftContainer"]
-visible = false
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/SaveAsPreset"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PresetCodeBtn" type="Button" parent="LeftContainer/SaveAsPreset"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2_d75fn")
-text = "Save as Preset Code"
-
 [node name="ScrollContainer" type="ScrollContainer" parent="LeftContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InstructionCode" type="TextEdit" parent="LeftContainer/ScrollContainer" node_paths=PackedStringArray("instructions")]
+[node name="InstructionCode" type="TextEdit" parent="LeftContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -526,10 +519,7 @@ theme = ExtResource("2_d75fn")
 theme_override_fonts/font = ExtResource("8_6x74r")
 theme_override_font_sizes/font_size = 20
 placeholder_text = "Input code here..."
-selecting_enabled = false
 deselect_on_focus_loss_enabled = false
-script = ExtResource("9_ni21l")
-instructions = NodePath(".")
 
 [node name="UnitType" type="Label" parent="LeftContainer" node_paths=PackedStringArray("_microprogrammed", "_hardwired")]
 layout_mode = 2
@@ -690,108 +680,137 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
 
-[node name="PresetCodeManager" type="Node" parent="." node_paths=PackedStringArray("_assembledCode", "_codeKeyword", "_exitBtn", "_savePresetBtn", "_finalizeSavePresetBtn", "_presetTextureRect", "_presetBtnContainer", "_instructionCodeHandler", "_notificationHandler", "_loading")]
-script = ExtResource("18_h1qas")
-_assembledCode = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
-_codeKeyword = NodePath("PresetRect/keyword")
-_exitBtn = NodePath("PresetRect/ExitButton")
-_savePresetBtn = NodePath("../LeftContainer/SaveAsPreset/PresetCodeBtn")
-_finalizeSavePresetBtn = NodePath("PresetRect/finalizeSaveBtn")
-_presetTextureRect = NodePath("PresetRect")
-_presetBtnContainer = NodePath("../LeftContainer/SaveAsPreset")
-_instructionCodeHandler = NodePath("../LeftContainer/ScrollContainer/InstructionCode")
-_notificationHandler = NodePath("../NotificationHandler")
-_loading = NodePath("PresetRect/Loading")
+[node name="Guide" type="Node" parent="."]
 
-[node name="PresetRect" type="TextureRect" parent="PresetCodeManager"]
+[node name="TextureRect2" type="TextureRect" parent="Guide"]
 visible = false
-custom_minimum_size = Vector2(1000, 500)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("19_30ukb")
-expand_mode = 1
+z_index = 10
+offset_left = 40.0
+offset_top = 87.0
+offset_right = 567.0
+offset_bottom = 236.0
+texture = SubResource("GradientTexture2D_8tq5y")
 
-[node name="Label" type="Label" parent="PresetCodeManager/PresetRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -158.5
-offset_top = -99.0
-offset_right = 158.5
-offset_bottom = -61.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_rnxid")
-theme_override_font_sizes/font_size = 30
-text = "Enter Preset Keyword"
+[node name="Label" type="Label" parent="Guide/TextureRect2"]
+layout_mode = 0
+offset_left = 535.0
+offset_top = 6.0
+offset_right = 1259.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "<------ This is your animation information. "
 
-[node name="keyword" type="LineEdit" parent="PresetCodeManager/PresetRect"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -30.0
-offset_right = 250.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-max_length = 30
+[node name="TextureRect3" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 42.0
+offset_top = 233.0
+offset_right = 566.0
+offset_bottom = 1056.0
+texture = SubResource("GradientTexture2D_8tq5y")
 
-[node name="finalizeSaveBtn" type="Button" parent="PresetCodeManager/PresetRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = 80.0
-offset_right = 150.0
-offset_bottom = 120.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "SAVE PRESET INSTRUCTIONS"
+[node name="Label2" type="Label" parent="Guide/TextureRect3"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 33.0
+offset_right = 1281.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "<------ Your starting memory address when assembling"
 
-[node name="Loading" parent="PresetCodeManager/PresetRect" instance=ExtResource("21_gw1lt")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 185.0
-offset_top = -108.0
-offset_right = 249.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label3" type="Label" parent="Guide/TextureRect3"]
+layout_mode = 0
+offset_left = 537.0
+offset_top = 177.0
+offset_right = 1286.0
+offset_bottom = 240.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "<------ Playground area for your instruction codes"
 
-[node name="ExitButton" type="Button" parent="PresetCodeManager/PresetRect"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -34.0
-offset_top = 10.0
-offset_right = -16.0
-offset_bottom = 41.0
-grow_horizontal = 0
-icon = ExtResource("13_ggbv5")
-expand_icon = true
+[node name="Label4" type="Label" parent="Guide/TextureRect3"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 693.0
+offset_right = 1281.0
+offset_bottom = 756.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "<------ Select your control units here"
+
+[node name="Label5" type="Label" parent="Guide/TextureRect3"]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 756.0
+offset_right = 1283.0
+offset_bottom = 819.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "<------ After inputing some instructions click here to assemble it."
+
+[node name="TextureRect4" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 589.0
+offset_top = 95.0
+offset_right = 1723.0
+offset_bottom = 215.0
+texture = SubResource("GradientTexture2D_8tq5y")
+
+[node name="Label3" type="Label" parent="Guide/TextureRect4"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = -58.0
+offset_right = 1013.0
+offset_bottom = -4.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "Click any of these buttons to view each of their pages."
+
+[node name="TextureRect5" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 850.0
+offset_top = 516.0
+offset_right = 1439.0
+offset_bottom = 688.0
+texture = SubResource("GradientTexture2D_8tq5y")
+
+[node name="Label4" type="Label" parent="Guide/TextureRect5"]
+layout_mode = 0
+offset_left = 612.0
+offset_top = 60.0
+offset_right = 978.0
+offset_bottom = 123.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "<------ Click here to view 
+           the CARP system."
+
+[node name="TextureRect6" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 1767.0
+offset_top = 11.0
+offset_right = 1867.0
+offset_bottom = 104.0
+texture = SubResource("GradientTexture2D_8tq5y")
+
+[node name="Label4" type="Label" parent="Guide/TextureRect6"]
+offset_left = -244.0
+offset_top = 12.0
+offset_right = -11.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("20_hpasb")
+theme_override_font_sizes/font_size = 26
+text = "Your Profile ----->"

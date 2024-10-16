@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpt486otnrqkv"]
+[gd_scene load_steps=18 format=3 uid="uid://bpt486otnrqkv"]
 
 [ext_resource type="Script" path="res://Scripts/AI/ai_system.cs" id="1_hxjp6"]
 [ext_resource type="Shader" path="res://Shader/engineLike.gdshader" id="2_cu0w3"]
@@ -12,8 +12,6 @@
 [ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="8_edaj7"]
 [ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="8_o48ei"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="9_k114o"]
-[ext_resource type="Texture2D" uid="uid://day1e2bnip2dc" path="res://Sprites/QRCode_Payment.jpg" id="10_va4oh"]
-[ext_resource type="Script" path="res://Scripts/Subscription/PaymentConfirmation.cs" id="13_62j6m"]
 [ext_resource type="Script" path="res://Scripts/PaymentSystem/PaymongoPayment.cs" id="13_kmqa0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_elcsl"]
@@ -195,7 +193,6 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_2rjxw")
 
 [node name="API" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -272,47 +269,6 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Confirm Key"
 
-[node name="SubscibedAPIContainer" type="VBoxContainer" parent="API"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -250.0
-offset_right = 300.0
-offset_bottom = 250.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="QR Code" type="TextureRect" parent="API/SubscibedAPIContainer"]
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("10_va4oh")
-expand_mode = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="API/SubscibedAPIContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="paymentConfirmationBtn" type="Button" parent="API/SubscibedAPIContainer"]
-layout_mode = 2
-text = "Payment Confirmation Photo"
-icon_alignment = 2
-expand_icon = true
-
-[node name="MarginContainer" type="MarginContainer" parent="API/SubscibedAPIContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="confirmBtn" type="Button" parent="API/SubscibedAPIContainer"]
-layout_mode = 2
-text = "CONFIRM"
-
 [node name="APIBack" type="TextureButton" parent="API"]
 layout_mode = 0
 offset_left = 40.0
@@ -329,21 +285,6 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
-
-[node name="ReceiptDialog" type="FileDialog" parent="."]
-title = "Open a File"
-initial_position = 1
-size = Vector2i(800, 600)
-ok_button_text = "Open"
-file_mode = 0
-access = 2
-filters = PackedStringArray("*.png", "*.jpg")
-
-[node name="PaymentConfirmation" type="Node" parent="." node_paths=PackedStringArray("_payment_receiptBtn", "_receipt_dialog", "_notification")]
-script = ExtResource("13_62j6m")
-_payment_receiptBtn = NodePath("../API/SubscibedAPIContainer/paymentConfirmationBtn")
-_receipt_dialog = NodePath("../ReceiptDialog")
-_notification = NodePath("../NotificationHandler")
 
 [node name="PaymongoPay" type="Node" parent="." node_paths=PackedStringArray("_paymentBtn", "_notificationHandler")]
 script = ExtResource("13_kmqa0")

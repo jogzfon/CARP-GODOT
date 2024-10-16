@@ -14,7 +14,7 @@ public class UserData
     public string SubscriptionStart { get; set; }
     public string SubscriptionEnd { get; set; }
     public string ProfileImage { get; set; }
-    public string ProofOfPayment { get; set; }
+
     // ToString method to display user data
     public override string ToString()
     {

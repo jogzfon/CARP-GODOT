@@ -76,6 +76,9 @@ public partial class StartUpPage : Control
 
     private void RegisterPressed()
 	{
+        loginUsername.Text = String.Empty;
+        logInPassword.Text = String.Empty;
+
         loginAccount.Visible = false;
 
         createAccount.Visible = true;
@@ -162,8 +165,7 @@ public partial class StartUpPage : Control
             Role = rolePick.Selected.ToString(),
             SubscriptionStart = "",
             SubscriptionEnd = "",
-            ProfileImage = "NONE",
-            ProofOfPayment = "NONE"
+            ProfileImage = "NONE"
         };
 
 		if (data.Role.Equals("1"))
@@ -277,6 +279,13 @@ public partial class StartUpPage : Control
 
     private void CancelPressed()
 	{
+        username.Text = String.Empty; 
+        password.Text = String.Empty;
+        confirm_password.Text = String.Empty; 
+        firstname.Text = String.Empty; 
+        lastname.Text = String.Empty; 
+        email.Text = String.Empty;
+
         loginAccount.Visible = true;
 
         createAccount.Visible = false;

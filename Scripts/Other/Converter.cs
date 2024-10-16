@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 public static class Converter
@@ -27,10 +28,20 @@ public static class Converter
         // Remove spaces
         string cleanedBinaryString = binaryString.Replace(" ", "");
 
-        // Convert binary string to integer
-        int result = Convert.ToInt32(cleanedBinaryString, 2);
+        // Check if the string contains any characters outside of '0' and '1'
+        if (cleanedBinaryString.Any(c => !"01".Contains(c)))
+        {
+            // Treat the string as hexadecimal
+            int result = Convert.ToInt32(cleanedBinaryString, 16);
 
-        return result;
+            // Convert the integer back to a binary string
+            cleanedBinaryString = Convert.ToString(result, 2);
+        }
+
+        // Convert binary string to integer
+        int binaryResult = Convert.ToInt32(cleanedBinaryString, 2);
+
+        return binaryResult;
     }
 
     public static Task<string> TextureToBase64Async(Texture2D texture)

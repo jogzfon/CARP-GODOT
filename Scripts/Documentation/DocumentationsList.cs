@@ -79,7 +79,7 @@ public partial class DocumentationsList : VBoxContainer
                 string content = file.GetAsText();
 
                 DocumentationTemplate doc_template = (DocumentationTemplate)_documentationTemplate.Instantiate();
-                DistributeDocumentationValues(content, doc_template);
+                DistributeDocumentationValues(content, doc_template, filePath);
 
                 doc_template.SetDocumentationAbler(_docAbler);
                 _docAbler.AddDocTemplate(doc_template);
@@ -92,7 +92,7 @@ public partial class DocumentationsList : VBoxContainer
 
         dir.ListDirEnd(); // Finish listing the directory contents
     }
-    private void DistributeDocumentationValues(string content, DocumentationTemplate doc_template)
+    private void DistributeDocumentationValues(string content, DocumentationTemplate doc_template, string filePath)
     {
         List<List<Tokens>> tokens = new List<List<Tokens>>();
 
@@ -109,7 +109,7 @@ public partial class DocumentationsList : VBoxContainer
         {
             if (tokens[i].Count > 0)
             {
-                SetDocumentationValues(tokens[i], doc_template);
+                SetDocumentationValues(tokens[i], doc_template, filePath);
             }
         }
         if (_text.Length > 0)
@@ -143,7 +143,7 @@ public partial class DocumentationsList : VBoxContainer
         return tokens;
     }
 
-    private void SetDocumentationValues(List<Tokens> tokens, DocumentationTemplate doc_template)
+    private void SetDocumentationValues(List<Tokens> tokens, DocumentationTemplate doc_template, string filePath)
     {
         switch (tokens[0].type)
         {
@@ -153,7 +153,7 @@ public partial class DocumentationsList : VBoxContainer
                     doc_template.AddText(_text);
                     _text = "";
                 }
-                SetLabelValues(tokens, doc_template);
+                SetLabelValues(tokens, doc_template, filePath);
                 break;
             case TokenType.VALUE:
                 for (int i = 0; i < tokens.Count; i++)
@@ -168,7 +168,7 @@ public partial class DocumentationsList : VBoxContainer
         }
     }
 
-    private void SetLabelValues(List<Tokens> tokens, DocumentationTemplate doc_template)
+    private void SetLabelValues(List<Tokens> tokens, DocumentationTemplate doc_template, string filePath)
     {
         switch (tokens[0].value)
         {
@@ -177,6 +177,7 @@ public partial class DocumentationsList : VBoxContainer
                 {
                     DocBtnContainer btnDocContainer = (DocBtnContainer)_docBtnContainer.Instantiate();
                     var btn = btnDocContainer.GetButton();
+                    btnDocContainer.SetFilePath(filePath);
                     for (int i = 2; i < tokens.Count; i++)
                     {
                         btn.Text += tokens[i].value;

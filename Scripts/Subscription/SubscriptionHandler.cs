@@ -168,55 +168,6 @@ public partial class SubscriptionHandler : Node
             GetTree().Root.AddChild(simultaneous);
         }
     }
-   /* private void OnMouseEnteredPanel()
-    {
-        isMouseOverPanel = true;
-    }
-
-    private void OnMouseExitedPanel()
-    {
-        isMouseOverPanel = false;
-        // Defer closing to the next frame to ensure other signals don't conflict
-        CallDeferred(nameof(CheckMouseOver));
-    }
-
-    private void CheckMouseOver()
-    {
-        if (!isMouseOverPanel && subscriptionPanel.Visible)
-        {
-            subscriptionPanel.Visible = false;
-        }
-    }
-*/
-    /*private void ConfirmPayment()
-    {
-        if(_paymentConfirmation.GetReceipt() == null)
-        {
-            _notificationHandler.MessageBox("Please place the payment confirmation photo.\n Thank you", 0);
-            return;
-        }
-
-        _subscription_types_panel.Visible = true;
-        //_payment_panel.Visible = false;
-
-        if (SubscriptionRequestHandler.RequestSubscription(_paymentConfirmation.GetReceipt()))
-        {
-            _paymentConfirmation.ResetReceipt();
-            _notificationHandler.MessageBox("Request sent successfully.\nThank you for the patronage.\n Please wait for a while...", 0);
-            OnBackPressed();
-            OnBackPressed();
-        }
-        else
-        {
-            _notificationHandler.MessageBox("Please connect to the internet.\n Thank you", 0);
-        }
-    }*/
-
-    /*private void OpenPaymentPanel()
-    {
-        _subscription_types_panel.Visible = false;
-        //_payment_panel.Visible = true;
-    }*/
 
     private void OnBackPressed()
     {

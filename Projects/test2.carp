@@ -1,7 +1,7 @@
 ---------- Detail Info   ----------
 Status: Idle
-RtlStatement: Fetch 2
-DataMovement: DR <- M, PC <- PC+1
+RtlStatement: Fetch 2 
+DataMovement: DR < - M PC < - PC + 1 
 CurrentMemoryLocation: 0
 InstructionCodes: ; double a number . i = i + i 
 ; i at 100 
@@ -60,10 +60,10 @@ RTL: Fetch 2  ,
 DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0000 0011, PC: 0000 0000 0000 0100, DR: 0000 1011, TR: 0000 0000, IR: 0000 0010, R: 0000 0000, AC: 0000 0000, Z: 1
 RTL: Fetch 1  , 
-DataMove: AR <- PC , 
+DataMove: AR < - PC , 
 AR: 0000 0000 0000 0000, PC: 0000 0000 0000 0000, DR: 0000 0000, TR: 0000 0000, IR: 0000 0000, R: 0000 0000, AC: 0000 0000, Z: 0
 RTL: Fetch 2  , 
-DataMove: DR <- M, PC <- PC+1, 
+DataMove: DR < - M PC < - PC + 1 , 
 AR: 0000 0000 0000 0000, PC: 0000 0000 0000 0001, DR: 0000 0001, TR: 0000 0000, IR: 0000 0000, R: 0000 0000, AC: 0000 0000, Z: 0
 
 

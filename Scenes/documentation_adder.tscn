@@ -39,7 +39,7 @@ imageBtn = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/H
 saveBtn = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/save_Btn")
 backBtn = NodePath("VBoxContainer/Exit")
 docAdderPanel = NodePath(".")
-doc_Title = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2/DocumentationTitle")
+doc_Title = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/TitleContainer/DocumentationTitle")
 _imageFileDialogue = NodePath("ImageFileDialog")
 _saveFileDialogue = NodePath("SaveFileDialog")
 _textTemplate = ExtResource("2_nbuwe")
@@ -91,18 +91,15 @@ custom_minimum_size = Vector2(1350, 910)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Panel" type="Panel" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/TitleContainer"]
 layout_mode = 2
 text = "Documentation File Title: "
 
-[node name="DocumentationTitle" type="LineEdit" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="DocumentationTitle" type="LineEdit" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/TitleContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -114,7 +111,7 @@ max_length = 50
 clear_button_enabled = true
 flat = true
 
-[node name="Panel" type="Panel" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Panel" type="Panel" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer/TitleContainer"]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
@@ -148,13 +145,13 @@ size_flags_vertical = 13
 size_flags_stretch_ratio = 2.94
 
 [node name="ImageFileDialog" type="FileDialog" parent="."]
-title = "Open a File"
+title = "Open a File or Directory"
 position = Vector2i(400, 250)
 size = Vector2i(800, 500)
 ok_button_text = "Open"
-file_mode = 0
+file_mode = 3
 access = 2
-filters = PackedStringArray("*.png", "*.jpg")
+filters = PackedStringArray("*.png")
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1

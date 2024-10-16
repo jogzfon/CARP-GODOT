@@ -22,7 +22,7 @@ public static class AccountFileSaver
             "Lastname: " + user.Lastname + "\n" +   // Fixed to show Lastname properly
             "Email: " + user.Email + "\n"+
             "Status: "+ user.Status +"\n" +
-            "Subscription: " + user.Subscription + "\n" +
+            "Subscription: " + user.Subscription+ "\n" +
             "Role: " + user.Role + "\n" +
             "SubscriptionStart: " + user.SubscriptionStart + "\n" +
             "SubscriptionEnd: " + user.SubscriptionEnd + "\n" +

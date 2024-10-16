@@ -168,6 +168,11 @@ public partial class DocumentationAdder : Control
     }
     private async void SaveDocumentationFile()
     {
+        if (doc_Title.Text == String.Empty || doc_Title.Text == null)
+        {
+            _notificationHandler.MessageBox("Please set a title for the document.", 0);
+            return;
+        }
         await ShowLoading();
         SaveDoc();
         HideLoading();

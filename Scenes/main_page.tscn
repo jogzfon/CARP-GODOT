@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=75 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -28,8 +28,6 @@
 [ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
 [ext_resource type="Script" path="res://Scripts/FileHandler/FileHandler.cs" id="18_lnwlk"]
 [ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/Documentation/InstructionSet.png" id="19_f2wtp"]
-[ext_resource type="Texture2D" uid="uid://cimg5xsnd3w80" path="res://Sprites/Documentation/ProjectPage.png" id="20_t3kpw"]
-[ext_resource type="Texture2D" uid="uid://bpoqpdeukbide" path="res://Sprites/Documentation/Assembly.png" id="21_dmdda"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="21_iog1l"]
 [ext_resource type="Texture2D" uid="uid://brtc5luckr666" path="res://Sprites/Documentation/Memory.png" id="22_t4v1g"]
 [ext_resource type="Texture2D" uid="uid://bk5xps8cjaxia" path="res://Sprites/Documentation/Breakpoint.png" id="23_b17yx"]
@@ -43,17 +41,13 @@
 [ext_resource type="Texture2D" uid="uid://vvu0807gwg2x" path="res://Sprites/Subscription/Rectangle 92.png" id="28_o5xks"]
 [ext_resource type="Texture2D" uid="uid://c4uvbuprkvnnd" path="res://Sprites/Subscription/School_Logo3.png" id="30_up4sm"]
 [ext_resource type="Texture2D" uid="uid://bog35ofpaqh01" path="res://Sprites/Subscription/School_Logo1.png" id="31_5pwgi"]
-[ext_resource type="PackedScene" uid="uid://jtq8firoonfc" path="res://Scenes/Others/loading.tscn" id="31_we5ck"]
 [ext_resource type="Texture2D" uid="uid://cttitoinygqmv" path="res://Sprites/Subscription/School_Logo2.png" id="32_5ac3u"]
 [ext_resource type="PackedScene" uid="uid://vykxrngj8yrh" path="res://Scenes/documentation_template.tscn" id="32_5gf2n"]
 [ext_resource type="Texture2D" uid="uid://3vtbwidr05rs" path="res://Icons/Close.png" id="32_8acgo"]
 [ext_resource type="Texture2D" uid="uid://2s5qed0kxe8y" path="res://Sprites/Subscription/School_Logo4.png" id="32_mcsfd"]
 [ext_resource type="Script" path="res://Scripts/Subscription/SubscriptionHandler.cs" id="32_ooytf"]
-[ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="34_app1w"]
 [ext_resource type="Texture2D" uid="uid://di0abjh1c723w" path="res://Sprites/back.png" id="41_pe2uf"]
 [ext_resource type="FontFile" uid="uid://cwsvamme2gxwj" path="res://Fonts/Inter-Black.ttf" id="43_i1t6n"]
-[ext_resource type="Script" path="res://Scripts/Subscription/PaymentConfirmation.cs" id="44_8jo08"]
-[ext_resource type="Texture2D" uid="uid://day1e2bnip2dc" path="res://Sprites/QRCode_Payment.jpg" id="46_d88yh"]
 [ext_resource type="Script" path="res://Scripts/Documentation/DocumentationManager.cs" id="48_kvvd6"]
 [ext_resource type="PackedScene" uid="uid://dmwimuoit033v" path="res://Scenes/premade_doc_template.tscn" id="49_lyvmv"]
 [ext_resource type="Texture2D" uid="uid://lq48xxcpcq8x" path="res://Sprites/Documentation/Nav.png" id="50_m04nu"]
@@ -61,6 +55,7 @@
 [ext_resource type="Script" path="res://Scripts/AccountHandler/AccountUpdater.cs" id="56_5q7h3"]
 [ext_resource type="Script" path="res://Scripts/Settings/Settings.cs" id="57_ysgjy"]
 [ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="58_vo425"]
+[ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="59_tqwm2"]
 [ext_resource type="Script" path="res://Scripts/PaymentSystem/PaymongoPayment.cs" id="60_7jqtu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
@@ -130,13 +125,6 @@ shader_parameter/pulse_speed = 1.281
 shader = ExtResource("25_i667d")
 shader_parameter/corner_scale = 0.13
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yeqgk"]
-shader = ExtResource("25_i667d")
-shader_parameter/corner_scale = 0.051
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce0sa"]
-bg_color = Color(0.388235, 0.388235, 0.396078, 1)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t46w3"]
 shader = ExtResource("10_urm6c")
 shader_parameter/circle_size = 0.5
@@ -146,6 +134,21 @@ shader_parameter/ratio_width = 1.0
 shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_osjxi"]
+load_path = "res://.godot/imported/Assembly.png-4872e93835a14d445bd499d4b643e073.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iyxol"]
+load_path = "res://.godot/imported/ProjectPage.png-4cdf92117ccf5ea071e6f66ad91d2caa.ctex"
+
+[sub_resource type="Gradient" id="Gradient_slk8x"]
+offsets = PackedFloat32Array(0, 0.954861, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.435294, 0, 0, 0, 0.964706, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qk3n8"]
+gradient = SubResource("Gradient_slk8x")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
 
 [node name="MainPage" type="Control" node_paths=PackedStringArray("signIn", "signOut", "userName", "options", "logout", "settings", "documentationAdder", "_documentationAbler", "_subscriptionHandler", "_profileHandler")]
 layout_mode = 3
@@ -318,7 +321,6 @@ newProj = NodePath("../../../../../ProfileHandler/ManageFile/New Project")
 openProj = NodePath("../../../../../ProfileHandler/ManageFile/Open Project")
 
 [node name="Sign-In" type="Button" parent="MainContent"]
-visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -638,13 +640,13 @@ icon = ExtResource("26_vixfx")
 flat = true
 
 [node name="ProfileDialog" type="FileDialog" parent="ProfileHandler/ProfilePanel"]
-title = "Open a File"
+title = "Open a File or Directory"
 initial_position = 1
 size = Vector2i(800, 800)
 ok_button_text = "Open"
-file_mode = 0
+file_mode = 3
 access = 2
-filters = PackedStringArray("*.png", "*.jpg")
+filters = PackedStringArray("*.png")
 
 [node name="FileHandler" type="Node" parent="." node_paths=PackedStringArray("dialogue", "newProject", "openProject", "goToSystem", "directToSystem", "manageFile", "recentFileList", "documentationAdder")]
 script = ExtResource("18_lnwlk")
@@ -669,15 +671,11 @@ access = 2
 root_subfolder = "Projects"
 filters = PackedStringArray("*.carp")
 
-[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "savePanel", "yesbtn", "nobtn", "documentationAdder", "_load")]
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "documentationAdder")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
-savePanel = NodePath("SavePanel")
-yesbtn = NodePath("SavePanel/HBoxContainer/Yes")
-nobtn = NodePath("SavePanel/HBoxContainer/No")
 documentationAdder = NodePath("../MainContent/DocumentationAdder")
 saveAvailable = false
-_load = NodePath("SavePanel/Loading")
 
 [node name="ExitButton" type="Button" parent="Exit"]
 anchors_preset = 1
@@ -691,78 +689,6 @@ grow_horizontal = 0
 icon = ExtResource("32_8acgo")
 flat = true
 expand_icon = true
-
-[node name="SavePanel" type="Panel" parent="Exit"]
-visible = false
-material = SubResource("ShaderMaterial_yeqgk")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -143.0
-offset_right = 250.0
-offset_bottom = 143.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ce0sa")
-
-[node name="Label" type="Label" parent="Exit/SavePanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -123.0
-offset_top = -35.0
-offset_right = 117.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 20
-text = "Do you want to save file?"
-
-[node name="Loading" parent="Exit/SavePanel" instance=ExtResource("31_we5ck")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -23.0
-offset_right = 32.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Exit/SavePanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = 2.21001
-offset_right = 150.0
-offset_bottom = 42.21
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Yes" type="Button" parent="Exit/SavePanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("34_app1w")
-text = "SAVE"
-
-[node name="No" type="Button" parent="Exit/SavePanel/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("34_app1w")
-text = "CANCEL"
 
 [node name="NotificationHandler" parent="." instance=ExtResource("21_iog1l")]
 layout_mode = 1
@@ -967,54 +893,6 @@ text = "👌File System
 👌AI-generated Text"
 autowrap_mode = 2
 
-[node name="PaymentPanel" type="VBoxContainer" parent="SubscriptionHandler/SubscriptionRect"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -211.5
-offset_top = -326.5
-offset_right = 211.5
-offset_bottom = 326.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_font_sizes/font_size = 30
-text = "----------- TO BE ADDED -----------"
-horizontal_alignment = 1
-
-[node name="QR Code" type="TextureRect" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
-custom_minimum_size = Vector2(400, 400)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("46_d88yh")
-expand_mode = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="paymentConfirmationBtn" type="Button" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-text = "Payment Confirmation Photo"
-expand_icon = true
-
-[node name="MarginContainer" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="confirmBtn" type="Button" parent="SubscriptionHandler/SubscriptionRect/PaymentPanel"]
-layout_mode = 2
-text = "CONFIRM"
-
 [node name="SubscriptionBtn" type="TextureButton" parent="SubscriptionHandler"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_t46w3")
@@ -1025,21 +903,6 @@ offset_bottom = 83.0
 texture_normal = ExtResource("32_mcsfd")
 ignore_texture_size = true
 stretch_mode = 0
-
-[node name="PaymentConfirmation" type="Node" parent="." node_paths=PackedStringArray("_payment_receiptBtn", "_receipt_dialog", "_notification")]
-script = ExtResource("44_8jo08")
-_payment_receiptBtn = NodePath("../SubscriptionHandler/SubscriptionRect/PaymentPanel/paymentConfirmationBtn")
-_receipt_dialog = NodePath("../ReceiptDialog")
-_notification = NodePath("../NotificationHandler")
-
-[node name="ReceiptDialog" type="FileDialog" parent="."]
-auto_translate_mode = 1
-title = "Open a File"
-initial_position = 1
-size = Vector2i(800, 600)
-ok_button_text = "Open"
-file_mode = 0
-filters = PackedStringArray("*.png", "*.jpg")
 
 [node name="Settings" type="Node" parent="."]
 script = ExtResource("57_ysgjy")
@@ -1079,7 +942,7 @@ _premadeDocumentationTemplate = ExtResource("49_lyvmv")
 pd_sentences1 = ["What Is This?"]
 pd_images1 = [ExtResource("19_f2wtp")]
 pd_sentences2 = ["How Does This Work?"]
-pd_images2 = [ExtResource("21_dmdda"), ExtResource("23_b17yx"), ExtResource("22_t4v1g"), ExtResource("50_m04nu"), ExtResource("20_t3kpw"), ExtResource("25_7m7ga"), ExtResource("24_rhk4k")]
+pd_images2 = [SubResource("CompressedTexture2D_osjxi"), ExtResource("23_b17yx"), ExtResource("22_t4v1g"), ExtResource("50_m04nu"), SubResource("CompressedTexture2D_iyxol"), ExtResource("25_7m7ga"), ExtResource("24_rhk4k")]
 pd_sentences3 = ["Program Examples"]
 pd_sentences4 = ["Numeric Constants"]
 pd_sentences5 = ["Assembler Directives"]
@@ -1091,3 +954,107 @@ script = ExtResource("56_5q7h3")
 script = ExtResource("60_7jqtu")
 _paymentBtn = NodePath("../../SubscriptionHandler/SubscriptionRect/SubscriptionTypePanel/HBoxContainer/StudentTier/subscriptionBtn")
 _notificationHandler = NodePath("../../NotificationHandler")
+
+[node name="Guide" type="Node" parent="."]
+
+[node name="TextureRect2" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 8.0
+offset_top = 87.0
+offset_right = 332.0
+offset_bottom = 477.0
+texture = SubResource("GradientTexture2D_qk3n8")
+
+[node name="Label" type="Label" parent="Guide/TextureRect2"]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 127.0
+offset_right = 1050.0
+offset_bottom = 157.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("59_tqwm2")
+theme_override_font_sizes/font_size = 26
+text = "<------THIS IS WHERE RECENT PROJECTS ARE FOUND"
+
+[node name="TextureRect3" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 10.0
+offset_top = 545.0
+offset_right = 334.0
+offset_bottom = 894.0
+texture = SubResource("GradientTexture2D_qk3n8")
+
+[node name="Label2" type="Label" parent="Guide/TextureRect3"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 157.0
+offset_right = 1064.0
+offset_bottom = 187.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("59_tqwm2")
+theme_override_font_sizes/font_size = 26
+text = "<------ Documentations are found here.
+           Click into any of the following to view documents."
+
+[node name="TextureRect4" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 10.0
+offset_top = 918.0
+offset_right = 334.0
+offset_bottom = 1038.0
+texture = SubResource("GradientTexture2D_qk3n8")
+
+[node name="Label3" type="Label" parent="Guide/TextureRect4"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 28.0
+offset_right = 1089.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("59_tqwm2")
+theme_override_font_sizes/font_size = 26
+text = "<------ Log into your account by clicking here."
+
+[node name="TextureRect5" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 850.0
+offset_top = 516.0
+offset_right = 1439.0
+offset_bottom = 688.0
+texture = SubResource("GradientTexture2D_qk3n8")
+
+[node name="Label4" type="Label" parent="Guide/TextureRect5"]
+layout_mode = 0
+offset_left = 612.0
+offset_top = 60.0
+offset_right = 978.0
+offset_bottom = 123.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("59_tqwm2")
+theme_override_font_sizes/font_size = 26
+text = "<------ Click here to view 
+           the CARP system."
+
+[node name="TextureRect6" type="TextureRect" parent="Guide"]
+visible = false
+z_index = 10
+offset_left = 1767.0
+offset_top = 11.0
+offset_right = 1867.0
+offset_bottom = 104.0
+texture = SubResource("GradientTexture2D_qk3n8")
+
+[node name="Label4" type="Label" parent="Guide/TextureRect6"]
+layout_mode = 0
+offset_left = -244.0
+offset_top = 12.0
+offset_right = -11.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("59_tqwm2")
+theme_override_font_sizes/font_size = 26
+text = "Your Profile ----->"

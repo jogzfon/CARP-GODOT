@@ -16,6 +16,8 @@ public partial class DocBtnContainer : HBoxContainer
 
     private DocumentationAbler _abler;
     private DocumentationTemplate _template;
+
+    private string filePath;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -61,7 +63,6 @@ public partial class DocBtnContainer : HBoxContainer
             }
         }
     }
-    
     private void HideFromView()
 	{
         _abler.RemoveDocTemplate(_template);
@@ -84,6 +85,7 @@ public partial class DocBtnContainer : HBoxContainer
     }
     private void DeleteDocumentFile()
     {
+        DeleteFile();
         _abler.RemoveDocTemplate(_template);
         this.QueueFree();
     }
@@ -98,5 +100,31 @@ public partial class DocBtnContainer : HBoxContainer
     public void SetAbler(DocumentationAbler abler)
     {
         _abler = abler;
+    }
+
+    public void SetFilePath(string path)
+    {
+        filePath = path;
+    }
+    public void DeleteFile()
+    {
+        // Check if the file exists at the given path
+        if (FileAccess.FileExists(filePath))
+        {
+            // Attempt to delete the file
+            var error = DirAccess.RemoveAbsolute(filePath);
+            if (error == Error.Ok)
+            {
+                GD.Print("File deleted successfully.");
+            }
+            else
+            {
+                GD.PrintErr("Failed to delete the file. Error: " + error);
+            }
+        }
+        else
+        {
+            GD.PrintErr("File not found: " + filePath);
+        }
     }
 }

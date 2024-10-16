@@ -17,12 +17,14 @@ public partial class ExitController : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-        _load.Visible = false;
-
-        savePanel.Visible = false;
+        if (savePanel != null)
+        {
+            _load.Visible = false;
+            savePanel.Visible = false;
+            yesbtn.Connect("pressed", new Callable(this, nameof(Save)));
+            nobtn.Connect("pressed", new Callable(this, nameof(NotSave)));
+        }
         exitbtn.Connect("pressed", new Callable(this, nameof(Exit)));
-        yesbtn.Connect("pressed", new Callable(this, nameof(Save)));
-        nobtn.Connect("pressed", new Callable(this, nameof(NotSave)));
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,7 +38,7 @@ public partial class ExitController : Node
         {
             documentationAdder.Visible = false;
         }
-        if (AccountManager.GetUser() != null && saveAvailable && (AccountManager.GetUser().Role == "Student" || AccountManager.GetUser().Role == "Teacher"))
+        if (AccountManager.GetUser() != null && saveAvailable && (AccountManager.GetUser().Subscription.Equals("Subscribed") || AccountManager.GetUser().Role == "Teacher"))
         {
             savePanel.Visible = true;
 		}

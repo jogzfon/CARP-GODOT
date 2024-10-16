@@ -1,5 +1,5 @@
 ---------- Detail Info   ----------
-Status: Idle
+Status: Idle 
 RtlStatement: Fetch 3 
 DataMovement: IR < - DR AR < - PC 
 CurrentMemoryLocation: 0
@@ -95,7 +95,7 @@ AR: 0000 0000 0000 0101, PC: 0000 0000 0000 0110, DR: 0000 0010, TR: 0000 0000, 
 
 ---------- Registers     ----------
 IO: 0
-AR: 5
+AR: 7
 PC: 6
 DR: 2
 TR: 0

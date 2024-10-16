@@ -39,7 +39,7 @@ public partial class FileHandler : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{       
-        if (AccountManager.GetUser() != null && (AccountManager.GetRole().Contains("Teacher") || AccountManager.GetUser().Subscription == "Subscribed"))
+        if (AccountManager.GetUser() != null && (AccountManager.GetRole().Contains("Teacher") || AccountManager.GetUser().Subscription.Contains("Subscribed")))
         {
             manageFile.Visible = true;
             directToSystem.Visible = false;

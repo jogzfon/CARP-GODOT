@@ -43,6 +43,8 @@ public partial class project_page : Control
 
     [Export] private TextureButton back;
 
+    [Export] private Label _status;
+
     [ExportCategory("Loading Screens")]
     [Export] private TextureRect _loading;
     [Export] private TextureRect _memoryLoad;
@@ -174,6 +176,8 @@ public partial class project_page : Control
     public async void BackToProject()
     {
         UserData user = AccountManager.GetUser();
+
+        _status.Text = "Idle";
         if (user != null && (user.Role.Equals("Teacher") || user.Subscription.Equals("Subscribed")))
         {
             await LoadSave();
