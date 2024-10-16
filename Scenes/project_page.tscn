@@ -500,6 +500,7 @@ placeholder_text = "Enter Memory Location"
 alignment = 1
 
 [node name="SaveAsPreset" type="HBoxContainer" parent="LeftContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="LeftContainer/SaveAsPreset"]

@@ -95,7 +95,7 @@ public partial class PaymongoPayment : Node
 
     }
 
-    private async void OnPayCheckout()
+    /*private async void OnPayCheckout()
     {
         Checkout checkout = new Checkout()
         {
@@ -128,9 +128,9 @@ public partial class PaymongoPayment : Node
         };
 
         Checkout checkoutResult = await client.Checkouts.CreateCheckoutAsync(checkout);
-        /*var paymentWindow = new PaymentWindow(checkoutResult.CheckoutUrl);
+        *//*var paymentWindow = new PaymentWindow(checkoutResult.CheckoutUrl);
 
-        paymentWindow.Show();*/
+        paymentWindow.Show();*//*
 
         while (true)
         {
@@ -148,9 +148,9 @@ public partial class PaymongoPayment : Node
                 continue;
             }
 
-           /* StatusBlock.Text = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
+           *//* StatusBlock.Text = $"Paid by {payment.Billing!.Name} on {payment.PaidAt} using {payment.Source!["type"]}";
 
-            paymentWindow.Close();*/
+            paymentWindow.Close();*//*
 
             break;
         }
@@ -190,9 +190,9 @@ public partial class PaymongoPayment : Node
 
         // Act
         var sourceResult = await client.Sources.CreateSourceAsync(source);
-        /*var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
+        *//*var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
 
-        paymentWindow.Show();*/
+        paymentWindow.Show();*//*
 
         while (true)
         {
@@ -203,9 +203,9 @@ public partial class PaymongoPayment : Node
                 continue;
             }
 
-            /*StatusBlock.Text = $"Chargeable on GCash by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
+            *//*StatusBlock.Text = $"Chargeable on GCash by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
 
-            paymentWindow.Close();*/
+            paymentWindow.Close();*//*
 
             break;
         }
@@ -245,9 +245,9 @@ public partial class PaymongoPayment : Node
 
         // Act
         var sourceResult = await client.Sources.CreateSourceAsync(source);
-        /*var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
+        *//*var paymentWindow = new PaymentWindow(sourceResult.Redirect!.CheckoutUrl);
 
-        paymentWindow.Show();*/
+        paymentWindow.Show();*//*
 
         while (true)
         {
@@ -258,12 +258,12 @@ public partial class PaymongoPayment : Node
                 continue;
             }
 
-           /* StatusBlock.Text = $"Chargeable on GrabPay by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
+           *//* StatusBlock.Text = $"Chargeable on GrabPay by {paymentStatus.Billing.Name} on {paymentStatus.UpdatedAt}";
 
-            paymentWindow.Close();*/
+            paymentWindow.Close();*//*
 
             break;
         }
 
-    }
+    }*/
 }

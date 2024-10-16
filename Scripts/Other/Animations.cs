@@ -1469,7 +1469,6 @@ public partial class Animations : Node
             await Task.Delay(1000);
         }
     }
-
     public async Task NOP()
     {
         AR(0);
@@ -1502,7 +1501,6 @@ public partial class Animations : Node
 
         TraceResults.AddResult(rtlStatement.Text, dataMovement.Text, ar_bit, pc_bit, dr_bit, tr_bit, ir_bit, r_bit, ac_bit, z_bit);
     }
-
     public async Task END()
     {
         AR(0);

@@ -1,26 +1,90 @@
 [gd_scene load_steps=3 format=3 uid="uid://ch2tuesmvb3cb"]
 
 [ext_resource type="Script" path="res://Scripts/Documentation/DocBtnContainer.cs" id="1_eriu7"]
-[ext_resource type="FontFile" uid="uid://ceybppuc8ltqh" path="res://Fonts/Inter-ExtraBold.ttf" id="2_mf0t3"]
+[ext_resource type="Texture2D" uid="uid://1d5ieyywjcp7" path="res://Sprites/Settings.png" id="2_3qsko"]
 
-[node name="DocBtnContainer" type="HBoxContainer" node_paths=PackedStringArray("_docBtn", "_trashBtn")]
+[node name="DocBtnContainer" type="HBoxContainer" node_paths=PackedStringArray("_docBtn", "_hideBtnOptionBtn", "_deleteOptionBtn", "_cancelOptionBtn", "_confirmBtn", "_cancelBtn", "_optionsContainer", "_deleteConfirmationContainer")]
 custom_minimum_size = Vector2(0, 45)
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 script = ExtResource("1_eriu7")
-_docBtn = NodePath("Button")
-_trashBtn = NodePath("Exit")
+_docBtn = NodePath("VBoxContainer/Button")
+_hideBtnOptionBtn = NodePath("VBoxContainer/HBoxContainer/Options/HideFromView")
+_deleteOptionBtn = NodePath("VBoxContainer/HBoxContainer/Options/Delete")
+_cancelOptionBtn = NodePath("VBoxContainer/HBoxContainer/Options/Cancel")
+_confirmBtn = NodePath("VBoxContainer/HBoxContainer/DeleteConfirmation/HBoxContainer/Confirm")
+_cancelBtn = NodePath("VBoxContainer/HBoxContainer/DeleteConfirmation/HBoxContainer/Cancel")
+_optionsContainer = NodePath("VBoxContainer/HBoxContainer/Options")
+_deleteConfirmationContainer = NodePath("VBoxContainer/HBoxContainer/DeleteConfirmation")
 
-[node name="Button" type="Button" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Exit" type="Button" parent="."]
-custom_minimum_size = Vector2(45, 45)
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Options" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HideFromView" type="Button" parent="VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 9
+size_flags_vertical = 6
+text = "Remove From View "
+icon = ExtResource("2_3qsko")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Delete" type="Button" parent="VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 9
+size_flags_vertical = 6
+text = "Delete Documentation"
+icon = ExtResource("2_3qsko")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 9
+size_flags_vertical = 6
+text = "Cancel"
+icon = ExtResource("2_3qsko")
+icon_alignment = 2
+expand_icon = true
+
+[node name="DeleteConfirmation" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/DeleteConfirmation"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("2_mf0t3")
-theme_override_font_sizes/font_size = 20
-text = "X"
+text = "This action cannot be undone."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/DeleteConfirmation"]
+layout_mode = 2
+
+[node name="Confirm" type="Button" parent="VBoxContainer/HBoxContainer/DeleteConfirmation/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Confirm"
+icon = ExtResource("2_3qsko")
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer/DeleteConfirmation/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+icon = ExtResource("2_3qsko")
