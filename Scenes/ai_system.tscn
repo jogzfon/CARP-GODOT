@@ -232,6 +232,7 @@ text = "Use Personal API"
 [node name="subscribeAPIBtn" type="Button" parent="API/APIOptionContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+disabled = true
 text = "Subscribe To Our API"
 
 [node name="PersonalAPIContainer" type="VBoxContainer" parent="API"]

@@ -7,6 +7,7 @@ public static class Memory
     public static Animations animation;
     public const int MEMORY_SIZE = 65536;
     public static short[] contents = new short[MEMORY_SIZE];
+
     public static short Read(int address)
     {
         if ((address < 0) || (address >= MEMORY_SIZE))

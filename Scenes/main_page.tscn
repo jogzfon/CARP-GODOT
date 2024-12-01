@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://gc328eisvff8"]
+[gd_scene load_steps=81 format=3 uid="uid://gc328eisvff8"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7h54c74s1d" path="res://Sprites/LOGOa.png" id="1_iv1we"]
 [ext_resource type="Script" path="res://Scripts/Pages/main_page.cs" id="1_tloas"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cb7khywx4djwc" path="res://Sprites/Group 31.png" id="17_587en"]
 [ext_resource type="Script" path="res://Scripts/FileHandler/FileHandler.cs" id="18_lnwlk"]
 [ext_resource type="Texture2D" uid="uid://wp1g3sk41g5" path="res://Sprites/Documentation/InstructionSet.png" id="19_f2wtp"]
+[ext_resource type="Texture2D" uid="uid://cidpt3w1hju5s" path="res://Icons/Help.png" id="21_i4fgg"]
 [ext_resource type="PackedScene" uid="uid://cjoi18xm4kdgo" path="res://Scenes/NotificationHandler.tscn" id="21_iog1l"]
 [ext_resource type="Texture2D" uid="uid://brtc5luckr666" path="res://Sprites/Documentation/Memory.png" id="22_t4v1g"]
 [ext_resource type="Texture2D" uid="uid://bk5xps8cjaxia" path="res://Sprites/Documentation/Breakpoint.png" id="23_b17yx"]
@@ -57,6 +58,9 @@
 [ext_resource type="Texture2D" uid="uid://dfnhjebxumqyo" path="res://Sprites/load2.png" id="58_vo425"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="59_tqwm2"]
 [ext_resource type="Script" path="res://Scripts/PaymentSystem/PaymongoPayment.cs" id="60_7jqtu"]
+[ext_resource type="Texture2D" uid="uid://c5uglbxqrbff" path="res://Icons/Circled Right.png" id="60_pjt3v"]
+[ext_resource type="Texture2D" uid="uid://dojj5sl1nx14e" path="res://Icons/Forward Button.png" id="61_7dld3"]
+[ext_resource type="Script" path="res://Scripts/Other/GuideHandler.cs" id="61_qgo4f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoori"]
 shader = ExtResource("3_fhf3p")
@@ -107,6 +111,10 @@ shader_parameter/ratio_height = 1.0
 shader_parameter/glow_intensity = 1.0
 shader_parameter/pulse_speed = 1.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1k5t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s83nk"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a3k6q"]
 shader = ExtResource("25_i667d")
 shader_parameter/corner_scale = 0.05
@@ -141,12 +149,12 @@ load_path = "res://.godot/imported/Assembly.png-4872e93835a14d445bd499d4b643e073
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iyxol"]
 load_path = "res://.godot/imported/ProjectPage.png-4cdf92117ccf5ea071e6f66ad91d2caa.ctex"
 
-[sub_resource type="Gradient" id="Gradient_slk8x"]
+[sub_resource type="Gradient" id="Gradient_wdq02"]
 offsets = PackedFloat32Array(0, 0.954861, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.435294, 0, 0, 0, 0.964706, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qk3n8"]
-gradient = SubResource("Gradient_slk8x")
+gradient = SubResource("Gradient_wdq02")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
@@ -458,6 +466,22 @@ offset_bottom = -14.0
 _notificationHandler = NodePath("../../NotificationHandler")
 _documentationsList = NodePath("../VBoxContainer/DocumentationContainer/DocumentationsList/AddedDocumentationList")
 
+[node name="Guide" type="Button" parent="MainContent"]
+custom_minimum_size = Vector2(70, 70)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -235.0
+offset_top = 20.0
+offset_right = -165.0
+offset_bottom = 90.0
+grow_horizontal = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b1k5t")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s83nk")
+icon = ExtResource("21_i4fgg")
+flat = true
+expand_icon = true
+
 [node name="ProfileHandler" type="Node" parent="." node_paths=PackedStringArray("schoolBtn", "centerMargin", "accountProfile", "profilePanel", "exitProfile", "profileDialog", "changeProfileBtn", "saveProfileImage", "userName", "_documentationAbler", "subscriptionPanel", "documentationAdder", "notification")]
 script = ExtResource("12_dw1ay")
 schoolBtn = NodePath("ManageFile/New Project3")
@@ -671,10 +695,9 @@ access = 2
 root_subfolder = "Projects"
 filters = PackedStringArray("*.carp")
 
-[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn", "documentationAdder")]
+[node name="Exit" type="Node" parent="." node_paths=PackedStringArray("exitbtn")]
 script = ExtResource("16_metue")
 exitbtn = NodePath("ExitButton")
-documentationAdder = NodePath("../MainContent/DocumentationAdder")
 saveAvailable = false
 
 [node name="ExitButton" type="Button" parent="Exit"]
@@ -844,6 +867,7 @@ offset_left = 35.842
 offset_top = 592.932
 offset_right = 385.842
 offset_bottom = 623.932
+disabled = true
 text = "SUBSCRIBE"
 
 [node name="MarginContainer3" type="MarginContainer" parent="SubscriptionHandler/SubscriptionRect/SubscriptionTypePanel/HBoxContainer"]
@@ -955,18 +979,43 @@ script = ExtResource("60_7jqtu")
 _paymentBtn = NodePath("../../SubscriptionHandler/SubscriptionRect/SubscriptionTypePanel/HBoxContainer/StudentTier/subscriptionBtn")
 _notificationHandler = NodePath("../../NotificationHandler")
 
-[node name="Guide" type="Node" parent="."]
-
-[node name="TextureRect2" type="TextureRect" parent="Guide"]
+[node name="Guides" type="Control" parent="."]
 visible = false
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Guides"]
+z_index = 5
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0.117647, 0.121569, 0.133333, 0.568627)
+
+[node name="TextureRect2" type="TextureRect" parent="Guides"]
 z_index = 10
+layout_mode = 0
 offset_left = 8.0
 offset_top = 87.0
 offset_right = 332.0
 offset_bottom = 477.0
 texture = SubResource("GradientTexture2D_qk3n8")
 
-[node name="Label" type="Label" parent="Guide/TextureRect2"]
+[node name="Label" type="Label" parent="Guides/TextureRect2"]
 layout_mode = 0
 offset_left = 326.0
 offset_top = 127.0
@@ -977,16 +1026,17 @@ theme_override_fonts/font = ExtResource("59_tqwm2")
 theme_override_font_sizes/font_size = 26
 text = "<------THIS IS WHERE RECENT PROJECTS ARE FOUND"
 
-[node name="TextureRect3" type="TextureRect" parent="Guide"]
+[node name="TextureRect3" type="TextureRect" parent="Guides"]
 visible = false
 z_index = 10
+layout_mode = 0
 offset_left = 10.0
 offset_top = 545.0
 offset_right = 334.0
 offset_bottom = 894.0
 texture = SubResource("GradientTexture2D_qk3n8")
 
-[node name="Label2" type="Label" parent="Guide/TextureRect3"]
+[node name="Label2" type="Label" parent="Guides/TextureRect3"]
 layout_mode = 0
 offset_left = 340.0
 offset_top = 157.0
@@ -998,16 +1048,17 @@ theme_override_font_sizes/font_size = 26
 text = "<------ Documentations are found here.
            Click into any of the following to view documents."
 
-[node name="TextureRect4" type="TextureRect" parent="Guide"]
+[node name="TextureRect4" type="TextureRect" parent="Guides"]
 visible = false
 z_index = 10
+layout_mode = 0
 offset_left = 10.0
 offset_top = 918.0
 offset_right = 334.0
 offset_bottom = 1038.0
 texture = SubResource("GradientTexture2D_qk3n8")
 
-[node name="Label3" type="Label" parent="Guide/TextureRect4"]
+[node name="Label3" type="Label" parent="Guides/TextureRect4"]
 layout_mode = 0
 offset_left = 340.0
 offset_top = 28.0
@@ -1018,16 +1069,17 @@ theme_override_fonts/font = ExtResource("59_tqwm2")
 theme_override_font_sizes/font_size = 26
 text = "<------ Log into your account by clicking here."
 
-[node name="TextureRect5" type="TextureRect" parent="Guide"]
+[node name="TextureRect5" type="TextureRect" parent="Guides"]
 visible = false
 z_index = 10
+layout_mode = 0
 offset_left = 850.0
 offset_top = 516.0
 offset_right = 1439.0
 offset_bottom = 688.0
 texture = SubResource("GradientTexture2D_qk3n8")
 
-[node name="Label4" type="Label" parent="Guide/TextureRect5"]
+[node name="Label4" type="Label" parent="Guides/TextureRect5"]
 layout_mode = 0
 offset_left = 612.0
 offset_top = 60.0
@@ -1039,16 +1091,17 @@ theme_override_font_sizes/font_size = 26
 text = "<------ Click here to view 
            the CARP system."
 
-[node name="TextureRect6" type="TextureRect" parent="Guide"]
+[node name="TextureRect6" type="TextureRect" parent="Guides"]
 visible = false
 z_index = 10
+layout_mode = 0
 offset_left = 1767.0
 offset_top = 11.0
 offset_right = 1867.0
 offset_bottom = 104.0
 texture = SubResource("GradientTexture2D_qk3n8")
 
-[node name="Label4" type="Label" parent="Guide/TextureRect6"]
+[node name="Label4" type="Label" parent="Guides/TextureRect6"]
 layout_mode = 0
 offset_left = -244.0
 offset_top = 12.0
@@ -1058,3 +1111,56 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("59_tqwm2")
 theme_override_font_sizes/font_size = 26
 text = "Your Profile ----->"
+
+[node name="TextureRect7" type="TextureRect" parent="Guides"]
+visible = false
+z_index = 10
+layout_mode = 0
+offset_left = 1773.0
+offset_top = 53.0
+offset_right = 1808.0
+offset_bottom = 87.0
+texture = SubResource("GradientTexture2D_qk3n8")
+expand_mode = 1
+
+[node name="Label4" type="Label" parent="Guides/TextureRect7"]
+layout_mode = 0
+offset_left = -325.0
+offset_right = -7.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("59_tqwm2")
+theme_override_font_sizes/font_size = 26
+text = "Subscription Button -->"
+
+[node name="PageButtons" type="HBoxContainer" parent="Guides"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -80.0
+offset_right = -32.0
+offset_bottom = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PrevButton" type="TextureButton" parent="Guides/PageButtons"]
+layout_mode = 2
+texture_normal = ExtResource("60_pjt3v")
+texture_disabled = ExtResource("61_7dld3")
+
+[node name="NextButton" type="TextureButton" parent="Guides/PageButtons"]
+layout_mode = 2
+texture_normal = ExtResource("60_pjt3v")
+texture_disabled = ExtResource("61_7dld3")
+flip_h = true
+
+[node name="GuideHandler" type="Node" parent="." node_paths=PackedStringArray("guides", "guidesButton", "nextButton", "prevButton")]
+script = ExtResource("61_qgo4f")
+guides = NodePath("../Guides")
+guidesButton = NodePath("../MainContent/Guide")
+nextButton = NodePath("../Guides/PageButtons/NextButton")
+prevButton = NodePath("../Guides/PageButtons/PrevButton")

@@ -9,8 +9,6 @@ public partial class ExitController : Node
 	[Export] private Button yesbtn;
 	[Export] private Button nobtn;
 
-    [Export] private Control documentationAdder;
-
     [Export] private bool saveAvailable = true;
 
     [Export] private TextureRect _load;
@@ -34,10 +32,6 @@ public partial class ExitController : Node
 	}
 	private async void Exit()
 	{
-        if(documentationAdder != null)
-        {
-            documentationAdder.Visible = false;
-        }
         if (AccountManager.GetUser() != null && saveAvailable && (AccountManager.GetUser().Subscription.Equals("Subscribed") || AccountManager.GetUser().Role == "Teacher"))
         {
             savePanel.Visible = true;

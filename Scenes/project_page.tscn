@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c18fyoobswur4"]
+[gd_scene load_steps=40 format=3 uid="uid://c18fyoobswur4"]
 
 [ext_resource type="Script" path="res://Scripts/Pages/project_page.cs" id="1_lst7x"]
 [ext_resource type="Theme" uid="uid://s5pvudrtsbda" path="res://Theme/default.tres" id="2_d75fn"]
@@ -20,6 +20,10 @@
 [ext_resource type="Shader" path="res://Shader/loading3.gdshader" id="18_ms3uc"]
 [ext_resource type="FontFile" uid="uid://ffghwoybpfw3" path="res://Fonts/Comfortaa-Bold.ttf" id="20_hpasb"]
 [ext_resource type="PackedScene" uid="uid://jtq8firoonfc" path="res://Scenes/Others/loading.tscn" id="21_gw1lt"]
+[ext_resource type="Texture2D" uid="uid://cidpt3w1hju5s" path="res://Icons/Help.png" id="21_om4ap"]
+[ext_resource type="Texture2D" uid="uid://c5uglbxqrbff" path="res://Icons/Circled Right.png" id="22_it2qg"]
+[ext_resource type="Texture2D" uid="uid://dojj5sl1nx14e" path="res://Icons/Forward Button.png" id="23_4wvx4"]
+[ext_resource type="Script" path="res://Scripts/Other/GuideHandler.cs" id="24_8skuo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wil1c"]
 shader = ExtResource("18_ms3uc")
@@ -81,6 +85,10 @@ height = 128
 fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k17yj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kscgi"]
 
 [sub_resource type="Gradient" id="Gradient_hcnba"]
 offsets = PackedFloat32Array(0, 0.954861, 1)
@@ -234,6 +242,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -680,18 +689,61 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_nqaa8")
 
-[node name="Guide" type="Node" parent="."]
+[node name="Guide" type="Button" parent="."]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -50.0
+offset_bottom = 90.0
+grow_horizontal = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k17yj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kscgi")
+icon = ExtResource("21_om4ap")
+flat = true
+expand_icon = true
 
-[node name="TextureRect2" type="TextureRect" parent="Guide"]
+[node name="InitialGuides" type="Control" parent="."]
+visible = false
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="InitialGuides"]
+z_index = 5
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998594, 0.994333)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0.117647, 0.121569, 0.133333, 0.568627)
+
+[node name="TextureRect2" type="TextureRect" parent="InitialGuides"]
 visible = false
 z_index = 10
+layout_mode = 0
 offset_left = 40.0
 offset_top = 87.0
 offset_right = 567.0
 offset_bottom = 236.0
 texture = SubResource("GradientTexture2D_8tq5y")
 
-[node name="Label" type="Label" parent="Guide/TextureRect2"]
+[node name="Label" type="Label" parent="InitialGuides/TextureRect2"]
 layout_mode = 0
 offset_left = 535.0
 offset_top = 6.0
@@ -702,16 +754,17 @@ theme_override_fonts/font = ExtResource("20_hpasb")
 theme_override_font_sizes/font_size = 26
 text = "<------ This is your animation information. "
 
-[node name="TextureRect3" type="TextureRect" parent="Guide"]
+[node name="TextureRect3" type="TextureRect" parent="InitialGuides"]
 visible = false
 z_index = 10
+layout_mode = 0
 offset_left = 42.0
 offset_top = 233.0
 offset_right = 566.0
 offset_bottom = 1056.0
 texture = SubResource("GradientTexture2D_8tq5y")
 
-[node name="Label2" type="Label" parent="Guide/TextureRect3"]
+[node name="Label2" type="Label" parent="InitialGuides/TextureRect3"]
 layout_mode = 0
 offset_left = 532.0
 offset_top = 33.0
@@ -722,7 +775,7 @@ theme_override_fonts/font = ExtResource("20_hpasb")
 theme_override_font_sizes/font_size = 26
 text = "<------ Your starting memory address when assembling"
 
-[node name="Label3" type="Label" parent="Guide/TextureRect3"]
+[node name="Label3" type="Label" parent="InitialGuides/TextureRect3"]
 layout_mode = 0
 offset_left = 537.0
 offset_top = 177.0
@@ -733,7 +786,7 @@ theme_override_fonts/font = ExtResource("20_hpasb")
 theme_override_font_sizes/font_size = 26
 text = "<------ Playground area for your instruction codes"
 
-[node name="Label4" type="Label" parent="Guide/TextureRect3"]
+[node name="Label4" type="Label" parent="InitialGuides/TextureRect3"]
 layout_mode = 0
 offset_left = 532.0
 offset_top = 693.0
@@ -744,7 +797,7 @@ theme_override_fonts/font = ExtResource("20_hpasb")
 theme_override_font_sizes/font_size = 26
 text = "<------ Select your control units here"
 
-[node name="Label5" type="Label" parent="Guide/TextureRect3"]
+[node name="Label5" type="Label" parent="InitialGuides/TextureRect3"]
 layout_mode = 0
 offset_left = 534.0
 offset_top = 756.0
@@ -755,16 +808,17 @@ theme_override_fonts/font = ExtResource("20_hpasb")
 theme_override_font_sizes/font_size = 26
 text = "<------ After inputing some instructions click here to assemble it."
 
-[node name="TextureRect4" type="TextureRect" parent="Guide"]
+[node name="TextureRect4" type="TextureRect" parent="InitialGuides"]
 visible = false
 z_index = 10
+layout_mode = 0
 offset_left = 589.0
-offset_top = 95.0
-offset_right = 1723.0
-offset_bottom = 215.0
+offset_top = 100.0
+offset_right = 1914.0
+offset_bottom = 200.0
 texture = SubResource("GradientTexture2D_8tq5y")
 
-[node name="Label3" type="Label" parent="Guide/TextureRect4"]
+[node name="Label3" type="Label" parent="InitialGuides/TextureRect4"]
 layout_mode = 0
 offset_left = 264.0
 offset_top = -58.0
@@ -775,42 +829,55 @@ theme_override_fonts/font = ExtResource("20_hpasb")
 theme_override_font_sizes/font_size = 26
 text = "Click any of these buttons to view each of their pages."
 
-[node name="TextureRect5" type="TextureRect" parent="Guide"]
+[node name="TextureRect5" type="TextureRect" parent="InitialGuides"]
 visible = false
 z_index = 10
-offset_left = 850.0
-offset_top = 516.0
-offset_right = 1439.0
-offset_bottom = 688.0
-texture = SubResource("GradientTexture2D_8tq5y")
-
-[node name="Label4" type="Label" parent="Guide/TextureRect5"]
 layout_mode = 0
-offset_left = 612.0
-offset_top = 60.0
-offset_right = 978.0
-offset_bottom = 123.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("20_hpasb")
-theme_override_font_sizes/font_size = 26
-text = "<------ Click here to view 
-           the CARP system."
-
-[node name="TextureRect6" type="TextureRect" parent="Guide"]
-visible = false
-z_index = 10
-offset_left = 1767.0
-offset_top = 11.0
-offset_right = 1867.0
-offset_bottom = 104.0
+offset_left = 589.0
+offset_top = 196.0
+offset_right = 1914.0
+offset_bottom = 1067.0
 texture = SubResource("GradientTexture2D_8tq5y")
 
-[node name="Label4" type="Label" parent="Guide/TextureRect6"]
-offset_left = -244.0
-offset_top = 12.0
-offset_right = -11.0
-offset_bottom = 75.0
+[node name="Label4" type="Label" parent="InitialGuides/TextureRect5"]
+layout_mode = 0
+offset_left = -396.0
+offset_top = 448.0
+offset_right = 111.0
+offset_bottom = 511.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("20_hpasb")
 theme_override_font_sizes/font_size = 26
-text = "Your Profile ----->"
+text = "Panel View for the pages --->"
+
+[node name="PageButtons" type="HBoxContainer" parent="InitialGuides"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -80.0
+offset_right = -32.0
+offset_bottom = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PrevButton" type="TextureButton" parent="InitialGuides/PageButtons"]
+layout_mode = 2
+texture_normal = ExtResource("22_it2qg")
+texture_disabled = ExtResource("23_4wvx4")
+
+[node name="NextButton" type="TextureButton" parent="InitialGuides/PageButtons"]
+layout_mode = 2
+texture_normal = ExtResource("22_it2qg")
+texture_disabled = ExtResource("23_4wvx4")
+flip_h = true
+
+[node name="GuideHandler" type="Node" parent="." node_paths=PackedStringArray("guides", "guidesButton", "nextButton", "prevButton")]
+script = ExtResource("24_8skuo")
+guides = NodePath("../InitialGuides")
+guidesButton = NodePath("../Guide")
+nextButton = NodePath("../InitialGuides/PageButtons/NextButton")
+prevButton = NodePath("../InitialGuides/PageButtons/PrevButton")
