@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 public partial class AssemblyParser
 {
-    private List<int> breakpoints;
-    private bool breaks = false;
-
     int i = 0;
-    
-
-    bool isHex = false;
 
     #region VisualizationOpcodes
     public const short opcodeNOP = 0x00;
@@ -31,9 +25,6 @@ public partial class AssemblyParser
     public const short opcodeEND = 0xff;
 
     short[] memorycode;
-
-    short instructadv1;
-    short instructadv2;
 
     public long IOint = 0;
     public string IO = "00000000";
