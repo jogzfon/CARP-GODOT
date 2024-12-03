@@ -40,6 +40,7 @@ public partial class project_page : Control
     [Export] private Button toSystem;
     [Export] private Button assemble;
     [Export] private Button toAI;
+    [Export] private Button toGuide;
 
     [Export] private TextureButton back;
 
@@ -155,6 +156,13 @@ public partial class project_page : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
+        if (aiPnl.Visible)
+        {
+            toGuide.Hide();
+        }
+        else{
+            toGuide.Show();
+        }
         if (AccountManager.GetUser() != null)
         {
             DataToSave.memoryContents = Memory.contents;

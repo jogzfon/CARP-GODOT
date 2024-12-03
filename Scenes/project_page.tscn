@@ -99,7 +99,7 @@ gradient = SubResource("Gradient_hcnba")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
-[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "back", "_status", "_loading", "_memoryLoad", "_traceLoad")]
+[node name="ProjectPage" type="Control" node_paths=PackedStringArray("memoryPnl", "breakPointsPnl", "traceResultsPnl", "aiPnl", "viewSystem", "notification", "toSystem", "assemble", "toAI", "toGuide", "back", "_status", "_loading", "_memoryLoad", "_traceLoad")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,6 +116,7 @@ notification = NodePath("NotificationHandler")
 toSystem = NodePath("VBoxContainer/HBoxContainer/ViewSystem")
 assemble = NodePath("LeftContainer/Assemble")
 toAI = NodePath("VBoxContainer/HBoxContainer/AIBtn")
+toGuide = NodePath("Guide")
 back = NodePath("HBoxContainer/Back")
 _status = NodePath("LeftContainer/HBoxContainer2/Status")
 _loading = NodePath("HBoxContainer/Loading")
@@ -276,6 +277,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_6x74r")
 theme_override_font_sizes/font_size = 25
+editable = false
 
 [node name="Loading" type="TextureRect" parent="VBoxContainer/PanelContainer/MemoryAndIO/VBoxContainer/ScrollContainer"]
 visible = false
